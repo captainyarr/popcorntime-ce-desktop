@@ -38,6 +38,9 @@
                 cmd = path.normalize('"' + this.get('path') + '" ');
             }
 
+            //var cmd = path.normalize('"' + this.get('path') + '" ');
+            //var cmd = path.normalize('' + this.get('path') + '');
+
             args.push(getPlayerSwitches(this.get('id')));
 
             var subtitle = streamModel.attributes.subFile || '';
@@ -76,7 +79,7 @@
 
             win.info('Launching External Player: ' + cmd + ' URL: ' + url);
             win.info('Launching External Player Args: ' + args);
-            win.info('Launching External Player Options: ' + JSON.stringify(options));
+            win.info('Launching External Player Options: ' + options);
 
             var player = child.spawn(cmd, args, options);
 
@@ -85,7 +88,7 @@
             });
 
             player.stderr.on('data', (data) => {
-                win.error(`stderr: ${data}`);
+                win.debug(`stderr: ${data}`);
             });
 
             player.on('error', (data) => {
@@ -174,8 +177,8 @@
         },
         'mpv': {
             type: 'mpv',
-            switches: '',
-            subswitch: '--sub-file=',
+            switches: '-quiet',
+            subswitch: '--sub=',
             fs: '--fs'
         },
         'MPC-HC': {
