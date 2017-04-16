@@ -122,9 +122,14 @@ else{for(var i = 0; i < genre.length; i++){ genre[i] = i18n.__(genre[i]); } };
                     title: title
                 });
 
-            ga('send', {
-                hitType: 'pageview'
-            });
-            win.debug("Analytics:Movie Detail");
-        }
-    %>
+    </div>
+</section>
+
+<% 
+        ga('send', {
+            'hitType': 'pageview',
+            'page': '/popcorntimece/movie/detail/'+title,
+            'title': title
+        });
+
+ %>
