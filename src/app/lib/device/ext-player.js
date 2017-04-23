@@ -38,9 +38,6 @@
                 cmd = path.normalize('"' + this.get('path') + '" ');
             }
 
-            //var cmd = path.normalize('"' + this.get('path') + '" ');
-            //var cmd = path.normalize('' + this.get('path') + '');
-
             args.push(getPlayerSwitches(this.get('id')));
 
             var subtitle = streamModel.attributes.subFile || '';
@@ -79,7 +76,7 @@
 
             win.info('Launching External Player: ' + cmd + ' URL: ' + url);
             win.info('Launching External Player Args: ' + args);
-            win.info('Launching External Player Options: ' + options);
+            win.info('Launching External Player Options: ' + JSON.stringify(options));
 
             var player = child.spawn(cmd, args, options);
 
@@ -88,7 +85,7 @@
             });
 
             player.stderr.on('data', (data) => {
-                win.debug(`stderr: ${data}`);
+                win.error(`stderr: ${data}`);
             });
 
             player.on('error', (data) => {
