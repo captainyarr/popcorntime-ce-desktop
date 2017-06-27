@@ -1,4 +1,4 @@
-(function(App) {
+(function (App) {
     'use strict';
 
     var _ = require('underscore');
@@ -172,7 +172,7 @@
         }
 
         return Q.all(
-            _.map(imdbIds, function(id) {
+            _.map(imdbIds, function (id) {
                 var deferred = Q.defer();
                 setTimeout(function() {
                     //win.debug("Search Start: "+id);
@@ -205,7 +205,7 @@
             var subtitleList = {};
             subtitleList.subs = {};
 
-            _.each(data, function(item) {
+            _.each(data, function (item) {
                 for (var name in item) {
                     //win.debug("Subtitle IMDB ID: " + name);
                     subtitleList.subs[name] = item[name];
@@ -227,16 +227,16 @@
         //win.debug("formatForPopcorn:data: " + JSON.stringify(data));
         var allSubs = {};
         // Iterate each movie
-        _.each(data.subs, function(langs, imdbId) {
+        _.each(data.subs, function (langs, imdbId) {
             var movieSubs = {};
             langs = normalizeLangCodes(langs);
             // Iterate each language
-            _.each(langs, function(subs, lang) {
+            _.each(langs, function (subs, lang) {
                 // Pick highest rated
                 var langCode = lang;
                 var ratedSub = _.max({
                     subs
-                }, function(s) {
+                }, function (s) {
                     return s.score;
                 });
                 movieSubs[langCode] = ratedSub.url;
@@ -252,7 +252,7 @@
         return Common.sanitize(allSubs);
     };
 
-    OpenSubtitlesMovies.prototype.query = function(ids) {
+    OpenSubtitlesMovies.prototype.query = function (ids) {
         return Q.when(querySubtitles(ids)).then(formatForPopcorn);
     };
 
