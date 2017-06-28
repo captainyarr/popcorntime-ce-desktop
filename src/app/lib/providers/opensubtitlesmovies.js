@@ -253,7 +253,7 @@
     };
 
     OpenSubtitlesMovies.prototype.query = function(ids) {
-        return querySubtitles(ids).then(formatForPopcorn);
+        return Q.when(querySubtitles(ids)).then(formatForPopcorn);
     };
 
     App.Providers.OpenSubtitlesMovies = OpenSubtitlesMovies;
