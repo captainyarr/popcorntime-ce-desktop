@@ -77,6 +77,9 @@ Settings.events = false;
 Settings.minimizeToTray = false;
 Settings.bigPicture = false;
 
+//Network
+Settings.networkUrl = '127.0.0.1';
+
 // Plugins
 Settings.pluginGoogleDrive = true;
 Settings.pluginHTML5 = true;
@@ -102,6 +105,11 @@ Settings.totalUploaded = 0;
 Settings.vpn = false;
 Settings.vpnUsername = '';
 Settings.vpnPassword = '';
+
+// OpenSubtitles Login
+Settings.opensubtitles = true;
+Settings.opsUsername = '';
+Settings.opsPassword = '';
 
 Settings.tvAPI = [{
     url: 'http://eztv.is/api/',

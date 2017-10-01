@@ -69,6 +69,7 @@
         "torrent-tracker-health": "git+https://github.com/PTCE-Public/torrent-tracker-health.git",
         "underscore": "^1.8.3",
         "upnp-mediarenderer-client": "^1.2.1",
+        "webtorrent": "^0.98.19",
         "xmlbuilder": "^8.2.2"
     },
     "devDependencies": {

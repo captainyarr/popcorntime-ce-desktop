@@ -63,13 +63,15 @@
                     args.push(this.get('id'));
                 }
             }
-            if (getPlayerFilenameSwitch(this.get('id')) !== '') {
+            if (getPlayerFilenameSwitch(this.get('id'))  !== '') {
                 // The video file is the biggest file in the torrent
                 var videoFile = _.sortBy(streamModel.attributes.torrent.info.files, function(file) {
                     return -file.length;
                 })[0];
                 args.push(videoFile ? (getPlayerFilenameSwitch(this.get('id')) + '"' + videoFile.name + '" ') : '');
             }
+
+            //Push localhost URL for external devices
             args.push(url);
 
             win.info('Launching External Player: ' + cmd + ' URL: ' + url);
@@ -166,7 +168,7 @@
         'mplayer': {
             type: 'mplayer',
             cmd: 'mplayer',
-            switches: '-really-quiet',
+            switches: '-nolirc -prefer-ipv4 -really-quiet',
             subswitch: '-sub ',
             fs: '-fs',
         },
