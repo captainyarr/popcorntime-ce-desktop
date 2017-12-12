@@ -3,13 +3,7 @@
 # Check https://circleci.com/docs/2.0/language-javascript/ for more details
 #
 version: 2
-general:
-  branches:
-    only:
-     - master # list of branches to build
-     - develop
-     - /feature.*/ # or regexes
-     - greenkeeper.*/
+
 jobs:
   build:
     docker:
