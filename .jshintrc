@@ -21,7 +21,6 @@
     "quotmark" : "single",
     "trailing" : true,
     "sub"      : true,
-    "trailing" : true,
     "undef"    : true,
     "laxbreak" : true,
     "loopfunc" : true,
@@ -85,8 +84,6 @@
         // Third party
         "Backbone": true,
         "Mousetrap": true,
-        "_": true,
-        "request": true,
         "videojs": true,
         "vjs": true
     }

@@ -526,6 +526,7 @@
 	" Musical": " Musical",
 	" Romance": " Romance",
 	" Horror": " Horror",
-	"comedy": "comedy",
-	"reality": "reality"
+	" Comedy": " Comedy",
+	" Reality": " Reality",
+	" Documentary": " Documentary"
 }
