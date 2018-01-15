@@ -655,7 +655,7 @@
 
         areYouSure: function(btn, waitDesc) {
             if (!btn.hasClass('confirm')) {
-                btn.addClass('confirm warning').css('width', btn.css('width')).text(i18n.__('Are you sure?'));
+                btn.addClass('confirm warning').text(i18n.__('Are you sure?'));
                 return false;
             }
             btn.text(waitDesc).addClass('disabled').prop('disabled', true);
