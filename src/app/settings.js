@@ -107,10 +107,12 @@ Settings.vpn = false;
 Settings.vpnUsername = '';
 Settings.vpnPassword = '';
 
-// OpenSubtitles Login
+// OpenSubtitles
 Settings.opensubtitles = true;
-Settings.opsUsername = '';
-Settings.opsPassword = '';
+Settings.opensubtitlesAutoUpload = true;
+Settings.opensubtitlesAuthenticated = false;
+Settings.opensubtitlesUsername = "";
+Settings.opensubtitlesPassword = "";
 
 Settings.tvAPI = [{
     url: 'https://api-fetch.website/tv/',

@@ -272,6 +272,24 @@ vjs.TextTrack.prototype.load = function () {
             }
         };
 
+        // Decompress zip
+        var decompressGZ = function(dataBuff, callback) {
+            try { 
+                var zlib = require('zlib');
+                zlib.unzip(dataBuff, function (error, decompressedData){
+                    if (!error) {
+                        win.debug("Subtitles decompressed - .gz")
+                        callback(decompressedData);
+                    } else {
+                      // handle error
+                      win.warn('Failed to decompress subtitle!', error);
+                    }
+                });
+            } catch (error) {
+                win.warn('Failed to decompress subtitle!', error);
+            }
+        };
+
         // Handles charset encoding
         var decode = function (dataBuff, language, callback) {
             var charsetDetect = require('jschardet');
@@ -334,8 +352,12 @@ vjs.TextTrack.prototype.load = function () {
         // Get it, Unzip it, Decode it, Send it
         get_subtitle(this.src_, function (dataBuf) {
             var path = require('path');
-            if (path.extname(this_.src_) === '.zip') {
+            if (path.extname(this_.src_) === '.zip' ) {
                 decompress(dataBuf, function (dataBuf) {
+                    decode(dataBuf, this_.language(), vjsBind);
+                });
+            }else if( path.extname(this_.src_) === '.gz' ){
+                decompressGZ(dataBuf, function (dataBuf) {
                     decode(dataBuf, this_.language(), vjsBind);
                 });
             } else if (path.extname(this_.src_) === '.ass' || path.extname(this_.src_) === '.ssa' || path.extname(this_.src_) === '.txt') {
