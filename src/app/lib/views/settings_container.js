@@ -36,6 +36,8 @@
             'click #unauthTrakt': 'disconnectTrakt',
             'click #connect-with-tvst': 'connectWithTvst',
             'click #disconnect-tvst': 'disconnectTvst',
+            'click .connect-opensubtitles': 'connectWithOpensubtitles',
+            'click #disconnect-opensubtitles': 'disconnectOpenSubtitles',
             'click .reset-ytsAPI': 'resetMovieAPI',
             'click .reset-tvAPI': 'resetTVShowAPI',
             'change #tmpLocation': 'updateCacheDirectory',
@@ -131,13 +133,14 @@
 
         resetMovieAPI: function() {
             var value = [{
-                url: 'http://yts.am/',
-                strictSSL: true
-            },
-            {
-                url: 'https://yts.ag/',
-                strictSSL: true
-            }];
+                    url: 'http://yts.am/',
+                    strictSSL: true
+                },
+                {
+                    url: 'https://yts.ag/',
+                    strictSSL: true
+                }
+            ];
             App.settings['ytsAPI'] = value;
             //save to db
             App.db.writeSetting({
@@ -237,6 +240,12 @@
                         strictSSL: value.substr(0, 8) === 'https://'
                     }];
                     break;
+                case 'opensubtitlesUsername':
+                    value = field.val();
+                    break;
+                case 'opensubtitlesPassword':
+                    value = field.val(); //require('crypto').createHash('md5').update(field.val()).digest('hex');
+                    break;
                 case 'subtitle_size':
                 case 'stream_browser':
                     if ($('option:selected', field).val() === 'Torrent Link') {
@@ -257,7 +266,7 @@
                     if ($('option:selected', field).val() === 'Last Open') {
                         AdvSettings.set('lastTab', App.currentview);
                     }
-                /* falls through */
+                    /* falls through */
                 case 'watchedCovers':
                 case 'theme':
                     value = $('option:selected', field).val();
@@ -278,16 +287,17 @@
                 case 'automaticUpdating':
                 case 'events':
                 case 'alwaysFullscreen':
+                case 'showPassword':
                 case 'minimizeToTray':
                 case 'bigPicture':
-                case 'analytics':
-                    value = field.is(':checked');
-                    window['ga-disable-' + AdvSettings.get('gaCode')] = !value;
-                    break;
                 case 'activateTorrentCollection':
                 case 'activateAutoplay':
                 case 'activateRandomize':
                     value = field.is(':checked');
+                    break;
+                case 'analytics':
+                    value = field.is(':checked');
+                    window['ga-disable-' + AdvSettings.get('gaCode')] = !value;
                     break;
                 case 'httpApiUsername':
                 case 'httpApiPassword':
@@ -312,7 +322,6 @@
                     win.warn('Setting not defined: ' + field.attr('name'));
             }
             win.info('Setting changed: ' + field.attr('name') + ' - ' + value);
-
 
             // update active session
             App.settings[field.attr('name')] = value;
@@ -394,6 +403,7 @@
                 case 'movies_quality':
                 case 'translateSynopsis':
                     App.Providers.delete('Yts');
+                    opensubtitlesPassword
                     App.vent.trigger('movies:list');
                     App.vent.trigger('settings:show');
                     break;
@@ -404,6 +414,10 @@
                     break;
                 case 'ytsAPI':
                     App.Providers.delete('ytsAPI');
+                    App.vent.trigger('movies:list');
+                    App.vent.trigger('settings:show');
+                    break;
+                case 'opensubtitles':
                     App.vent.trigger('movies:list');
                     App.vent.trigger('settings:show');
                     break;
@@ -422,6 +436,16 @@
                         win.info('Setting changed: bigPicture - true');
                         $('input#bigPicture.settings-checkbox').attr('checked', false);
                         $('.notification_alert').show().text(i18n.__('Big Picture Mode is unavailable on your current screen resolution')).delay(2500).fadeOut(400);
+                    }
+                    break;
+                case 'showPassword':
+                    {
+                        var x = document.getElementById("opensubtitlesPassword");
+                        if (x.type === "password") {
+                            x.type = "text";
+                        } else {
+                            x.type = "password";
+                        }
                     }
                     break;
                 default:
@@ -516,9 +540,86 @@
 
         disconnectTvst: function() {
             var self = this;
-            App.TVShowTime.disconnect(function() {
+            App.OpenSubtitlesMovies.disconnect(function() {
                 self.render();
             });
+        },
+
+        connectWithOpensubtitles: function() {
+
+            $('.loading-spinner').show();
+
+            var username = App.settings.opensubtitlesUsername;
+            var password = require('crypto').createHash('md5').update(App.settings.opensubtitlesPassword).digest('hex');
+
+            App.OpenSubtitlesMovies.authenticate(username,password).then(function(value) {
+                if (value == false) {
+                    that.alertMessageFailed(i18n.__("Incorrect Username or Password"));
+                }
+                ga('send', {
+                    hitType: 'event',
+                    eventCategory: 'Settings',
+                    eventAction: 'OpenSubtitles Login Incorrect',
+                    eventLabel: 'OpenSubtitles Login Incorrect'
+                    });
+                return value;
+            }).then(function(value) {
+                if (value == true) {
+                    App.db.writeSetting({
+                        key: 'opensubtitlesUsername',
+                        value: username
+                    }).then(function() {
+                        return App.db.writeSetting({
+                            key: 'opensubtitlesPassword',
+                            value: password
+                        });
+                    });
+                    that.ui.success_alert.show().delay(3000).fadeOut(400);
+                    that.syncSetting('opensubtitles', "");
+                    //GA: Player Launched
+                    ga('send', {
+                        hitType: 'event',
+                        eventCategory: 'Settings',
+                        eventAction: 'OpenSubtitles Login Successful',
+                        eventLabel: 'OpenSubtitles Login Successful'
+                        });
+                    self.render();
+                }
+            });
+        },
+
+        disconnectOpenSubtitles: function(e) {
+            var self = this;
+
+            App.settings['opensubtitlesUsername'] = '';
+            App.settings['opensubtitlesPassword'] = '';
+
+            App.db.writeSetting({
+                key: 'opensubtitlesUsername',
+                value: ''
+            }).then(function() {
+                return App.db.writeSetting({
+                    key: 'opensubtitlesPassword',
+                    value: ''
+                });
+            }).then(function() {
+                that.ui.success_alert.show().delay(3000).fadeOut(400);
+                that.syncSetting('opensubtitles', "");
+            });
+
+             //GA: Player Launched
+             ga('send', {
+                hitType: 'event',
+                eventCategory: 'Settings',
+                eventAction: 'OpenSubtitles Disconnect',
+                eventLabel: 'OpenSubtitles Disconnect'
+                });
+
+            App.OpenSubtitlesMovies.disconnect(function() {
+                self.render();
+            });
+
+
         },
 
         flushBookmarks: function(e) {
