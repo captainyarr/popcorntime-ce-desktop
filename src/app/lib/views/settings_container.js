@@ -263,7 +263,7 @@
                     if ($('option:selected', field).val() === 'Last Open') {
                         AdvSettings.set('lastTab', App.currentview);
                     }
-                    /* falls through */
+                /* falls through */
                 case 'watchedCovers':
                 case 'theme':
                     value = $('option:selected', field).val();
@@ -287,6 +287,10 @@
                 case 'showPassword':
                 case 'minimizeToTray':
                 case 'bigPicture':
+                case 'analytics':
+                    value = field.is(':checked');
+                    window['ga-disable-' + AdvSettings.get('gaCode')] = !value;
+                    break;
                 case 'activateTorrentCollection':
                 case 'activateAutoplay':
                 case 'activateRandomize':
@@ -517,6 +521,8 @@
                 $('.tvst-loading-spinner').hide();
                 self.render();
             });
+
+            /*
             App.TVShowTime.authenticate(function(activateUri) {
                 var gui = require('nw.gui');
                 gui.App.addOriginAccessWhitelistEntry(activateUri, 'app', 'host', true);
@@ -537,8 +543,8 @@
                 });
 
             });
+            */
         },
-
         disconnectTvst: function() {
             var self = this;
             App.OpenSubtitlesMovies.disconnect(function() {

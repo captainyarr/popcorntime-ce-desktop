@@ -65,6 +65,13 @@ Settings.traktPlayback = true;
 
 // TVShow Time
 Settings.tvstAccessToken = '';
+Settings.tvstTokenRefresh = '';
+Settings.tvstTokenTTL = '';
+Settings.tvstVersion = '1.0.0';
+Settings.tvstLastSync = '';
+Settings.tvstLastActivities = '';
+Settings.tvstSyncOnStart = true;
+Settings.tvstPlayback = true;
 
 // Advanced options
 Settings.connectionLimit = 100;

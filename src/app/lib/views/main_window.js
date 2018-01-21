@@ -570,6 +570,7 @@
 
         tvstAuthenticated: function() {
             win.info('TVShow Time: authenticated');
+            //TODO: Add Analytics for TV ShowTime
         },
 
         streamStarted: function(stateModel) {

@@ -190,6 +190,52 @@
         connectWithTvst: function() {
             var self = this;
 
+            if (AdvSettings.get('tvstTokenRefresh') !== '') {
+                return;
+            }
+
+            $('#connect-with-tvst > i').css('visibility', 'hidden');
+            $('.tvst-loading-spinner').show();
+
+            //TODO: Use newer method to launch TV ShowTime Authenicate
+            App.TVShowTime.authenticate(function(activateUri) {
+                var gui = require('nw.gui');
+                gui.App.addOriginAccessWhitelistEntry(activateUri, 'app', 'host', true);
+                window.loginWindow = gui.Window.open(activateUri, {
+                    position: 'center',
+                    focus: true,
+                    title: 'TVShow Time',
+                    icon: 'src/app/images/icon.png',
+                    toolbar: false,
+                    resizable: false,
+                    width: 600,
+                    height: 600
+                });
+            });
+
+
+            /*App.TVShowTime.oauth.authenticate()
+            App.TVShowTime.authenticate().then(function (valid) {
+                    if (valid) {
+                        $('.tvst-loading-spinner').hide();
+                        that.render();
+                    } else {
+                        $('.tvst-loading-spinner').hide();
+                        $('#connect-with-tvst > i').css('visibility', 'visible');
+                    }
+                }).catch(function (err) {
+                    win.debug('TV ShowTime:', err);
+                    $('#connect-with-tvst > i').css('visibility', 'visible');
+                    $('.tvst-loading-spinner').hide();
+                });
+                */
+
+        },
+
+        /*
+        connectWithTvst: function() {
+            var self = this;
+
             $('#connect-with-tvst > i').css('visibility', 'hidden');
             $('.tvst-loading-spinner').show();
 
@@ -198,6 +244,8 @@
                 $('.tvst-loading-spinner').hide();
                 self.render();
             });
+
+            //TODO: Use newer method to launch TV ShowTime Authenicate
             App.TVShowTime.authenticate(function(activateUri) {
                 var gui = require('nw.gui');
                 gui.App.addOriginAccessWhitelistEntry(activateUri, 'app', 'host', true);
@@ -219,7 +267,7 @@
 
             });
         },
-
+*/
         disconnectTvst: function() {
             var self = this;
             App.TVShowTime.disconnect(function() {
@@ -292,8 +340,6 @@
             // Open the notification
             App.vent.trigger('notification:show', notificationModel);
         },
-
-
 
 
     });
