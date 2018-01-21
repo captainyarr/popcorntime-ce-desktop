@@ -1,6 +1,6 @@
 // Place your settings in this file to overwrite default and user settings.
 {
-    // Defines space handling after function keyword for anonymous functions
+    "typescript.format.insertSpaceAfterFunctionKeywordForAnonymousFunctions": false,
     "javascript.format.insertSpaceAfterFunctionKeywordForAnonymousFunctions": false,
     "eslint.enable": false,
     "jshint.enable": false
