@@ -82,7 +82,7 @@
         "gulp-tar": "^2.0.0",
         "nw-builder": "^3.5.1",
         "nw-gyp": "^3.4.0",
-        "yargs": "^10.0.3"
+        "yargs": "^11.0.0"
     },
     "description": "",
     "author": ""
