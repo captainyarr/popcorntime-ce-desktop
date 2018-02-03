@@ -48,7 +48,7 @@
         "mv": "^2.0.3",
         "nedb": "1.8.0",
         "node-captions": "0.4.6",
-        "node-tvdb": "^3.1.1",
+        "node-tvdb": "^4.0.0",
         "node-webkit-fdialogs": "^0.2.7",
         "nodecast-js": "^1.0.3",
         "opensubtitles-ce": "^1.0.0",
