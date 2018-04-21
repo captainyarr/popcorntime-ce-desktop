@@ -52,7 +52,7 @@
         "node-webkit-fdialogs": "^0.2.7",
         "nodecast-js": "^1.0.3",
         "opensubtitles-ce": "^1.0.0",
-        "opensubtitles-api": "4.0.0",
+        "opensubtitles-api": "4.1.0",
         "os-name": "^2.0.1",
         "peerflix": "^0.37.0",
         "q": "2.0.3",
