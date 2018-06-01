@@ -113,7 +113,7 @@ Settings.opsUsername = '';
 Settings.opsPassword = '';
 
 Settings.tvAPI = [{
-    url: 'https://eztvapi.ml/',
+    url: 'https://api-fetch.website/tv/',
     strictSSL: true
 }, {
     url: 'https://api-fetch.website/tv/',
