@@ -258,6 +258,11 @@
     addPath(process.env.SystemDrive + '\\Program Files (x86)\\');
     addPath(process.env.LOCALAPPDATA + '\\Apps\\2.0\\');
 
+    win.debug("SystemDrive:"+process.env.SystemDrive);
+    win.debug("LOCALAPPDATA:"+process.env.LOCALAPPDATA);
+    win.debug("HOMEPATH:"+process.env.HOMEPATH);
+    win.debug("HOME:"+process.env.HOME);
+
     var folderName = '';
     var birthtimes = {};
 
@@ -270,6 +275,7 @@
             depth: 3
         });
         fileStream.on('data', function(d) {
+            
             var app = d.name.replace('.app', '').replace('.exe', '').toLowerCase();
             var match = _.filter(players, function(v, k) {
                 return k.toLowerCase() === app;
