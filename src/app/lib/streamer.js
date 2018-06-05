@@ -246,7 +246,7 @@
                 // clear downloaded so change:downloaded gets triggered for the first time
                 streamInfo.set('downloaded', 0);
 
-                if (AdvSettings.get('chosenPlayer') != 'html5') {
+                if (AdvSettings.get('chosenPlayer') != 'html5' && AdvSettings.get('chosenPlayer') != 'downloadonly') {
                     App.vent.trigger('stream:ready', streamInfo);
                     stateModel.destroy();
                 }
