@@ -155,13 +155,10 @@
 
         resetTVShowAPI: function() {
             var value = [{
-                url: 'https://popcorntime.ws/api/eztv/',
+                url: 'https://api-fetch.website/tv/',
                 strictSSL: true
             }, {
                 url: 'http://eztvapi.ml/',
-                strictSSL: true
-            }, {
-                url: 'https://popcornwvnbg7jev.onion.to/',
                 strictSSL: true
             }];
             App.settings['tvAPI'] = value;
@@ -552,7 +549,7 @@
             var username = App.settings.opensubtitlesUsername;
             var password = require('crypto').createHash('md5').update(App.settings.opensubtitlesPassword).digest('hex');
 
-            App.OpenSubtitlesMovies.authenticate(username,password).then(function(value) {
+            App.OpenSubtitlesMovies.authenticate(username, password).then(function(value) {
                 if (value == false) {
                     that.alertMessageFailed(i18n.__("Incorrect Username or Password"));
                 }
@@ -561,7 +558,7 @@
                     eventCategory: 'Settings',
                     eventAction: 'OpenSubtitles Login Incorrect',
                     eventLabel: 'OpenSubtitles Login Incorrect'
-                    });
+                });
                 return value;
             }).then(function(value) {
                 if (value == true) {
@@ -582,7 +579,7 @@
                         eventCategory: 'Settings',
                         eventAction: 'OpenSubtitles Login Successful',
                         eventLabel: 'OpenSubtitles Login Successful'
-                        });
+                    });
                     self.render();
                 }
             });
@@ -607,13 +604,13 @@
                 that.syncSetting('opensubtitles', "");
             });
 
-             //GA: Player Launched
-             ga('send', {
+            //GA: Player Launched
+            ga('send', {
                 hitType: 'event',
                 eventCategory: 'Settings',
                 eventAction: 'OpenSubtitles Disconnect',
                 eventLabel: 'OpenSubtitles Disconnect'
-                });
+            });
 
             App.OpenSubtitlesMovies.disconnect(function() {
                 self.render();
