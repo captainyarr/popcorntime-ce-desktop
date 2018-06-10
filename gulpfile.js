@@ -11,11 +11,13 @@ var gzip = require('gulp-gzip');
 var tar = require('gulp-tar');
 var package = require('./package.json');
 
+const nwVersion = '0.20.1';
+
 var nw = new NwBuilder({
     files: ['./src/**', './node_modules/**', './package.json','./install','LICENSE.txt','CHANGELOG.md','README.md'],
-    version: '0.20.1',
+    version: nwVersion,
     zip: false,
-    downloadUrl: 'http://builds.butterproject.org/nw/',
+    downloadUrl: 'https://get.popcorntime.sh/repo/nw/',
     platforms: argv.p ? argv.p.split(',') : [detectCurrentPlatform()]
 }).on('log', console.log);
 

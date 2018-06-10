@@ -120,7 +120,7 @@
         </div>
     </section>
 
-    <section id="subtitles">
+    <section id="subtitles" class="advanced">
         <div class="title">
             <%= i18n.__("Subtitles") %>
         </div>
@@ -143,7 +143,6 @@
                     <div class="dropdown-arrow"></div>
                 </div>
             </span>
-
             <span class="advanced">
                 <div class="dropdown subtitles-font">
                     <p><%= i18n.__("Font") %></p>
@@ -211,7 +210,6 @@
                     <div class="dropdown-arrow"></div>
                 </div>
             </span>
-
             <span class="advanced">
                 <div class="dropdown subtitles-decoration">
                     <p><%= i18n.__("Decoration") %></p>
@@ -227,7 +225,6 @@
                     <div class="dropdown-arrow"></div>
                 </div>
             </span>
-
             <span>
                 <div class="dropdown subtitles-size">
                     <p><%= i18n.__("Size") %></p>
@@ -243,22 +240,50 @@
                     <div class="dropdown-arrow"></div>
                 </div>
             </span>
-
             <span class="advanced">
                 <div class="subtitles-custom">
-                    <p><%= i18n.__("Color") %></p>
-                    <input class="colorsub" id="subtitles_color" type="color" size="7" name="subtitle_color" value="<%=Settings.subtitle_color%>" list="subs_colors">
-                        <datalist id="subs_colors">
-                            <option>#ffffff</option>
-                            <option>#ffff00</option>
-                            <option>#ff0000</option>
-                            <option>#ff00ff</option>
-                            <option>#00ffff</option>
-                            <option>#00ff00</option>
-                        </datalist>
+                        <p><%= i18n.__("Color") %></p>
+                        <input class="colorsub" id="subtitles_color" type="color" size="7" name="subtitle_color" value="<%=Settings.subtitle_color%>" list="subs_colors">
+                            <datalist id="subs_colors">
+                                <option>#ffffff</option>
+                                <option>#ffff00</option>
+                                <option>#ff0000</option>
+                                <option>#ff00ff</option>
+                                <option>#00ffff</option>
+                                <option>#00ff00</option>
+                            </datalist>
                 </div>
             </span>
-
+            <% if (App.OpenSubtitlesMovies.authenticated) { %>
+                <span>
+                    <%= i18n.__("You are currently connected to %s", "Opensubtitles.org") %>.
+                    <a id="disconnect-opensubtitles" class="unauthtext" href="#"><%= i18n.__("Disconnect account") %></a>
+                </span>
+            <% } else { %>
+                    <span>
+                        <%= i18n.__("Create an account at")%> <a href='https://www.opensubtitles.org' data-toggle="tooltip" data-placement="top" title="opensubtitles.org" class='links' ><%= i18n.__("www.opensubtitles.org") %></a>
+                    </span>
+                    <span>
+                            <i class="fa fa-user icon">&nbsp;&nbsp;</i>
+                            <input id="opensubtitlesUsername" type="text" size="50" name="opensubtitlesUsername" value="<%=Settings.opensubtitlesUsername%>">
+                    </span>
+                    <span>
+                            <i class="fa fa-key icon">&nbsp;&nbsp;</i>
+                            <input id="opensubtitlesPassword" type="password" size="50" name="opensubtitlesPassword" autocomplete="new-password" value="<%=Settings.opensubtitlesPassword%>">
+                    </span>
+                    <span>
+                            <!-- An element to toggle between password visibility -->
+                            <input class="settings-checkbox" name="showPassword" id="showPassword" type="checkbox"> 
+                            <label class="settings-label" for="showPassword"><%= i18n.__("Show Password") %></label>
+                    </span>
+                    <div class="btns advanced database">           
+                        <div class="btn-settings database connect-opensubtitles" id="authOpensubtitles">
+                            <i class="fa fa-key icon">&nbsp;&nbsp;</i>
+                            <%= i18n.__("Connect To %s", "OpenSubtitles.org") %>
+                        </div>
+                        <div class="loading-spinner" style="display: none"></div>
+                    </div>
+            <% } %>
         </div>
     </section>
 
@@ -521,6 +546,7 @@
             </div>
         </div>
     </section>
+
     <section id="miscellaneous">
         <div class="title">
             <%= i18n.__("Miscellaneous") %>
