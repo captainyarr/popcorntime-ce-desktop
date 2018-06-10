@@ -118,10 +118,9 @@ Settings.tvAPI = [{
     url: 'https://api-fetch.website/tv/',
     strictSSL: true
 }, {
-    url: 'https://api-fetch.website/tv/',
+    url: 'http://eztvapi.ml/',
     strictSSL: true
-}
-];
+}];
 
 Settings.ytsAPI = [{
     url: 'http://yts.am/',
@@ -129,8 +128,7 @@ Settings.ytsAPI = [{
 }, {
     url: 'http://yts.ag/',
     strictSSL: true
-}
-];
+}];
 
 Settings.updateEndpoint = {
     url: 'http://popcorntime.ag/',
@@ -158,7 +156,7 @@ Settings.trackers = [
     'udp://torrent.gresille.org:80/announce',
     'udp://public.popcorn-tracker.org:6969/announce',
     'udp://9.rarbg.com:2710/announce',
-    'udp://p4p.arenabg.com:1337'
+    'udp://p4p.arenabg.com:1337',
 ];
 
 // App Settings
@@ -214,9 +212,9 @@ var AdvSettings = {
 
     set: function(variable, newValue) {
         Database.writeSetting({
-            key: variable,
-            value: newValue
-        })
+                key: variable,
+                value: newValue
+            })
             .then(function() {
                 Settings[variable] = newValue;
             });
