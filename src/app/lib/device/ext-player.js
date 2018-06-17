@@ -227,7 +227,13 @@
             switches: '',
             subswitch: '',
             fs: ''
-        }
+        },
+        'wmplayer': {
+            type: 'wmplayer',
+            switches: '',
+            subswitch: '/sub ',
+            fs: '/fullscreen'
+        }// wmplayer /fullscreen
     };
 
     /* map name back into the object as we use it in match */
@@ -256,12 +262,26 @@
     // win32
     addPath(process.env.SystemDrive + '\\Program Files\\');
     addPath(process.env.SystemDrive + '\\Program Files (x86)\\');
+    // win7+
+    /*
+    "LOCALAPPDATA": "C:\\Users\\{username}\\AppData\\Local",
+    "ProgramData": "C:\\ProgramData",
+    "ProgramFiles": "C:\\Program Files",
+    "ProgramFiles(x86)": "C:\\Program Files (x86)",
+    "ProgramW6432": "C:\\Program Files",
+    "SystemDrive": "C:",
+    "SystemRoot": "C:\\WINDOWS",
+    */
+    addPath(process.env.LOCALAPPDATA);
+    addPath(process.env.LOCALAPPDATA + '\\Programs');
     addPath(process.env.LOCALAPPDATA + '\\Apps\\2.0\\');
 
     win.debug("SystemDrive:"+process.env.SystemDrive);
     win.debug("LOCALAPPDATA:"+process.env.LOCALAPPDATA);
     win.debug("HOMEPATH:"+process.env.HOMEPATH);
     win.debug("HOME:"+process.env.HOME);
+
+    win.debug(JSON.stringify(process.env));
 
     var folderName = '';
     var birthtimes = {};
