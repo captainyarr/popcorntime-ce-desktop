@@ -228,7 +228,7 @@
             subswitch: '',
             fs: ''
         },
-        'wmplayer': {
+        'WMPlayer': {
             type: 'wmplayer',
             switches: '',
             subswitch: '/sub ',
