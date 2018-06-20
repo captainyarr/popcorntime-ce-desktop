@@ -231,7 +231,7 @@
         'WMPlayer': {
             type: 'wmplayer',
             switches: '',
-            subswitch: '/sub ',
+            subswitch: '',
             fs: '/fullscreen'
         }// wmplayer /fullscreen
     };
@@ -262,6 +262,7 @@
     // win32
     addPath(process.env.SystemDrive + '\\Program Files\\');
     addPath(process.env.SystemDrive + '\\Program Files (x86)\\');
+    
     // win7+
     /*
     "LOCALAPPDATA": "C:\\Users\\{username}\\AppData\\Local",
@@ -272,16 +273,20 @@
     "SystemDrive": "C:",
     "SystemRoot": "C:\\WINDOWS",
     */
+    addPath(process.env.ProgramFiles);
+
     addPath(process.env.LOCALAPPDATA);
     addPath(process.env.LOCALAPPDATA + '\\Programs');
     addPath(process.env.LOCALAPPDATA + '\\Apps\\2.0\\');
-
+    
+    /*
     win.debug("SystemDrive:"+process.env.SystemDrive);
     win.debug("LOCALAPPDATA:"+process.env.LOCALAPPDATA);
     win.debug("HOMEPATH:"+process.env.HOMEPATH);
     win.debug("HOME:"+process.env.HOME);
 
     win.debug(JSON.stringify(process.env));
+    */
 
     var folderName = '';
     var birthtimes = {};
