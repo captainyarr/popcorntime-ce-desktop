@@ -17,12 +17,12 @@ var buildplatforms = argv.p ? argv.p.split(',') : [detectCurrentPlatform()];
 
 //Platform specific overrides if needed
 
-if (buildplatforms.indexOf("linuxarm") >=0 ) {
+if (buildplatforms.indexOf("linuxarm") >= 0) {
     nwVersion = '0.31.2';
 }
 
 if (buildplatforms.indexOf("linuxarm") >= 0) {
-    buildDownloadUrl = 'https://dl.nwjs.io/';
+    buildDownloadUrl = 'https://github.com/LeonardLaszlo/nw.js-armv7-binaries/releases/download/v0.27.6/nwjs-sdk-v0.27.6-linux-arm-chrome-branding.tar.gz';
 }
 
 var nw = new NwBuilder({
