@@ -169,7 +169,7 @@
         //Search for imdbId
         var i = _.size(imdbIds);
 
-        if (i < 40) {
+        if (i < 10) {
             i = 0;
         }
 
@@ -195,8 +195,8 @@
                         //subtitles is blank
                         deferred.resolve({});
                     });
-                }, 300 * (i));
-                //win.debug("Subtitle IMDB ID: " + id + " Time: "+300*i+"ms");
+                }, 500 * (i));
+                win.debug("Subtitle IMDB ID: " + id + " Time: "+300*i+"ms");
                 if (i > 0) {
                     i = i - 1
                 }
