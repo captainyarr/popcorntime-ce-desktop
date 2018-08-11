@@ -53,7 +53,7 @@ if (buildplatforms.indexOf("linuxarm") >= 0) {
 var nw = new NwBuilder({
     files: ['./src/**', './node_modules/**', './package.json', './install', 'LICENSE.txt', 'CHANGELOG.md', 'README.md'],
     version: nwVersion,
-    zip: buildplatforms.includes('osx64') ? true : false,
+    zip: false,
     downloadUrl: buildDownloadUrl,
     platforms: buildplatforms,
 }).on('log', console.log);
