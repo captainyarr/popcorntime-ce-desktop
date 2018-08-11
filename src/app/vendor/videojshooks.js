@@ -9,7 +9,7 @@ vjs.options['children'] = {
 };
 
 vjs.Player.prototype.debugMouse_ = false;
-vjs.Player.prototype.reportUserActivity = function (event) {
+vjs.Player.prototype.reportUserActivity = function(event) {
     /** DEBUG MOUSE CTRL+D **/
     if (this.debugMouse_) {
         win.debug('');
@@ -24,19 +24,19 @@ vjs.Player.prototype.reportUserActivity = function (event) {
     this.userActivity_ = true;
 };
 
-vjs.Player.prototype.listenForUserActivity = function () {
+vjs.Player.prototype.listenForUserActivity = function() {
     var onActivity, onMouseDown, mouseInProgress, onMouseUp,
         activityCheck, inactivityTimeout;
 
     onActivity = vjs.bind(this, this.reportUserActivity);
 
-    onMouseDown = function (e) {
+    onMouseDown = function(e) {
         onActivity(e);
         clearInterval(mouseInProgress);
         mouseInProgress = setInterval(onActivity, 250);
     };
 
-    onMouseUp = function (e) {
+    onMouseUp = function(e) {
         onActivity(e);
         clearInterval(mouseInProgress);
     };
@@ -47,12 +47,12 @@ vjs.Player.prototype.listenForUserActivity = function () {
     this.on('keydown', onActivity);
     this.on('keyup', onActivity);
 
-    activityCheck = setInterval(vjs.bind(this, function () {
+    activityCheck = setInterval(vjs.bind(this, function() {
         if (this.userActivity_) {
             this.userActivity_ = false;
             this.userActive(true);
             clearTimeout(inactivityTimeout);
-            inactivityTimeout = setTimeout(vjs.bind(this, function () {
+            inactivityTimeout = setTimeout(vjs.bind(this, function() {
                 if (!this.userActivity_) {
                     this.userActive(false);
                 }
@@ -60,13 +60,13 @@ vjs.Player.prototype.listenForUserActivity = function () {
         }
     }), 250);
 
-    this.on('dispose', function () {
+    this.on('dispose', function() {
         clearInterval(activityCheck);
         clearTimeout(inactivityTimeout);
     });
 };
 
-vjs.Player.prototype.onFullscreenChange = function () {
+vjs.Player.prototype.onFullscreenChange = function() {
     if (this.isFullscreen()) {
         this.addClass('vjs-fullscreen');
         $('.vjs-text-track').css('font-size', '140%');
@@ -80,13 +80,13 @@ vjs.Player.prototype.onFullscreenChange = function () {
 
 // This is a custom way of loading subtitles, since we can't use src (CORS blocks it and we can't disable it)
 // We fetch them when requested, process them and finally throw a parseCues their way
-vjs.TextTrack.prototype.load = function () {
+vjs.TextTrack.prototype.load = function() {
     // Only load if not loaded yet.
     if (this.readyState_ === 0) {
         var this_ = this;
         this.readyState_ = 1;
 
-        var subsParams = function () {
+        var subsParams = function() {
             $('#video_player .vjs-text-track').css('display', 'inline-block').drags();
             $('#video_player .vjs-text-track-display').css('font-size', Settings.subtitle_size);
             if (win.isFullscreen) {
@@ -103,13 +103,16 @@ vjs.TextTrack.prototype.load = function () {
         };
 
         // Fetches a raw subtitle, locally or remotely
-        var get_subtitle = function (subtitle_url, callback) {
+        var get_subtitle = function(subtitle_url, callback) {
+            win.debug("get_subtitles");
             var request = require('request');
+            var https = require('https');
 
             // Fetches Locally
             if (fs.existsSync(path.join(subtitle_url))) {
-                fs.readFile(subtitle_url, function (error, data) {
+                fs.readFile(subtitle_url, function(error, data) {
                     if (!error) {
+                        win.debug("Local Subtiles file found.")
                         callback(data);
                     } else {
                         win.warn('Failed to read subtitle!', error);
@@ -117,21 +120,70 @@ vjs.TextTrack.prototype.load = function () {
                 });
                 // Fetches Remotely
             } else {
-                request({
+
+                var options = {
                     url: subtitle_url,
+                    headers: {
+                        'Accept-Encoding': 'gzip, deflate'
+                    },
                     encoding: null
-                }, function (error, response, data) {
-                    if (!error && response.statusCode === 200) {
-                        callback(data);
-                    } else {
-                        win.warn('Failed to download subtitle!', error, response);
-                    }
+                };
+                
+                https.get(subtitle_url, (res) => {
+                    res.setEncoding('binary');
+                    let chunks = [];
+
+                    res.on('data', (chunk) => {
+                        chunks.push(Buffer.from(chunk, 'binary'));
+                    });
+
+                    res.on('close', () => {
+                        let binary = Buffer.concat(chunks);
+                        // binary is now a Buffer that can be used as Uint8Array or as
+                        // any other TypedArray for data processing in NodeJS or 
+                        // passed on via the Buffer to something else.
+                        win.debug("decompress callback - close");
+                        callback(binary);
+                    });
+
+                    res.on('error', function(err) {
+                        win.error("Error during HTTP request");
+                        win.error(err.message);
+                    });
                 });
+                
+                /*
+                request(options,
+                    function(error, response, data) {
+
+                        if (!error && response.statusCode === 200) {
+
+                            var data = new Uint32Array(data);
+
+                            callback(data);
+
+                            if (Buffer.isBuffer(data)) {
+                                win.debug("data is a buffer");
+                            } else
+                                win.debug("data is NOT a bufer");
+
+                            win.debug(data.toString('base64'));
+
+                            var newBuff = new Buffer(data.length);
+
+                            newBuff.copy(data, data.length);
+
+                            callback(data);
+                        } else {
+                            win.warn('Failed to download subtitle!', error, response);
+                        }
+                    });*/
+
             }
         };
 
         //transcode .ass, .ssa, .txt to SRT
-        var convert2srt = function (file, ext, callback) {
+        var convert2srt = function(file, ext, callback) {
             var readline = require('readline'),
                 counter = null,
                 lastBeginTime,
@@ -155,7 +207,7 @@ vjs.TextTrack.prototype.load = function () {
                 output: process.stdout,
                 terminal: false
             });
-            rl.on('line', function (line) {
+            rl.on('line', function(line) {
 
                 //detect encoding
                 var charset = require('jschardet').detect(line);
@@ -170,19 +222,19 @@ vjs.TextTrack.prototype.load = function () {
 
                         for (var i = 0; i < ssaFormat.length; i++) {
                             switch (ssaFormat[i]) {
-                            case 'Text':
-                            case ' Text':
-                                dialog = i;
-                                break;
-                            case 'Start':
-                            case ' Start':
-                                begin_time = i;
-                                break;
-                            case 'End':
-                            case ' End':
-                                end_time = i;
-                                break;
-                            default:
+                                case 'Text':
+                                case ' Text':
+                                    dialog = i;
+                                    break;
+                                case 'Start':
+                                case ' Start':
+                                    begin_time = i;
+                                    break;
+                                case 'End':
+                                case ' End':
+                                    end_time = i;
+                                    break;
+                                default:
                             }
                         }
 
@@ -211,7 +263,7 @@ vjs.TextTrack.prototype.load = function () {
                 if (ext === '.txt') {
                     line_ = line.split('}');
 
-                    var formatSeconds = function (seconds) {
+                    var formatSeconds = function(seconds) {
                         var date = new Date(1970, 0, 1);
                         date.setSeconds(seconds);
                         return date.toTimeString().replace(/.*(\d{2}:\d{2}:\d{2}).*/, '$1');
@@ -242,8 +294,8 @@ vjs.TextTrack.prototype.load = function () {
                 lastBeginTime = parsedBeginTime;
             });
 
-            setTimeout(function () {
-                fs.readFile(path.join(srtPath, srt), function (err, dataBuff) {
+            setTimeout(function() {
+                fs.readFile(path.join(srtPath, srt), function(err, dataBuff) {
                     if (!err) {
                         win.debug('SUB transcoded to SRT:', srt);
                         callback(dataBuff);
@@ -255,13 +307,13 @@ vjs.TextTrack.prototype.load = function () {
         };
 
         // Decompress zip
-        var decompress = function (dataBuff, callback) {
+        var decompress = function(dataBuff, callback) {
             try {
                 var AdmZip = require('adm-zip');
                 var zip = new AdmZip(dataBuff);
                 var zipEntries = zip.getEntries();
                 // TODO: Shouldn't we look for only 1 file ???
-                zipEntries.forEach(function (zipEntry, key) {
+                zipEntries.forEach(function(zipEntry, key) {
                     if (zipEntry.entryName.indexOf('.srt') !== -1) {
                         var decompressedData = zip.readFile(zipEntry);
                         callback(decompressedData);
@@ -272,12 +324,29 @@ vjs.TextTrack.prototype.load = function () {
             }
         };
 
+        // Decompress zip
+        var decompressGZ = function(dataBuff, callback) {
+            try {                       
+                // zlib Version
+                var data;
+                data = zlib.gunzipSync(dataBuff);
+                if(data < 0){
+                    // handle error
+                    win.warn('Failed to decompress subtitle!', data);
+                }else{
+                    callback(data);
+                }
+            } catch (error) {
+                win.warn('Catch: Failed to decompress subtitle!', error);
+            }
+        };
+
         // Handles charset encoding
-        var decode = function (dataBuff, language, callback) {
+        var decode = function(dataBuff, language, callback) {
             var charsetDetect = require('jschardet');
             var targetEncodingCharset = 'utf8';
 
-            var parse = function (strings) {
+            var parse = function(strings) {
                 strings = strings
                     .replace(/\{.*\}/g, '') // {/pos(x,y)}
                     .replace(/(- |==|sync).*[\s\S].*[\s\S].*[\s\S].*[\s\S].*\.(com|org|net|edu)/ig, '') // various teams
@@ -317,7 +386,7 @@ vjs.TextTrack.prototype.load = function () {
             }
         };
 
-        var vjsBind = function (data) {
+        var vjsBind = function(data) {
             try {
                 this_.parseCues(data);
             } catch (e) {
@@ -326,20 +395,24 @@ vjs.TextTrack.prototype.load = function () {
             }
         };
 
-        this.on('loaded', function () {
+        this.on('loaded', function() {
             win.info('Subtitles loaded!');
             subsParams();
         });
 
         // Get it, Unzip it, Decode it, Send it
-        get_subtitle(this.src_, function (dataBuf) {
+        get_subtitle(this.src_, function(dataBuf) {
             var path = require('path');
             if (path.extname(this_.src_) === '.zip') {
-                decompress(dataBuf, function (dataBuf) {
+                decompress(dataBuf, function(dataBuf) {
+                    decode(dataBuf, this_.language(), vjsBind);
+                });
+            } else if (path.extname(this_.src_) === '.gz') {
+                decompressGZ(dataBuf, function(dataBuf) {
                     decode(dataBuf, this_.language(), vjsBind);
                 });
             } else if (path.extname(this_.src_) === '.ass' || path.extname(this_.src_) === '.ssa' || path.extname(this_.src_) === '.txt') {
-                convert2srt(this_.src_, path.extname(this_.src_), function (dataBuf) {
+                convert2srt(this_.src_, path.extname(this_.src_), function(dataBuf) {
                     decode(dataBuf, this_.language(), vjsBind);
                 });
             } else {
@@ -358,7 +431,7 @@ vjs.TextTrack.prototype.load = function () {
  */
 vjs.TextTrackMenuItem = vjs.MenuItem.extend({
     /** @constructor */
-    init: function (player, options) {
+    init: function(player, options) {
         var track = this.track = options['track'];
 
         // Modify options for parent MenuItem class's init.
@@ -376,16 +449,16 @@ vjs.TextTrackMenuItem = vjs.MenuItem.extend({
     }
 });
 
-vjs.TextTrackMenuItem.prototype.onClick = function () {
+vjs.TextTrackMenuItem.prototype.onClick = function() {
     vjs.MenuItem.prototype.onClick.call(this);
     this.player_.showTextTrack(this.track.id_, this.track.kind());
 };
 
-vjs.TextTrackMenuItem.prototype.update = function () {
+vjs.TextTrackMenuItem.prototype.update = function() {
     this.selected(this.track.mode() === 2);
 };
 
-vjs.Player.prototype.onLoadStart = function () {
+vjs.Player.prototype.onLoadStart = function() {
     if (this.error()) {
         this.error(null);
     }
@@ -400,22 +473,22 @@ vjs.Player.prototype.onLoadStart = function () {
  * @constructor
  */
 vjs.LoadProgressBar = vjs.Component.extend({
-    init: function (player, options) {
+    init: function(player, options) {
         vjs.Component.call(this, player, options);
         this.on(player, 'progress', this.update);
     }
 });
-vjs.LoadProgressBar.prototype.createEl = function () {
+vjs.LoadProgressBar.prototype.createEl = function() {
     return vjs.Component.prototype.createEl.call(this, 'div', {
         className: 'vjs-load-progress',
         innerHTML: '<span class="vjs-control-text"><span>' + this.localize('Loaded') + '</span>: 0%</span>'
     });
 };
-vjs.LoadProgressBar.prototype.update = function () {
+vjs.LoadProgressBar.prototype.update = function() {
     return;
 };
 
-vjs.Player.prototype.volume = function (percentAsDecimal) {
+vjs.Player.prototype.volume = function(percentAsDecimal) {
     var vol;
 
     if (percentAsDecimal !== undefined) {
@@ -437,18 +510,18 @@ vjs.Player.prototype.volume = function (percentAsDecimal) {
 };
 
 //Display our own error
-var suggestedExternal = function () {
+var suggestedExternal = function() {
     var link = '<a href="http://www.videolan.org/vlc/" class="links">VLC</a>';
     try {
-        App.Device.Collection.models.forEach(function (player) {
+        App.Device.Collection.models.forEach(function(player) {
             link = (player.id === 'VLC') ? player.id : link;
         });
     } catch (e) {}
     return link;
 };
-vjs.ErrorDisplay.prototype.update = function () {
+vjs.ErrorDisplay.prototype.update = function() {
     if (this.player().error()) {
-        $('.vjs-error-display').dblclick(function (event) {
+        $('.vjs-error-display').dblclick(function(event) {
             App.PlayerView.toggleFullscreen();
             event.preventDefault();
         });
@@ -466,32 +539,32 @@ vjs.ErrorDisplay.prototype.update = function () {
  * @constructor
  */
 vjs.LoadProgressBar = vjs.Component.extend({
-    init: function (player, options) {
+    init: function(player, options) {
         vjs.Component.call(this, player, options);
         this.on(player, 'progress', this.update);
     }
 });
-vjs.LoadProgressBar.prototype.createEl = function () {
+vjs.LoadProgressBar.prototype.createEl = function() {
     return vjs.Component.prototype.createEl.call(this, 'div', {
         className: 'vjs-load-progress',
         innerHTML: '<span class="vjs-control-text"><span>Loaded</span>: 0%</span>'
     });
 };
-vjs.LoadProgressBar.prototype.update = function () {
+vjs.LoadProgressBar.prototype.update = function() {
     return;
 };
 
 //Display our own error
-var suggestedExternal = function () {
+var suggestedExternal = function() {
     var link = '<a href="http://www.videolan.org/vlc/" class="links">VLC</a>';
     try {
-        App.Device.Collection.models.forEach(function (player) {
+        App.Device.Collection.models.forEach(function(player) {
             link = (player.id === 'VLC') ? player.id : link;
         });
     } catch (e) {}
     return link;
 };
-vjs.ErrorDisplay.prototype.update = function () {
+vjs.ErrorDisplay.prototype.update = function() {
     if (this.player().error()) {
         if (this.player().error().message === 'The video playback was aborted due to a corruption problem or because the video used features your browser did not support.') {
             this.contentEl_.innerHTML = i18n.__('The video playback encountered an issue. Please try an external player like %s to view this content.', suggestedExternal());
@@ -502,12 +575,12 @@ vjs.ErrorDisplay.prototype.update = function () {
 };
 
 // Remove videojs key listeners
-vjs.Button.prototype.onKeyPress = function (event) {
+vjs.Button.prototype.onKeyPress = function(event) {
     return;
 };
 
 // Dispose needs to clear currentTimeInterval to avoid vdata error (https://github.com/videojs/video.js/issues/1484#issuecomment-55245716)
-vjs.MediaTechController.prototype.dispose = function () {
+vjs.MediaTechController.prototype.dispose = function() {
     // Turn off any manual progress or timeupdate tracking
     if (this.manualProgress) {
         this.manualProgressOff();
