@@ -29,7 +29,8 @@
         "position": "center"
     },
     "dependencies": {
-        "adm-zip": "0.4.7",
+        "urijs": "^1.17.0",
+        "adm-zip": "0.4.11",
         "airplay-js": "^0.3.0",
         "async": "^2.2.0",
         "chromecast-js": "git+https://github.com/captainyarr/chromecast-js.git",
