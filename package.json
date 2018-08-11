@@ -31,6 +31,7 @@
     "dependencies": {
         "urijs": "^1.17.0",
         "adm-zip": "0.4.11",
+        "ajv": "6.0.0",
         "airplay-js": "^0.3.0",
         "async": "^2.2.0",
         "chromecast-js": "git+https://github.com/captainyarr/chromecast-js.git",
@@ -70,7 +71,6 @@
         "underscore": "^1.8.3",
         "upnp-mediarenderer-client": "^1.2.1",
         "webtorrent": "^0.102.1",
-        "urijs": "^1.17.0",
         "xmlbuilder": "^9.0.4"
     },
     "devDependencies": {
