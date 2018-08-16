@@ -318,7 +318,11 @@
                 default:
                     win.warn('Setting not defined: ' + field.attr('name'));
             }
-            win.info('Setting changed: ' + field.attr('name') + ' - ' + value);
+            
+            if(field.attr('name')!='opensubtitlesPassword'){
+                win.info('Setting changed: ' + field.attr('name') + ' - ' + value);
+            }else
+                win.info('Setting changed: ' + field.attr('name') );
 
             // update active session
             App.settings[field.attr('name')] = value;
