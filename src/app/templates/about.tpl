@@ -19,7 +19,8 @@
         <div class="text-about">
             <div class="full-text">
                 <%= i18n.__("Popcorn Time! is the result of many developers and designers putting a bunch of APIs together to make the experience of watching torrent movies as simple as possible.") %><br/>
-                <%= i18n.__("We are an open source project. We are from all over the world. We love our movies. And boy, do we love popcorn.") %>
+                <%= i18n.__("We are an open source project. We are from all over the world. We love our movies. And boy, do we love popcorn.") %><br/>
+                <%= i18n.__("Subtitles are provided by")%> <a class="links" href="http://opensubtitles.org">opensubtitles.org</a>.
             </div>
         </div>
 
