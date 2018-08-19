@@ -169,7 +169,7 @@
         //Search for imdbId
         var i = _.size(imdbIds);
 
-        if (i < 40) {
+        if (i < 10) {
             i = 0;
         }
 
@@ -177,6 +177,7 @@
             _.map(imdbIds, function(id) {
                 var deferred = Q.defer();
                 setTimeout(function() {
+                    win.debug("Search Start: "+id);
                     OS.search({
                         imdbid: id,
                         gzip: true
@@ -191,12 +192,12 @@
                             deferred.resolve({});
                         }
                     }).catch(err => {
-                        win.error("OpenSubtitlesMovies API Error: " + err);
+                        win.error("OpenSubtitlesMovies API Error: "+id+" " + err);
                         //subtitles is blank
                         deferred.resolve({});
                     });
-                }, 300 * (i));
-                //win.debug("Subtitle IMDB ID: " + id + " Time: "+300*i+"ms");
+                }, 400 * (i));
+                win.debug("Subtitle IMDB ID: " + id + " Time: "+300*i+"ms");
                 if (i > 0) {
                     i = i - 1
                 }
