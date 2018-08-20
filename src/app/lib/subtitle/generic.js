@@ -79,6 +79,7 @@
     //Download URL from Butter Project
 
     var downloadFromUrl = function(data) {
+        win.debug("downloadfromUrl");
         return new Promise(function(resolve, reject) {
             var vpath = data.path; // video file path
             var vext = path.extname(vpath); // video extension
@@ -132,6 +133,7 @@
                     } else if (fgz) {
                         require('zlib').unzip(fs.readFileSync(fpath + ext), (error, buffer) => {
                             if (error) {
+                                win.error(error);
                                 reject(error);
                             } else {
                                 var charset = charsetDetect.detect(buffer);
@@ -189,7 +191,7 @@
         download: function(data) {
             if (data.path && data.url) {
                 win.debug('Subtitles download url:', data.url);
-                console.log('save subtitles to AdvSettings ' + data.url);
+                win.debug('Save subtitles to AdvSettings ' + data.url);
                 AdvSettings.set('LastSubtitle', data.url);
                 var fileFolder = path.dirname(data.path);
 

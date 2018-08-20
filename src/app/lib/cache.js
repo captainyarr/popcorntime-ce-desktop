@@ -14,9 +14,9 @@
             win.debug('New database version');
 
             _.each(cache.tables, function (table) {
-                tx.executeSql('DROP TABLE IF EXISTS ' + table, [], function () {
+                tx.executeSql('DROP TABLE IF EXISTS ' + table, [], function(_, result){
                     win.debug('Create table ' + table);
-                    tx.executeSql('CREATE TABLE ' + table + ' (' + tableStruct + ')');
+                    tx.executeSql('CREATE TABLE ' + table + ' (' + tableStruct + ')',[], function(_, result) {});
                 }, function (tx, err) {
                     win.error('Ceating db table', err);
                 });
@@ -46,7 +46,7 @@
             db.transaction(function (tx) {
                 // Select item in db
                 var query = 'SELECT * FROM ' + self.table + ' WHERE ' + buildWhereIn(ids);
-                tx.executeSql(query, ids, function (tx, results) {
+                tx.executeSql(query, ids, function(_, result) {
                     var cachedData = {};
                     var expiredData = [];
                     var now = +new Date();
@@ -93,14 +93,14 @@
                     db.transaction(function (tx) {
                         _.each(cachedData, function (item, id) {
                             var data = JSON.stringify(item);
-                            tx.executeSql('UPDATE ' + self.table + ' SET data = ?, ttl = ?, date_saved = ? WHERE id = ?', [data, ttl, now, id]);
+                            tx.executeSql('UPDATE ' + self.table + ' SET data = ?, ttl = ?, date_saved = ? WHERE id = ?', [data, ttl, now, id], function(_, result) {});
                         });
 
                         var missedData = _.difference(_.keys(items), _.keys(cachedData));
                         _.each(missedData, function (id) {
                             var data = JSON.stringify(items[id]);
                             var query = 'INSERT INTO ' + self.table + ' VALUES (?, ?, ?, ?)';
-                            tx.executeSql(query, [id, data, ttl, now]);
+                            tx.executeSql(query, [id, data, ttl, now], function(_, result) {});
                         });
                     }, function (err) {
                         win.error('db.transaction()', err);
@@ -112,7 +112,7 @@
             var self = this;
             db.transaction(function (tx) {
                 var query = 'DELETE FROM ' + self.table + ' WHERE ' + buildWhereIn(ids);
-                tx.executeSql(query, ids, function () {});
+                tx.executeSql(query, ids, function(_, result) {});
             });
         },
 
@@ -122,7 +122,7 @@
             return Q.Promise(function (resolve, reject) {
                 db.transaction(function (tx) {
                     var query = 'DELETE FROM ' + self.table;
-                    tx.executeSql(query, function () {});
+                    tx.executeSql(query, [], function(_, result) {});
                     resolve();
                 });
             });
