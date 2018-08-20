@@ -46,14 +46,14 @@
             db.transaction(function (tx) {
                 // Select item in db
                 var query = 'SELECT * FROM ' + self.table + ' WHERE ' + buildWhereIn(ids);
-                tx.executeSql(query, ids, function(_, result) {
+                tx.executeSql(query, ids, function(tx, result) {
                     var cachedData = {};
                     var expiredData = [];
                     var now = +new Date();
 
                     // Filter expired item
-                    for (var i = 0; i < results.rows.length; i++) {
-                        var row = results.rows.item(i);
+                    for (var i = 0; i < result.rows.length; i++) {
+                        var row = result.rows.item(i);
                         var data = JSON.parse(row.data);
 
                         if (row.ttl !== 0 && row.ttl < now - row.date_saved) {
