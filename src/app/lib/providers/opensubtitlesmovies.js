@@ -180,7 +180,7 @@
                     win.debug("Search Start: "+id);
                     OS.search({
                         imdbid: id,
-                        gzip: true
+                        gzip: false
                     }).then(subtitles => {
                         //win.debug("OS:Subtitles: "+JSON.stringify(subtitles));
                         if (subtitles) {

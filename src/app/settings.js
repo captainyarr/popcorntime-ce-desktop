@@ -381,8 +381,8 @@ var AdvSettings = {
             var cacheDb = openDatabase('cachedb', '', 'Cache database', 50 * 1024 * 1024);
 
             cacheDb.transaction(function(tx) {
-                tx.executeSql('DELETE FROM subtitle');
-                tx.executeSql('DELETE FROM metadata');
+                tx.executeSql('DELETE FROM subtitle',[], function(_, result) {});
+                tx.executeSql('DELETE FROM metadata',[], function(_, result) {});
             });
 
             // Add an upgrade flag
