@@ -67,8 +67,8 @@ Settings.traktPlayback = true;
 Settings.tvstAccessToken = '';
 
 // Advanced options
-Settings.connectionLimit = 200;
-Settings.dhtLimit = 500;
+Settings.connectionLimit = 100;
+Settings.dhtLimit = 50;
 Settings.streamPort = 0; // 0 = Random
 Settings.tmpLocation = path.join(os.tmpDir(), 'Popcorn-Time');
 Settings.databaseLocation = path.join(data_path, 'data');

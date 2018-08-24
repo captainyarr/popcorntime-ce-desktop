@@ -318,11 +318,11 @@
                 default:
                     win.warn('Setting not defined: ' + field.attr('name'));
             }
-            
-            if(field.attr('name')!='opensubtitlesPassword'){
+
+            if (field.attr('name') != 'opensubtitlesPassword') {
                 win.info('Setting changed: ' + field.attr('name') + ' - ' + value);
-            }else
-                win.info('Setting changed: ' + field.attr('name') );
+            } else
+                win.info('Setting changed: ' + field.attr('name'));
 
             // update active session
             App.settings[field.attr('name')] = value;
@@ -333,7 +333,7 @@
 
             // move tmp folder safely
             if (tmpLocationChanged) {
-                that.moveTmpLocation(value);
+                value = that.moveTmpLocation(value);
             }
 
             //save to db
@@ -702,15 +702,30 @@
         },
 
         moveTmpLocation: function(location) {
-            if (!fs.existsSync(location)) {
-                fs.mkdir(location);
+            try {
+                if (!fs.existsSync(location)) {
+                    fs.mkdirSync(location);
+                }
+                if (App.settings['deleteTmpOnClose']) {
+                    deleteFolder(oldTmpLocation);
+                } else {
+                    $('.notification_alert').show().text(i18n.__('You should save the content of the old directory, then delete it')).delay(5000).fadeOut(400);
+                    gui.Shell.openItem(oldTmpLocation);
+                }
+                return location;
+            } catch (err) {
+                if (err.code !== 'EEXIST'){
+                    $('.notification_alert').show().text(i18n.__('Unable to create new Download directory')).delay(5000).fadeOut(400);
+                    return this.resetTmpLocation();
+                }
             }
-            if (App.settings['deleteTmpOnClose']) {
-                deleteFolder(oldTmpLocation);
-            } else {
-                $('.notification_alert').show().text(i18n.__('You should save the content of the old directory, then delete it')).delay(5000).fadeOut(400);
-                gui.Shell.openItem(oldTmpLocation);
-            }
+        },
+
+        resetTmpLocation: function(){
+            var value = path.join(os.tmpDir(), 'Popcorn-Time');
+            $('#tmpLocation').val(value);
+            this.render();
+            return value; 
         },
 
         openDatabaseFolder: function() {

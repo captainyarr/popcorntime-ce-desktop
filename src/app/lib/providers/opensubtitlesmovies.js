@@ -161,9 +161,7 @@
             return deferred.promise;
         }
 
-        //Check and update login credentials
-
-        win.debug("querySubtitles: " + imdbIds);
+        //win.debug("querySubtitles: " + imdbIds);
 
         //Cycle through each imdbId then return the sublist
         //Search for imdbId
@@ -177,7 +175,7 @@
             _.map(imdbIds, function(id) {
                 var deferred = Q.defer();
                 setTimeout(function() {
-                    win.debug("Search Start: "+id);
+                    //win.debug("Search Start: "+id);
                     OS.search({
                         imdbid: id,
                         gzip: false
@@ -197,7 +195,7 @@
                         deferred.resolve({});
                     });
                 }, 400 * (i));
-                win.debug("Subtitle IMDB ID: " + id + " Time: "+300*i+"ms");
+                //win.debug("Subtitle IMDB ID: " + id + " Time: "+300*i+"ms");
                 if (i > 0) {
                     i = i - 1
                 }
