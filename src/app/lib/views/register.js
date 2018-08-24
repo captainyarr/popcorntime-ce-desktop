@@ -36,6 +36,7 @@
 
             switch (field.attr('name')) {
             case 'rememberRegister':
+                break;
  			//case 'chosenPlayer':
 				//AdvSettings.set('chosenPlayer', 'html5');
             default:
@@ -52,7 +53,7 @@
                 value: value
             });
 
-            that.syncSetting(field.attr('name'), value);
+            this.syncSetting(field.attr('name'), value);
         },
 
         syncSetting: function (setting, value) {
