@@ -630,7 +630,7 @@
 
             // multimedia keys
             // Change when mousetrap can be extended
-            $('body').bind('keydown', function (e) {
+            $('body').on('keydown', function (e) {
                 if (e.keyCode === 179) {
                     $('.vjs-play-control').click();
                 } else if (e.keyCode === 177) {
@@ -712,7 +712,7 @@
 
             // multimedia keys
             // Change when mousetrap can be extended
-            $('body').unbind('keydown');
+            $('body').off('keydown');
 
             document.removeEventListener('mousewheel', _this.mouseScroll);
         },
