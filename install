@@ -23,7 +23,7 @@ fi
 func_error
 
 #Variables
-version="0.4.1-15"
+version="0.4.1-16"
 tos="http://popcorn-time.is/tos.html"
 $path="$HOME/.Popcorn-Time-CE"
 
@@ -36,7 +36,7 @@ Popcorn Time CE $version - Linux $arch bits
 Please read our Terms of service:
 	$tos
 
-This installer will install Popcorn Time in:
+This installer will install Popcorn Time CE in:
 	~/.Popcorn-Time-CE
 	~/.local/share/applications
 	~/.local/share/icons

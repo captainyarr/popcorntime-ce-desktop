@@ -1,3 +1,37 @@
+## 0.4.1-16 Beta - Summer Dream  - 28 August 2018
+
+New Features:
+- OpenSubtitles: Add link to create account
+- OpenSubtitles: Added Username and Password for OpenSubtitles API into the settings screen.
+- ExtPlayer: Added Windows Media Player
+- Player: Added a "Download Only" option to the player selection
+- gulp: Add ffmpeg update to cache sdk
+- gulp: Add ffmpeg update to builds
+- gulp: Add commandline paramters to set nw.js version and downloadUrl location
+
+BugFixes: 
+- Register: Fixed default torrent
+- Settings: Fixed Download direction selection
+- Magnet and Torrent: Fixed Magnet and Torrent Drop
+- Cache: Fixed SQL execute methods
+- About: Added OpenSubtitles.org link
+- circleci: Removed osx64 from automated builds and zip
+- Trackers: Updated trackers
+- GulpArm: Updated LinuxArm downloadUrl
+- GulpArmSupport: Add support for linuxarm platform
+- OpenSubtitles: Better handling of subtitle information downloading
+- OpenSubtitles: Better error handling and fixed settings
+
+Updated:
+- Nodejs: Updated to version 0.31.5
+- jQuery: Updated to version 3.3.1
+- Mousetrap: Updated to latest version 1.6.2
+- gitlab: Updated to version 3.11.0
+- xmlbuilder: Updated to version 10.0.0
+- webtorrent: Updated to version 0.102.1
+- yargs: Updated to version 12.0.1
+- opensubtitles-api: Updated to version 4.1.0
+
 ## 0.4.1-15 Beta - Ides of March  - 11 March 2018
 
 BugFixes: 

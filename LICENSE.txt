@@ -1,5 +1,5 @@
 Popcorn Time - Streaming video through torrents
-Copyright © 2014 - 2015  Popcorn Time and the contributors (popcorntime.ag)
+Copyright © 2014 - 2018  Popcorn Time and the contributors (popcorntime.ag)
  
 If you distribute a copy or make a fork of the project, you have to credit this project as source.
 	
@@ -20,7 +20,7 @@ If you want to contact us : hello@popcorntime.ag
  
  
 Popcorn Time - Streaming video through torrents
-Copyright © 2014 - 2015  Popcorn Time and the contributors (popcorntime.ag)
+Copyright © 2014 - 2018  Popcorn Time and the contributors (popcorntime.ag)
 Popcorn Time is released under the GPL
 
 Last update: May 4, 2014
