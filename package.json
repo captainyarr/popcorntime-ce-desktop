@@ -10,9 +10,9 @@
     },
     "license": "GPL-3.0",
     "main": "src/app/index.html",
-    "version": "0.4.1-16-develop",
+    "version": "0.4.1-16",
     "node-remote": "*://*",
-    "releaseName": "Ides of March",
+    "releaseName": "Summer Dreams",
     "scripts": {
         "start": "gulp run"
     },
