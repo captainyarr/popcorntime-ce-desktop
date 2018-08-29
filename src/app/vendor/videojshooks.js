@@ -9,7 +9,7 @@ vjs.options['children'] = {
 };
 
 vjs.Player.prototype.debugMouse_ = false;
-vjs.Player.prototype.reportUserActivity = function (event) {
+vjs.Player.prototype.reportUserActivity = function(event) {
     /** DEBUG MOUSE CTRL+D **/
     if (this.debugMouse_) {
         win.debug('');
@@ -24,19 +24,19 @@ vjs.Player.prototype.reportUserActivity = function (event) {
     this.userActivity_ = true;
 };
 
-vjs.Player.prototype.listenForUserActivity = function () {
+vjs.Player.prototype.listenForUserActivity = function() {
     var onActivity, onMouseDown, mouseInProgress, onMouseUp,
         activityCheck, inactivityTimeout;
 
     onActivity = vjs.bind(this, this.reportUserActivity);
 
-    onMouseDown = function (e) {
+    onMouseDown = function(e) {
         onActivity(e);
         clearInterval(mouseInProgress);
         mouseInProgress = setInterval(onActivity, 250);
     };
 
-    onMouseUp = function (e) {
+    onMouseUp = function(e) {
         onActivity(e);
         clearInterval(mouseInProgress);
     };
@@ -47,12 +47,12 @@ vjs.Player.prototype.listenForUserActivity = function () {
     this.on('keydown', onActivity);
     this.on('keyup', onActivity);
 
-    activityCheck = setInterval(vjs.bind(this, function () {
+    activityCheck = setInterval(vjs.bind(this, function() {
         if (this.userActivity_) {
             this.userActivity_ = false;
             this.userActive(true);
             clearTimeout(inactivityTimeout);
-            inactivityTimeout = setTimeout(vjs.bind(this, function () {
+            inactivityTimeout = setTimeout(vjs.bind(this, function() {
                 if (!this.userActivity_) {
                     this.userActive(false);
                 }
@@ -60,13 +60,13 @@ vjs.Player.prototype.listenForUserActivity = function () {
         }
     }), 250);
 
-    this.on('dispose', function () {
+    this.on('dispose', function() {
         clearInterval(activityCheck);
         clearTimeout(inactivityTimeout);
     });
 };
 
-vjs.Player.prototype.onFullscreenChange = function () {
+vjs.Player.prototype.onFullscreenChange = function() {
     if (this.isFullscreen()) {
         this.addClass('vjs-fullscreen');
         $('.vjs-text-track').css('font-size', '140%');
@@ -80,13 +80,13 @@ vjs.Player.prototype.onFullscreenChange = function () {
 
 // This is a custom way of loading subtitles, since we can't use src (CORS blocks it and we can't disable it)
 // We fetch them when requested, process them and finally throw a parseCues their way
-vjs.TextTrack.prototype.load = function () {
+vjs.TextTrack.prototype.load = function() {
     // Only load if not loaded yet.
     if (this.readyState_ === 0) {
         var this_ = this;
         this.readyState_ = 1;
 
-        var subsParams = function () {
+        var subsParams = function() {
             $('#video_player .vjs-text-track').css('display', 'inline-block').drags();
             $('#video_player .vjs-text-track-display').css('font-size', Settings.subtitle_size);
             if (win.isFullscreen) {
@@ -103,13 +103,21 @@ vjs.TextTrack.prototype.load = function () {
         };
 
         // Fetches a raw subtitle, locally or remotely
-        var get_subtitle = function (subtitle_url, callback) {
+        var get_subtitle = function(subtitle_url, callback) {
+            win.debug("get_subtitles");
             var request = require('request');
+            var http;
+            if (subtitle_url.includes('https')) {
+                http = require('https');
+            } else {
+                http = require('http');
+            }
 
             // Fetches Locally
             if (fs.existsSync(path.join(subtitle_url))) {
-                fs.readFile(subtitle_url, function (error, data) {
+                fs.readFile(subtitle_url, function(error, data) {
                     if (!error) {
+                        win.debug("Local Subtiles file found.")
                         callback(data);
                     } else {
                         win.warn('Failed to read subtitle!', error);
@@ -117,59 +125,110 @@ vjs.TextTrack.prototype.load = function () {
                 });
                 // Fetches Remotely
             } else {
-                request({
+
+                var options = {
                     url: subtitle_url,
+                    headers: {
+                        'Accept-Encoding': 'gzip, deflate'
+                    },
                     encoding: null
-                }, function (error, response, data) {
+                };
+
+                http.get(subtitle_url, (res) => {
+                    res.setEncoding('binary');
+                    let chunks = [];
+
+                    res.on('data', (chunk) => {
+                        chunks.push(Buffer.from(chunk, 'binary'));
+                    });
+
+                    res.on('end', () => {
+                        let binary = Buffer.concat(chunks);
+                        // binary is now a Buffer that can be used as Uint8Array or as
+                        // any other TypedArray for data processing in NodeJS or 
+                        // passed on via the Buffer to something else.
+                        win.debug("get_subtitles callback - end");
+                        callback(binary);
+                    });
+
+                    res.on('error', function(err) {
+                        win.error("Error during HTTP request");
+                        win.error(err.message);
+                    });
+                });
+
+            }
+
+            /*
+            request(options,
+                function(error, response, data) {
+
                     if (!error && response.statusCode === 200) {
+
+                        var data = new Uint32Array(data);
+
+                        callback(data);
+
+                        if (Buffer.isBuffer(data)) {
+                            win.debug("data is a buffer");
+                        } else
+                            win.debug("data is NOT a bufer");
+
+                        win.debug(data.toString('base64'));
+
+                        var newBuff = new Buffer(data.length);
+
+                        newBuff.copy(data, data.length);
+
                         callback(data);
                     } else {
                         win.warn('Failed to download subtitle!', error, response);
                     }
-                });
-            }
-        };
+                });*/
 
-        //transcode .ass, .ssa, .txt to SRT
-        var convert2srt = function (file, ext, callback) {
-            var readline = require('readline'),
-                counter = null,
-                lastBeginTime,
+        }
+    };
 
-                //input
-                orig = /([^\\]+)$/.exec(file)[1],
-                origPath = file.substr(0, file.indexOf(orig)),
+    //transcode .ass, .ssa, .txt to SRT
+    var convert2srt = function(file, ext, callback) {
+        var readline = require('readline'),
+            counter = null,
+            lastBeginTime,
 
-                //output
-                srt = orig.replace(ext, '.srt'),
-                srtPath = Settings.tmpLocation,
+            //input
+            orig = /([^\\]+)$/.exec(file)[1],
+            origPath = file.substr(0, file.indexOf(orig)),
 
-                //elements
-                dialog, begin_time, end_time;
+            //output
+            srt = orig.replace(ext, '.srt'),
+            srtPath = Settings.tmpLocation,
 
-            fs.writeFileSync(path.join(srtPath, srt), ''); //create or delete content;
-            win.debug('SUB format can be converted:', orig);
+            //elements
+            dialog, begin_time, end_time;
 
-            var rl = readline.createInterface({
-                input: fs.createReadStream(path.join(origPath, orig)),
-                output: process.stdout,
-                terminal: false
-            });
-            rl.on('line', function (line) {
+        fs.writeFileSync(path.join(srtPath, srt), ''); //create or delete content;
+        win.debug('SUB format can be converted:', orig);
 
-                //detect encoding
-                var charset = require('jschardet').detect(line);
-                var encoding = charset.encoding;
-                var line_, parsedBeginTime, parsedEndTime, parsedDialog;
+        var rl = readline.createInterface({
+            input: fs.createReadStream(path.join(origPath, orig)),
+            output: process.stdout,
+            terminal: false
+        });
+        rl.on('line', function(line) {
 
-                //parse SSA
-                if (ext === '.ssa' || ext === '.ass') {
-                    encoding = 'utf-8';
-                    if (line.indexOf('Format:') !== -1) {
-                        var ssaFormat = line.split(',');
+            //detect encoding
+            var charset = require('jschardet').detect(line);
+            var encoding = charset.encoding;
+            var line_, parsedBeginTime, parsedEndTime, parsedDialog;
 
-                        for (var i = 0; i < ssaFormat.length; i++) {
-                            switch (ssaFormat[i]) {
+            //parse SSA
+            if (ext === '.ssa' || ext === '.ass') {
+                encoding = 'utf-8';
+                if (line.indexOf('Format:') !== -1) {
+                    var ssaFormat = line.split(',');
+
+                    for (var i = 0; i < ssaFormat.length; i++) {
+                        switch (ssaFormat[i]) {
                             case 'Text':
                             case ' Text':
                                 dialog = i;
@@ -183,173 +242,195 @@ vjs.TextTrack.prototype.load = function () {
                                 end_time = i;
                                 break;
                             default:
-                            }
                         }
-
-                        if (dialog && begin_time && end_time) {
-                            win.debug('SUB formatted in \'ssa\'');
-                        }
-                        return; //we have the elms spots, move on to the next line
                     }
 
-                    if (line.indexOf('Dialogue:') === -1) { //not a dialog line
-                        return;
+                    if (dialog && begin_time && end_time) {
+                        win.debug('SUB formatted in \'ssa\'');
                     }
-
-                    line_ = line.split(',');
-
-                    parsedBeginTime = line_[begin_time];
-                    parsedEndTime = line_[end_time];
-                    parsedDialog = line_[dialog];
-                    parsedDialog = parsedDialog.replace('{\\i1}', '<i>').replace('{\\i0}', '</i>'); //italics
-                    parsedDialog = parsedDialog.replace('{\\b1}', '<b>').replace('{\\b0}', '</b>'); //bold
-                    parsedDialog = parsedDialog.replace('\\N', '\n'); //return to line
-                    parsedDialog = parsedDialog.replace(/{.*?}/g, ''); //remove leftovers brackets 
+                    return; //we have the elms spots, move on to the next line
                 }
 
-                //parse TXT
-                if (ext === '.txt') {
-                    line_ = line.split('}');
-
-                    var formatSeconds = function (seconds) {
-                        var date = new Date(1970, 0, 1);
-                        date.setSeconds(seconds);
-                        return date.toTimeString().replace(/.*(\d{2}:\d{2}:\d{2}).*/, '$1');
-                    };
-
-                    parsedBeginTime = formatSeconds(line_[0].replace('{', '') / 25);
-                    parsedEndTime = formatSeconds(line_[1].replace('{', '') / 25);
-                    parsedDialog = line_[2].replace('|', '\n');
+                if (line.indexOf('Dialogue:') === -1) { //not a dialog line
+                    return;
                 }
 
-                //SRT needs a number for each subtitle
-                counter += 1;
+                line_ = line.split(',');
 
-                //keep only the last lang
-                if (parsedBeginTime < lastBeginTime) {
-                    counter = 1;
-                    fs.writeFileSync(path.join(srtPath, srt), '');
-                    win.debug('SUB contains multiple tracks, keeping only the last');
-                }
-
-                //SRT formatting
-                var parsedLine =
-                    counter + '\n' +
-                    parsedBeginTime + ' --> ' + parsedEndTime + '\n' +
-                    parsedDialog;
-
-                fs.appendFileSync(path.join(srtPath, srt), '\n\n' + parsedLine, encoding);
-                lastBeginTime = parsedBeginTime;
-            });
-
-            setTimeout(function () {
-                fs.readFile(path.join(srtPath, srt), function (err, dataBuff) {
-                    if (!err) {
-                        win.debug('SUB transcoded to SRT:', srt);
-                        callback(dataBuff);
-                    } else {
-                        win.warn('SUB transcoding failed', err);
-                    }
-                });
-            }, 2000);
-        };
-
-        // Decompress zip
-        var decompress = function (dataBuff, callback) {
-            try {
-                var AdmZip = require('adm-zip');
-                var zip = new AdmZip(dataBuff);
-                var zipEntries = zip.getEntries();
-                // TODO: Shouldn't we look for only 1 file ???
-                zipEntries.forEach(function (zipEntry, key) {
-                    if (zipEntry.entryName.indexOf('.srt') !== -1) {
-                        var decompressedData = zip.readFile(zipEntry);
-                        callback(decompressedData);
-                    }
-                });
-            } catch (error) {
-                win.warn('Failed to decompress subtitle!', error);
+                parsedBeginTime = line_[begin_time];
+                parsedEndTime = line_[end_time];
+                parsedDialog = line_[dialog];
+                parsedDialog = parsedDialog.replace('{\\i1}', '<i>').replace('{\\i0}', '</i>'); //italics
+                parsedDialog = parsedDialog.replace('{\\b1}', '<b>').replace('{\\b0}', '</b>'); //bold
+                parsedDialog = parsedDialog.replace('\\N', '\n'); //return to line
+                parsedDialog = parsedDialog.replace(/{.*?}/g, ''); //remove leftovers brackets 
             }
-        };
 
-        // Handles charset encoding
-        var decode = function (dataBuff, language, callback) {
-            var charsetDetect = require('jschardet');
-            var targetEncodingCharset = 'utf8';
+            //parse TXT
+            if (ext === '.txt') {
+                line_ = line.split('}');
 
-            var parse = function (strings) {
-                strings = strings
-                    .replace(/\{.*\}/g, '') // {/pos(x,y)}
-                    .replace(/(- |==|sync).*[\s\S].*[\s\S].*[\s\S].*[\s\S].*\.(com|org|net|edu)/ig, '') // various teams
-                    .replace(/[^0-9][\s\S][^0-9\W].*[\s\S].*[\s\S].*opensubtitles.*/ig, ''); // opensubs "contact us" ads
+                var formatSeconds = function(seconds) {
+                    var date = new Date(1970, 0, 1);
+                    date.setSeconds(seconds);
+                    return date.toTimeString().replace(/.*(\d{2}:\d{2}:\d{2}).*/, '$1');
+                };
 
-                callback(strings);
-            };
+                parsedBeginTime = formatSeconds(line_[0].replace('{', '') / 25);
+                parsedEndTime = formatSeconds(line_[1].replace('{', '') / 25);
+                parsedDialog = line_[2].replace('|', '\n');
+            }
 
-            var charset = charsetDetect.detect(dataBuff);
-            var detectedEncoding = charset.encoding;
-            win.debug('SUB charset detected: ' + detectedEncoding);
-            // Do we need decoding?
-            if (detectedEncoding.toLowerCase().replace('-', '') === targetEncodingCharset) {
-                parse(dataBuff.toString('utf-8'));
-                // We do
-            } else {
-                if (!language && Settings.subtitle_language !== 'none') {
-                    language = Settings.subtitle_language;
-                    win.debug('SUB charset: using subtitles_language setting (' + language + ') as default');
-                }
-                var iconv = require('iconv-lite');
-                var langInfo = App.Localization.langcodes[language] || {};
-                win.debug('SUB charset expected:', langInfo.encoding);
-                if (langInfo.encoding !== undefined && langInfo.encoding.indexOf(detectedEncoding) < 0) {
-                    // The detected encoding was unexepected to the language, so we'll use the most common
-                    // encoding for that language instead.
-                    detectedEncoding = langInfo.encoding[0];
-                    dataBuff = iconv.encode(iconv.decode(dataBuff, detectedEncoding), targetEncodingCharset);
+            //SRT needs a number for each subtitle
+            counter += 1;
+
+            //keep only the last lang
+            if (parsedBeginTime < lastBeginTime) {
+                counter = 1;
+                fs.writeFileSync(path.join(srtPath, srt), '');
+                win.debug('SUB contains multiple tracks, keeping only the last');
+            }
+
+            //SRT formatting
+            var parsedLine =
+                counter + '\n' +
+                parsedBeginTime + ' --> ' + parsedEndTime + '\n' +
+                parsedDialog;
+
+            fs.appendFileSync(path.join(srtPath, srt), '\n\n' + parsedLine, encoding);
+            lastBeginTime = parsedBeginTime;
+        });
+
+        setTimeout(function() {
+            fs.readFile(path.join(srtPath, srt), function(err, dataBuff) {
+                if (!err) {
+                    win.debug('SUB transcoded to SRT:', srt);
+                    callback(dataBuff);
                 } else {
-                    // fallback to utf8
-                    win.debug('SUB charset: fallback to utf-8');
-                    dataBuff = iconv.decode(dataBuff, detectedEncoding);
-                    detectedEncoding = 'UTF-8';
+                    win.warn('SUB transcoding failed', err);
                 }
-                win.debug('SUB charset used:', detectedEncoding);
-                parse(dataBuff.toString('utf-8'));
-            }
-        };
+            });
+        }, 2000);
+    };
 
-        var vjsBind = function (data) {
-            try {
-                this_.parseCues(data);
-            } catch (e) {
-                win.error('Error reading subtitles timing, file seems corrupted', e);
-                subsParams();
-            }
-        };
+    // Decompress zip
+    var decompress = function(dataBuff, callback) {
+        try {
+            var AdmZip = require('adm-zip');
+            var zip = new AdmZip(dataBuff);
+            var zipEntries = zip.getEntries();
+            // TODO: Shouldn't we look for only 1 file ???
+            zipEntries.forEach(function(zipEntry, key) {
+                if (zipEntry.entryName.indexOf('.srt') !== -1) {
+                    var decompressedData = zip.readFile(zipEntry);
+                    callback(decompressedData);
+                }
+            });
+        } catch (error) {
+            win.warn('Failed to decompress subtitle!', error);
+        }
+    };
 
-        this.on('loaded', function () {
-            win.info('Subtitles loaded!');
-            subsParams();
-        });
-
-        // Get it, Unzip it, Decode it, Send it
-        get_subtitle(this.src_, function (dataBuf) {
-            var path = require('path');
-            if (path.extname(this_.src_) === '.zip') {
-                decompress(dataBuf, function (dataBuf) {
-                    decode(dataBuf, this_.language(), vjsBind);
-                });
-            } else if (path.extname(this_.src_) === '.ass' || path.extname(this_.src_) === '.ssa' || path.extname(this_.src_) === '.txt') {
-                convert2srt(this_.src_, path.extname(this_.src_), function (dataBuf) {
-                    decode(dataBuf, this_.language(), vjsBind);
-                });
+    // Decompress zip
+    var decompressGZ = function(dataBuff, callback) {
+        try {
+            // zlib Version
+            var data;
+            data = zlib.gunzipSync(dataBuff, {
+                finishFlush: zlib.constants.Z_SYNC_FLUSH
+            });
+            if (data < 0) {
+                // handle error
+                win.warn('Failed to decompress subtitle!', data);
             } else {
-                decode(dataBuf, this_.language(), vjsBind);
+                callback(data);
             }
-        });
+        } catch (error) {
+            win.warn('Catch: Failed to decompress subtitle!', error);
+        }
+    };
 
-    }
+    // Handles charset encoding
+    var decode = function(dataBuff, language, callback) {
+        var charsetDetect = require('jschardet');
+        var targetEncodingCharset = 'utf8';
+
+        var parse = function(strings) {
+            strings = strings
+                .replace(/\{.*\}/g, '') // {/pos(x,y)}
+                .replace(/(- |==|sync).*[\s\S].*[\s\S].*[\s\S].*[\s\S].*\.(com|org|net|edu)/ig, '') // various teams
+                .replace(/[^0-9][\s\S][^0-9\W].*[\s\S].*[\s\S].*opensubtitles.*/ig, ''); // opensubs "contact us" ads
+
+            callback(strings);
+        };
+
+        var charset = charsetDetect.detect(dataBuff);
+        var detectedEncoding = charset.encoding;
+        win.debug('SUB charset detected: ' + detectedEncoding);
+        // Do we need decoding?
+        if (detectedEncoding.toLowerCase().replace('-', '') === targetEncodingCharset) {
+            parse(dataBuff.toString('utf-8'));
+            // We do
+        } else {
+            if (!language && Settings.subtitle_language !== 'none') {
+                language = Settings.subtitle_language;
+                win.debug('SUB charset: using subtitles_language setting (' + language + ') as default');
+            }
+            var iconv = require('iconv-lite');
+            var langInfo = App.Localization.langcodes[language] || {};
+            win.debug('SUB charset expected:', langInfo.encoding);
+            if (langInfo.encoding !== undefined && langInfo.encoding.indexOf(detectedEncoding) < 0) {
+                // The detected encoding was unexepected to the language, so we'll use the most common
+                // encoding for that language instead.
+                detectedEncoding = langInfo.encoding[0];
+                dataBuff = iconv.encode(iconv.decode(dataBuff, detectedEncoding), targetEncodingCharset);
+            } else {
+                // fallback to utf8
+                win.debug('SUB charset: fallback to utf-8');
+                dataBuff = iconv.decode(dataBuff, detectedEncoding);
+                detectedEncoding = 'UTF-8';
+            }
+            win.debug('SUB charset used:', detectedEncoding);
+            parse(dataBuff.toString('utf-8'));
+        }
+    };
+
+    var vjsBind = function(data) {
+        try {
+            this_.parseCues(data);
+        } catch (e) {
+            win.error('Error reading subtitles timing, file seems corrupted', e);
+            subsParams();
+        }
+    };
+
+    this.on('loaded', function() {
+        win.info('Subtitles loaded!');
+        subsParams();
+    });
+
+    // Get it, Unzip it, Decode it, Send it
+    get_subtitle(this.src_, function(dataBuf) {
+        var path = require('path');
+        if (path.extname(this_.src_) === '.zip') {
+            decompress(dataBuf, function(dataBuf) {
+                decode(dataBuf, this_.language(), vjsBind);
+            });
+        } else if (path.extname(this_.src_) === '.gz') {
+            decompressGZ(dataBuf, function(dataBuf) {
+                decode(dataBuf, this_.language(), vjsBind);
+            });
+        } else if (path.extname(this_.src_) === '.ass' || path.extname(this_.src_) === '.ssa' || path.extname(this_.src_) === '.txt') {
+            convert2srt(this_.src_, path.extname(this_.src_), function(dataBuf) {
+                decode(dataBuf, this_.language(), vjsBind);
+            });
+        } else {
+            decode(dataBuf, this_.language(), vjsBind);
+        }
+    });
 
 };
+
 
 /**
  * The specific menu item type for selecting a language within a text track kind
@@ -358,7 +439,7 @@ vjs.TextTrack.prototype.load = function () {
  */
 vjs.TextTrackMenuItem = vjs.MenuItem.extend({
     /** @constructor */
-    init: function (player, options) {
+    init: function(player, options) {
         var track = this.track = options['track'];
 
         // Modify options for parent MenuItem class's init.
@@ -376,16 +457,16 @@ vjs.TextTrackMenuItem = vjs.MenuItem.extend({
     }
 });
 
-vjs.TextTrackMenuItem.prototype.onClick = function () {
+vjs.TextTrackMenuItem.prototype.onClick = function() {
     vjs.MenuItem.prototype.onClick.call(this);
     this.player_.showTextTrack(this.track.id_, this.track.kind());
 };
 
-vjs.TextTrackMenuItem.prototype.update = function () {
+vjs.TextTrackMenuItem.prototype.update = function() {
     this.selected(this.track.mode() === 2);
 };
 
-vjs.Player.prototype.onLoadStart = function () {
+vjs.Player.prototype.onLoadStart = function() {
     if (this.error()) {
         this.error(null);
     }
@@ -400,22 +481,22 @@ vjs.Player.prototype.onLoadStart = function () {
  * @constructor
  */
 vjs.LoadProgressBar = vjs.Component.extend({
-    init: function (player, options) {
+    init: function(player, options) {
         vjs.Component.call(this, player, options);
         this.on(player, 'progress', this.update);
     }
 });
-vjs.LoadProgressBar.prototype.createEl = function () {
+vjs.LoadProgressBar.prototype.createEl = function() {
     return vjs.Component.prototype.createEl.call(this, 'div', {
         className: 'vjs-load-progress',
         innerHTML: '<span class="vjs-control-text"><span>' + this.localize('Loaded') + '</span>: 0%</span>'
     });
 };
-vjs.LoadProgressBar.prototype.update = function () {
+vjs.LoadProgressBar.prototype.update = function() {
     return;
 };
 
-vjs.Player.prototype.volume = function (percentAsDecimal) {
+vjs.Player.prototype.volume = function(percentAsDecimal) {
     var vol;
 
     if (percentAsDecimal !== undefined) {
@@ -437,18 +518,18 @@ vjs.Player.prototype.volume = function (percentAsDecimal) {
 };
 
 //Display our own error
-var suggestedExternal = function () {
+var suggestedExternal = function() {
     var link = '<a href="http://www.videolan.org/vlc/" class="links">VLC</a>';
     try {
-        App.Device.Collection.models.forEach(function (player) {
+        App.Device.Collection.models.forEach(function(player) {
             link = (player.id === 'VLC') ? player.id : link;
         });
     } catch (e) {}
     return link;
 };
-vjs.ErrorDisplay.prototype.update = function () {
+vjs.ErrorDisplay.prototype.update = function() {
     if (this.player().error()) {
-        $('.vjs-error-display').dblclick(function (event) {
+        $('.vjs-error-display').dblclick(function(event) {
             App.PlayerView.toggleFullscreen();
             event.preventDefault();
         });
@@ -466,32 +547,32 @@ vjs.ErrorDisplay.prototype.update = function () {
  * @constructor
  */
 vjs.LoadProgressBar = vjs.Component.extend({
-    init: function (player, options) {
+    init: function(player, options) {
         vjs.Component.call(this, player, options);
         this.on(player, 'progress', this.update);
     }
 });
-vjs.LoadProgressBar.prototype.createEl = function () {
+vjs.LoadProgressBar.prototype.createEl = function() {
     return vjs.Component.prototype.createEl.call(this, 'div', {
         className: 'vjs-load-progress',
         innerHTML: '<span class="vjs-control-text"><span>Loaded</span>: 0%</span>'
     });
 };
-vjs.LoadProgressBar.prototype.update = function () {
+vjs.LoadProgressBar.prototype.update = function() {
     return;
 };
 
 //Display our own error
-var suggestedExternal = function () {
+var suggestedExternal = function() {
     var link = '<a href="http://www.videolan.org/vlc/" class="links">VLC</a>';
     try {
-        App.Device.Collection.models.forEach(function (player) {
+        App.Device.Collection.models.forEach(function(player) {
             link = (player.id === 'VLC') ? player.id : link;
         });
     } catch (e) {}
     return link;
 };
-vjs.ErrorDisplay.prototype.update = function () {
+vjs.ErrorDisplay.prototype.update = function() {
     if (this.player().error()) {
         if (this.player().error().message === 'The video playback was aborted due to a corruption problem or because the video used features your browser did not support.') {
             this.contentEl_.innerHTML = i18n.__('The video playback encountered an issue. Please try an external player like %s to view this content.', suggestedExternal());
@@ -502,12 +583,12 @@ vjs.ErrorDisplay.prototype.update = function () {
 };
 
 // Remove videojs key listeners
-vjs.Button.prototype.onKeyPress = function (event) {
+vjs.Button.prototype.onKeyPress = function(event) {
     return;
 };
 
 // Dispose needs to clear currentTimeInterval to avoid vdata error (https://github.com/videojs/video.js/issues/1484#issuecomment-55245716)
-vjs.MediaTechController.prototype.dispose = function () {
+vjs.MediaTechController.prototype.dispose = function() {
     // Turn off any manual progress or timeupdate tracking
     if (this.manualProgress) {
         this.manualProgressOff();

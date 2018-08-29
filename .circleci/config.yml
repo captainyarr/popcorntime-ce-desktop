@@ -32,11 +32,11 @@ jobs:
       - run: sudo npm install -g gulp
         
       # run tests!
-      #- run: gulp build linux32,linux64,win32,osx64
-      - run: gulp build -p linux32,linux64,win32,win64,osx64
+      #- run: gulp build linux32,linux64,win32,win64,osx64
+      - run: gulp build -p linux32,linux64,win32,win64
       
       - deploy:
-         command: gulp zip
+         command: gulp zip -p linux32,linux64,win32,win64
       
       #store cache dependencies
       - save_cache:

@@ -1,4 +1,5 @@
 # Mousetrap
+[![CDNJS](https://img.shields.io/cdnjs/v/mousetrap.svg)](https://cdnjs.com/libraries/mousetrap)
 
 Mousetrap is a simple library for handling keyboard shortcuts in Javascript.
 
@@ -13,14 +14,18 @@ It is around **2kb** minified and gzipped and **4.5kb** minified, has no externa
 
 It has support for ``keypress``, ``keydown``, and ``keyup`` events on specific keys, keyboard combinations, or key sequences.
 
-If you would like to donate to help support Mousetrap development use [Gittip](https://www.gittip.com/ccampbell).
-
 ## Getting started
 
 1.  Include mousetrap on your page before the closing ``</body>`` tag
 
     ```html
     <script src="/path/to/mousetrap.min.js"></script>
+    ```
+    
+    or install `mousetrap` from `npm` and require it
+    
+    ```js
+    var Mousetrap = require('mousetrap');
     ```
 
 2.  Add some keyboard events to listen for
@@ -74,7 +79,7 @@ Unit tests run via <a href="http://mochajs.org/" target="_blank">mocha</a>.
 
 ### Running in browser
 
-Download the repo and go to `tests/mousetrap.html` in your browser.
+[View it online](http://rawgit.com/ccampbell/mousetrap/master/tests/mousetrap.html) to check your browser compatibility. You may also download the repo and open `tests/mousetrap.html` in your browser. 
 
 ### Running with Grunt and PhantomJS
 

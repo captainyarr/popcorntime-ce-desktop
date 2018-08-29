@@ -532,5 +532,20 @@
 	" Action": " Action",
 	"comedy": " Comedy",
 	"western": " Western",
-	"YTS.ph Search": "YTS.ph Search"
+	"YTS.ph Search": "YTS.ph Search",
+	"OpenSubtitles Username": "OpenSubtitles Username",
+	"OpenSubtitles Password": "OpenSubtitles Password",
+	"You should save the content of the old directory, then delete it": "You should save the content of the old directory, then delete it",
+	"OpenSubtitles.org Username": "OpenSubtitles.org Username",
+	"OpenSubtitles.org Password": "OpenSubtitles.org Password",
+	"Incorrect Username or Password": "Incorrect Username or Password",
+	"Show Password": "Show Password",
+	"Create a new account ": "Create a new account ",
+	"www.opensubtitles.org": "www.opensubtitles.org",
+	"Create a new account at ": "Create a new account at ",
+	"Create an account at": "Create an account at",
+	"fantasy": "fantasy",
+	"documentary": "documentary",
+	"Subtitles are provided by": "Subtitles are provided by",
+	"Unable to create new Download directory": "Unable to create new Download directory"
 }
