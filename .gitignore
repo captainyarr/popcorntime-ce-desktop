@@ -76,6 +76,7 @@ bld/
 [Oo]bj/
 [Ll]og/
 dist/
+pre/
 
 # Visual Studio 2015 cache/options directory
 .vs/
