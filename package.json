@@ -35,7 +35,7 @@
         "airplay-js": "^0.3.0",
         "async": "^2.2.0",
         "chromecast-js": "git+https://github.com/captainyarr/chromecast-js.git",
-        "gitlab": "^3.11.0",
+        "gitlab": "^4.0.0",
         "i18n": "0.8.3",
         "iconv-lite": "^0.4.7",
         "jschardet": "1.6.0",
