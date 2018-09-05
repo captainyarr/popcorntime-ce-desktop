@@ -76,7 +76,7 @@
     "devDependencies": {
         "del": "^3.0.0",
         "eslint": "^5.0.1",
-        "eslint-config-google": "^0.9.1",
+        "eslint-config-google": "^0.10.0",
         "gulp": "^3.9.1",
         "gulp-zip": "~4.1.0",
         "gulp-download": "0.0.1",
