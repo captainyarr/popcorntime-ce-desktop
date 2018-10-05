@@ -128,6 +128,9 @@ Settings.ytsAPI = [{
 }, {
     url: 'http://yts.ag/',
     strictSSL: true
+},{
+    url: 'https://movies.api-fetch.website/',
+    strictSSL: true
 }];
 
 Settings.updateEndpoint = {
