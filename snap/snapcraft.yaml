@@ -7,10 +7,19 @@ description: >
 confinement: devmode
 
 parts:
-  popcorntimece:
+  popcorn-time-ce:
     plugin: dump
     source: https://github.com/captainyarr/desktop/releases/download/$SNAPCRAFT_PROJECT_VERSION/popcorn-time-ce_linux64_$SNAPCRAFT_PROJECT_VERSION.tar.gz
-
+    stage-packages:
+        - libasound2
+        - libgconf2-4
+        - libnotify4
+        - libnspr4
+        - libnss3
+        - libpcre3
+        - libpulse0
+        - libxss1
+        - libxtst6
 apps:
-  popcorntimece:
+  popcorn-time-ce:
     command: ./Popcorn-Time-CE
