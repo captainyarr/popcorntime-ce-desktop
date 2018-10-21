@@ -1,0 +1,16 @@
+name: Popcorn-Time-CE
+version: 0.4.1-16
+summary: Watch Movies and TV Shows instantly
+description: >
+  Watch Movies and TV Shows instantly
+
+confinement: devmode
+
+parts:
+  popcorntimece:
+    plugin: dump
+    source: https://github.com/captainyarr/desktop/releases/download/$SNAPCRAFT_PROJECT_VERSION/popcorn-time-ce_linux64_$SNAPCRAFT_PROJECT_VERSION.tar.gz
+
+apps:
+  popcorntimece:
+    command: Popcorn-Time-CE
