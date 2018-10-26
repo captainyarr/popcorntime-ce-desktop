@@ -6,20 +6,90 @@ description: >
 
 confinement: devmode
 
+apps:
+  popcorn-time-ce:
+    command: ./Popcorn-Time-CE
+    plugs:
+      - unity7
+      - network
+      - network-bind
+      - home
+      - opengl
+      - alsa
+      - pulseaudio
+      - mount-observe
+      - optical-drive
+      - camera
+      - removable-media
+      - screen-inhibit-control
+      - x11
+      - desktop
+      - desktop-legacy
+      - gsettings
+
 parts:
   popcorn-time-ce:
     plugin: dump
     source: https://github.com/captainyarr/desktop/releases/download/$SNAPCRAFT_PROJECT_VERSION/popcorn-time-ce_linux64_$SNAPCRAFT_PROJECT_VERSION.tar.gz
     stage-packages:
-        - libasound2
-        - libgconf2-4
-        - libnotify4
-        - libnspr4
-        - libnss3
-        - libpcre3
-        - libpulse0
-        - libxss1
-        - libxtst6
-apps:
-  popcorn-time-ce:
-    command: ./Popcorn-Time-CE
+      - fonts-freefont-ttf
+      - dbus-x11
+      - libegl1-mesa
+      - libfreerdp-client1.1
+      - libfreerdp-core1.1
+      - libfreerdp-gdi1.1
+      - libfreetype6
+      - libfribidi0
+      - libgcc1
+      - libgl1-mesa-glx
+      - libgles2-mesa
+      - libglib2.0-0
+      - libpulse0
+      - libqt5core5a
+      - libqt5gui5
+      - librsvg2-2
+      - libsecret-1-0
+      - libva-drm1
+      - libva-x11-1
+      - libva1
+      - libvdpau1
+      - libx11-6
+      - libxcb-composite0
+      - libxcb-keysyms1
+      - libxcb-randr0
+      - libxcb-shm0
+      - libxcb-xv0
+      - libxcb1
+      - libxext6
+      - libxi6
+      - libxinerama1
+      - libxkbcommon-x11-0
+      - libxpm4
+      - vdpau-va-driver
+      - i965-va-driver
+      - mesa-utils
+      - mesa-vdpau-drivers
+      - zlib1g
+      - kde-style-breeze
+      - breeze-icon-theme
+      - frameworkintegration
+      - phonon4qt5-backend-null
+      - libjack0
+      - libasound2
+      - libgtk-3-0
+      - liblua5.2-0
+      - libmtp9
+      - libschroedinger-1.0-0
+      - libupnp6
+      - libnotify4
+      - libgconf2-4
+      - libnspr4
+      - libnss3
+      - libpcre3
+      - libxss1
+      - libx11-xcb-dev
+      - libxcomposite1
+      - libxcursor1
+      - libxtst-dev
+
+
