@@ -73,7 +73,7 @@ Settings.streamPort = 0; // 0 = Random
 Settings.tmpLocation = path.join(os.tmpDir(), 'Popcorn-Time');
 Settings.databaseLocation = path.join(data_path, 'data');
 Settings.deleteTmpOnClose = false;
-Settings.automaticUpdating = true;
+Settings.automaticUpdating = false;
 Settings.events = false;
 Settings.minimizeToTray = false;
 Settings.bigPicture = false;
@@ -134,13 +134,13 @@ Settings.ytsAPI = [{
 }];
 
 Settings.updateEndpoint = {
-    url: 'http://popcorntime.ag/',
+    url: '',//'http://popcorntime.ag/',
     index: 0,
     proxies: [{
-        url: 'http://popcorntime.ag/',
+        url: '',//'http://popcorntime.ag/',
         //fingerprint: '30:A6:BA:6C:19:A4:D5:C3:5A:E8:F1:56:C6:B4:E1:DC:EF:DD:EC:8C',
     }, {
-        url: 'http://popcorn-time.is/',
+        url: '',//'http://popcorn-time.is/',
         //fingerprint: '30:A6:BA:6C:19:A4:D5:C3:5A:E8:F1:56:C6:B4:E1:DC:EF:DD:EC:8C',
     }]
 };
