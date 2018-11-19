@@ -4,11 +4,12 @@ summary: Watch Movies and TV Shows instantly
 description: >
   Watch Movies and TV Shows instantly
 
+grade: devel
 confinement: devmode
 
 apps:
   popcorn-time-ce:
-    command: ./Popcorn-Time-CE
+    command: snapcraft-preload ./Popcorn-Time-CE
     plugs:
       - unity7
       - network
@@ -26,6 +27,13 @@ apps:
       - desktop
       - desktop-legacy
       - gsettings
+      - browser-support
+      - system-observe
+
+parts:
+    snapcraft-preload:
+        source: https://github.com/sergiusens/snapcraft-preload.git
+        plugin: cmake
 
 parts:
   popcorn-time-ce:
