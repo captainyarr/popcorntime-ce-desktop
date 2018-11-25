@@ -32,8 +32,7 @@
 <body>
 
     <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-ML5LN34"
-    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-ML5LN34" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
 
     <div class="main-window-region"></div>
@@ -204,6 +203,11 @@
         ga('create', Settings.gaCode);
 
         ga('set', 'checkProtocolTask', function() { /* nothing */ });
+        // Sets the page value on the tracker.
+        ga('set', {
+            page: '/popcorntimece/',
+            title: 'Popcorn Time CE Startup'
+        });
 
         // Replace the following lines with the plugins you want to use.
         ga('require', 'eventTracker', {

@@ -206,10 +206,6 @@
 
                     //Initialize Google Analytics
                     if (App.settings.analytics) {
-                        // Sets the page value on the tracker.
-                        ga('set', {
-                            page: '/popcorntimece/'
-                        });
                         //Set AppVersion
                         ga('set', 'appName', App.Config.title);
                         ga('set', 'appVersion', AdvSettings.get('version'));
