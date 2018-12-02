@@ -225,12 +225,12 @@
             App.Device.Collection.setDevice(Settings.chosenPlayer);
             App.Device.ChooserView('#player-chooser').render();
 
-			$('#player-googlecloud').hide();
-			if (AdvSettings.get('pluginHTML5')===false) {
-				$('#player-html5').hide();
+            $('#player-googlecloud').hide();
+            if (AdvSettings.get('pluginHTML5') === false) {
+                $('#player-html5').hide();
             }
-			if (AdvSettings.get('pluginVLC')===false) {
-				$('#player-VLC').hide();
+            if (AdvSettings.get('pluginVLC') === false) {
+                $('#player-VLC').hide();
             }
         },
 
@@ -464,12 +464,19 @@
             var selected_quality = $(e.currentTarget).attr('data-quality');
             var auto_play = false;
 
+            var playerType = App.Device.Collection.selected.get('type');
+            var playerName = App.Device.Collection.selected.get('name');
+
+            if (playerType = 'chromecast') {
+                playerName = "chromecast";
+            }
+
             //GA: Player Launched
             ga('send', {
                 hitType: 'event',
                 eventCategory: 'TV Show',
                 eventAction: 'WatchPlayer',
-                eventLabel: App.Device.Collection.selected.get('type')+" - "+App.Device.Collection.selected.get('name')
+                eventLabel: playerType + " - " + playerName
             });
 
             if (AdvSettings.get('playNextEpisodeAuto') && this.model.get('imdb_id').indexOf('mal') === -1) {
@@ -609,33 +616,33 @@
             }
 
             switch (Settings.shows_default_quality) {
-            case '1080p':
-                if (torrents.q1080) {
-                    quality = '1080p';
-                } else if (torrents.q720) {
-                    quality = '720p';
-                } else if (torrents.q480) {
-                    quality = '480p';
-                }
-                break;
-            case '720p':
-                if (torrents.q720) {
-                    quality = '720p';
-                } else if (torrents.q480) {
-                    quality = '480p';
-                } else if (torrents.q1080) {
-                    quality = '1080p';
-                }
-                break;
-            case '480p':
-                if (torrents.q480) {
-                    quality = '480p';
-                } else if (torrents.q720) {
-                    quality = '720p';
-                } else if (torrents.q1080) {
-                    quality = '1080p';
-                }
-                break;
+                case '1080p':
+                    if (torrents.q1080) {
+                        quality = '1080p';
+                    } else if (torrents.q720) {
+                        quality = '720p';
+                    } else if (torrents.q480) {
+                        quality = '480p';
+                    }
+                    break;
+                case '720p':
+                    if (torrents.q720) {
+                        quality = '720p';
+                    } else if (torrents.q480) {
+                        quality = '480p';
+                    } else if (torrents.q1080) {
+                        quality = '1080p';
+                    }
+                    break;
+                case '480p':
+                    if (torrents.q480) {
+                        quality = '480p';
+                    } else if (torrents.q720) {
+                        quality = '720p';
+                    } else if (torrents.q1080) {
+                        quality = '1080p';
+                    }
+                    break;
             }
 
 
@@ -653,7 +660,7 @@
                 torrents.quality = '480p';
                 this.ui.q480p.addClass('active');
             }
-            
+
 
             $('.tab-episode.active').removeClass('active');
             $elem.addClass('active');

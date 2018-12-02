@@ -1,4 +1,4 @@
-(function(App) {
+(function (App) {
     'use strict';
 
     App.View.MovieDetail = Backbone.Marionette.ItemView.extend({
@@ -27,20 +27,20 @@
             'click .rating-container': 'switchRating'
         },
 
-        initialize: function() {
+        initialize: function () {
             var _this = this;
 
             //Handle keyboard shortcuts when other views are appended or removed
 
             //If a child was removed from above this view
-            App.vent.on('viewstack:pop', function() {
+            App.vent.on('viewstack:pop', function () {
                 if (_.last(App.ViewStack) === _this.className) {
                     _this.initKeyboardShortcuts();
                 }
             });
 
             //If a child was added above this view
-            App.vent.on('viewstack:push', function() {
+            App.vent.on('viewstack:push', function () {
                 if (_.last(App.ViewStack) !== _this.className) {
                     _this.unbindKeyboardShortcuts();
                 }
@@ -51,7 +51,7 @@
             this.model.on('change:quality', this.renderHealth, this);
         },
 
-        onShow: function() {
+        onShow: function () {
 
             win.info('Show movie detail (' + this.model.get('imdb_id') + ')');
             this.handleAnime();
@@ -101,11 +101,11 @@
 
             var bgCache = new Image();
             bgCache.src = backgroundUrl;
-            bgCache.onload = function() {
+            bgCache.onload = function () {
                 $('.backdrop').css('background-image', 'url(' + backgroundUrl + ')').addClass('fadein');
                 bgCache = null;
             };
-            bgCache.onerror = function() {
+            bgCache.onerror = function () {
                 $('.backdrop').css('background-image', 'url(images/bg-header.jpg)').addClass('fadein');
                 bgCache = null;
             };
@@ -114,11 +114,11 @@
 
             var coverCache = new Image();
             coverCache.src = coverUrl;
-            coverCache.onload = function() {
+            coverCache.onload = function () {
                 $('.mcover-image').attr('src', coverUrl).addClass('fadein');
                 coverCache = null;
             };
-            coverCache.onerror = function() {
+            coverCache.onerror = function () {
                 $('.mcover-image').attr('src', this.model.get('image')).addClass('fadein');
                 coverCache = null;
             };
@@ -129,24 +129,24 @@
             // Bookmarked / not bookmarked
             if (this.model.get('bookmarked') === true) {
                 this.ui.bookmarkIcon.addClass('selected').text(i18n.__('Remove from bookmarks'));
-            }else{
+            } else {
                 this.ui.bookmarkIcon.text(i18n.__('Add to bookmarks'));
             }
 
             // Seen / Unseen
             if (this.model.get('watched') === true) {
                 this.ui.watchedIcon.addClass('selected').text(i18n.__('Seen'));
-            }else{
+            } else {
                 this.ui.watchedIcon.text(i18n.__('Not Seen'));
             }
             var _this = this;
-            this.ui.watchedIcon.hover(function() {
+            this.ui.watchedIcon.hover(function () {
                 if (_this.model.get('watched')) {
                     _this.ui.watchedIcon.text(i18n.__('Mark as unseen'));
                 } else {
                     _this.ui.watchedIcon.text(i18n.__('Mark as Seen'));
                 }
-            }, function() {
+            }, function () {
                 if (_this.model.get('watched')) {
                     _this.ui.watchedIcon.text(i18n.__('Seen'));
                 } else {
@@ -179,7 +179,7 @@
             }
         },
 
-        handleAnime: function() {
+        handleAnime: function () {
             if (this.model.get('imdb_id').indexOf('mal') === -1) {
                 return;
             }
@@ -188,29 +188,29 @@
             $('.dot').css('opacity', 0);
         },
 
-        onDestroy: function() {
+        onDestroy: function () {
             this.unbindKeyboardShortcuts();
         },
 
-        initKeyboardShortcuts: function() {
+        initKeyboardShortcuts: function () {
             Mousetrap.bind(['esc', 'backspace'], this.closeDetails);
-            Mousetrap.bind(['enter', 'space'], function(e) {
+            Mousetrap.bind(['enter', 'space'], function (e) {
                 $('#watch-now').click();
             });
             Mousetrap.bind('q', this.toggleQuality);
-            Mousetrap.bind('f', function() {
+            Mousetrap.bind('f', function () {
                 $('.favourites-toggle').click();
             });
         },
 
-        unbindKeyboardShortcuts: function() { // There should be a better way to do this
+        unbindKeyboardShortcuts: function () { // There should be a better way to do this
             Mousetrap.unbind(['esc', 'backspace']);
             Mousetrap.unbind(['enter', 'space']);
             Mousetrap.unbind('q');
             Mousetrap.unbind('f');
         },
 
-        switchRating: function() {
+        switchRating: function () {
             if ($('.number-container').hasClass('hidden')) {
                 $('.number-container').removeClass('hidden');
                 $('.star-container').addClass('hidden');
@@ -222,7 +222,7 @@
             }
         },
 
-        switchSubtitle: function(lang) {
+        switchSubtitle: function (lang) {
             var subtitles = this.model.get('subtitle');
 
             if (subtitles === undefined || subtitles[lang] === undefined) {
@@ -235,13 +235,20 @@
             win.info('Subtitles: ' + this.subtitle_selected);
         },
 
-        startStreaming: function() {
+        startStreaming: function () {
+            var playerType = App.Device.Collection.selected.get('type');
+            var playerName = App.Device.Collection.selected.get('name');
+
+            if (playerType = 'chromecast') {
+                playerName = "chromecast";
+            }
+
             //GA: Player Launched
             ga('send', {
                 hitType: 'event',
                 eventCategory: 'Movie',
                 eventAction: 'WatchPlayer',
-                eventLabel: App.Device.Collection.selected.get('type') + " - " + App.Device.Collection.selected.get('name')
+                eventLabel: playerType + " - " + playerName
             });
 
             var player = $('.imgplayerchoice').attr('src');
@@ -281,7 +288,7 @@
 
         },
 
-        toggleDropdown: function(e) {
+        toggleDropdown: function (e) {
             if ($('.sub-dropdown').is('.open')) {
                 this.closeDropdown(e);
                 return false;
@@ -293,7 +300,7 @@
             $('.flag-container').fadeIn();
         },
 
-        closeDropdown: function(e) {
+        closeDropdown: function (e) {
             e.preventDefault();
             $('.flag-container').fadeOut();
             $('.sub-dropdown').removeClass('open');
@@ -305,7 +312,7 @@
             }
         },
 
-        playTrailer: function() {
+        playTrailer: function () {
 
             var trailer = new Backbone.Model({
                 src: this.model.get('trailer'),
@@ -320,11 +327,11 @@
             App.Device.Collection.setDevice(tmpPlayer);
         },
 
-        closeDetails: function() {
+        closeDetails: function () {
             App.vent.trigger('movie:closeDetail');
         },
 
-        enableHD: function() {
+        enableHD: function () {
             var torrents = this.model.get('torrents');
 
             if (torrents['1080p'] !== undefined) {
@@ -343,7 +350,7 @@
             });
         },
 
-        disableHD: function() {
+        disableHD: function () {
             var torrents = this.model.get('torrents');
 
             if (torrents['720p'] !== undefined) {
@@ -361,7 +368,7 @@
             });
         },
 
-        renderHealth: function() {
+        renderHealth: function () {
             var torrent = this.model.get('torrents')[this.model.get('quality')];
             var health = torrent.health.capitalize();
             var ratio = torrent.peer > 0 ? torrent.seed / torrent.peer : +torrent.seed;
@@ -371,8 +378,8 @@
                 .tooltip('fixTitle');
 
             $('.health-icon').tooltip({
-                html: true
-            })
+                    html: true
+                })
                 .removeClass('Bad Medium Good Excellent')
                 .addClass(health)
                 .attr('data-original-title', i18n.__('Health ' + health) + ' - ' + i18n.__('Ratio:') + ' ' + ratio.toFixed(2) + ' <br> ' + i18n.__('Seeds') + ': ' + torrent.seed + ' - ' + i18n.__('Peers') + ': ' + torrent.peer)
@@ -380,7 +387,7 @@
         },
 
 
-        toggleFavourite: function(e) {
+        toggleFavourite: function (e) {
             if (e.type) {
                 e.stopPropagation();
                 e.preventDefault();
@@ -388,15 +395,15 @@
             var that = this;
             if (this.model.get('bookmarked') === true) {
                 Database.deleteBookmark(this.model.get('imdb_id'))
-                    .then(function() {
+                    .then(function () {
                         win.info('Bookmark deleted (' + that.model.get('imdb_id') + ')');
                         App.userBookmarks.splice(App.userBookmarks.indexOf(that.model.get('imdb_id')), 1);
                         that.ui.bookmarkIcon.removeClass('selected').text(i18n.__('Add to bookmarks'));
                     })
-                    .then(function() {
+                    .then(function () {
                         return Database.deleteMovie(that.model.get('imdb_id'));
                     })
-                    .then(function() {
+                    .then(function () {
                         that.model.set('bookmarked', false);
                         var bookmark = $('.bookmark-item .' + that.model.get('imdb_id'));
                         if (bookmark.length > 0) {
@@ -433,10 +440,10 @@
                 };
 
                 Database.addMovie(movie)
-                    .then(function() {
+                    .then(function () {
                         return Database.addBookmark(that.model.get('imdb_id'), 'movie');
                     })
-                    .then(function() {
+                    .then(function () {
                         win.info('Bookmark added (' + that.model.get('imdb_id') + ')');
                         that.ui.bookmarkIcon.addClass('selected').text(i18n.__('Remove from bookmarks'));
                         App.userBookmarks.push(that.model.get('imdb_id'));
@@ -445,7 +452,7 @@
             }
         },
 
-        toggleWatched: function(e) {
+        toggleWatched: function (e) {
 
             if (e.type) {
                 e.stopPropagation();
@@ -463,7 +470,7 @@
             $('li[data-imdb-id="' + this.model.get('imdb_id') + '"] .actions-watched').click();
         },
 
-        openMagnet: function(e) {
+        openMagnet: function (e) {
             var provider = this.model.get('provider'),
                 torrent = this.model.get('torrents')[this.model.get('quality')],
                 magnetLink;
@@ -482,7 +489,7 @@
             }
         },
 
-        toggleQuality: function(e) {
+        toggleQuality: function (e) {
             if ($('#switch-hd-off').is(':checked')) {
                 $('#switch-hd-on').trigger('click');
             } else {
@@ -496,7 +503,7 @@
             }
         },
 
-        selectPlayer: function(e) { //onclick li player
+        selectPlayer: function (e) { //onclick li player
             var player = $(e.currentTarget).parent('li').attr('id').replace('player-', '');
             win.info('Initial Device set to: ' + player);
             //this.model.set('device', player);
