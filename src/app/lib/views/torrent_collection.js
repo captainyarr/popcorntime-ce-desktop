@@ -100,6 +100,11 @@
                 + '&tr=udp:\/\/tracker.coppersurfer.tk:6969'
                 + '&tr=udp:\/\/tracker.leechers-paradise.org:6969'
                 + '&tr=udp:\/\/exodus.desync.com:696931622A';
+            
+            Settings.trackers.forEach(function(item){
+                tracker_list += '&tr='+item;
+            });
+            
             return magnet_uri + torrentHash + tracker_list;
         },
 
