@@ -57,7 +57,7 @@
                     ga('send', {
                         hitType: 'timing',
                         timingCategory: 'StartUp Timing',
-                        timingVar: 'load',
+                        timingVar: 'load-'+Settings.version,
                         timingValue: Settings.loadTime
                     });
                 }
