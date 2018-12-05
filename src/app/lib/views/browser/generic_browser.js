@@ -46,11 +46,20 @@
             }));
 
             if (!isNaN(startupTime)) {
-                win.debug('Popcorn Time CE %s startup time: %sms', Settings.version, (window.performance.now() - startupTime).toFixed(3)); // started in database.js;
+                Settings.loadTime = (window.performance.now() - startupTime).toFixed(0);
+                win.debug('Popcorn Time CE %s startup time: %sms', Settings.version, Settings.loadTime); // started in database.js;
                 startupTime = 'none';
                 if (Settings.bigPicture) {
                     var zoom = ScreenResolution.HD ? 2 : 3;
                     win.zoomLevel = zoom;
+                }
+                if (Settings.loadTime != 0) {
+                    ga('send', {
+                        hitType: 'timing',
+                        timingCategory: 'StartUp Timing',
+                        timingVar: 'load',
+                        timingValue: Settings.loadTime
+                    });
                 }
                 App.vent.trigger('app:started');
             }

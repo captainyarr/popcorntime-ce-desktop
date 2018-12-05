@@ -102,6 +102,9 @@ Settings.onlineSearchEngine = 'RARBG';
 Settings.totalDownloaded = 0;
 Settings.totalUploaded = 0;
 
+// Timings
+Settings.loadTime = 0;
+
 // VPN
 Settings.vpn = false;
 Settings.vpnUsername = '';
