@@ -78,7 +78,7 @@
         "del": "^3.0.0",
         "eslint": "^5.0.1",
         "eslint-config-google": "^0.9.1",
-        "gulp": "^3.9.1",
+        "gulp": "^4.0.0",
         "gulp-download": "0.0.1",
         "gulp-gzip": "^1.4.0",
         "gulp-tar": "^2.0.0",
