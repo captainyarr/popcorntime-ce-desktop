@@ -30,10 +30,9 @@
         "position": "center"
     },
     "dependencies": {
-        "urijs": "^1.17.0",
         "adm-zip": "0.4.11",
-        "ajv": "6.5.3",
         "airplay-js": "^0.3.0",
+        "ajv": "6.5.3",
         "async": "^2.2.0",
         "chromecast-js": "git+https://github.com/captainyarr/chromecast-js.git",
         "gitlab": "^3.11.0",
@@ -71,8 +70,9 @@
         "torrent-tracker-health": "git+https://github.com/PTCE-Public/torrent-tracker-health.git",
         "underscore": "1.9.1",
         "upnp-mediarenderer-client": "^1.2.1",
-        "xmlbuilder": "^10.0.0",
-        "webtorrent": "^0.103.0"
+        "urijs": "^1.17.0",
+        "webtorrent": "^0.103.0",
+        "xmlbuilder": "^10.0.0"
     },
     "devDependencies": {
         "del": "^3.0.0",
