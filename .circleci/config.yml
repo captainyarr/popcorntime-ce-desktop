@@ -8,7 +8,7 @@ jobs:
   build:
     docker:
       # specify the version you desire here
-      - image: circleci/node:8.2.1
+      - image: circleci/node:10.14.2
       
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
@@ -29,7 +29,7 @@ jobs:
           - v1-dependencies-
           
       - run: npm install
-      - run: sudo npm install -g gulp
+      - run: sudo npm install -g gulp 
         
       # run tests!
       #- run: gulp build linux32,linux64,win32,win64,osx64
