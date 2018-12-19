@@ -30,9 +30,7 @@
         "position": "center"
     },
     "dependencies": {
-        "urijs": "^1.17.0",
         "adm-zip": "0.4.13",
-        "ajv": "6.5.3",
         "airplay-js": "^0.3.0",
         "ajv": "6.5.3",
         "async": "^2.2.0",
