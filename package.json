@@ -33,7 +33,6 @@
         "adm-zip": "0.4.13",
         "ajv": "6.6.2",
         "airplay-js": "^0.3.0",
-        "ajv": "6.6.2",
         "async": "^2.2.0",
         "chromecast-js": "git+https://github.com/captainyarr/chromecast-js.git",
         "gitlab": "^3.11.0",
@@ -72,7 +71,7 @@
         "underscore": "1.9.1",
         "upnp-mediarenderer-client": "^1.2.1",
         "urijs": "^1.17.0",
-        "webtorrent": "^0.103.0",
+        "webtorrent": "^0.102.4",
         "xmlbuilder": "^10.0.0"
     },
     "devDependencies": {
