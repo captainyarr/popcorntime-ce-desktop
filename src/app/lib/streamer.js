@@ -88,13 +88,12 @@
         win.debug('Streaming movie to %s', tmpFile);
 
         engine = new webtorrent({
-            dht: true || parseInt(Settings.dhtLimit, 10), // Enable DHT (default=true), or options object for DHT
-            maxConns: parseInt(Settings.connectionLimit, 10) || 100 // Max number of peers to connect to per torrent (default=100)
+            dht: true, // || parseInt(Settings.dhtLimit, 10), // Enable DHT (default=true), or options object for DHT
+            maxConns: parseInt(Settings.connectionLimit, 10) || 100, // Max number of peers to connect to per torrent (default=100)
+            webSeeds: true
         });
 
         engine.add(torrent.info, {
-            // dht: true || parseInt(Settings.dhtLimit, 10),   // Enable DHT (default=true), or options object for DHT
-            //maxConns: parseInt(Settings.connectionLimit, 10) || 100,     // Max number of peers to connect to per torrent (default=100)
             tracker: true,
             announce: Settings.trackers,
             port: parseInt(Settings.streamPort, 10) || 0,
@@ -125,8 +124,20 @@
         engine.piecesGot = 0;
         engine.cachedDownload = 0;
 
+        engine.on('error', function(err) {
+            win.error(err);
+        });
+
         engineTorrent.on('warning', function(err) {
             win.warn(err);
+        });
+
+        engineTorrent.on('error', function(err) {
+            win.error(err);
+        });
+
+        engineTorrent.on('wire', function(wire, addr) {
+            //win.debug('connected to peer with address ' + addr);
         });
 
         engineTorrent.on('ready', function() {

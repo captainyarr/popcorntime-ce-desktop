@@ -16,6 +16,9 @@
             stateTextSeeds: '.text_seeds',
             progressTextSeeds: '.value_seeds',
 
+            stateTextTotalPeers: '.text_totalpeers',
+            progressTextTotalPeers: '.total_peers',
+
             seedStatus: '.seed_status',
             bufferPercent: '.buffer_percent',
 
@@ -127,6 +130,7 @@
                 this.listenTo(this.model.get('streamInfo'), 'change:downloadSpeed', this.updateDownloadSpeed);
                 this.listenTo(this.model.get('streamInfo'), 'change:uploadSpeed', this.updateUploadSpeed);
                 this.listenTo(this.model.get('streamInfo'), 'change:active_peers', this.updateActivePeers);
+                this.listenTo(this.model.get('streamInfo'), 'change:total_peers', this.updateTotalPeers);
                 this.listenTo(this.model.get('streamInfo'), 'change:downloadedPercent', this.updateDownloadPercent);
 
                 // The first progress update can take some time, so force updating the UI immediately
@@ -144,11 +148,13 @@
 
             this.ui.progressTextPeers.text(streamInfo.get('active_peers'));
             this.ui.progressTextSeeds.text(streamInfo.get('total_peers'));
+
             this.ui.bufferPercent.text(streamInfo.get('buffer_percent').toFixed() + '%');
+            this.ui.progressbar.css('width', streamInfo.get('buffer_percent').toFixed() + '%');
 
             this.ui.downloadSpeed.text(streamInfo.get('downloadSpeed'));
             this.ui.uploadSpeed.text(streamInfo.get('uploadSpeed'));
-            this.ui.progressbar.css('width', streamInfo.get('buffer_percent').toFixed() + '%');
+            
 
             if (streamInfo.get('title') !== '') {
                 this.ui.title.html(streamInfo.get('title'));
@@ -193,6 +199,10 @@
 
         updateActivePeers: function () {
             this.ui.progressTextPeers.text(this.model.get('streamInfo').get('active_peers'));
+        },
+
+        updateTotalPeers: function () {
+            this.ui.progressTextSeeds.text(this.model.get('streamInfo').get('total_peers'));
         },
 
         updateDownloadPercent: function () {
