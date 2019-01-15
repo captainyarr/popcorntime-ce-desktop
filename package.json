@@ -51,7 +51,7 @@
         "node-tvdb": "^4.0.0",
         "node-webkit-fdialogs": "^0.2.7",
         "nodecast-js": "^1.0.3",
-        "opensubtitles-api": "5.0.0",
+        "opensubtitles-api": "5.0.1",
         "opensubtitles-ce": "^1.0.0",
         "os-name": "^3.1.0",
         "parse-torrent": "^6.1.1",
