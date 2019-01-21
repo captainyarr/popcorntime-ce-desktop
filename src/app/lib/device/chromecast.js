@@ -21,6 +21,7 @@
             this.attributes.id = this._makeID(this.device.config.name);
             this.attributes.name = this.device.config.name;
             this.attributes.address = this.device.host;
+            win.info("Found Chromecast: "+this.attributes.name);
         },
 
         play: function (streamModel) {
