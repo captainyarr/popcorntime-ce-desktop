@@ -76,7 +76,7 @@
     },
     "devDependencies": {
         "del": "^3.0.0",
-        "eslint": "^5.12.0",
+        "eslint": "^5.12.1",
         "eslint-config-google": "^0.9.1",
         "gulp": "^4.0.0",
         "gulp-download": "0.0.1",
@@ -86,7 +86,7 @@
         "gulp-zip": "~4.1.0",
         "jest": "^23.6.0",
         "merge2": "1.2.3",
-        "nw-builder": "^3.5.4",
+        "nw-builder": "^3.5.7",
         "nw-gyp": "^3.4.0",
         "yargs": "^12.0.1"
     },

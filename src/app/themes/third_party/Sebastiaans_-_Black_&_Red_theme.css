@@ -7419,7 +7419,7 @@ body,
 }
 
 .loading .state .loading-info {
-    width: 60%;
+    width: auto;
     max-width: 300px;
     height: auto;
     margin: auto;
