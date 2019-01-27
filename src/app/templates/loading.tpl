@@ -25,7 +25,9 @@
                 <span class="loading-info-text"><%= i18n.__("Active Peers") %>:&nbsp;</span>
                 <span class="value_peers value">0</span><br>
                 <span class="loading-info-text"><%= i18n.__("Total Peers") %>:&nbsp;</span>
-                <span class="value_seeds value">0</span>
+                <span class="value_seeds value">0</span><br>
+                <span class="loading-info-text"><%= i18n.__("Time") %>:&nbsp;</span>
+                <span class="value_time value">0</span>
             </div>
         </div>
         <div class="player-controls" style="visibility:hidden">
