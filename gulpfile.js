@@ -28,7 +28,7 @@ var argv = require('yargs')
     .argv;
 
 //Set Default nw.js version
-var nwVersion = '0.31.5';
+var nwVersion = '0.35.3';
 var buildDownloadUrl = 'https://dl.nwjs.io/';
 
 nwVersion = argv.nwv ? argv.nwv : nwVersion;
