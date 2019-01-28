@@ -225,8 +225,10 @@
                 return i18n.__('%s hour(s) remaining', Math.round(timeLeft / 3600));
             } else if (timeLeft > 60) {
                 return i18n.__('%s minute(s) remaining', Math.round(timeLeft / 60));
-            } else if (timeLeft <= 60) {
+            } else if (timeLeft <= 60 && timeLeft > 0) {
                 return i18n.__('%s second(s) remaining', timeLeft);
+            } else if (timeLeft === 0) {
+                return i18n.__('Completed', timeLeft);
             }
         },
 

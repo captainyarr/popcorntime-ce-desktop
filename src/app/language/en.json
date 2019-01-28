@@ -553,5 +553,7 @@
 	"talk-show": "Talk Show",
 	"game-show": "Game Show",
 	"home-and-garden": "Home and Garden",
-	"Time Remaining": "Time Remaining"
+	"Time Remaining": "Time Remaining",
+	"Time": "Time",
+	"Completed": "Completed"
 }
