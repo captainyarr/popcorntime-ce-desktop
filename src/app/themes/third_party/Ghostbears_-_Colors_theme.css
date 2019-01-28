@@ -7374,7 +7374,6 @@ body,
 .loading .state .cancel-button {
     bottom: 20px;
     z-index: 2;
-    position: absolute;
     cursor: pointer;
     width: 120px;
     height: 35px;
