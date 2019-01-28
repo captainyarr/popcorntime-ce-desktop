@@ -171,6 +171,9 @@
                 this.ui.player.text(streamInfo.get('player').get('name'));
                 this.ui.streaming.css('visibility', 'visible');
             }
+
+            //Update Time Remaining
+            this.updateTimeRemaining();
         },
 
         onDeviceStatus: function (status) {
