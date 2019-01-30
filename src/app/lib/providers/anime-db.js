@@ -12,13 +12,13 @@
         2: 'Ended'
     };
 
-    var URL = 'http://ptp.haruhichan.com/';
+    var URL = 'mongodb://poptest:test1212@ds213755.mlab.com:13755/poptest-db';
 
-    var anime-db = function () {
-        anime-db.super_.call(this);
+    var animedb = function () {
+        animedb.super_.call(this);
     };
 
-    inherits(anime-db, App.Providers.Generic);
+    inherits(animedb, App.Providers.Generic);
 
     var queryTorrents = function (filters) {
         var deferred = Q.defer();
@@ -46,14 +46,14 @@
         }
 
         switch (filters.order) {
-        case 1:
-            params.order = 'desc';
-            break;
-        case -1:
-            /* falls through */
-        default:
-            params.order = 'asc';
-            break;
+            case 1:
+                params.order = 'desc';
+                break;
+            case -1:
+                /* falls through */
+            default:
+                params.order = 'asc';
+                break;
         }
 
         if (filters.type && filters.type !== 'All') {
@@ -65,8 +65,35 @@
         }
 
         // XXX(xaiki): haruchichan currently doesn't support filters
-        var url = URL + 'list.php?' + querystring.stringify(params).replace(/%25%20/g, '%20');
-        win.info('Request to Hurahican API', url);
+        var url = URL; // + 'list.php?' + querystring.stringify(params).replace(/%25%20/g, '%20');
+        win.info('Request to Anime API', url);
+
+
+        const MongoClient = require('mongodb').MongoClient;
+        const assert = require('assert');
+
+        // Connection URL
+        //const url = 'mongodb://localhost:27017';
+
+        // Database Name
+        const dbName = 'poptest-db';
+
+        // Create a new MongoClient
+        const client = new MongoClient(url);
+
+        // Connect using MongoClient
+        // Use connect method to connect to the Server
+        client.connect(function (err) {
+            assert.equal(null, err);
+            console.log("Connected successfully to server");
+
+            const db = client.db(dbName);
+
+            client.close();
+        });
+
+        /*
+
         request({
             url: url,
             json: true
@@ -81,7 +108,17 @@
                 deferred.resolve(data);
             }
         });
-
+        
+        */
+        var animeTestdata = [{
+            malimg: "http://img7-us.anidb.net/pics/anime/32901.jpg",
+            aired: "January 1, 2020",
+            type: "Movie",
+            id: "6751",
+            name: "11 Eyes",
+            MAL: "6751"
+        }];
+        deferred.resolve(animeTestdata);
         return deferred.promise;
     };
 
@@ -128,9 +165,9 @@
     var queryTorrent = function (torrent_id, prev_data) {
         return Q.Promise(function (resolve, reject) {
             var id = torrent_id.split('-')[1];
-            var url = URL + 'anime.php?id=' + id;
+            var url = URL; // + 'anime.php?id=' + id;
 
-            win.info('Request to Hurahican API', url);
+            win.info('Request to Animedb API', url);
             request({
                 url: url,
                 json: true
@@ -151,7 +188,6 @@
                     reject(err);
 
                 } else {
-
                     // we cache our new element
                     resolve(formatDetailForPopcorn(data, prev_data));
                 }
@@ -281,19 +317,19 @@
         return Common.sanitize(ret);
     };
 
-    anime-db.prototype.extractIds = function (items) {
+    animedb.prototype.extractIds = function (items) {
         return _.pluck(items.results, 'haru_id');
     };
 
-    anime-db.prototype.fetch = function (filters) {
+    animedb.prototype.fetch = function (filters) {
         return queryTorrents(filters)
             .then(formatForPopcorn);
     };
 
-    anime-db.prototype.detail = function (torrent_id, prev_data) {
+    animedb.prototype.detail = function (torrent_id, prev_data) {
         return queryTorrent(torrent_id, prev_data);
     };
 
-    App.Providers.Haruhichan = anime-db;
+    App.Providers.Animedb = animedb;
 
 })(window.App);
