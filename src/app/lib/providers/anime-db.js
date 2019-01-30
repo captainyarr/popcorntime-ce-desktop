@@ -66,31 +66,42 @@
 
         // XXX(xaiki): haruchichan currently doesn't support filters
         var url = URL; // + 'list.php?' + querystring.stringify(params).replace(/%25%20/g, '%20');
-        win.info('Request to Anime API', url);
 
+        var animeTestdata = [{
+            malimg: "http://img7-us.anidb.net/pics/anime/32901.jpg",
+            aired: "January 1, 2020",
+            type: "Movie",
+            id: "6751",
+            name: "11 Eyes",
+            MAL: "6751"
+        }];
+
+        win.info('Request to Anime API', url);
 
         const MongoClient = require('mongodb').MongoClient;
         const assert = require('assert');
 
-        // Connection URL
-        //const url = 'mongodb://localhost:27017';
+        return (async function () {
+            
+            // Database Name
+            const dbName = 'poptest-db';
+            const client = new MongoClient(url);
 
-        // Database Name
-        const dbName = 'poptest-db';
+            try {
+                // Use connect method to connect to the Server
+                await client.connect();
+                win.info("Connected successfully to server");
+                const db = client.db(dbName);
+                
+                //Pull information from const 
 
-        // Create a new MongoClient
-        const client = new MongoClient(url);
-
-        // Connect using MongoClient
-        // Use connect method to connect to the Server
-        client.connect(function (err) {
-            assert.equal(null, err);
-            console.log("Connected successfully to server");
-
-            const db = client.db(dbName);
-
+            } catch (err) {
+                win.err(err.stack);
+            }
+            win.info("Closing db..");
             client.close();
-        });
+            return animeTestdata;
+        })();
 
         /*
 
@@ -110,16 +121,9 @@
         });
         
         */
-        var animeTestdata = [{
-            malimg: "http://img7-us.anidb.net/pics/anime/32901.jpg",
-            aired: "January 1, 2020",
-            type: "Movie",
-            id: "6751",
-            name: "11 Eyes",
-            MAL: "6751"
-        }];
-        deferred.resolve(animeTestdata);
-        return deferred.promise;
+       
+        //deferred.resolve(animeTestdata);
+        //return deferred.promise;
     };
 
     var parseTime = function (duration) {
@@ -167,7 +171,7 @@
             var id = torrent_id.split('-')[1];
             var url = URL; // + 'anime.php?id=' + id;
 
-            win.info('Request to Animedb API', url);
+            win.info('Request to Animedb API Single Element', url);
             request({
                 url: url,
                 json: true
