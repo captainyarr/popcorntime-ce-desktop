@@ -5,6 +5,8 @@
     var Q = require('q');
     var inherits = require('util').inherits;
 
+    //db variables
+    const MongoClient = require('mongodb').MongoClient;
 
     var statusMap = {
         0: 'Not Airing Yet',
@@ -12,13 +14,13 @@
         2: 'Ended'
     };
 
-    var URL = 'mongodb://poptest:test1212@ds213755.mlab.com:13755/poptest-db';
+    var URL = 'mongodb://popcorntimece:test1212@ds219095.mlab.com:19095/animedb';
 
-    var animedb = function () {
-        animedb.super_.call(this);
+    var Animedb = function () {
+        Animedb.super_.call(this);
     };
 
-    inherits(animedb, App.Providers.Generic);
+    inherits(Animedb, App.Providers.Generic);
 
     var queryTorrents = function (filters) {
         var deferred = Q.defer();
@@ -67,37 +69,57 @@
         // XXX(xaiki): haruchichan currently doesn't support filters
         var url = URL; // + 'list.php?' + querystring.stringify(params).replace(/%25%20/g, '%20');
 
-        var animeTestdata = [{
-            malimg: "http://img7-us.anidb.net/pics/anime/32901.jpg",
-            aired: "January 1, 2020",
-            type: "Movie",
-            id: "6751",
-            name: "11 Eyes",
-            MAL: "6751"
-        }];
-
         win.info('Request to Anime API', url);
 
         const MongoClient = require('mongodb').MongoClient;
         const assert = require('assert');
 
         return (async function () {
-            
+
             // Database Name
-            const dbName = 'poptest-db';
+            const dbName = 'animedb';
             const client = new MongoClient(url);
+
+            var animedb;
+            var animeTestdata = [];
 
             try {
                 // Use connect method to connect to the Server
                 await client.connect();
                 win.info("Connected successfully to server");
-                const db = client.db(dbName);
-                
-                //Pull information from const 
+                animedb = client.db(dbName);
 
+                //Pull information from const 
+                //Get Data from database
+
+                /*
+                function iterateFunc(doc) {
+                    win.debug(JSON.stringify(doc, null, 4));
+                    animeTestdata.push(doc);
+                }
+
+                function errorFunc(error) {
+                    win.debug(error);
+                }
+                var cursor = animedb.collection('anime').find({}).forEach(iterateFunc);
+                */
+
+                // This is supported with Node v10.x and the 3.1 Series Driver
+                await (async function () {
+                    win.info("async iterator");
+                    for await (let doc of animedb.collection('anime').find({})) {
+                        win.debug(JSON.stringify(doc, null, 4));
+                        animeTestdata.push(doc);
+                    }
+                })();
+
+                //JSON.stringify(cursor, null, 4)
+                //await cursor.forEach(iterateFunc, errorFunc);
             } catch (err) {
-                win.err(err.stack);
+                win.error(err.stack);
             }
+
+            //Close Db connection
             win.info("Closing db..");
             client.close();
             return animeTestdata;
@@ -121,7 +143,7 @@
         });
         
         */
-       
+
         //deferred.resolve(animeTestdata);
         //return deferred.promise;
     };
@@ -169,7 +191,7 @@
     var queryTorrent = function (torrent_id, prev_data) {
         return Q.Promise(function (resolve, reject) {
             var id = torrent_id.split('-')[1];
-            var url = URL; // + 'anime.php?id=' + id;
+            var url = URL + 'anime.php?id=' + id;
 
             win.info('Request to Animedb API Single Element', url);
             request({
@@ -197,6 +219,64 @@
                 }
             });
         });
+    };
+
+    //queryItem: async function to query details for single item
+    var queryItem = async function (item_id, prev_data) {
+        var id = item_id.split('-')[1];
+        var url = URL;
+
+        win.info('Request to Animedb API Single Element', url);
+
+        //Connect db
+        const assert = require('assert');
+
+        // Database Name
+        const dbName = 'animedb';
+        const client = new MongoClient(url);
+
+        //torrent_id = 13635; //Test Data
+
+        //Query torrent_id
+        var animedb;
+        var animeTestdata;
+
+        try {
+            // Use connect method to connect to the Server
+            await client.connect();
+            win.info("Connected successfully to server");
+            animedb = client.db(dbName);
+
+            //Pull information from const 
+            //Get Data from database
+
+            // This is supported with Node v10.x and the 3.1 Series Driver
+            await (async function () {
+                win.info("async iterator");
+                for await (let doc of animedb.collection('anime').find({
+                    "id": id
+                })) {
+                    win.debug(JSON.stringify(doc, null, 4));
+                    animeTestdata = doc;
+                }
+            })();
+
+            //JSON.stringify(cursor, null, 4)
+            //await cursor.forEach(iterateFunc, errorFunc);
+        } catch (err) {
+            win.error(err.stack);
+            reject(err);
+        }
+
+        //Return data
+        // we cache our new element
+        return formatDetailForPopcorn(animeTestdata, prev_data);
+    };
+
+
+    // Single element query
+    var queryTorrentDb = function (torrent_id, prev_data) {
+        return queryItem(torrent_id,prev_data)
     };
 
     var movieTorrents = function (id, dl) {
@@ -236,6 +316,8 @@
                 quality = '1080p';
             }
             var episode, tryName;
+
+            //Match [Text] Text - 01 (OVA|CM)
             var match = item.name.match(/[\s_]([0-9]+(-[0-9]+)?|CM|OVA)[\s_]/);
             if (!match) {
                 tryName = item.name.split(/:?(\(|\[)/);
@@ -286,7 +368,7 @@
             genre: genres,
             genres: genres,
             num_seasons: 1,
-            runtime: parseTime(item.duration),
+            runtime: item.duration,//parseTime(item.duration),
             status: statusMap[item.status],
             synopsis: item.synopsis,
             network: item.producers, //FIXME
@@ -321,19 +403,21 @@
         return Common.sanitize(ret);
     };
 
-    animedb.prototype.extractIds = function (items) {
+    Animedb.prototype.extractIds = function (items) {
+        win.debug("AnimeDb Items: " + items);
         return _.pluck(items.results, 'haru_id');
     };
 
-    animedb.prototype.fetch = function (filters) {
+    Animedb.prototype.fetch = function (filters) {
+        win.debug("AnimeDb Filters: " + filters);
         return queryTorrents(filters)
             .then(formatForPopcorn);
     };
 
-    animedb.prototype.detail = function (torrent_id, prev_data) {
-        return queryTorrent(torrent_id, prev_data);
+    Animedb.prototype.detail = function (torrent_id, prev_data) {
+        return queryTorrentDb(torrent_id, prev_data);
     };
 
-    App.Providers.Animedb = animedb;
+    App.Providers.Animedb = Animedb;
 
 })(window.App);
