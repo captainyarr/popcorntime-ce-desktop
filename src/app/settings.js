@@ -154,19 +154,21 @@ Settings.trackers = [
     'udp://glotorrents.pw:6969/announce',
     'udp://tracker.coppersurfer.tk:80',
     'udp://tracker.coppersurfer.tk:6969/announce',
-    'udp://tracker.leechers-paradise.org:6969',
-    'udp://tracker.internetwarriors.net:1337',
+    'udp://tracker.leechers-paradise.org:6969/announce',
+    'udp://tracker.internetwarriors.net:1337/announce',
     'udp://tracker.openbittorrent.com:80',
     'udp://tracker.opentrackr.org:1337/announce',
     'udp://tracker.pirateparty.gr:6969/announce',
     'udp://tracker.tiny-vps.com:6969/announce',
     'udp://tracker.vanitycore.co:6969/announce',
-    'udp://exodus.desync.com:6969',
+    'udp://exodus.desync.com:6969/announce',
     'udp://p4p.arenabg.ch:1337',
     'udp://open.demonii.com:1337/announce',
     'udp://public.popcorn-tracker.org:6969/announce',
-    'udp://9.rarbg.me:2710/announce',
+    'udp://9.rarbg.to:2710/announce',
     'udp://p4p.arenabg.com:1337',
+    'wss://tracker.openwebtorrent.com:443/announce',
+    'wss://tracker.fastcast.nz:443/announce'
 ];
 
 // App Settings
