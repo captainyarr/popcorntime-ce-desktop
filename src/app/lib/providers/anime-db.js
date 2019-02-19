@@ -160,7 +160,10 @@
         var results = _.map(items, function (item) {
             var img = item.malimg;
             var type = (item.type === 'Movie') ? 'movie' : 'show';
-            var aired = (item.aired.indexOf(', ') !== -1) ? item.aired.split(', ')[1] : item.aired;
+            var aired = "";
+
+            if (item.aired)
+                aired = (item.aired.indexOf(', ') !== -1) ? item.aired.split(', ')[1] : item.aired;
 
             var ret = {
                 images: {
@@ -276,7 +279,7 @@
 
     // Single element query
     var queryTorrentDb = function (torrent_id, prev_data) {
-        return queryItem(torrent_id,prev_data)
+        return queryItem(torrent_id, prev_data)
     };
 
     var movieTorrents = function (id, dl) {
@@ -361,14 +364,18 @@
     var formatDetailForPopcorn = function (item, prev) {
         var img = item.malimg;
         var type = prev.type;
-        var genres = item.genres.split(', ');
+        var genres = "";
+
+        if (item.genres != undefined) {
+            genres = item.genres.split(', ');
+        }
 
         var ret = _.extend(prev, {
             country: i18n.__('Japan'),
             genre: genres,
             genres: genres,
             num_seasons: 1,
-            runtime: item.duration,//parseTime(item.duration),
+            runtime: item.duration, //parseTime(item.duration),
             status: statusMap[item.status],
             synopsis: item.synopsis,
             network: item.producers, //FIXME
@@ -383,9 +390,14 @@
                 fanart: img,
                 banner: img
             },
-            year: item.aired.split(', ')[1].replace(/ to.*/, ''),
             type: type
         });
+
+        if (item.aired != undefined) {
+            ret = _.extend(ret, {
+                year: item.aired.split(', ')[1].replace(/ to.*/, '')
+            });
+        }
 
         if (type === 'movie') {
             ret = _.extend(ret, {
