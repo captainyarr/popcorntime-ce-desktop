@@ -72,7 +72,7 @@
         "upnp-mediarenderer-client": "^1.2.1",
         "urijs": "^1.17.0",
         "webtorrent": "^0.102.4",
-        "xmlbuilder": "^10.0.0"
+        "xmlbuilder": "^13.0.2"
     },
     "devDependencies": {
         "del": "^3.0.0",
