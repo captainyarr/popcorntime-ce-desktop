@@ -115,13 +115,6 @@ else{for(var i = 0; i < genre.length; i++){ genre[i] = i18n.__(genre[i]); } };
         </div>
     </section>
 
-    <%
-        if (Settings.analytics) {
-            ga('set', {
-                    page: '/popcorntimece/movie/detail/' + title,
-                    title: title
-                });
-
             <br>
 
             <div class="button dropup" id="player-chooser"></div>
