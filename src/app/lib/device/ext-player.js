@@ -175,7 +175,7 @@
         'mpv': {
             type: 'mpv',
             switches: '-quiet',
-            subswitch: '--sub=',
+            subswitch: '--sub-file=',
             fs: '--fs'
         },
         'MPC-HC': {
