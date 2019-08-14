@@ -60,7 +60,7 @@
         "rarbg-api": "git+https://github.com/talas9/rarbg-api.git",
         "readdirp": "^2.1.0",
         "request": "^2.87.0",
-        "rimraf": "^2.7.1",
+        "rimraf": "^3.0.0",
         "sanitizer": "^0.1.2",
         "semver": "^5.7.1",
         "send": "^0.16.1",
