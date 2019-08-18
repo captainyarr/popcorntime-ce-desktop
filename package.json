@@ -81,7 +81,7 @@
         "gulp": "^4.0.2",
         "gulp-download": "0.0.1",
         "gulp-gzip": "^1.4.0",
-        "gulp-tar": "^2.0.0",
+        "gulp-tar": "^3.0.0",
         "gulp-unzip": "^1.1.0",
         "gulp-zip": "~4.1.0",
         "jest": "^23.6.0",
