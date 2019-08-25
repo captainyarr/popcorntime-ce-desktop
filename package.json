@@ -71,7 +71,7 @@
         "underscore": "1.9.1",
         "upnp-mediarenderer-client": "^1.2.1",
         "urijs": "^1.17.0",
-        "webtorrent": "^0.107.3",
+        "webtorrent": "^0.107.5",
         "xmlbuilder": "^10.0.0"
     },
     "devDependencies": {
