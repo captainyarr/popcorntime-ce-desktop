@@ -16,6 +16,12 @@
             stateTextSeeds: '.text_seeds',
             progressTextSeeds: '.value_seeds',
 
+            stateTextTotalPeers: '.text_totalpeers',
+            progressTextTotalPeers: '.total_peers',
+
+            stateTextTimeRemaining: '.text_time',
+            progressTextTimeRemaining: '.value_time',
+
             seedStatus: '.seed_status',
             bufferPercent: '.buffer_percent',
 
@@ -127,6 +133,8 @@
                 this.listenTo(this.model.get('streamInfo'), 'change:downloadSpeed', this.updateDownloadSpeed);
                 this.listenTo(this.model.get('streamInfo'), 'change:uploadSpeed', this.updateUploadSpeed);
                 this.listenTo(this.model.get('streamInfo'), 'change:active_peers', this.updateActivePeers);
+                this.listenTo(this.model.get('streamInfo'), 'change:total_peers', this.updateTotalPeers);
+                this.listenTo(this.model.get('streamInfo'), 'change:time_left', this.updateTimeRemaining);
                 this.listenTo(this.model.get('streamInfo'), 'change:downloadedPercent', this.updateDownloadPercent);
 
                 // The first progress update can take some time, so force updating the UI immediately
@@ -144,11 +152,13 @@
 
             this.ui.progressTextPeers.text(streamInfo.get('active_peers'));
             this.ui.progressTextSeeds.text(streamInfo.get('total_peers'));
+
             this.ui.bufferPercent.text(streamInfo.get('buffer_percent').toFixed() + '%');
+            this.ui.progressbar.css('width', streamInfo.get('buffer_percent').toFixed() + '%');
 
             this.ui.downloadSpeed.text(streamInfo.get('downloadSpeed'));
             this.ui.uploadSpeed.text(streamInfo.get('uploadSpeed'));
-            this.ui.progressbar.css('width', streamInfo.get('buffer_percent').toFixed() + '%');
+            
 
             if (streamInfo.get('title') !== '') {
                 this.ui.title.html(streamInfo.get('title'));
@@ -161,6 +171,9 @@
                 this.ui.player.text(streamInfo.get('player').get('name'));
                 this.ui.streaming.css('visibility', 'visible');
             }
+
+            //Update Time Remaining
+            this.updateTimeRemaining();
         },
 
         onDeviceStatus: function (status) {
@@ -195,8 +208,31 @@
             this.ui.progressTextPeers.text(this.model.get('streamInfo').get('active_peers'));
         },
 
+        updateTotalPeers: function () {
+            this.ui.progressTextSeeds.text(this.model.get('streamInfo').get('total_peers'));
+        },
+
+        updateTimeRemaining: function () {
+            var timeLeft = this.remainingTime(this.model.get('streamInfo').get('time_left'));
+            this.ui.progressTextTimeRemaining.text(timeLeft);
+        },
+
         updateDownloadPercent: function () {
             this.ui.bufferPercent.text(this.model.get('streamInfo').get('downloadedPercent').toFixed() + '%');
+        },
+
+        remainingTime: function (timeLeft) {
+            if (timeLeft === undefined) {
+                return i18n.__('Unknown time remaining');
+            } else if (timeLeft > 3600) {
+                return i18n.__('%s hour(s) remaining', Math.round(timeLeft / 3600));
+            } else if (timeLeft > 60) {
+                return i18n.__('%s minute(s) remaining', Math.round(timeLeft / 60));
+            } else if (timeLeft <= 60 && timeLeft > 0) {
+                return i18n.__('%s second(s) remaining', timeLeft);
+            } else if (timeLeft === 0) {
+                return i18n.__('Completed', timeLeft);
+            }
         },
 
         cancelStreaming: function () {

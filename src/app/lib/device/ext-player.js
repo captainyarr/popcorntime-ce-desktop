@@ -174,7 +174,7 @@
         },
         'mpv': {
             type: 'mpv',
-            switches: '',
+            switches: '-quiet',
             subswitch: '--sub-file=',
             fs: '--fs'
         },
