@@ -1,4 +1,4 @@
-(function(App) {
+(function (App) {
     'use strict';
 
     var STREAM_PORT = 21584; // 'PT'!
@@ -14,7 +14,7 @@
     var engine = null;
     var preload_engine = null;
     var statsUpdater = null;
-    var active = function(wire) {
+    var active = function (wire) {
         return !wire.peerChoking;
     };
     var subtitles = null;
@@ -23,7 +23,7 @@
     var subtitleDownloading = false;
     var serverStarting = false;
 
-    var watchState = function(stateModel) {
+    var watchState = function (stateModel) {
 
         if (engine !== null) {
 
@@ -75,7 +75,7 @@
         }
     };
 
-    var handleTorrent = function(torrent, stateModel) {
+    var handleTorrent = function (torrent, stateModel) {
 
         var tmpFilename = torrent.info.infoHash;
         tmpFilename = tmpFilename.replace(/([^a-zA-Z0-9-_])/g, '_'); // +'-'+ (new Date()*1);
@@ -88,13 +88,12 @@
         win.debug('Streaming movie to %s', tmpFile);
 
         engine = new webtorrent({
-            dht: true || parseInt(Settings.dhtLimit, 10), // Enable DHT (default=true), or options object for DHT
-            maxConns: parseInt(Settings.connectionLimit, 10) || 100 // Max number of peers to connect to per torrent (default=100)
+            dht: true, // || parseInt(Settings.dhtLimit, 10), // Enable DHT (default=true), or options object for DHT
+            maxConns: parseInt(Settings.connectionLimit, 10) || 100, // Max number of peers to connect to per torrent (default=100)
+            webSeeds: true
         });
 
         engine.add(torrent.info, {
-            // dht: true || parseInt(Settings.dhtLimit, 10),   // Enable DHT (default=true), or options object for DHT
-            //maxConns: parseInt(Settings.connectionLimit, 10) || 100,     // Max number of peers to connect to per torrent (default=100)
             tracker: true,
             announce: Settings.trackers,
             port: parseInt(Settings.streamPort, 10) || 0,
@@ -125,8 +124,20 @@
         engine.piecesGot = 0;
         engine.cachedDownload = 0;
 
+        engine.on('error', function(err) {
+            win.error(err);
+        });
+
         engineTorrent.on('warning', function(err) {
             win.warn(err);
+        });
+
+        engineTorrent.on('error', function(err) {
+            win.error(err);
+        });
+
+        engineTorrent.on('wire', function(wire, addr) {
+            //win.debug('connected to peer with address ' + addr);
         });
 
         engineTorrent.on('ready', function() {
@@ -161,8 +172,6 @@
 
             //Set file_index to the largest file in torrent
             streamInfo.set('file_index', file_index);
-
-            //Increase buffer size based on file size
 
             //Set total torrent size 
             streamInfo.set('size', size);
@@ -253,13 +262,13 @@
             }
         };
 
-        App.vent.on('subtitle:downloaded', function(sub) {
+        App.vent.on('subtitle:downloaded', function (sub) {
             if (sub) {
                 stateModel.get('streamInfo').set('subFile', sub);
                 App.vent.trigger('subtitle:convert', {
                     path: sub,
                     language: torrent.defaultSubtitle
-                }, function(err, res) {
+                }, function (err, res) {
                     if (err) {
                         win.error('error converting subtitles', err);
                         stateModel.get('streamInfo').set('subFile', null);
@@ -271,12 +280,11 @@
             downloadedSubtitles = true;
         });
 
-        engine.server.on('listening', function() {
+        engine.server.on('listening', function () {
             if (engine) {
                 win.debug("engine:listening");
                 win.debug(`Server running at ` + engine.server.address().address + ":" + engine.server.address().port);
                 engine.server.port = engine.server.address().port;
-
                 //streamInfo.set('src', 'http://127.0.0.1:' + engine.server.address().port + '/');
                 streamInfo.set('src', 'http://' + engine.server.address().address + ':' + engine.server.port + "/" + streamInfo.get('file_index'));
                 streamInfo.set('type', 'video/mp4');
@@ -294,14 +302,14 @@
         });
 
 
-        engine.on('uninterested', function() {
+        engine.on('uninterested', function () {
             if (engine) {
                 engine.pause();
             }
 
         });
 
-        engine.on('interested', function() {
+        engine.on('interested', function () {
             if (engine) {
                 engine.resume();
             }
@@ -311,7 +319,7 @@
 
 
     var Preload = {
-        start: function(model) {
+        start: function (model) {
 
             if (Streamer.currentTorrent && model.get('torrent') === Streamer.currentTorrent.get('torrent')) {
                 return;
@@ -348,7 +356,7 @@
 
         },
 
-        stop: function() {
+        stop: function () {
 
             if (preload_engine) {
                 if (preload_engine.server._handle) {
@@ -364,7 +372,7 @@
 
 
     var Streamer = {
-        start: function(model) {
+        start: function (model) {
             var torrentUrl = model.get('torrent');
             var torrent_read = false;
             if (model.get('torrent_read')) {
@@ -386,7 +394,7 @@
 
             this.stop_ = false;
             var that = this;
-            var doTorrent = function(err, torrent) {
+            var doTorrent = function (err, torrent) {
                 // Return if streaming was cancelled while loading torrent
                 if (that.stop_) {
                     return;
@@ -399,12 +407,12 @@
                     // did we need to extract subtitle ?
                     var extractSubtitle = model.get('extract_subtitle');
 
-                    var getSubtitles = function(data) {
+                    var getSubtitles = function (data) {
                         win.debug('Subtitles data request:', data);
 
                         var subtitleProvider = App.Config.getProvider('tvshowsubtitle');
 
-                        subtitleProvider.fetch(data).then(function(subs) {
+                        subtitleProvider.fetch(data).then(function (subs) {
                             if (subs && Object.keys(subs).length > 0) {
                                 subtitles = subs;
                                 win.info(Object.keys(subs).length + ' subtitles found');
@@ -415,7 +423,7 @@
                                 win.warn('No subtitles returned');
                             }
                             hasSubtitles = true;
-                        }).catch(function(err) {
+                        }).catch(function (err) {
                             subtitles = null;
                             hasSubtitles = true;
                             downloadedSubtitles = true;
@@ -423,7 +431,7 @@
                         });
                     };
 
-                    var handleTorrent_fnc = function() {
+                    var handleTorrent_fnc = function () {
                         // TODO: We should passe the movie / tvshow imdbid instead
                         // and read from the player
                         // so from there we can use the previous next etc
@@ -483,7 +491,7 @@
                             }
                         }
                         if (torrent.files && torrent.files.length > 0 && !model.get('file_index') && model.get('file_index') !== 0) {
-                            torrent.files = $.grep(torrent.files, function(n) {
+                            torrent.files = $.grep(torrent.files, function (n) {
                                 return (n);
                             });
                             var fileModel = new Backbone.Model({
@@ -500,7 +508,7 @@
                                     torrentMetadata = torrent.info.name.toString();
                                 }
                                 Common.matchTorrent(torrent.name, torrentMetadata)
-                                    .then(function(res) {
+                                    .then(function (res) {
                                         if (res.error) {
                                             win.warn(res.error);
                                             sub_data.filename = res.filename;
@@ -509,34 +517,34 @@
                                             handleTorrent_fnc();
                                         } else {
                                             switch (res.type) {
-                                                case 'movie':
-                                                    $('.loading-background').css('background-image', 'url(' + res.movie.image + ')');
-                                                    sub_data.imdbid = res.movie.imdbid;
-                                                    model.set('quality', res.quality);
-                                                    model.set('imdb_id', sub_data.imdbid);
-                                                    title = res.movie.title;
-                                                    break;
-                                                case 'episode':
-                                                    $('.loading-background').css('background-image', 'url(' + res.show.episode.image + ')');
-                                                    sub_data.imdbid = res.show.imdbid;
-                                                    sub_data.season = res.show.episode.season;
-                                                    sub_data.episode = res.show.episode.episode;
-                                                    model.set('quality', res.quality);
-                                                    model.set('tvdb_id', res.show.tvdbid);
-                                                    model.set('episode_id', res.show.episode.tvdbid);
-                                                    model.set('imdb_id', res.show.imdbid);
-                                                    model.set('episode', sub_data.episode);
-                                                    model.set('season', sub_data.season);
-                                                    title = res.show.title + ' - ' + i18n.__('Season %s', res.show.episode.season) + ', ' + i18n.__('Episode %s', res.show.episode.episode) + ' - ' + res.show.episode.title;
-                                                    break;
-                                                default:
-                                                    sub_data.filename = res.filename;
+                                            case 'movie':
+                                                $('.loading-background').css('background-image', 'url(' + res.movie.image + ')');
+                                                sub_data.imdbid = res.movie.imdbid;
+                                                model.set('quality', res.quality);
+                                                model.set('imdb_id', sub_data.imdbid);
+                                                title = res.movie.title;
+                                                break;
+                                            case 'episode':
+                                                $('.loading-background').css('background-image', 'url(' + res.show.episode.image + ')');
+                                                sub_data.imdbid = res.show.imdbid;
+                                                sub_data.season = res.show.episode.season;
+                                                sub_data.episode = res.show.episode.episode;
+                                                model.set('quality', res.quality);
+                                                model.set('tvdb_id', res.show.tvdbid);
+                                                model.set('episode_id', res.show.episode.tvdbid);
+                                                model.set('imdb_id', res.show.imdbid);
+                                                model.set('episode', sub_data.episode);
+                                                model.set('season', sub_data.season);
+                                                title = res.show.title + ' - ' + i18n.__('Season %s', res.show.episode.season) + ', ' + i18n.__('Episode %s', res.show.episode.episode) + ' - ' + res.show.episode.title;
+                                                break;
+                                            default:
+                                                sub_data.filename = res.filename;
                                             }
                                             getSubtitles(sub_data);
                                             handleTorrent_fnc();
                                         }
                                     })
-                                    .catch(function(err) {
+                                    .catch(function (err) {
                                         title = $.trim(torrent.name.replace('[rartv]', '').replace('[PublicHD]', '').replace('[ettv]', '').replace('[eztv]', '')).replace(/[\s]/g, '.');
                                         sub_data.filename = title;
                                         win.error('An error occured while trying to get metadata and subtitles', err);
@@ -557,7 +565,7 @@
             // HACK(xaiki): we need to go through parse torrent
             // if we have a torrent and not an http source, this
             // is fragile as shit.
-            if (typeof(torrentUrl) === 'string' && torrentUrl.substring(0, 7) === 'http://' && !torrentUrl.match('\\.torrent') && !torrentUrl.match('\\.php?')) {
+            if (typeof (torrentUrl) === 'string' && torrentUrl.substring(0, 7) === 'http://' && !torrentUrl.match('\\.torrent') && !torrentUrl.match('\\.php?')) {
                 return Streamer.startStream(model, torrentUrl, stateModel);
             } else if (!torrent_read) {
                 //readTorrent(torrentUrl, doTorrent); //preload torrent
@@ -584,7 +592,7 @@
             App.vent.trigger('stream:ready', si);
         },
 
-        stop: function() {
+        stop: function () {
             this.stop_ = true;
             if (engine) {
                 // update ratio

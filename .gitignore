@@ -1,3 +1,6 @@
+#Popcorntime Project Specific ignore
+pre/
+
 # Windows image file caches
 Thumbs.db
 ehthumbs.db
