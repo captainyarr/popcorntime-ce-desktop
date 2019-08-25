@@ -118,10 +118,19 @@ Settings.opensubtitlesUsername = "";
 Settings.opensubtitlesPassword = "";
 
 Settings.tvAPI = [{
+    url: 'http://eztv.is/api/',
+    strictSSL: true
+}, {
     url: 'https://api-fetch.website/tv/',
     strictSSL: true
 }, {
-    url: 'http://eztvapi.ml/',
+    url: 'https://eztvapi.ml/',
+    strictSSL: true
+}, {
+    url: 'https://popcorntime.ws/api/eztv/',
+    strictSSL: true
+}, {
+    url: 'https://popcorntimece.ch/api/eztv/',
     strictSSL: true
 }];
 
