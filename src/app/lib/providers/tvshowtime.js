@@ -9,7 +9,7 @@
 
         PT_VERSION = AdvSettings.get('version'),
 
-        API_ENDPOINT = URI('https://api.tvshowtime.com/v1'),
+        API_ENDPOINT = URI('https://api.tvtime.com/v1'),
         CLIENT_ID = 'iM2Vxlwr93imH7nwrTEZ',
         CLIENT_SECRET = 'ghmK6ueMJjQLHBwsaao1tw3HUF7JVp_GQTwDwhCn',
         //REDIRECT_URI = 'http://localhost/popcorntimece/oauth',
@@ -70,7 +70,7 @@
 
     /*
      * TV Show v1
-     * METHODS (https://api.tvshowtime.com/doc)
+     * METHODS (https://api.tvtime.com/doc)
      */
 
     TVShowTime.prototype.post = function (endpoint, postVariables) {
@@ -99,8 +99,7 @@
         var defer = Q.defer();
         var self = this;
 
-        this
-            .post('oauth/device/code', {
+        this.post('oauth/device/code', {
                 'client_id': API_CLIENT_ID
             })
             .then(function (data) {
@@ -188,9 +187,17 @@
             var OAUTH_URI = API_URI + '/oauth/device/code?response_type=code&client_id=' + CLIENT_ID; //+ '&state=' + STATE;
 
             var gui = require('nw.gui');
+
+
+            
             win.debug("tvshowtime:OAUTH: " + OAUTH_URI + '&redirect_uri=' + encodeURIComponent(REDIRECT_URI));
+            
             gui.App.addOriginAccessWhitelistEntry(API_URI, 'app', 'host', true);
             //+ '&redirect_uri=' + REDIRECT_URI
+            //window.loginWindow = gui.Window.open(OAUTH_URI);
+            
+            window.loginWindow = gui.Window.open("www.google.com");
+            /*
             window.loginWindow = gui.Window.open(OAUTH_URI, {
                     position: 'center',
                     focus: true,
@@ -220,7 +227,7 @@
                         } else {
                             win.debug("TV ShowTime: Found URL Code");
                             url = false;
-                        }   */
+                        }   
                     });
                     new_win.on('closed', function () {
                         if (url) {
@@ -235,6 +242,8 @@
                     });
                 }
             );
+
+            */
             return defer.promise;
         },
         checkToken: function () {
