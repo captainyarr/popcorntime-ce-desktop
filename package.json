@@ -83,7 +83,7 @@
         "gulp-gzip": "^1.4.0",
         "gulp-tar": "^3.0.0",
         "gulp-unzip": "^1.1.0",
-        "gulp-zip": "~4.1.0",
+        "gulp-zip": "~5.0.0",
         "jest": "^23.6.0",
         "merge2": "1.2.3",
         "nw-builder": "^3.5.7",
