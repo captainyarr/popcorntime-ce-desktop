@@ -60,9 +60,9 @@
         "rarbg-api": "git+https://github.com/talas9/rarbg-api.git",
         "readdirp": "^2.1.0",
         "request": "^2.87.0",
-        "rimraf": "^2.6.3",
+        "rimraf": "^2.7.1",
         "sanitizer": "^0.1.2",
-        "semver": "^5.7.0",
+        "semver": "^5.7.1",
         "send": "^0.16.1",
         "strike-api": "0.2.0",
         "tar": "^4.4.10",
@@ -71,7 +71,7 @@
         "underscore": "1.9.1",
         "upnp-mediarenderer-client": "^1.2.1",
         "urijs": "^1.17.0",
-        "webtorrent": "^0.107.5",
+        "webtorrent": "^0.107.7",
         "xmlbuilder": "^10.0.0"
     },
     "devDependencies": {
