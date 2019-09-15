@@ -1,33 +1,31 @@
 {
     // Environments
-    "browser"  : true,
-    "node"     : true,
-    "jquery"   : true,
-    "devel"    : true,
-
+    "browser": true,
+    "node": true,
+    "jquery": true,
+    "devel": true,
     // Options
-    "curly"    : true,
-    "bitwise"  : false,
-    "immed"    : true,
-    "latedef"  : true,
-    "nonbsp"   : true,
-    "nonew"    : true,
+    "curly": true,
+    "bitwise": false,
+    "immed": true,
+    "latedef": true,
+    "nonbsp": true,
+    "nonew": true,
     "validthis": true,
-    "debug"    : true,
-    "boss"     : true,
-    "eqeqeq"   : true,
-    "expr"     : true,
-    "eqnull"   : true,
-    "quotmark" : "single",
-    "trailing" : true,
-    "sub"      : true,
-    "undef"    : true,
-    "laxbreak" : true,
-    "loopfunc" : true,
-    "indent"   : 4,
-    "newcap"   : false,
-    "esversion" : 6,
-
+    "debug": true,
+    "boss": true,
+    "eqeqeq": true,
+    "expr": true,
+    "eqnull": true,
+    "quotmark": "single",
+    "trailing": true,
+    "sub": true,
+    "undef": true,
+    "laxbreak": true,
+    "loopfunc": true,
+    "indent": 4,
+    "newcap": false,
+    "esversion": 6,
     // Globals
     "globals": {
         // App
@@ -48,7 +46,6 @@
         "promisifyDb": true,
         "db": true,
         "Promise": true,
-
         // Global variables
         "_": true,
         "async": true,
@@ -80,10 +77,11 @@
         "WebTorrent": true,
         "child": true,
         "Trakt": true,
-
         // Third party
         "Backbone": true,
         "Mousetrap": true,
+        "_": true,
+        "request": true,
         "videojs": true,
         "vjs": true
     }
