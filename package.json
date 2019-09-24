@@ -57,7 +57,7 @@
         "parse-torrent": "^7.0.0",
         "q": "^2.0.3",
         "rarbg-api": "git+https://github.com/talas9/rarbg-api.git",
-        "readdirp": "^2.1.0",
+        "readdirp": "^3.0.0",
         "request": "^2.87.0",
         "rimraf": "^3.0.0",
         "sanitizer": "^0.1.2",
