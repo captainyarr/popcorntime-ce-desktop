@@ -29,14 +29,14 @@
                 };
 
             } else
-            if (process.platform == 'linux' || process.platform == "darwin") {
-                cmd = path.normalize('' + this.get('path') + '');
-                options = {
-                    shell: true
-                };
-            } else {
-                cmd = path.normalize('"' + this.get('path') + '" ');
-            }
+                if (process.platform == 'linux' || process.platform == "darwin") {
+                    cmd = path.normalize('' + this.get('path') + '');
+                    options = {
+                        shell: true
+                    };
+                } else {
+                    cmd = path.normalize('"' + this.get('path') + '" ');
+                }
 
             args.push(getPlayerSwitches(this.get('id')));
 
@@ -63,7 +63,7 @@
                     args.push(this.get('id'));
                 }
             }
-            if (getPlayerFilenameSwitch(this.get('id'))  !== '') {
+            if (getPlayerFilenameSwitch(this.get('id')) !== '') {
                 // The video file is the biggest file in the torrent
                 var videoFile = _.sortBy(streamModel.attributes.torrent.info.files, function(file) {
                     return -file.length;
@@ -107,11 +107,11 @@
             });
         },
 
-        pause: function() {},
+        pause: function() { },
 
-        stop: function() {},
+        stop: function() { },
 
-        unpause: function() {}
+        unpause: function() { }
     });
 
     function getPlayerName(loc) {
@@ -262,7 +262,7 @@
     // win32
     addPath(process.env.SystemDrive + '\\Program Files\\');
     addPath(process.env.SystemDrive + '\\Program Files (x86)\\');
-    
+
     // win7+
     /*
     "LOCALAPPDATA": "C:\\Users\\{username}\\AppData\\Local",
@@ -278,7 +278,7 @@
     addPath(process.env.LOCALAPPDATA);
     addPath(process.env.LOCALAPPDATA + '\\Programs');
     addPath(process.env.LOCALAPPDATA + '\\Apps\\2.0\\');
-    
+
     /*
     win.debug("SystemDrive:"+process.env.SystemDrive);
     win.debug("LOCALAPPDATA:"+process.env.LOCALAPPDATA);
@@ -295,20 +295,21 @@
         folderName = path.resolve(folderName);
         win.info('Scanning: ' + folderName);
         var appIndex = -1;
-        var fileStream = readdirp({
-            root: folderName,
-            depth: 3
+
+        var fileStream = readdirp(folderName, {
+            depth: 3,
+            alwaysStat: true
         });
+
         fileStream.on('data', function(d) {
-            
-            var app = d.name.replace('.app', '').replace('.exe', '').toLowerCase();
+            var app = d.basename.replace('.app', '').replace('.exe', '').toLowerCase();
             var match = _.filter(players, function(v, k) {
                 return k.toLowerCase() === app;
             });
 
             if (match.length) {
                 match = match[0];
-                var birthtime = d.stat.birthtime;
+                var birthtime = d.stats.birthtime;
                 var previousBirthTime = birthtimes[match.name];
                 if (!previousBirthTime || birthtime > previousBirthTime) {
                     if (!previousBirthTime) {
@@ -318,12 +319,12 @@
                             name: match.name,
                             path: d.fullPath
                         }));
-                        win.info('Found External Player: ' + match.name + ' in ' + d.fullParentDir);
+                        win.info('Found External Player: ' + match.name + ' in ' + d.fullPath);
                     } else {
                         collection.findWhere({
                             id: match.name
                         }).set('path', d.fullPath);
-                        win.info('Updated External Player: ' + app + ' with more recent version found in ' + d.fullParentDir);
+                        win.info('Updated External Player: ' + app + ' with more recent version found in ' + d.fullPath);
                     }
                     birthtimes[match.name] = birthtime;
                 }
