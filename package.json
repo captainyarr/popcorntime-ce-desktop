@@ -55,6 +55,7 @@
         "opensubtitles-ce": "^1.0.0",
         "os-name": "^3.1.0",
         "parse-torrent": "^7.0.0",
+        "peerflix": "^0.39.0",
         "q": "^2.0.3",
         "rarbg-api": "git+https://github.com/talas9/rarbg-api.git",
         "readdirp": "^3.0.0",
