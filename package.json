@@ -36,7 +36,7 @@
         "async": "^3.0.1",
         "chromecast-js": "git+https://github.com/captainyarr/chromecast-js.git",
         "gitlab": "^11.3.1",
-        "i18n": "0.8.3",
+        "i18n": "0.8.4",
         "iconv-lite": "^0.5.0",
         "jschardet": "2.1.0",
         "json-rpc2": "^1.0.2",
