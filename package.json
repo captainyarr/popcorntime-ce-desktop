@@ -10,9 +10,9 @@
     },
     "license": "GPL-3.0",
     "main": "src/app/index.html",
-    "version": "0.4.1-17-develop",
+    "version": "0.4.1-17",
     "node-remote": "*://*",
-    "releaseName": "Summer Dreams",
+    "releaseName": "Popcorn Treats",
     "scripts": {
         "start": "npx gulp run",
         "update": "npm prune && npm install"
