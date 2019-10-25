@@ -2,15 +2,11 @@
 
 # [Popcorn Time Community](https://github.com/PopcornTime-CE/desktop)
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/captainyarr/desktop.svg)](https://greenkeeper.io/)
-
 [![Join the chat at https://gitter.im/PopcornTime-CE/desktop](https://badges.gitter.im/PopcornTime-CE/desktop.svg)](https://gitter.im/PopcornTime-CE/desktop?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 Allow anyone to easily watch their favorite movies, shows, and anime.
 
 ![Popcorn Time](src/app/images/icon.png)
-
-Visit the project's website at <http://popcorn-time.is>.
 
 This project would absolutely **not** be possible without the original developer's hard work into making Popcorn Time what it is today. All credit should go to them, we're just trying to help the community :)
 
@@ -30,7 +26,7 @@ If you're comfortable getting up and running from a `git clone`, this method is 
 
 If you clone the GitLab repository, you will need to build a number of assets with npm.
 
-The [master](https://github.com/PopcornTime-CE/desktop/tree/master) branch which contains the latest release.
+The [master](https://github.com/captainyarr/popcorntime-ce-desktop/tree/master) branch which contains the latest release.
 
 #### Requirements
 
@@ -40,7 +36,7 @@ The [master](https://github.com/PopcornTime-CE/desktop/tree/master) branch which
 #### Running
 *Runs the app without building, useful for testing*
 
-1. `git clone https://github.com/PopcornTime-CE/desktop.git`
+1. `git clone https://github.com/captainyarr/popcorntime-ce-desktop.git`
 1. `cd desktop`
 1. `npm install`
 1. `npm start`
@@ -49,14 +45,18 @@ The [master](https://github.com/PopcornTime-CE/desktop/tree/master) branch which
 
 `The video could not be loaded, either because the server or network failed or because the format is not supported`
 
-1. Go to your popcorntime directory `desktop` and paste/replace [libffmpegsumo.so](http://www33.zippyshare.com/v/4UZX7pu4/file.html) in it.
+1. Update the [libffmpegsumo.so] in the NW.js cache folder via gulp:
+  `npx gulp ffmpegcache`
+
+2. Update the [libffmpegsumo.so] in the build folder via gulp:
+  `npx gulp ffmpegbuild`
 
 #### Building
 *Builds the app for a packaged, runnable app*
 
 1. `npm install`
-1. `gulp build` **OR** `node_modules/.bin/gulp build` depending whether you have gulp installed globally or not. 
-  2. You can also build for different platforms by passing them with the `-p` argument as a comma-seperated list (For example: `gulp build -p osx64,win32`
+2. `npx gulp build` **OR** `node_modules/.bin/gulp build` depending whether you have gulp installed globally or not. 
+3. You can also build for different platforms by passing them with the `-p` argument as a comma-seperated list (For example: `npx gulp build -p osx64,win32`
 1. There should be a `build/` directory containing the built files 
  
 <a name="community"></a>
@@ -65,7 +65,6 @@ The [master](https://github.com/PopcornTime-CE/desktop/tree/master) branch which
 Keep track of Popcorn Time Community development and community activity.
 
 * Join in discussions on the [Popcorn Time Subreddit](http://reddit.com/r/PopcornTimeCE)
-* Visit the [website](http://popcorn-time.is)
 * Chat with us on [![Join the chat at https://gitter.im/PopcornTime-CE/desktop](https://badges.gitter.im/PopcornTime-CE/desktop.svg)](https://gitter.im/PopcornTime-CE/desktop)
 
 ## Versioning
@@ -98,7 +97,5 @@ You should have received a copy of the GNU General Public License along with thi
 **This project and the distribution of this project is not illegal, nor does it violate *any* DMCA laws. The use of this project, however, may be illegal in your area. Check your local laws and regulations regarding the use of torrents to watch potentially copyrighted content. The maintainers of this project do not condone the use of this project for anything illegal, in any state, region, country, or planet. *Please use at your own risk*.**
 
 ***
-
-If you want to contact us : send pm to [samewhiterabbits](https://www.reddit.com/user/Samewhiterabbits) on reddit or [use the form](http://yify.is/index.php/blog/contact) on the yify website.
  
-Copyright (c) 2018 Popcorn Time Community - Released under the [GPL v3 license](LICENSE.txt).
+Copyright (c) 2019 Popcorn Time Community - Released under the [GPL v3 license](LICENSE.txt).
