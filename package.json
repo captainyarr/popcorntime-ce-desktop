@@ -2,11 +2,11 @@
     "name": "Popcorn-Time-CE",
     "homepage": "http://popcorntime.ag",
     "bugs": {
-        "url": "https://github.com/PopcornTimeCommunity/desktop/issues"
+        "url": "https://github.com/captainyarr/popcorntime-ce-desktop/issues"
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/PopcornTimeCommunity/desktop.git"
+        "url": "git+https://github.com/captainyarr/popcorntime-ce-desktop.git"
     },
     "license": "GPL-3.0",
     "main": "src/app/index.html",
