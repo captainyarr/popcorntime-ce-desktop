@@ -129,14 +129,14 @@
             // Bookmarked / not bookmarked
             if (this.model.get('bookmarked') === true) {
                 this.ui.bookmarkIcon.addClass('selected').text(i18n.__('Remove from bookmarks'));
-            }else{
+            } else {
                 this.ui.bookmarkIcon.text(i18n.__('Add to bookmarks'));
             }
 
             // Seen / Unseen
             if (this.model.get('watched') === true) {
                 this.ui.watchedIcon.addClass('selected').text(i18n.__('Seen'));
-            }else{
+            } else {
                 this.ui.watchedIcon.text(i18n.__('Not Seen'));
             }
             var _this = this;
@@ -235,13 +235,20 @@
             win.info('Subtitles: ' + this.subtitle_selected);
         },
 
-        startStreaming: function() {
+        startStreaming: function () {
+            var playerType = App.Device.Collection.selected.get('type');
+            var playerName = App.Device.Collection.selected.get('name');
+
+            if (playerType = 'chromecast') {
+                playerName = "chromecast";
+            }
+
             //GA: Player Launched
             ga('send', {
                 hitType: 'event',
                 eventCategory: 'Movie',
                 eventAction: 'WatchPlayer',
-                eventLabel: App.Device.Collection.selected.get('type') + " - " + App.Device.Collection.selected.get('name')
+                eventLabel: playerType + " - " + playerName
             });
 
             var player = $('.imgplayerchoice').attr('src');
@@ -305,7 +312,7 @@
             }
         },
 
-        playTrailer: function() {
+        playTrailer: function () {
 
             var trailer = new Backbone.Model({
                 src: this.model.get('trailer'),
@@ -371,8 +378,8 @@
                 .tooltip('fixTitle');
 
             $('.health-icon').tooltip({
-                html: true
-            })
+                    html: true
+                })
                 .removeClass('Bad Medium Good Excellent')
                 .addClass(health)
                 .attr('data-original-title', i18n.__('Health ' + health) + ' - ' + i18n.__('Ratio:') + ' ' + ratio.toFixed(2) + ' <br> ' + i18n.__('Seeds') + ': ' + torrent.seed + ' - ' + i18n.__('Peers') + ': ' + torrent.peer)
@@ -463,6 +470,10 @@
             $('li[data-imdb-id="' + this.model.get('imdb_id') + '"] .actions-watched').click();
         },
 
+        openIMDb: function () {
+            gui.Shell.openExternal('http://www.imdb.com/title/' + this.model.get('imdb_id'));
+        },
+        
         openMagnet: function(e) {
             var provider = this.model.get('provider'),
                 torrent = this.model.get('torrents')[this.model.get('quality')],
@@ -496,7 +507,7 @@
             }
         },
 
-        selectPlayer: function(e) { //onclick li player
+        selectPlayer: function (e) { //onclick li player
             var player = $(e.currentTarget).parent('li').attr('id').replace('player-', '');
             win.info('Initial Device set to: ' + player);
             //this.model.set('device', player);

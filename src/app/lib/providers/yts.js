@@ -19,49 +19,55 @@
     };
 
     var format = function (data) {
-        var results = _.chain(data.movies)/*
+        /*
+        var results = _.chain(data.movies)
          .filter(function (movie) {
          // Filter any 3D only movies
          return _.any(movie.torrents, function (torrent) {
          return torrent.quality !== '3D';
          });
-         })*/.map(function (movie) {
-            return {
-                type: 'movie',
-                id: movie.id,
-		imdb_id: movie.imdb_code,
-                title: movie.title,
-		slug: movie.slug,
-                year: movie.year,
-                genre: movie.genres,
-		directors: movie.directors,
-		cast: movie.cast,
-                rating: movie.rating,
-                runtime: movie.runtime,
-                image: movie.medium_cover_image,
-                cover: movie.medium_cover_image, //movie.large_cover_image,
-                backdrop: movie.background_image,
-                synopsis: movie.synopsis, 
-                trailer: 'https://www.youtube.com/watch?v=' + movie.yt_trailer_code || false,
-		google_video: movie.google_video || false,
-                certification: movie.mpa_rating,
-                torrents: _.reduce(movie.torrents, function (torrents, torrent) {
-                    if (torrent.quality !== '3D') {
-                        torrents[torrent.quality] = {
-                            url: torrent.url,
-                            magnet: 'magnet:?xt=urn:btih:' + torrent.hash +
-                            '&tr=udp://tracker.coppersurfer.tk:6969&tr=udp://p4p.arenabg.com:1337&tr=udp://9.rarbg.me:2710/announce&tr=udp://glotorrents.pw:6969/announce' +
-                            '&tr=udp://torrent.gresille.org:80/announce&tr=udp://tracker.internetwarriors.net:1337&tr=udp://tracker.opentrackr.org:1337/announce&tr=udp://tracker.leechers-paradise.org:6969',
-                            size: torrent.size_bytes,
-                            filesize: torrent.size,
-                            seed: torrent.seeds,
-                            peer: torrent.peers
-                        };
-                    }
-                    return torrents;
-                }, {})
-            };
-        }).value();
+         })*/
+         var tracker_list = '';
+
+         Settings.trackers.forEach(function (item) {
+             tracker_list += '&tr=' + item;
+         });
+
+         var results = _.chain(data.movies).map(function (movie) {
+             return {
+                 type: 'movie',
+                 id: movie.id,
+                 imdb_id: movie.imdb_code,
+                 title: movie.title,
+                 slug: movie.slug,
+                 year: movie.year,
+                 genre: movie.genres,
+                 directors: movie.directors,
+                 cast: movie.cast,
+                 rating: movie.rating,
+                 runtime: movie.runtime,
+                 image: movie.medium_cover_image,
+                 cover: movie.medium_cover_image, //movie.large_cover_image,
+                 backdrop: movie.background_image,
+                 synopsis: movie.synopsis,
+                 trailer: 'https://www.youtube.com/watch?v=' + movie.yt_trailer_code || false,
+                 google_video: movie.google_video || false,
+                 certification: movie.mpa_rating,
+                 torrents: _.reduce(movie.torrents, function (torrents, torrent) {
+                     if (torrent.quality !== '3D') {
+                         torrents[torrent.quality] = {
+                             url: torrent.url,
+                             magnet: 'magnet:?xt=urn:btih:' + torrent.hash + tracker_list,
+                             size: torrent.size_bytes,
+                             filesize: torrent.size,
+                             seed: torrent.seeds,
+                             peer: torrent.peers
+                         };
+                     }
+                     return torrents;
+                 }, {})
+             };
+         }).value();
 
         return {
             results: Common.sanitize(results),

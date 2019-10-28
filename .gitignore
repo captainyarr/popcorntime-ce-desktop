@@ -1,3 +1,6 @@
+#Popcorntime Project Specific ignore
+pre/
+
 # Windows image file caches
 Thumbs.db
 ehthumbs.db
@@ -76,6 +79,7 @@ bld/
 [Oo]bj/
 [Ll]og/
 dist/
+pre/
 
 # Visual Studio 2015 cache/options directory
 .vs/
@@ -349,3 +353,11 @@ __pycache__/
 
 #vscode
 .vscode/
+
+#snap
+parts/
+prime/
+.snapcraft/
+stage/
+*.snap
+

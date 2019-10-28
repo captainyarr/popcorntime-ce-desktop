@@ -1,3 +1,18 @@
+## 0.4.1-17 Beta - Popcorn Treats  - 24 October 2019
+
+New Features:
+- Added more information to status screen: Active Users, and Total User, Time remaining
+
+BugFixes: 
+- Fixed Next TV episode playing Automatically
+- Disabled autoupdate by default
+- Improved subtitle support
+
+Updated:
+- Updated to nw.js version 0.41.3
+- Updated various packages to latest version
+
+
 ## 0.4.1-16 Beta - Summer Dream  - 28 August 2018
 
 New Features:

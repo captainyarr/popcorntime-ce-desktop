@@ -7,7 +7,7 @@ async = require('async'),
 
     db = {},
     data_path = require('nw.gui').App.dataPath,
-    TTL = 1000 * 60 * 60 * 24;
+    TTL = 1000 * 60 * 60 * 72; //72 hours
 
 var startupTime = window.performance.now();
 console.debug('Database path: ' + data_path);

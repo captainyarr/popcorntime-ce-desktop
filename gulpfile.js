@@ -28,7 +28,7 @@ var argv = require('yargs')
     .argv;
 
 //Set Default nw.js version
-var nwVersion = '0.31.5';
+var nwVersion = '0.41.3';
 var buildDownloadUrl = 'https://dl.nwjs.io/';
 
 nwVersion = argv.nwv ? argv.nwv : nwVersion;
@@ -58,24 +58,72 @@ var nw = new NwBuilder({
     platforms: buildplatforms,
 }).on('log', console.log);
 
-gulp.task('run', function() {
+gulp.task('run', function run() {
     nw.options.files = './**';
-    return nw.run().catch(function(error) {
+    return nw.run().catch(function (error) {
         console.error(error);
     });
 });
 
-gulp.task('build', ['clean'], function() {
-    return nw.build().catch(function(error) {
+var buildTask = function () {
+    return nw.build().catch(function (error) {
         console.error(error);
     });
-});
+};
 
-gulp.task('clean', function() {
+var cleanTask = function () {
     return del('build/');
-});
+}
 
-gulp.task('ffmpegbuild', function() {
+var ffmpegcacheTask = function () {
+    var cacheDir = './cache/' + nwVersion + '-sdk';
+    var downloadArray = merge2();
+    var item = 0;
+
+    buildplatforms.forEach(item => {
+        switch (item) {
+            case "linux64":
+                //Copy updated FFMPEG into the cache directory before building
+                downloadArray.add(download(ffmpegDownloadurl + '/' + nwVersion + '-linux-x64.zip')
+                    .pipe(unzip())
+                    .pipe(gulp.dest(cacheDir + '/' + item + "/lib")));
+                break;
+            case "linux32":
+                //Copy updated FFMPEG into the cache directory before building
+                downloadArray.add(download(ffmpegDownloadurl + '/' + nwVersion + '-linux-ia32.zip')
+                    .pipe(unzip())
+                    .pipe(gulp.dest(cacheDir + '/' + item + "/lib")));
+                break;
+            case "win32":
+                //Copy updated FFMPEG into the cache directory before building
+                downloadArray.add(download(ffmpegDownloadurl + '/' + nwVersion + '-win-ia32.zip')
+                    .pipe(unzip())
+                    .pipe(gulp.dest(cacheDir + '/' + item)));
+                break;
+            case "win64":
+                //Copy updated FFMPEG into the cache directory before building
+                downloadArray.add(download(ffmpegDownloadurl + '/' + nwVersion + '-win-x64.zip')
+                    .pipe(unzip())
+                    .pipe(gulp.dest(cacheDir + '/' + item)));
+                break;
+            case "osx64":
+                var fs = require("fs");
+                var osxCachedir = './cache/' + nwVersion + '-sdk/osx64/nwjs.app/Contents/Versions/';
+                var files = fs.readdirSync(osxCachedir);
+                if (files.length > 0) {
+                    osxCachedir = './cache/' + nwVersion + '-sdk/osx64/nwjs.app/Contents/Versions/' + files[0];
+                }
+                downloadArray.add(download(ffmpegDownloadurl + '/' + nwVersion + '-osx-x64.zip')
+                    .pipe(unzip())
+                    .pipe(gulp.dest(osxCachedir)));
+                break;
+        }
+    });
+
+    return downloadArray;
+}
+
+var ffmpegbuildTask = function () {
     var downloadArray = merge2();
     var item = 0;
     buildplatforms.forEach(item => {
@@ -126,57 +174,9 @@ gulp.task('ffmpegbuild', function() {
         }
     });
     return downloadArray;
-});
+}
 
-gulp.task('ffmpegcache', function() {
-    var cacheDir = './cache/' + nwVersion + '-sdk';
-    var downloadArray = merge2();
-    var item = 0;
-
-    buildplatforms.forEach(item => {
-        switch (item) {
-            case "linux64":
-                //Copy updated FFMPEG into the cache directory before building
-                downloadArray.add(download(ffmpegDownloadurl + '/' + nwVersion + '-linux-x64.zip')
-                    .pipe(unzip())
-                    .pipe(gulp.dest(cacheDir + '/' + item + "/lib")));
-                break;
-            case "linux32":
-                //Copy updated FFMPEG into the cache directory before building
-                downloadArray.add(download(ffmpegDownloadurl + '/' + nwVersion + '-linux-ia32.zip')
-                    .pipe(unzip())
-                    .pipe(gulp.dest(cacheDir + '/' + item + "/lib")));
-                break;
-            case "win32":
-                //Copy updated FFMPEG into the cache directory before building
-                downloadArray.add(download(ffmpegDownloadurl + '/' + nwVersion + '-win-ia32.zip')
-                    .pipe(unzip())
-                    .pipe(gulp.dest(cacheDir + '/' + item)));
-                break;
-            case "win64":
-                //Copy updated FFMPEG into the cache directory before building
-                downloadArray.add(download(ffmpegDownloadurl + '/' + nwVersion + '-win-x64.zip')
-                    .pipe(unzip())
-                    .pipe(gulp.dest(cacheDir + '/' + item)));
-                break;
-            case "osx64":
-                var fs = require("fs");
-                var osxCachedir = './cache/' + nwVersion + '-sdk/osx64/nwjs.app/Contents/Versions/';
-                var files = fs.readdirSync(osxCachedir);
-                if (files.length > 0) {
-                    osxCachedir = './cache/' + nwVersion + '-sdk/osx64/nwjs.app/Contents/Versions/' + files[0];
-                }
-                downloadArray.add(download(ffmpegDownloadurl + '/' + nwVersion + '-osx-x64.zip')
-                    .pipe(unzip())
-                    .pipe(gulp.dest(osxCachedir)));
-                break;
-        }
-    });
-
-    return downloadArray;
-});
-
-gulp.task('zip', ['ffmpegbuild'], function() {
+var zipTask = function () {
     var zipArray = merge2();
 
     buildplatforms.forEach(item => {
@@ -213,9 +213,19 @@ gulp.task('zip', ['ffmpegbuild'], function() {
     });
 
     return zipArray;
-});
+}
 
-gulp.task('default', function() {
+gulp.task('build', gulp.series(cleanTask, buildTask));
+
+gulp.task('clean', cleanTask);
+
+gulp.task('ffmpegbuild', ffmpegbuildTask);
+
+gulp.task('ffmpegcache', ffmpegcacheTask);
+
+gulp.task('zip', gulp.series(ffmpegbuildTask, zipTask));
+
+gulp.task('default', function defaultTask() {
     // place code for your default task here
     console.log(nwVersion);
 });

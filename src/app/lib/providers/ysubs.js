@@ -9,7 +9,7 @@
     var mirrorUrl = 'http://api.ysubs.com/subs/';
     var prefix = 'http://www.yifysubtitles.com';
 
-    var TTL = 1000 * 60 * 60 * 4; // 4 hours
+    var TTL = 1000 * 60 * 60 * 24; // 24 hours
 
     var YSubs = function () {
         App.Providers.CacheProvider.call(this, 'subtitle', TTL);

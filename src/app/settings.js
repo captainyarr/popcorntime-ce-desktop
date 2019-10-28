@@ -73,7 +73,7 @@ Settings.streamPort = 0; // 0 = Random
 Settings.tmpLocation = path.join(os.tmpDir(), 'Popcorn-Time');
 Settings.databaseLocation = path.join(data_path, 'data');
 Settings.deleteTmpOnClose = false;
-Settings.automaticUpdating = true;
+Settings.automaticUpdating = false;
 Settings.events = false;
 Settings.minimizeToTray = false;
 Settings.bigPicture = false;
@@ -102,6 +102,9 @@ Settings.onlineSearchEngine = 'RARBG';
 Settings.totalDownloaded = 0;
 Settings.totalUploaded = 0;
 
+// Timings
+Settings.loadTime = 0;
+
 // VPN
 Settings.vpn = false;
 Settings.vpnUsername = '';
@@ -115,10 +118,19 @@ Settings.opensubtitlesUsername = "";
 Settings.opensubtitlesPassword = "";
 
 Settings.tvAPI = [{
-    url: 'https://api-fetch.website/tv/',
+    url: 'http://eztv.is/api/',
     strictSSL: true
 }, {
     url: 'http://eztvapi.ml/',
+    strictSSL: true
+}, {
+    url: 'https://eztvapi.ml/',
+    strictSSL: true
+}, {
+    url: 'https://popcorntime.ws/api/eztv/',
+    strictSSL: true
+}, {
+    url: 'https://popcorntimece.ch/api/eztv/',
     strictSSL: true
 }];
 
@@ -128,16 +140,19 @@ Settings.ytsAPI = [{
 }, {
     url: 'http://yts.ag/',
     strictSSL: true
+},{
+    url: 'https://movies.api-fetch.website/',
+    strictSSL: true
 }];
 
 Settings.updateEndpoint = {
-    url: 'http://popcorntime.ag/',
+    url: '',//'http://popcorntime.ag/',
     index: 0,
     proxies: [{
-        url: 'http://popcorntime.ag/',
+        url: '',//'http://popcorntime.ag/',
         //fingerprint: '30:A6:BA:6C:19:A4:D5:C3:5A:E8:F1:56:C6:B4:E1:DC:EF:DD:EC:8C',
     }, {
-        url: 'http://popcorn-time.is/',
+        url: '',//'http://popcorn-time.is/',
         //fingerprint: '30:A6:BA:6C:19:A4:D5:C3:5A:E8:F1:56:C6:B4:E1:DC:EF:DD:EC:8C',
     }]
 };
@@ -146,17 +161,23 @@ Settings.trackersList = ['https://raw.githubusercontent.com/ngosang/trackerslist
 
 Settings.trackers = [
     'udp://glotorrents.pw:6969/announce',
-    'udp://tracker.coppersurfer.tk:6969',
-    'udp://tracker.leechers-paradise.org:6969',
-    'udp://tracker.internetwarriors.net:1337',
+    'udp://tracker.coppersurfer.tk:80',
+    'udp://tracker.coppersurfer.tk:6969/announce',
+    'udp://tracker.leechers-paradise.org:6969/announce',
+    'udp://tracker.internetwarriors.net:1337/announce',
     'udp://tracker.openbittorrent.com:80',
+    'udp://tracker.opentrackr.org:1337/announce',
+    'udp://tracker.pirateparty.gr:6969/announce',
+    'udp://tracker.tiny-vps.com:6969/announce',
+    'udp://tracker.vanitycore.co:6969/announce',
+    'udp://exodus.desync.com:6969/announce',
     'udp://p4p.arenabg.ch:1337',
     'udp://open.demonii.com:1337/announce',
-    'udp://tracker.opentrackr.org:1337/announce',
-    'udp://torrent.gresille.org:80/announce',
     'udp://public.popcorn-tracker.org:6969/announce',
-    'udp://9.rarbg.me:2710/announce',
+    'udp://9.rarbg.to:2710/announce',
     'udp://p4p.arenabg.com:1337',
+    'wss://tracker.openwebtorrent.com:443/announce',
+    'wss://tracker.fastcast.nz:443/announce'
 ];
 
 // App Settings

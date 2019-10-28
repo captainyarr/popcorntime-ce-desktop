@@ -6,7 +6,6 @@
     var BUFFERING_SIZE = Settings.bufferSize;
     //var readTorrent = require('read-torrent');
     var parseTorrent = require('parse-torrent');
-    var peerflix = require('peerflix');
     var webtorrent = require('webtorrent');
     var path = require('path');
     var crypto = require('crypto');
@@ -88,13 +87,12 @@
         win.debug('Streaming movie to %s', tmpFile);
 
         engine = new webtorrent({
-            dht: true || parseInt(Settings.dhtLimit, 10), // Enable DHT (default=true), or options object for DHT
-            maxConns: parseInt(Settings.connectionLimit, 10) || 100 // Max number of peers to connect to per torrent (default=100)
+            dht: true, // || parseInt(Settings.dhtLimit, 10), // Enable DHT (default=true), or options object for DHT
+            maxConns: parseInt(Settings.connectionLimit, 10) || 100, // Max number of peers to connect to per torrent (default=100)
+            webSeeds: true
         });
 
         engine.add(torrent.info, {
-            // dht: true || parseInt(Settings.dhtLimit, 10),   // Enable DHT (default=true), or options object for DHT
-            //maxConns: parseInt(Settings.connectionLimit, 10) || 100,     // Max number of peers to connect to per torrent (default=100)
             tracker: true,
             announce: Settings.trackers,
             port: parseInt(Settings.streamPort, 10) || 0,
@@ -125,8 +123,20 @@
         engine.piecesGot = 0;
         engine.cachedDownload = 0;
 
+        engine.on('error', function(err) {
+            win.error(err);
+        });
+
         engineTorrent.on('warning', function(err) {
             win.warn(err);
+        });
+
+        engineTorrent.on('error', function(err) {
+            win.error(err);
+        });
+
+        engineTorrent.on('wire', function(wire, addr) {
+            //win.debug('connected to peer with address ' + addr);
         });
 
         engineTorrent.on('ready', function() {
@@ -161,8 +171,6 @@
 
             //Set file_index to the largest file in torrent
             streamInfo.set('file_index', file_index);
-
-            //Increase buffer size based on file size
 
             //Set total torrent size 
             streamInfo.set('size', size);
@@ -276,7 +284,6 @@
                 win.debug("engine:listening");
                 win.debug(`Server running at ` + engine.server.address().address + ":" + engine.server.address().port);
                 engine.server.port = engine.server.address().port;
-
                 //streamInfo.set('src', 'http://127.0.0.1:' + engine.server.address().port + '/');
                 streamInfo.set('src', 'http://' + engine.server.address().address + ':' + engine.server.port + "/" + streamInfo.get('file_index'));
                 streamInfo.set('type', 'video/mp4');
@@ -333,16 +340,23 @@
 
                 win.debug('Preloading movie to %s', tmpFile);
 
-                preload_engine = peerflix(torrent_url, {
-                    connections: parseInt(Settings.connectionLimit, 10) || 100, // Max amount of peers to be connected to.
-                    dht: parseInt(Settings.dhtLimit, 10) || 50,
-                    port: 0,
-                    tmp: App.settings.tmpLocation,
-                    path: tmpFile, // we'll have a different file name for each stream also if it's same torrent in same session
-                    index: torrent.file_index,
-                    id: torrentPeerId
+                preload_engine = new webtorrent({
+                    dht: true, // || parseInt(Settings.dhtLimit, 10), // Enable DHT (default=true), or options object for DHT
+                    maxConns: parseInt(Settings.connectionLimit, 10) || 100, // Max number of peers to connect to per torrent (default=100)
+                    webSeeds: true
                 });
 
+                preload_engine.add(torrent.infoHash, {
+                    tracker: true,
+                    announce: Settings.trackers,
+                    port: parseInt(Settings.streamPort, 10) || 0,
+                    tmp: App.settings.tmpLocation,
+                    path: tmpFile, // we'll have a different file name for each stream also if it's same torrent in same session
+                    buffer: BUFFERING_SIZE.toString(), // create a buffer on torrent-stream
+                    index: torrent.file_index,
+                    name: torrent.infoHash,
+                    id: torrentPeerId
+                });
             });
 
 
@@ -351,9 +365,6 @@
         stop: function() {
 
             if (preload_engine) {
-                if (preload_engine.server._handle) {
-                    preload_engine.server.close();
-                }
                 preload_engine.destroy();
                 win.info('Preloading stopped');
             }

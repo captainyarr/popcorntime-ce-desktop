@@ -100,6 +100,11 @@
                 + '&tr=udp:\/\/tracker.coppersurfer.tk:6969'
                 + '&tr=udp:\/\/tracker.leechers-paradise.org:6969'
                 + '&tr=udp:\/\/exodus.desync.com:696931622A';
+            
+            Settings.trackers.forEach(function(item){
+                tracker_list += '&tr='+item;
+            });
+            
             return magnet_uri + torrentHash + tracker_list;
         },
 
@@ -255,7 +260,7 @@
         },
 
         onlineOpen: function (e) {
-            var file = $(e.currentTarget).context.dataset.file;
+            var file = $(e.currentTarget).dataset.file;
             Settings.droppedMagnet = file;
             window.handleTorrent(file);
         },
@@ -306,8 +311,13 @@
         },
 
         openFileSelector: function (e) {
-            var _file = $(e.currentTarget).context.innerText,
+            var _file = e.currentTarget.innerText;
+            var file;
+
+            if(_file !== undefined)           
                 file = _file.substring(0, _file.length - 2); // avoid ENOENT
+            else
+                file = "";
 
             if (_file.indexOf('.torrent') !== -1) {
                 Settings.droppedTorrent = file;
@@ -328,14 +338,14 @@
             var magnetLink,
                 gui = require('nw.gui');
 
-            if ($(e.currentTarget.parentNode).context.className === 'file-item') {
+            if (e.currentTarget.parentNode.className === 'file-item') {
                 // stored
-                var _file = $(e.currentTarget.parentNode).context.innerText,
+                var _file = e.currentTarget.parentNode.innerText,
                     file = _file.substring(0, _file.length - 2); // avoid ENOENT
                 magnetLink = fs.readFileSync(collection + file, 'utf8');
             } else {
                 // search result
-                magnetLink = $(e.currentTarget.parentNode).context.attributes['data-file'].value;
+                magnetLink = e.currentTarget.parentNode.attributes['data-file'].value;
             }
 
             if (e.button === 2) { //if right click on magnet link
@@ -352,7 +362,7 @@
             e.preventDefault();
             e.stopPropagation();
 
-            var _file = $(e.currentTarget.parentNode).context.innerText,
+            var _file = e.currentTarget.parentNode.innerText,
                 file = _file.substring(0, _file.length - 2); // avoid ENOENT
 
             fs.unlinkSync(collection + file);
@@ -368,7 +378,7 @@
             e.preventDefault();
             e.stopPropagation();
 
-            var _file = $(e.currentTarget.parentNode).context.innerText,
+            var _file = e.currentTarget.parentNode.innerText,
                 file = _file.substring(0, _file.length - 2), // avoid ENOENT
                 isTorrent = false;
 
