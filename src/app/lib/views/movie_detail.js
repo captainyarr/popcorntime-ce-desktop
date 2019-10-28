@@ -470,6 +470,10 @@
             $('li[data-imdb-id="' + this.model.get('imdb_id') + '"] .actions-watched').click();
         },
 
+        openIMDb: function () {
+            gui.Shell.openExternal('http://www.imdb.com/title/' + this.model.get('imdb_id'));
+        },
+        
         openMagnet: function(e) {
             var provider = this.model.get('provider'),
                 torrent = this.model.get('torrents')[this.model.get('quality')],

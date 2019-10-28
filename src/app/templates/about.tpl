@@ -20,7 +20,8 @@
             <div class="full-text">
                 <%= i18n.__("Popcorn Time! is the result of many developers and designers putting a bunch of APIs together to make the experience of watching torrent movies as simple as possible.") %><br/>
                 <%= i18n.__("We are an open source project. We are from all over the world. We love our movies. And boy, do we love popcorn.") %><br/>
-                <%= i18n.__("Subtitles are provided by")%> <a class="links" href="http://opensubtitles.org">opensubtitles.org</a>.
+                <%= i18n.__("Subtitles are provided by")%> <a class="links" href="http://opensubtitles.org">opensubtitles.org</a>.<br><br>
+                <%= i18n.__("This version of Popcorn Time CE is a fork based on Popcorntime Community.") %><br/>
             </div>
         </div>
 
@@ -31,7 +32,7 @@
         <!--
 		<a href='http://facebook.com/PopcornTimeCE' data-toggle="tooltip" data-placement="top" title="facebook.com/PopcornTimeCE" class='links facebook_icon'></span></a>
         -->
-		<a href='http://github.com/PopcornTimeCommunity' data-toggle="tooltip" data-placement="top" title="github.com/PopcornTime-CE" class='links github_icon'></span></a>
+		<a href='https://github.com/captainyarr/popcorntime-ce-desktop' data-toggle="tooltip" data-placement="top" title="github.com/captainyarr/popcorntime-ce-desktop" class='links github_icon'></span></a>
 
 		<a href='http://reddit.com/r/PopcornTimeCE' data-toggle="tooltip" data-placement="top" title="reddit.com/PopcornTimeCE" class='links forum_icon'></span></a>
         </div>
