@@ -27,7 +27,8 @@ jobs:
           - v1-nodecache-{{ checksum "gulpfile.js" }}
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
-          
+
+      - run: npm prune    
       - run: npm install
       - run: sudo npm install -g gulp 
         
