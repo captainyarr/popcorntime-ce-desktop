@@ -10,7 +10,7 @@
     },
     "license": "GPL-3.0",
     "main": "src/app/index.html",
-    "version": "0.4.1-17",
+    "version": "0.4.1-17.1",
     "node-remote": "*://*",
     "releaseName": "Popcorn Treats",
     "scripts": {
