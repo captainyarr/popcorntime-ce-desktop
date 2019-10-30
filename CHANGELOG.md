@@ -1,4 +1,4 @@
-## 0.4.1-17 Beta - Popcorn Treats  - 24 October 2019
+## 0.4.1-17.1 Beta - Popcorn Treats  - 24 October 2019
 
 New Features:
 - Added more information to status screen: Active Users, and Total User, Time remaining
@@ -73,7 +73,6 @@ BugFixes:
 
 - Fixed build archive so that all files are included when a new build is generated.  All builds should now have all the proper files as expected and run properly.
 - Updated dependencies
-
 ## 0.4.1-11 Beta - Now with some butter - 6 December 2017
 
 New Features: 
