@@ -23,10 +23,15 @@ jobs:
       # Download and cache dependencies
       - restore_cache:
           keys:
-          - v1-dependencies-{{ checksum "package.json" }}
-          - v1-nodecache-{{ checksum "gulpfile.js" }}
+          - v1-dependencies-{{ checksum "package-lock.json" }}
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
+
+      # Download and cache node-cache
+      - restore_cache:
+          keys:
+          - v1-nodecache-{{ checksum "gulpfile.js" }}
+          # fallback to using the latest cache if no exact match is found
           - v1-nodecache-
 
       - run: npm prune    
@@ -42,15 +47,16 @@ jobs:
       
       #store cache dependencies
       - save_cache:
+         key: v1-dependencies-{{ checksum "package-lock.json" }}
          paths:
             - node_modules
-         key: v1-dependencies-{{ checksum "package.json" }}
-          
+
+      #store node cache
       - save_cache:
+         key: v1-nodecache-{{ checksum "gulpfile.js" }}
          paths:
             - cache
-         key: v1-nodecache-{{ checksum "gulpfile.js" }}
-          
+      
       - store_artifacts:
          path: ~/repo/dist
 
