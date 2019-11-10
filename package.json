@@ -39,7 +39,7 @@
         "gitlab": "^11.4.2",
         "i18n": "0.8.3",
         "iconv-lite": "^0.5.0",
-        "jschardet": "2.1.0",
+        "jschardet": "2.1.1",
         "json-rpc2": "^1.0.2",
         "kat-api-ce": "^0.0.4",
         "markdown": "~0.5.0",
