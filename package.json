@@ -81,7 +81,7 @@
         "eslint-config-google": "^0.14.0",
         "gulp": "^4.0.2",
         "gulp-download": "0.0.1",
-        "gulp-gzip": "^1.4.0",
+        "gulp-gzip": "^1.4.2",
         "gulp-tar": "^3.0.1",
         "gulp-unzip": "^1.1.0",
         "gulp-zip": "^5.0.1",
