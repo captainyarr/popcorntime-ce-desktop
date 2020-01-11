@@ -1,4 +1,16 @@
-## 0.4.1-18-develop Beta - Popcorn Treats  - 24 October 2019
+## 0.4.1-18 Beta - WIP Builds
+
+New Features:
+
+
+BugFixes: 
+
+
+Updated:
+
+
+
+## 0.4.1-17.1 Beta - Popcorn Treats  - 24 October 2019
 
 New Features:
 - Added more information to status screen: Active Users, and Total User, Time remaining
