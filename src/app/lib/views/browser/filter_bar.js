@@ -243,6 +243,19 @@
 
             var sorter = $(e.target).attr('data-value');
 
+            switch (App.currentview) {
+                case 'movies':
+                    AdvSettings.set('lastSortMovie', sorter);
+                    break;
+                case 'shows':
+                    AdvSettings.set('lastSortTV', sorter);
+                    break;
+                case 'anime':
+                    AdvSettings.set('lastSortAnime', sorter);
+                    break;
+                default:
+                }
+
             if (this.previousSort === sorter) {
                 this.model.set('order', this.model.get('order') * -1);
             } else if (this.previousSort !== sorter && sorter === 'title') {
@@ -266,6 +279,20 @@
             $(e.target).addClass('active');
 
             var type = $(e.target).attr('data-value');
+            
+            switch (App.currentview) {
+                case 'movies':
+                    AdvSettings.set('lastTypeMovie', type);
+                    break;
+                case 'shows':
+                    AdvSettings.set('lastTypeTV', type);
+                    break;
+                case 'anime':
+                    AdvSettings.set('lastTypeAnime', type);
+                    break;
+                default:
+                }
+
             this.ui.typeValue.text(i18n.__(type));
 
             this.model.set({
@@ -280,6 +307,21 @@
             $(e.target).addClass('active');
 
             var genre = $(e.target).attr('data-value');
+
+            switch (App.currentview) {
+                case 'movies':
+                    AdvSettings.set('lastGenreMovie', genre);
+                    break;
+                case 'shows':
+                    AdvSettings.set('lastGenreTV', genre);
+                    break;
+                case 'anime':
+                    AdvSettings.set('lastGenreAnime', genre);
+                    break;
+                default:
+                }
+
+
             this.ui.genreValue.text(i18n.__(genre));
 
             this.model.set({
