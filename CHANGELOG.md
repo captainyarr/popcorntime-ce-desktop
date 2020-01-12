@@ -1,6 +1,7 @@
 ## 0.4.1-18 Beta - WIP Builds
 
 New Features:
+- Sort By, Genres, Type are now saved when going between Movies and TV Shows.
 
 
 BugFixes: 
