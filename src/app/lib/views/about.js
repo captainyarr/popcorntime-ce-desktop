@@ -54,7 +54,7 @@
         },
 
         reportIssue: function () {
-            App.vent.trigger('issue:new');
+            App.vent.trigger();
         },
 
         closeChangelog: function () {
