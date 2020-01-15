@@ -12,8 +12,13 @@
             <% } %>
         </div>
 
-        <div class="title-issue">
+        <!--
+            <div class="title-issue">
             <a><%= i18n.__("Report an issue") %></a>
+            </div>
+        -->
+        <div class="title-issue">
+            <a href='https://github.com/captainyarr/popcorntime-ce-desktop/issues' data-toggle="tooltip" data-placement="top" title="github.com/captainyarr/popcorntime-ce-desktop/issues" class='links'><%= i18n.__("Report an issue") %></span></a>  
         </div>
 
         <div class="text-about">
