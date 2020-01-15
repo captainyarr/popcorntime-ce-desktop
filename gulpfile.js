@@ -72,7 +72,12 @@ var buildTask = function () {
 };
 
 var cleanTask = function () {
-    return del('build/');
+    var item = 0;
+
+    buildplatforms.forEach(item => {
+        del('build/Popcorn-Time-CE/'+item+'/');
+    });
+    return del('build/Popcorn-Time-CE/'+item+'/');
 }
 
 var ffmpegcacheTask = function () {
