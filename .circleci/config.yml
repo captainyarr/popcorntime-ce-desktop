@@ -5,8 +5,8 @@
 version: 2.1
 
 jobs:
-  build:
-    docker:
+   checkout:
+      docker:
       # specify the version you desire here
       - image: circleci/node:lts
       
@@ -15,10 +15,99 @@ jobs:
       # documented at https://circleci.com/docs/2.0/circleci-images/
       # - image: circleci/mongo:3.4.4
 
-    working_directory: ~/repo
+      working_directory: ~/repo 
+      
+      steps:
+         - checkout
+         - save_cache:
+            key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
+            paths:
+               - ~/repo
 
-    steps:
-      - checkout
+         # Download and cache dependencies
+         - restore_cache:
+            keys:
+               - v1-dependencies-{{ checksum "package-lock.json" }}
+               # fallback to using the latest cache if no exact match is found
+               - v1-dependencies-
+
+         # Download and cache node-cache
+         - restore_cache:
+            keys:
+               - v1-nodecache-{{ checksum "gulpfile.js" }}
+               # fallback to using the latest cache if no exact match is found
+               - v1-nodecache-
+
+         - run: sudo npm prune    
+         - run: sudo npm install
+      
+         #store cache dependencies
+         - save_cache:
+            key: v1-dependencies-{{ checksum "package-lock.json" }}
+            paths:
+               - node_modules
+
+         #store node cache
+         - save_cache:
+            key: v1-nodecache-{{ checksum "gulpfile.js" }}
+            paths:
+               - cache
+
+   build_original:
+      docker:
+      # specify the version you desire here
+      - image: circleci/node:lts
+      
+      # Specify service dependencies here if necessary
+      # CircleCI maintains a library of pre-built images
+      # documented at https://circleci.com/docs/2.0/circleci-images/
+      # - image: circleci/mongo:3.4.4
+
+      working_directory: ~/repo
+
+      steps:
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "package-lock.json" }}
+          # fallback to using the latest cache if no exact match is found
+          - v1-dependencies-
+
+      # Download and cache node-cache
+      - restore_cache:
+          keys:
+          - v1-nodecache-{{ checksum "gulpfile.js" }}
+          # fallback to using the latest cache if no exact match is found
+          - v1-nodecache-
+
+      - run: sudo npm prune    
+      - run: sudo npm install
+      #- run: sudo npm install -g gulp 
+        
+      # run tests!
+      #- run: gulp build linux32,linux64,win32,win64,osx64
+      - run: npx gulp build -p linux32,linux64,win32,win64
+      
+      - deploy:
+         command: npx gulp zip -p linux32,linux64,win32,win64
+
+   build_linux64:
+      docker:
+      # specify the version you desire here
+      - image: circleci/node:lts
+      
+      # Specify service dependencies here if necessary
+      # CircleCI maintains a library of pre-built images
+      # documented at https://circleci.com/docs/2.0/circleci-images/
+      # - image: circleci/mongo:3.4.4
+
+      working_directory: ~/repo
+
+      steps:
+      - restore_cache:
+         keys: 
+         - v1-repo-{{ .Environment.CIRCLE_SHA1 }}
+         - v1-repo-
 
       # Download and cache dependencies
       - restore_cache:
@@ -34,16 +123,16 @@ jobs:
           # fallback to using the latest cache if no exact match is found
           - v1-nodecache-
 
-      - run: npm prune    
-      - run: npm install
+      - run: sudo npm prune    
+      - run: sudo npm install
       #- run: sudo npm install -g gulp 
         
       # run tests!
       #- run: gulp build linux32,linux64,win32,win64,osx64
-      - run: npx gulp build -p linux32,linux64,win32,win64
+      - run: npx gulp build -p linux64
       
       - deploy:
-         command: npx gulp zip -p linux32,linux64,win32,win64
+         command: npx gulp zip -p linux64
       
       #store cache dependencies
       - save_cache:
@@ -60,3 +149,192 @@ jobs:
       - store_artifacts:
          path: ~/repo/dist
 
+   build_linux32:
+      docker:
+      # specify the version you desire here
+      - image: circleci/node:lts
+      
+      # Specify service dependencies here if necessary
+      # CircleCI maintains a library of pre-built images
+      # documented at https://circleci.com/docs/2.0/circleci-images/
+      # - image: circleci/mongo:3.4.4
+
+      working_directory: ~/repo
+
+      steps:
+      - restore_cache:
+         keys: 
+         - v1-repo-{{ .Environment.CIRCLE_SHA1 }}
+         - v1-repo-
+      
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "package-lock.json" }}
+          # fallback to using the latest cache if no exact match is found
+          - v1-dependencies-
+
+      # Download and cache node-cache
+      - restore_cache:
+          keys:
+          - v1-nodecache-{{ checksum "gulpfile.js" }}
+          # fallback to using the latest cache if no exact match is found
+          - v1-nodecache-
+      
+      - run: sudo npm prune    
+      - run: sudo npm install
+
+      # run tests!
+      #- run: gulp build linux32,linux64,win32,win64,osx64
+      - run: npx gulp build -p linux32
+      
+      - deploy:
+         command: npx gulp zip -p linux32
+      
+      #store cache dependencies
+      - save_cache:
+         key: v1-dependencies-{{ checksum "package-lock.json" }}
+         paths:
+            - node_modules
+
+      #store node cache
+      - save_cache:
+         key: v1-nodecache-{{ checksum "gulpfile.js" }}
+         paths:
+            - cache
+      
+      - store_artifacts:
+         path: ~/repo/dist
+
+   build_win64:
+      docker:
+      # specify the version you desire here
+      - image: circleci/node:lts
+      
+      # Specify service dependencies here if necessary
+      # CircleCI maintains a library of pre-built images
+      # documented at https://circleci.com/docs/2.0/circleci-images/
+      # - image: circleci/mongo:3.4.4
+
+      working_directory: ~/repo
+
+      steps:
+      - restore_cache:
+         keys: 
+         - v1-repo-{{ .Environment.CIRCLE_SHA1 }}
+         - v1-repo-
+
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "package-lock.json" }}
+          # fallback to using the latest cache if no exact match is found
+          - v1-dependencies-
+
+      # Download and cache node-cache
+      - restore_cache:
+          keys:
+          - v1-nodecache-{{ checksum "gulpfile.js" }}
+          # fallback to using the latest cache if no exact match is found
+          - v1-nodecache-
+      
+      - run: sudo npm prune    
+      - run: sudo npm install
+      
+      # run tests!
+      #- run: gulp build linux32,linux64,win32,win64,osx64
+      - run: npx gulp build -p win64
+      
+      - deploy:
+         command: npx gulp zip -p win64
+      
+      #store cache dependencies
+      - save_cache:
+         key: v1-dependencies-{{ checksum "package-lock.json" }}
+         paths:
+            - node_modules
+
+      #store node cache
+      - save_cache:
+         key: v1-nodecache-{{ checksum "gulpfile.js" }}
+         paths:
+            - cache
+      
+      - store_artifacts:
+         path: ~/repo/dist
+
+   build_win32:
+      docker:
+      # specify the version you desire here
+      - image: circleci/node:lts
+      
+      # Specify service dependencies here if necessary
+      # CircleCI maintains a library of pre-built images
+      # documented at https://circleci.com/docs/2.0/circleci-images/
+      # - image: circleci/mongo:3.4.4
+
+      working_directory: ~/repo
+
+      steps:
+      - restore_cache:
+         keys: 
+         - v1-repo-{{ .Environment.CIRCLE_SHA1 }}
+         - v1-repo-
+
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "package-lock.json" }}
+          # fallback to using the latest cache if no exact match is found
+          - v1-dependencies-
+
+      # Download and cache node-cache
+      - restore_cache:
+          keys:
+          - v1-nodecache-{{ checksum "gulpfile.js" }}
+          # fallback to using the latest cache if no exact match is found
+          - v1-nodecache-
+      
+      - run: sudo npm prune    
+      - run: sudo npm install  
+      
+      # run tests!
+      #- run: gulp build linux32,linux64,win32,win64,osx64
+      - run: npx gulp build -p win32
+      
+      - deploy:
+         command: npx gulp zip -p win32
+      
+      #store cache dependencies
+      - save_cache:
+         key: v1-dependencies-{{ checksum "package-lock.json" }}
+         paths:
+            - node_modules
+
+      #store node cache
+      - save_cache:
+         key: v1-nodecache-{{ checksum "gulpfile.js" }}
+         paths:
+            - cache
+      
+      - store_artifacts:
+         path: ~/repo/dist
+
+
+workflows:
+   version: 2.1
+   build-and-deploy:
+      jobs:
+         - checkout
+         - build_linux64:
+            requires:
+               - checkout
+         - build_linux32:
+            requires:
+               - checkout
+         - build_win32:
+            requires:
+               - checkout
+         - build_win64:
+            requires:
+               - checkout
