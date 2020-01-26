@@ -12,7 +12,7 @@
     "main": "src/app/index.html",
     "version": "0.4.1-18-develop",
     "node-remote": "*://*",
-    "chromium-args": "--password-store=basic",
+    "chromium-args": "--password-store=basic --remote-debugging-port=9222",
     "releaseName": "Popcorn Treats",
     "scripts": {
         "start": "npx gulp run",
