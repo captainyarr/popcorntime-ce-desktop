@@ -65,7 +65,7 @@
         "semver": "^7.0.0",
         "send": "^0.17.1",
         "strike-api": "0.2.0",
-        "tar": "^5.0.5",
+        "tar": "^6.0.0",
         "temp": "^0.9.1",
         "torrent-tracker-health": "git+https://github.com/PTCE-Public/torrent-tracker-health.git",
         "underscore": "1.9.2",
