@@ -11,7 +11,7 @@
         useragent: 'Popcorn Time v1'
     });
 
-    var TTL = 1000 * 60 * 60 * 48; // 48 hours
+    var TTL = 1000 * 60 * 60 * 24 * 14; // 14 Day retention
 
     var OpenSubtitlesMovies = function() {
         win.debug('OpenSubtitles Init')
