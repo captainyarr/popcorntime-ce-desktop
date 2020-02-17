@@ -38,7 +38,7 @@ jobs:
                # fallback to using the latest cache if no exact match is found
                - v1-nodecache-
 
-         - run: sudo npm prune    
+         #- run: sudo npm prune    
          - run: sudo npm install
       
          #store cache dependencies
@@ -80,7 +80,7 @@ jobs:
           # fallback to using the latest cache if no exact match is found
           - v1-nodecache-
 
-      - run: sudo npm prune    
+      #- run: sudo npm prune    
       - run: sudo npm install
       #- run: sudo npm install -g gulp 
         
@@ -123,7 +123,7 @@ jobs:
           # fallback to using the latest cache if no exact match is found
           - v1-nodecache-
 
-      - run: sudo npm prune    
+      #- run: sudo npm prune    
       - run: sudo npm install
       #- run: sudo npm install -g gulp 
         
@@ -181,7 +181,7 @@ jobs:
           # fallback to using the latest cache if no exact match is found
           - v1-nodecache-
       
-      - run: sudo npm prune    
+      #- run: sudo npm prune    
       - run: sudo npm install
 
       # run tests!
@@ -238,7 +238,7 @@ jobs:
           # fallback to using the latest cache if no exact match is found
           - v1-nodecache-
       
-      - run: sudo npm prune    
+      #- run: sudo npm prune    
       - run: sudo npm install
       
       # run tests!
@@ -295,7 +295,7 @@ jobs:
           # fallback to using the latest cache if no exact match is found
           - v1-nodecache-
       
-      - run: sudo npm prune    
+      #- run: sudo npm prune    
       - run: sudo npm install  
       
       # run tests!
