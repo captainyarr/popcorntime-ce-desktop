@@ -6,6 +6,8 @@ version: 2.1
 
 jobs:
    checkout:
+      working_directory: ~/repo 
+
       docker:
       # specify the version you desire here
       - image: circleci/node:lts
@@ -15,8 +17,6 @@ jobs:
       # documented at https://circleci.com/docs/2.0/circleci-images/
       # - image: circleci/mongo:3.4.4
 
-      working_directory: ~/repo 
-      
       steps:
          - checkout
          - save_cache:
@@ -39,7 +39,9 @@ jobs:
                - v1-nodecache-
 
          #- run: sudo npm prune    
-         - run: sudo npm install
+         - run: 
+            name: update-npm
+            command: 'sudo npm install'
       
          #store cache dependencies
          - save_cache:
