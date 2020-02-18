@@ -41,7 +41,7 @@ jobs:
          #- run: sudo npm prune    
          - run: 
             name: update-npm
-            command: 'npm install'
+            command: 'sudo npm install'
       
          #store cache dependencies
          - save_cache:
