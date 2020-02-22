@@ -36,17 +36,18 @@
                             deferred.resolve(data);
                             return null;
                         } else {
-                            throw new Error("Movie IMDB Not Found");
+                            deferred.reject("Movie IMDB Not Found");
                         }
                     },
                         function(err) {
                             deferred.reject(err);
-                        }).then(function(data) {deferred.resolve(data)},
-                            function(err) {
-                                win.error(err+" "+_data.imdb_id);
-                                Database.deleteBookmark(_data.imdb_id);
-                                deferred.resolve(_data);
-                            });
+                        })
+                    .then(function(data) { deferred.resolve(data) },
+                        function(err) {
+                            win.error(err + " " + _data.imdb_id);
+                            Database.deleteBookmark(_data.imdb_id);
+                            deferred.resolve(_data);
+                        });
             } else {
                 // its a tv show
                 var _data = null;
