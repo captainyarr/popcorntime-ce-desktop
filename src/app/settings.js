@@ -2,7 +2,8 @@ var Q = require('q'),
     os = require('os'),
     path = require('path'),
     _ = require('underscore'),
-    data_path = require('nw.gui').App.dataPath;
+    data_path = require('nw.gui').App.dataPath,
+    axios = require('axios');
 
 /** Default settings **/
 var Settings = {};
@@ -131,7 +132,7 @@ Settings.ytsAPI = [{
 }, {
     url: 'http://yts.ag/',
     strictSSL: true
-},{
+}, {
     url: 'https://movies.api-fetch.website/',
     strictSSL: true
 }];
@@ -148,7 +149,10 @@ Settings.updateEndpoint = {
     }]
 };
 
-Settings.trackersList = ['https://raw.githubusercontent.com/ngosang/trackerslist/master/trackers_all_udp.txt'];
+Settings.trackersList = [
+    'https://raw.githubusercontent.com/ngosang/trackerslist/master/trackers_best.txt',
+    'https://raw.githubusercontent.com/ngosang/trackerslist/master/trackers_all_ws.txt'
+];
 
 Settings.trackers = [
     'udp://glotorrents.pw:6969/announce',
@@ -161,7 +165,6 @@ Settings.trackers = [
     'udp://tracker.opentrackr.org:1337/announce',
     'udp://tracker.pirateparty.gr:6969/announce',
     'udp://tracker.tiny-vps.com:6969/announce',
-    'udp://tracker.vanitycore.co:6969/announce',
     'udp://exodus.desync.com:6969/announce',
     'udp://p4p.arenabg.ch:1337',
     'udp://open.demonii.com:1337/announce',
@@ -170,9 +173,7 @@ Settings.trackers = [
     'udp://p4p.arenabg.com:1337',
     'https://tracker.bt-hash.com:443/announce',
     'http://explodie.org:6969/announce',
-    'wss://tracker.openwebtorrent.com',
-    'wss://tracker.btorrent.xyz',
-    'wss://tracker.fastcast.nz'
+    'wss://tracker.openwebtorrent.com'
 ];
 
 // App Settings
@@ -228,9 +229,9 @@ var AdvSettings = {
 
     set: function(variable, newValue) {
         Database.writeSetting({
-                key: variable,
-                value: newValue
-            })
+            key: variable,
+            value: newValue
+        })
             .then(function() {
                 Settings[variable] = newValue;
             });
@@ -397,8 +398,8 @@ var AdvSettings = {
             var cacheDb = openDatabase('cachedb', '', 'Cache database', 50 * 1024 * 1024);
 
             cacheDb.transaction(function(tx) {
-                tx.executeSql('DELETE FROM subtitle',[], function(_, result) {});
-                tx.executeSql('DELETE FROM metadata',[], function(_, result) {});
+                tx.executeSql('DELETE FROM subtitle', [], function(_, result) { });
+                tx.executeSql('DELETE FROM metadata', [], function(_, result) { });
             });
 
             // Add an upgrade flag
@@ -406,5 +407,22 @@ var AdvSettings = {
         }
         AdvSettings.set('version', currentVersion);
         AdvSettings.set('releaseName', gui.App.manifest.releaseName);
+    },
+
+    updateTrackers: async function() {
+
+        win.info('Update Trackers');
+        Settings.trackersList.forEach(async function(item) {
+            //win.debug('Tracker Started: '+item);
+            var trackers;
+            try {
+                const response = await axios.get(item);
+                trackers = response.data.split("\n\n");
+                Settings.trackers = _.union(Settings.trackers, trackers);
+                win.debug('Trackers Added: '+item);
+            } catch (error) {
+                win.error(error);
+            }
+        })
     },
 };
