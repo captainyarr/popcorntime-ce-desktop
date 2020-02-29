@@ -211,6 +211,7 @@ var initApp = function() {
 };
 
 App.addInitializer(function(options) {
+    AdvSettings.updateTrackers();
     initTemplates()
         .then(initApp);
 });
