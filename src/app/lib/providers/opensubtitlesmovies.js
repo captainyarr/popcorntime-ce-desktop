@@ -175,12 +175,13 @@
             _.map(imdbIds, function(id) {
                 var deferred = Q.defer();
                 setTimeout(function() {
-                    //win.debug("Search Start: "+id);
+                    win.debug("Search Start: "+id);
                     OS.search({
                         imdbid: id,
                         gzip: false
                     }).then(subtitles => {
                         //win.debug("OS:Subtitles: "+JSON.stringify(subtitles));
+                        win.debug("Search End: "+id);
                         if (subtitles) {
                             deferred.resolve({
                                 [id]: subtitles
