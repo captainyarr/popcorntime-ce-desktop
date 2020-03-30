@@ -69,7 +69,7 @@
         "tar": "^5.0.5",
         "temp": "^0.9.1",
         "torrent-tracker-health": "git+https://github.com/PTCE-Public/torrent-tracker-health.git",
-        "underscore": "1.9.2",
+        "underscore": "1.10.0",
         "upnp-mediarenderer-client": "^1.2.1",
         "urijs": "^1.19.2",
         "webtorrent": "^0.107.17",
