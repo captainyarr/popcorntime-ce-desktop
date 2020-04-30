@@ -33,7 +33,7 @@
     "dependencies": {
         "adm-zip": "0.4.13",
         "airplay-js": "^0.3.0",
-        "ajv": "6.10.2",
+        "ajv": "6.12.2",
         "async": "^3.0.1",
         "axios": "^0.19.2",
         "chromecast-js": "git+https://github.com/captainyarr/chromecast-js.git",
