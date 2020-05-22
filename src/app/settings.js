@@ -118,24 +118,29 @@ Settings.opensubtitlesAuthenticated = false;
 Settings.opensubtitlesUsername = "";
 Settings.opensubtitlesPassword = "";
 
-Settings.tvAPI = [{
-    url: 'https://api-fetch.website/tv/',
+Settings.defaultTvAPI = [{
+    url: 'https://tv-v2.api-fetch.sh/',
     strictSSL: true
 }, {
-    url: 'https://tv-v2.api-fetch.website',
+    url: 'https://tv-v2.api-fetch.am/',
+    strictSSL: true
+}, {
+    url: 'https://tv-v2.api-fetch.website/',
     strictSSL: true
 }];
 
-Settings.ytsAPI = [{
+Settings.tvAPI = Settings.defaultTvAPI.slice(0);
+
+
+Settings.defaultMovieAPI = [{
     url: 'http://yts.am/',
     strictSSL: true
 }, {
     url: 'http://yts.ag/',
     strictSSL: true
-}, {
-    url: 'https://movies.api-fetch.website/',
-    strictSSL: true
 }];
+
+Settings.ytsAPI = Settings.defaultMovieAPI.slice(0);
 
 Settings.updateEndpoint = {
     url: '',//'http://popcorntime.ag/',
@@ -408,9 +413,9 @@ var AdvSettings = {
             var trackers;
             try {
                 const response = await axios.get(item);
-                trackers = response.data.split("\n\n").filter(function(value,index,arr){ return value != ""});
+                trackers = response.data.split("\n\n").filter(function(value, index, arr) { return value != "" });
                 Settings.trackers = _.union(Settings.trackers, trackers);
-                win.debug('Trackers Added: '+item);
+                win.debug('Trackers Added: ' + item);
             } catch (error) {
                 win.error(error);
             }

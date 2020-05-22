@@ -4983,6 +4983,7 @@ body,
     .episode-info {
         width: 46%;
     }
+
     .tabs-episodes {
         width: 38%;
     }
@@ -4992,12 +4993,15 @@ body,
     .episode-info {
         width: 36%;
     }
+
     .tabs-episodes {
         width: 47%;
     }
+
     .episode-info-title {
         font-size: 18px;
     }
+
     .episode-info-number {
         top: 36px;
     }
@@ -6166,24 +6170,25 @@ body,
     -webkit-transition: opacity 0.1s ease-in;
     transition: opacity 0.1s ease-in;
 }
+
 .torrent-collection-container .content .onlinesearch .engine-selector div#kat-icon {
-  background: url("../images/icons/kickasstorrents.png");
-  -webkit-background-size: contain;
-  background-size: contain;
+    background: url("../images/icons/kickasstorrents.png");
+    -webkit-background-size: contain;
+    background-size: contain;
 }
 
 .torrent-collection-container .content .onlinesearch .engine-selector div#strike-icon {
-  -webkit-filter: brightness(1);
-  background: url("../images/icons/getstrike.png");
-  -webkit-background-size: contain;
-  background-size: contain;
+    -webkit-filter: brightness(1);
+    background: url("../images/icons/getstrike.png");
+    -webkit-background-size: contain;
+    background-size: contain;
 }
 
 .torrent-collection-container .content .onlinesearch .engine-selector div#rarbg-icon {
-  -webkit-filter: brightness(1);
-  background: url("../images/icons/rarbg.png");
-  -webkit-background-size: contain;
-  background-size: contain;
+    -webkit-filter: brightness(1);
+    background: url("../images/icons/rarbg.png");
+    -webkit-background-size: contain;
+    background-size: contain;
 }
 
 .torrent-collection-container .content .onlinesearch .engine-selector div.active {
@@ -6875,6 +6880,20 @@ body,
     padding-right: 8px;
 }
 
+.settings-container-contain .settings-container #connection .reset-ytsAPI {
+    font-size: 13px;
+    color: #939597;
+    -webkit-transition: all 0.5s;
+    transition: all 0.5s;
+}
+
+.settings-container-contain .settings-container #connection .reset-ytsAPI:hover {
+    cursor: pointer;
+    color: #2468cc;
+    -webkit-transition: all 0.5s;
+    transition: all 0.5s;
+}
+
 .settings-container-contain .settings-container #connection .reset-tvAPI {
     font-size: 13px;
     color: #8a8b8e;
@@ -7219,6 +7238,7 @@ body,
         -webkit-transform: rotate(0deg);
         transform: rotate(0deg);
     }
+
     100% {
         -webkit-transform: rotate(360deg);
         transform: rotate(360deg);
@@ -7230,6 +7250,7 @@ body,
         -webkit-transform: rotate(0deg);
         transform: rotate(0deg);
     }
+
     100% {
         -webkit-transform: rotate(360deg);
         transform: rotate(360deg);
@@ -7241,6 +7262,7 @@ body,
         -webkit-transform: rotate(0deg);
         transform: rotate(0deg);
     }
+
     100% {
         -webkit-transform: rotate(360deg);
         transform: rotate(360deg);
@@ -7252,6 +7274,7 @@ body,
         -webkit-transform: rotate(0deg);
         transform: rotate(0deg);
     }
+
     100% {
         -webkit-transform: rotate(360deg);
         transform: rotate(360deg);
