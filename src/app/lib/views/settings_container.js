@@ -132,16 +132,10 @@
         },
 
         resetMovieAPI: function() {
-            var value = [{
-                    url: 'http://yts.am/',
-                    strictSSL: true
-                },
-                {
-                    url: 'https://yts.ag/',
-                    strictSSL: true
-                }
-            ];
+            var value = App.settings['defaultMovieAPI'].slice(0);
+
             App.settings['ytsAPI'] = value;
+
             //save to db
             App.db.writeSetting({
                 key: 'ytsAPI',
@@ -154,14 +148,10 @@
         },
 
         resetTVShowAPI: function() {
-            var value = [{
-                url: 'https://api-fetch.website/tv/',
-                strictSSL: true
-            }, {
-                url: 'http://eztvapi.ml/',
-                strictSSL: true
-            }];
+            var value = App.settings['defaultTvAPI'].slice(0);
+
             App.settings['tvAPI'] = value;
+
             //save to db
             App.db.writeSetting({
                 key: 'tvAPI',
@@ -219,10 +209,15 @@
                     if (value.substr(0, 8) !== 'https://' && value.substr(0, 7) !== 'http://') {
                         value = 'http://' + value;
                     }
-                    value = [{
+
+                    App.settings['ytsAPI'] = App.settings['defaultMovieAPI'].slice(0);
+
+                    App.settings['ytsAPI'].unshift({
                         url: value,
                         strictSSL: value.substr(0, 8) === 'https://'
-                    }];
+                    });
+
+                    value = App.settings['ytsAPI'];
                     break;
                 case 'tvAPI':
                     value = field.val();
@@ -232,11 +227,17 @@
                     if (value.substr(0, 8) !== 'https://' && value.substr(0, 7) !== 'http://') {
                         value = 'http://' + value;
                     }
-                    value = [{
+
+                    App.settings['tvAPI'] = App.settings['defaultTvAPI'].slice(0);
+
+                    App.settings['tvAPI'].unshift({
                         url: value,
                         strictSSL: value.substr(0, 8) === 'https://'
-                    }];
+                    });
+                    
+                    value = App.settings['tvAPI'];
                     break;
+
                 case 'opensubtitlesUsername':
                     value = field.val();
                     break;

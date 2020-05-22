@@ -129,7 +129,8 @@ Settings.defaultTvAPI = [{
     strictSSL: true
 }];
 
-Settings.tvAPI = Settings.defaultTvAPI;
+Settings.tvAPI = Settings.defaultTvAPI.slice(0);
+
 
 Settings.defaultMovieAPI = [{
     url: 'http://yts.am/',
@@ -139,7 +140,7 @@ Settings.defaultMovieAPI = [{
     strictSSL: true
 }];
 
-Settings.ytsAPI = Settings.defaultMovieAPI;
+Settings.ytsAPI = Settings.defaultMovieAPI.slice(0);
 
 Settings.updateEndpoint = {
     url: '',//'http://popcorntime.ag/',
