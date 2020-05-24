@@ -33,6 +33,13 @@
             tracker_list += '&tr=' + item;
         });
 
+        function check_trailer(movie){
+            if(movie.yt_trailer_code && movie.yt_trailer_code != ""){
+                return  'https://www.youtube.com/watch?v=' + movie.yt_trailer_code
+            }else
+                return null;
+        }
+
         var results = _.chain(data.movies).map(function(movie) {
             return {
                 type: 'movie',
@@ -50,7 +57,7 @@
                 cover: movie.medium_cover_image, //movie.large_cover_image,
                 backdrop: movie.background_image,
                 synopsis: movie.synopsis,
-                trailer: 'https://www.youtube.com/watch?v=' + movie.yt_trailer_code || false,
+                trailer: check_trailer(movie),
                 google_video: movie.google_video || false,
                 certification: movie.mpa_rating,
                 torrents: _.reduce(movie.torrents, function(torrents, torrent) {
