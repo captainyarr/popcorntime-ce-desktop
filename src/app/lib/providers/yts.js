@@ -136,7 +136,7 @@
         var defer = Q.defer();
 
 
-        function getAxios(index) {
+        function get(index) {
 
             //Convert to axios
             var options = {
@@ -154,7 +154,7 @@
                     if (index + 1 >= Settings.ytsAPI.length) {
                         return defer.reject(err || 'Status Code is above 400');
                     } else {
-                        getAxios(index + 1);
+                        get(index + 1);
                     }
                     return;
                 } else if (!res.data || res.data.status === 'error') {
@@ -183,46 +183,15 @@
                 if (index + 1 >= Settings.ytsAPI.length) {
                     return defer.reject(error.message || 'Status Code is above 400');
                 } else {
-                    getAxios(index + 1);
+                    get(index + 1);
                 }
                 return;
             });
         }
 
-        function get(index) {
-
-            var options = {
-                uri: Settings.ytsAPI[index].url + 'api/v2/list_movies.json',
-                qs: params,
-                json: true,
-                timeout: 10000
-            };
-
-            win.info("Request to YTS API: " + options.uri);
-
-            var req = jQuery.extend(true, {}, Settings.ytsAPI[index], options);
-
-            request(req, function(err, res, data) {
-                if (err || res.statusCode >= 400 || (data && !data.data)) {
-                    win.warn('YTS API endpoint \'%s\' failed.', Settings.ytsAPI[index].url);
-                    if (index + 1 >= Settings.ytsAPI.length) {
-                        return defer.reject(err || 'Status Code is above 400');
-                    } else {
-                        get(index + 1);
-                    }
-                    return;
-                } else if (!data || data.status === 'error') {
-                    err = data ? data.status_message : 'No data returned';
-                    return defer.reject(err);
-                } else {
-                    return defer.resolve(format(data.data));
-                }
-            });
-        }
-
         //Get Movie list via request
         //get(0);
-        getAxios(0);
+        get(0);
 
         return defer.promise;
     };
