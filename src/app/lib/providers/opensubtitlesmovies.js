@@ -2,7 +2,6 @@
     'use strict';
 
     var _ = require('underscore');
-    var request = require('request');
     var Q = require('q');
     var OpenSubtitlesApi = require('opensubtitles-api');
 
