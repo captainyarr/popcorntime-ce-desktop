@@ -1,7 +1,8 @@
 (function (App) {
     'use strict';
 
-    var torrentHealth = require('torrent-tracker-health');
+    //var torrentHealth = require('torrent-tracker-health');
+    var torrentHealth = require('./lib/util/torrent-tracker-health');
     var cancelTorrentHealth = function () {};
     var torrentHealthRestarted = null;
 
@@ -853,6 +854,7 @@
             if (torrent.substring(0, 8) === 'magnet:?') {
                 // if 'magnet:?' is because TVApi sends back links, not magnets
 
+                //TODO: Update torrent magnet with full tracker list
                 torrent = torrent.split('&tr')[0] + '&tr=udp://tracker.openbittorrent.com:80/announce' + '&tr=udp://open.demonii.com:1337/announce' + '&tr=udp://tracker.coppersurfer.tk:6969';
 
                 torrentHealth(torrent, {
