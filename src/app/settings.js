@@ -87,7 +87,7 @@ Settings.pluginGoogleDrive = true;
 Settings.pluginHTML5 = true;
 Settings.pluginVLC = true;
 Settings.pluginRARBGsearch = true;
-Settings.pluginKATsearch = true;
+Settings.pluginKATsearch = false;
 Settings.pluginFakeSkan = false;
 
 // Features
