@@ -1,4 +1,4 @@
-(function (App) {
+(function(App) {
     'use strict';
     var peerflix = require('peerflix'),
         Q = require('q'),
@@ -18,18 +18,18 @@
     var tpmDir = path.join(App.settings.tmpLocation, 'TorrentCache'),
         MAGNET_RESOLVE_TIMEOUT = 60 * 1000; // let's give max a minute to resolve a magnet uri
 
-    var mod = function () {
-            this._checkTmpDir();
-        },
+    var mod = function() {
+        this._checkTmpDir();
+    },
         pmod = mod.prototype;
 
-    pmod.getTmpDir = function () {
+    pmod.getTmpDir = function() {
         return tpmDir;
     };
 
-    pmod.clearTmpDir = function () {
+    pmod.clearTmpDir = function() {
         var self = this;
-        rimraf(tpmDir, function (err) {
+        rimraf(tpmDir, function(err) {
             if (err) {
                 win.error('TorrentCache.clearTmpDir()', err);
             }
@@ -37,15 +37,15 @@
         });
     };
 
-    pmod._checkTmpDir = function () {
-        mkdirp(tpmDir, function (err) {
+    pmod._checkTmpDir = function() {
+        mkdirp(tpmDir, function(err) {
             if (err) {
                 win.error('TorrentCache._checkTmpDir()', err);
             }
         });
     };
 
-    pmod.getType = function (torrent) {
+    pmod.getType = function(torrent) {
         if (typeof torrent === 'string') {
             if (torrent.substring(0, 8) === 'magnet:?') {
                 return 'magnet';
@@ -60,7 +60,7 @@
         return 'unknown';
     };
 
-    pmod.resolve = function (torrent) {
+    pmod.resolve = function(torrent) {
         var type = this.getType(torrent);
         stateModel = new Backbone.Model({
             state: 'Resolving..',
@@ -71,37 +71,37 @@
         });
         App.vent.trigger('stream:started', stateModel);
         switch (type) {
-        case 'torrenturl':
-        case 'torrent':
-        case 'magnet':
-            this.checkCache(torrent).then(function (result) {
-                var filePath = result[0],
-                    exists = result[1];
-                if (exists) {
-                    return handlers.handleSuccess(filePath);
-                }
-                // try to store this torrent into our cache
-                handlers['handle' + type](filePath, torrent).then(handlers.handleSuccess);
-            }.bind(this));
-            break;
-        default:
-            handlers.handleError('TorrentCache.resolve(): Unknown torrent type', torrent);
-            return false;
+            case 'torrenturl':
+            case 'torrent':
+            case 'magnet':
+                this.checkCache(torrent).then(function(result) {
+                    var filePath = result[0],
+                        exists = result[1];
+                    if (exists) {
+                        return handlers.handleSuccess(filePath);
+                    }
+                    // try to store this torrent into our cache
+                    handlers['handle' + type](filePath, torrent).then(handlers.handleSuccess);
+                }.bind(this));
+                break;
+            default:
+                handlers.handleError('TorrentCache.resolve(): Unknown torrent type', torrent);
+                return false;
         }
         return true;
     };
 
-    pmod._getKey = function (name) {
+    pmod._getKey = function(name) {
         return Common.md5(path.basename(name));
     };
 
-    pmod.checkCache = function (torrent) {
+    pmod.checkCache = function(torrent) {
         var deferred = Q.defer(),
             name = this._getKey(torrent) + '.torrent',
             targetPath = path.join(tpmDir, name);
 
         // check if file already exists
-        fs.readdir(tpmDir, function (err, files) {
+        fs.readdir(tpmDir, function(err, files) {
             if (err) {
                 handlers.handleError('TorrentCache.checkCache() readdir:' + err, torrent);
                 return deferred.reject(err);
@@ -111,7 +111,7 @@
                 return deferred.resolve([targetPath, false]);
             }
             // check if it actually is a file, not dir..
-            fs.lstat(targetPath, function (err, stats) {
+            fs.lstat(targetPath, function(err, stats) {
                 if (err) {
                     handlers.handleError('TorrentCache.checkCache() lstat:' + err, torrent);
                     return deferred.reject(err);
@@ -126,15 +126,15 @@
         return deferred.promise;
     };
 
-    pmod.stop = function () {
+    pmod.stop = function() {
         stateModel = null;
     };
 
     var handlers = {
-        handletorrent: function (filePath, torrent) {
+        handletorrent: function(filePath, torrent) {
             // just copy the torrent file
             var deferred = Q.defer();
-            Common.copyFile(torrent, filePath, function (err) {
+            Common.copyFile(torrent, filePath, function(err) {
                 if (err) {
                     return handlers.handleError('TorrentCache.handletorrent() error: ' + err, torrent);
                 }
@@ -142,12 +142,12 @@
             });
             return deferred.promise;
         },
-        handletorrenturl: function (filePath, torrent) {
+        handletorrenturl: function(filePath, torrent) {
             // try to download the file
             var deferred = Q.defer(),
                 safeTimeoutID = null,
                 doneReached = false;
-            var done = function (error) {
+            var done = function(error) {
                 clearTimeout(safeTimeoutID);
                 if (doneReached) {
                     return;
@@ -157,7 +157,7 @@
                     // try unlinking the file in case it was created
                     try {
                         fs.unlink(filePath);
-                    } catch (e) {}
+                    } catch (e) { }
                     return handlers.handleError('TorrentCache.handletorrenturl() error: ' + error, torrent);
                 }
                 deferred.resolve(filePath);
@@ -175,38 +175,38 @@
                         }
                     },
                     req = request(params)
-                    .on('response', function (resp) {
-                        if (resp.statusCode >= 400) {
-                            return done('Invalid status: ' + resp.statusCode);
-                        }
-                        switch (resp.headers['content-encoding']) {
-                        case 'gzip':
-                            resp.pipe(zlib.createGunzip()).pipe(ws);
-                            break;
-                        case 'deflate':
-                            resp.pipe(zlib.createInflate()).pipe(ws);
-                            break;
-                        default:
-                            resp.pipe(ws);
-                            break;
-                        }
-                        ws
-                            .on('error', done)
-                            .on('close', done);
-                    })
-                    .on('error', done)
-                    .on('end', function () {
-                        // just to be on the safe side here, set 'huge' amount of time, close event should be triggered on ws long before this one if all goes good.
-                        safeTimeoutID = setTimeout(function () {
-                            done('Waiting for stream to end error: timed out.');
-                        }, 5 * 1000);
-                    });
+                        .on('response', function(resp) {
+                            if (resp.statusCode >= 400) {
+                                return done('Invalid status: ' + resp.statusCode);
+                            }
+                            switch (resp.headers['content-encoding']) {
+                                case 'gzip':
+                                    resp.pipe(zlib.createGunzip()).pipe(ws);
+                                    break;
+                                case 'deflate':
+                                    resp.pipe(zlib.createInflate()).pipe(ws);
+                                    break;
+                                default:
+                                    resp.pipe(ws);
+                                    break;
+                            }
+                            ws
+                                .on('error', done)
+                                .on('close', done);
+                        })
+                        .on('error', done)
+                        .on('end', function() {
+                            // just to be on the safe side here, set 'huge' amount of time, close event should be triggered on ws long before this one if all goes good.
+                            safeTimeoutID = setTimeout(function() {
+                                done('Waiting for stream to end error: timed out.');
+                            }, 5 * 1000);
+                        });
             } catch (e) {
                 done(e);
             }
             return deferred.promise;
         },
-        handlemagnet: function (filePath, torrent) {
+        handlemagnet: function(filePath, torrent) {
             clearTimeout(safeMagetTID);
 
             var deferred = Q.defer(),
@@ -218,13 +218,15 @@
             // lets wait max a minute
             // because engine does not report any error on wrong magnet links
             /*jshint -W120 */
-            var currentTID = safeMagetTID = setTimeout(function () {
-                engine.destroy();
+            var currentTID = safeMagetTID = setTimeout(function() {
+                //engine.destroy();
                 handlers.handleError('TorrentCache.handlemagnet() error: timed out', torrent);
+                resolve();
+                destroyEngine();
             }, MAGNET_RESOLVE_TIMEOUT);
 
 
-            var resolve = function () {
+            var resolve = function() {
                 // maybe somehow new magnet was pasted in while loading this one
                 if (currentTID !== safeMagetTID) {
                     return;
@@ -234,17 +236,17 @@
                 }
                 deferred.resolve(filePath);
             };
-            var destroyEngine = function () {
+            var destroyEngine = function() {
                 engine.destroy();
                 engine = null;
             };
 
-            engine.on('ready', function () {
+            engine.on('ready', function() {
                 var resolvedTorrentPath = engine.path;
                 clearTimeout(currentTID);
                 if (resolvedTorrentPath) {
                     // copy resolved path to cache so it will be awailable next time
-                    Common.copyFile(resolvedTorrentPath + '.torrent', filePath, function (err) {
+                    Common.copyFile(resolvedTorrentPath + '.torrent', filePath, function(err) {
                         if (err) {
                             error = err;
                         }
@@ -259,7 +261,7 @@
 
             return deferred.promise;
         },
-        handleSuccess: function (filePath) {
+        handleSuccess: function(filePath) {
             win.debug('TorrentCache.handleSuccess() ' + filePath + ' stopped: ' + !stateModel);
             if (!stateModel) {
                 return;
@@ -270,11 +272,11 @@
             });
             App.vent.trigger('stream:start', torrentStart);
         },
-        handleError: function (err, torrent) {
+        handleError: function(err, torrent) {
             win.error(err, torrent);
             handlers.updateState('Error resolving torrent.');
         },
-        updateState: function (state) {
+        updateState: function(state) {
             if (stateModel) {
                 stateModel.set('state', state);
             }
@@ -286,7 +288,7 @@
 
     App.vent.on('torrentcache:stop', singleton.stop);
 
-    App.Providers.TorrentCache = function () {
+    App.Providers.TorrentCache = function() {
         return singleton;
     };
 

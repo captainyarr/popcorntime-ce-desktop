@@ -104,6 +104,12 @@
             var self = this;
             var state = this.model.get('state');
             var streamInfo = this.model.get('streamInfo');
+
+            if (typeof streamInfo == 'undefined'){
+                win.error('streamInfo is not defined');
+                return this.cancelStreaming();
+            }
+
             win.info('Loading torrent:', state);
 
             this.checkFreeSpace(this.model.get('streamInfo').get('size'));
