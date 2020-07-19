@@ -81,7 +81,11 @@
                         return handlers.handleSuccess(filePath);
                     }
                     // try to store this torrent into our cache
-                    handlers['handle' + type](filePath, torrent).then(handlers.handleSuccess);
+                    handlers['handle' + type](filePath, torrent)
+                    .then(handlers.handleSuccess)
+                    .catch(function(error){
+                        handlers.handleError(error,torrent);
+                    });
                 }.bind(this));
                 break;
             default:
@@ -91,8 +95,11 @@
         return true;
     };
 
-    pmod._getKey = function(name) {
-        return Common.md5(path.basename(name));
+    pmod._getKey = function(name) {w
+        if (name.substring(0, 8) === 'magnet:?')
+            return Common.md5(name);
+        else
+            return Common.md5(path.basename(name));
     };
 
     pmod.checkCache = function(torrent) {
@@ -220,7 +227,8 @@
             /*jshint -W120 */
             var currentTID = safeMagetTID = setTimeout(function() {
                 //engine.destroy();
-                handlers.handleError('TorrentCache.handlemagnet() error: timed out', torrent);
+                //handlers.handleError('TorrentCache.handlemagnet() error: timed out', torrent);
+                error = 'TorrentCache.handlemagnet() error: timed out';
                 resolve();
                 destroyEngine();
             }, MAGNET_RESOLVE_TIMEOUT);
@@ -232,7 +240,8 @@
                     return;
                 }
                 if (error) {
-                    return handlers.handleError('TorrentCache.handlemagnet() error: ' + error, torrent);
+                    //handlers.handleError('TorrentCache.handlemagnet() error: ' + error, torrent);
+                    return deferred.reject('TorrentCache.handlemagnet() error: ' + error);
                 }
                 deferred.resolve(filePath);
             };
@@ -262,10 +271,13 @@
             return deferred.promise;
         },
         handleSuccess: function(filePath) {
-            win.debug('TorrentCache.handleSuccess() ' + filePath + ' stopped: ' + !stateModel);
+
             if (!stateModel) {
                 return;
             }
+
+            win.debug('TorrentCache.handleSuccess() ' + filePath + ' stopped: ' + !stateModel);
+
             var torrentStart = new Backbone.Model({
                 torrent: filePath,
                 is_file: true
@@ -282,7 +294,6 @@
             }
         }
     };
-
 
     var singleton = new mod();
 
