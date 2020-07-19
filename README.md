@@ -1,9 +1,11 @@
-[![CircleCI](https://circleci.com/gh/captainyarr/popcorntime-ce-desktop.svg?style=svg)](https://app.circleci.com/pipelines/github/captainyarr/popcorntime-ce-desktop)
+[![CircleCI](https://circleci.com/gh/captainyarr/popcorntime-ce-desktop.svg?style=shield)](https://app.circleci.com/pipelines/github/captainyarr/popcorntime-ce-desktop)
 
 
 # [Popcorn Time Community](https://github.com/PopcornTime-CE/desktop)
 
 [![Join the chat at https://gitter.im/PopcornTime-CE/desktop](https://badges.gitter.im/PopcornTime-CE/desktop.svg)](https://gitter.im/PopcornTime-CE/desktop?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
+[![CircleCI](https://circleci.com/gh/captainyarr/popcorntime-ce-desktop.svg?style=shield)](https://app.circleci.com/pipelines/github/captainyarr/popcorntime-ce-desktop)
 
 Allow anyone to easily watch their favorite movies, shows, and anime.
 
