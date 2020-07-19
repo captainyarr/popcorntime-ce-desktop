@@ -1,4 +1,5 @@
-[Warning! Popcorntime.sh threatens your computer privacy.](http://popcorn-time.is/official-statement.html#Malware2)
+[![CircleCI](https://circleci.com/gh/captainyarr/popcorntime-ce-desktop.svg?style=svg)](https://app.circleci.com/pipelines/github/captainyarr/popcorntime-ce-desktop)
+
 
 # [Popcorn Time Community](https://github.com/PopcornTime-CE/desktop)
 
