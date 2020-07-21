@@ -95,7 +95,7 @@
         return true;
     };
 
-    pmod._getKey = function(name) {w
+    pmod._getKey = function(name) {
         if (name.substring(0, 8) === 'magnet:?')
             return Common.md5(name);
         else
