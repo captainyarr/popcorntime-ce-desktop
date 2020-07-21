@@ -1,16 +1,27 @@
 (function(App) {
     'use strict';
 
-    var request = require('request'),
-        URI = require('urijs'),
-        Q = require('q'),
-        _ = require('underscore'),
-        inherits = require('util').inherits;
+    var request = require('request');
+    var URI = require('urijs');
+    var Q = require('q');
+    var _ = require('underscore');
+    var inherits = require('util').inherits;
+    var ClientOAuth2 = require('client-oauth2');
+
 
     var API_ENDPOINT = URI('https://api.trakt.tv'),
         CLIENT_ID = '3cdac1a63e01706452e6d52c70264cb4c9fe2d95d4c8d315521081c9f14c82ad',
         CLIENT_SECRET = '5a22c1a5da51bb6f8dcdd2ab57f708c6bccf0e9915e67299d1eeab77ddfd7713',
         REDIRECT_URI = 'urn:ietf:wg:oauth:2.0:oob';
+
+    var traktAuth = new ClientOAuth2({
+        clientId: CLIENT_ID,
+        clientSecret: CLIENT_SECRET,
+        accessTokenUri: 'https://api.trakt.tv/oauth/token',
+        authorizationUri: 'https://api.trakt.tv/oauth/authorize',
+        redirectUri: REDIRECT_URI
+    })
+
 
     function TraktTv() {
         App.Providers.CacheProviderV2.call(this, 'metadata');
@@ -440,14 +451,14 @@
             win.debug("trakt:OAUTH: " + OAUTH_URI + '&redirect_uri=' + encodeURIComponent(REDIRECT_URI));
             gui.App.addOriginAccessWhitelistEntry(API_URI, 'app', 'host', true);
             window.loginWindow = gui.Window.open(OAUTH_URI + '&redirect_uri=' + encodeURIComponent(REDIRECT_URI), {
-                    position: 'center',
-                    focus: true,
-                    title: 'Trakt.tv',
-                    icon: 'src/app/images/icon.png',
-                    resizable: false,
-                    width: 600,
-                    height: 600
-                },
+                position: 'center',
+                focus: true,
+                title: 'Trakt.tv',
+                icon: 'src/app/images/icon.png',
+                resizable: false,
+                width: 600,
+                height: 600
+            },
                 function(new_win) {
                     // And listeners to new window's focus event
                     new_win.on('loaded', function() {
@@ -456,7 +467,7 @@
 
                         if (url.indexOf('&') === -1 && url.indexOf('auth/signin') === -1) {
                             if (url.indexOf('oauth/authorize/') !== -1) {
-                                url = url.split('/');
+                                url = url.split('/native?code=');
                                 url = url[url.length - 1];
                                 new_win.close();
                             } else {
@@ -465,7 +476,7 @@
                         } else {
                             url = false;
                         }
-                        win.debug("Trakt Authorize Code:" + url);
+                        win.debug("Trakt Authorize Code: " + url);
                     });
                     new_win.on('closed', function() {
                         if (url) {
@@ -516,7 +527,12 @@
             win.debug("Trakt Revoke Access Token");
 
             var defer = Q.defer();
-            var postVariables = "token=" + Settings.traktToken;
+            //var postVariables = "token=" + Settings.traktToken;
+            var postVariables = {
+                token: Settings.traktToken,
+                client_id: CLIENT_ID,
+                client_secret: CLIENT_SECRET
+            };
 
             var requestUri = API_ENDPOINT.clone()
                 .segment("oauth/revoke");
@@ -525,10 +541,7 @@
                 method: 'POST',
                 url: requestUri.toString(),
                 headers: {
-                    'Content-Type': 'application/x-www-form-urlencode',
-                    'Authorization': 'Bearer ' + Settings.traktToken,
-                    'trakt-api-version': '2',
-                    'trakt-api-key': CLIENT_ID
+                    'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(postVariables)
             }, function(error, response, body) {
@@ -685,7 +698,7 @@
             case 'database':
                 break;
             case 'seen':
-                /* falls through */
+            /* falls through */
             default:
                 App.Trakt.sync.addToHistory('episode', show.episode_id);
                 break;
@@ -698,7 +711,7 @@
             case 'database':
                 break;
             case 'seen':
-                /* falls through */
+            /* falls through */
             default:
                 App.Trakt.sync.removeFromHistory('episode', show.episode_id);
                 break;
@@ -721,10 +734,10 @@
                     }
                     $('.watched-toggle').addClass('selected').text(i18n.__('Seen'));
                     App.MovieDetailView.model.set('watched', true);
-                } catch (e) {}
+                } catch (e) { }
                 break;
             case 'seen':
-                /* falls through */
+            /* falls through */
             default:
                 App.Trakt.sync.addToHistory('movie', movie.imdb_id);
                 break;
@@ -737,7 +750,7 @@
             case 'database':
                 break;
             case 'seen':
-                /* falls through */
+            /* falls through */
             default:
                 App.Trakt.sync.removeFromHistory('movie', movie.imdb_id);
                 break;
