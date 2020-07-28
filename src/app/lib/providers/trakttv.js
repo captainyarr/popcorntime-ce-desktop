@@ -1,12 +1,12 @@
 (function(App) {
     'use strict';
 
-    var request = require('request');
+    const axios = require('axios');
     var URI = require('urijs');
     var Q = require('q');
     var _ = require('underscore');
     var inherits = require('util').inherits;
-    var ClientOAuth2 = require('client-oauth2');
+    const ClientOAuth2 = require('client-oauth2');
 
 
     var API_ENDPOINT = URI('https://api.trakt.tv'),
@@ -14,7 +14,7 @@
         CLIENT_SECRET = '5a22c1a5da51bb6f8dcdd2ab57f708c6bccf0e9915e67299d1eeab77ddfd7713',
         REDIRECT_URI = 'urn:ietf:wg:oauth:2.0:oob';
 
-    var traktAuth = new ClientOAuth2({
+    let traktAuth = new ClientOAuth2({
         clientId: CLIENT_ID,
         clientSecret: CLIENT_SECRET,
         accessTokenUri: 'https://api.trakt.tv/oauth/token',
@@ -96,12 +96,14 @@
 
         getVariables = getVariables || {};
 
-
         var requestUri = API_ENDPOINT.clone()
             .segment(endpoint)
             .addQuery(getVariables);
 
-        request({
+        win.debug("Trakt GET: " + requestUri.toString());
+
+        //Add Axios Version of functions
+        const options = {
             method: 'GET',
             url: requestUri.toString(),
             headers: {
@@ -110,16 +112,19 @@
                 'trakt-api-version': '2',
                 'trakt-api-key': CLIENT_ID
             }
-        }, function(error, response, body) {
-            if (error || !body) {
-                defer.reject(error);
-            } else if (response.statusCode >= 400) {
+        };
+
+        axios(options).then((response) => {
+            if (response.status >= 400) {
                 defer.resolve({});
             } else {
-                defer.resolve(Common.sanitize(JSON.parse(body)));
+                defer.resolve(Common.sanitize(response.data));
+            }
+        }).catch(function(error) {
+            if (error) {
+                defer.reject(error);
             }
         });
-
 
         return defer.promise;
     };
@@ -132,7 +137,10 @@
         var requestUri = API_ENDPOINT.clone()
             .segment(endpoint);
 
-        request({
+        win.debug("Trakt POST: " + requestUri.toString());
+
+        //Add Axios Version of functions
+        const options = {
             method: 'POST',
             url: requestUri.toString(),
             headers: {
@@ -141,18 +149,23 @@
                 'trakt-api-version': '2',
                 'trakt-api-key': CLIENT_ID
             },
-            body: JSON.stringify(postVariables)
-        }, function(error, response, body) {
-            if (error || !body) {
-                defer.reject(error);
-            } else if (response.statusCode >= 400) {
+            data: JSON.stringify(postVariables)
+        };
+
+        axios(options).then((response) => {
+            if (response.status >= 400) {
                 defer.resolve({});
             } else {
-                defer.resolve(Common.sanitize(JSON.parse(body)));
+                defer.resolve(Common.sanitize(response.data));
+            }
+        }).catch(function(error) {
+            if (error) {
+                defer.reject(error);
             }
         });
 
         return defer.promise;
+
     };
 
     TraktTv.prototype.calendars = {
@@ -439,7 +452,7 @@
             return defer.promise;
         },
         authorize: function() {
-            win.debug("trakt authorize started");
+            win.debug("Trakt authorize started");
             var defer = Q.defer();
             var url = false;
             var loginWindow;
@@ -537,25 +550,28 @@
             var requestUri = API_ENDPOINT.clone()
                 .segment("oauth/revoke");
 
-            request({
+            //Add Axios Version of functions
+            const options = {
                 method: 'POST',
                 url: requestUri.toString(),
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(postVariables)
-            }, function(error, response, body) {
-                //win.debug('Status:', response.statusCode);
-                //win.debug('Headers:', JSON.stringify(response.headers));
-                //win.debug('Response:', body);
-                if (error || !body) {
-                    defer.reject(error);
-                } else if (response.statusCode >= 400) {
+                data: JSON.stringify(postVariables)
+            };
+
+            axios(options).then((response) => {
+                if (response.status >= 400) {
                     defer.resolve({});
                 } else {
-                    defer.resolve(Common.sanitize(JSON.parse(body)));
+                    defer.resolve(Common.sanitize(response.data));
+                }
+            }).catch(function(error) {
+                if (error) {
+                    defer.reject(error);
                 }
             });
+
             return defer.promise;
         }
     };
