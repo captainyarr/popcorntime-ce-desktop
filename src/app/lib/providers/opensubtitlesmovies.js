@@ -4,10 +4,29 @@
     var _ = require('underscore');
     var Q = require('q');
     var OpenSubtitlesApi = require('opensubtitles-api');
+    const Bottleneck = require('bottleneck');
+    const {
+        performance,
+        PerformanceObserver
+    } = require('perf_hooks');
+
+    var osError = false;
+
+    let obs;
 
     //Default non-authenicated login
     var OS = new OpenSubtitlesApi({
         useragent: 'Popcorn Time v1'
+    });
+
+    const limiter = new Bottleneck({
+        reservoir: 40, // initial value
+        reservoirRefreshAmount: 40,
+        reservoirRefreshInterval: 10 * 1000, // must be divisible by 250
+
+        // also use maxConcurrent and/or minTime for safety
+        maxConcurrent: 4,
+        minTime: 250 // pick a value that makes sense for your use case
     });
 
     var TTL = 1000 * 60 * 60 * 24 * 14; // 14 Day retention
@@ -19,7 +38,7 @@
         //Login with Default Values
         this.authenticated = false;
 
-        this.authenticate(App.settings.opensubtitlesUsername,App.settings.opensubtitlesPassword);
+        this.authenticate(App.settings.opensubtitlesUsername, App.settings.opensubtitlesPassword);
 
     };
 
@@ -73,7 +92,7 @@
 
     OpenSubtitlesMovies.prototype.authenticate = function(username, password, callback) {
         win.debug("Opensubtitles Authenicate")
-        
+
         var deferred = Q.defer();
 
         //Login with Default Values
@@ -92,7 +111,7 @@
                     //win.debug(res.userinfo);
                     this.authenticated = true;
                     win.debug("OpenSubtitles API Login Successful");
-                     
+
                     ga('send', {
                         hitType: 'event',
                         eventCategory: 'OpenSubtitles',
@@ -113,7 +132,7 @@
                         hitType: 'event',
                         eventCategory: 'OpenSubtitles',
                         eventAction: 'OpenSubtitles Login Unsuccessful',
-                        eventLabel: 'OpenSubtitles: '+err 
+                        eventLabel: 'OpenSubtitles: ' + err
                     });
                     deferred.resolve(this.authenticated);
                 });
@@ -128,7 +147,7 @@
                 hitType: 'event',
                 eventCategory: 'OpenSubtitles',
                 eventAction: 'OpenSubtitles Login Anonymous',
-                eventLabel: 'OpenSubtitles Login Anonymous' 
+                eventLabel: 'OpenSubtitles Login Anonymous'
             });
             deferred.resolve(this.authenticated);
         }
@@ -146,12 +165,47 @@
             hitType: 'event',
             eventCategory: 'OpenSubtitles',
             eventAction: 'OpenSubtitles Disconnect',
-            eventLabel: 'OpenSubtitles Disconnect' 
+            eventLabel: 'OpenSubtitles Disconnect'
         });
         callback();
     };
 
+    var subtitleSearch = function(id) {
+        var deferred = Q.defer();
+
+        if (!osError) {
+            win.debug("Search Start: " + id);
+            OS.search({
+                imdbid: id,
+                gzip: false
+            }).then(subtitles => {
+                //win.debug("OS:Subtitles: "+JSON.stringify(subtitles));
+                win.debug("Search End: " + id);
+                if (subtitles) {
+                    deferred.resolve({
+                        [id]: subtitles
+                    });
+                } else {
+                    //subtitles is blank
+                    deferred.resolve({});
+                }
+            }).catch(err => {
+                win.error("OpenSubtitlesMovies API Error: " + id + " " + err);
+                validateOSError(err);
+                //subtitles is blank
+                deferred.resolve({});
+            });
+        } else {
+            //subtitles is blank
+            deferred.resolve({});
+        }
+        return deferred.promise;
+    };
+
+    const throttledsubtitleSearch = limiter.wrap(subtitleSearch);
+
     var querySubtitles = function(imdbIds) {
+        performance.mark('querySubtitles_start');
         var deferred = Q.defer();
 
         if (_.isEmpty(imdbIds)) {
@@ -160,59 +214,30 @@
             return deferred.promise;
         }
 
+        osError = false; //Clear OS error flag
+
         //win.debug("querySubtitles: " + imdbIds);
 
         //Cycle through each imdbId then return the sublist
         //Search for imdbId
-        var i = _.size(imdbIds);
-
-        if (i < 10) {
-            i = 0;
-        }
 
         return Q.all(
-            _.map(imdbIds, function(id) {
-                var deferred = Q.defer();
-                setTimeout(function() {
-                    win.debug("Search Start: "+id);
-                    OS.search({
-                        imdbid: id,
-                        gzip: false
-                    }).then(subtitles => {
-                        //win.debug("OS:Subtitles: "+JSON.stringify(subtitles));
-                        win.debug("Search End: "+id);
-                        if (subtitles) {
-                            deferred.resolve({
-                                [id]: subtitles
-                            });
-                        } else {
-                            //subtitles is blank
-                            deferred.resolve({});
-                        }
-                    }).catch(err => {
-                        win.error("OpenSubtitlesMovies API Error: "+id+" " + err);
-                        //subtitles is blank
-                        deferred.resolve({});
-                    });
-                }, 400 * (i));
-                //win.debug("Subtitle IMDB ID: " + id + " Time: "+300*i+"ms");
-                if (i > 0) {
-                    i = i - 1
-                }
-                return deferred.promise;
-            })).then(data => {
-            //Create subtitleList Array and return based on the input list
-            var subtitleList = {};
-            subtitleList.subs = {};
+            _.map(imdbIds, throttledsubtitleSearch))
+            .then(data => {
+                //Create subtitleList Array and return based on the input list
+                var subtitleList = {};
+                subtitleList.subs = {};
 
-            _.each(data, function(item) {
-                for (var name in item) {
-                    //win.debug("Subtitle IMDB ID: " + name);
-                    subtitleList.subs[name] = item[name];
-                }
+                _.each(data, function(item) {
+                    for (var name in item) {
+                        //win.debug("Subtitle IMDB ID: " + name);
+                        subtitleList.subs[name] = item[name];
+                    }
+                });
+                performance.mark('querySubtitles_end');
+                performance.measure('querySubtitles', 'querySubtitles_start', 'querySubtitles_end');
+                return subtitleList;
             });
-            return subtitleList;
-        });
     };
 
     var normalizeLangCodes = function(data) {
@@ -224,6 +249,7 @@
     };
 
     var formatForPopcorn = function(data) {
+        performance.mark('formatForPopcorn_start');
         //win.debug("formatForPopcorn:data: " + JSON.stringify(data));
         var allSubs = {};
         // Iterate each movie
@@ -248,12 +274,41 @@
         });
 
         //win.debug("Common.santize: " + JSON.stringify(Common.sanitize(allSubs)));
-
+        performance.mark('formatForPopcorn_end');
+        performance.measure('formatForPopcorn_subtitles', 'formatForPopcorn_start', 'formatForPopcorn_end');
         return Common.sanitize(allSubs);
     };
 
+    var validateOSError = function(err) {
+        //Check and process OS errors
+        switch (err.message) {
+            case 'API seems offline':
+            case '401 Unauthorized':
+                osError = true;
+                break;
+            default:
+                break;
+        }
+
+    }
+
+    var stopPerformance = function() {
+        try {
+            obs.disconnect();
+        } catch (e) {
+            win.error(e)
+        }
+    }
     OpenSubtitlesMovies.prototype.query = function(ids) {
-        return querySubtitles(ids).then(formatForPopcorn);
+        obs = new PerformanceObserver((list, observer) => {
+            const entries = list.getEntries();
+            entries.forEach((entry) => {
+                win.debug('Performance Test: ' + entry.name + ' Duration: ' + entry.duration + 'ms');
+            });
+        });
+        obs.observe({ entryTypes: ['measure'], buffered: true });
+
+        return querySubtitles(ids).then(formatForPopcorn).finally(stopPerformance);
     };
 
     App.Providers.OpenSubtitlesMovies = OpenSubtitlesMovies;
