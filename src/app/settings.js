@@ -169,6 +169,8 @@ Settings.trackers = [
     'udp://exodus.desync.com:6969/announce',
     'https://tracker.bt-hash.com:443/announce',
     'http://explodie.org:6969/announce',
+    'udp://9.rarbg.me:2710',
+    'udp://9.rarbg.to:2710',
     'wss://tracker.openwebtorrent.com'
 ];
 
