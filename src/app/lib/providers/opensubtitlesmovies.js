@@ -19,15 +19,17 @@
         useragent: 'Popcorn Time v1'
     });
 
-    const limiter = new Bottleneck({
-        reservoir: 40, // initial value
-        reservoirRefreshAmount: 40,
-        reservoirRefreshInterval: 10 * 1000, // must be divisible by 250
+    const limiterOptions = {
+        //reservoir: 40, // initial value
+        //reservoirRefreshAmount: 40,
+        //reservoirRefreshInterval: 10 * 1000, // must be divisible by 250
 
         // also use maxConcurrent and/or minTime for safety
-        maxConcurrent: 4,
+        maxConcurrent: 10,
         minTime: 250 // pick a value that makes sense for your use case
-    });
+    };
+
+    const limiter = new Bottleneck(limiterOptions);
 
     var TTL = 1000 * 60 * 60 * 24 * 14; // 14 Day retention
 
@@ -304,10 +306,27 @@
             const entries = list.getEntries();
             entries.forEach((entry) => {
                 win.debug('Performance Test: ' + entry.name + ' Duration: ' + entry.duration + 'ms');
+                ga('send', {
+                    hitType: 'timing',
+                    timingCategory: 'OpenSubtitles',
+                    timingVar: entry.name,
+                    timingValue: entry.duration,
+                    timingLabel: 'OpenSubtitles_'+entry.name,
+                  });
             });
+            obs.disconnect();
         });
         obs.observe({ entryTypes: ['measure'], buffered: true });
 
+        let amount = _.size(ids);
+
+        if(amount < 40)
+            limiter.updateSettings({
+                minTime:50
+            })
+        else
+            limiter.updateSettings(limiterOptions);
+        
         return querySubtitles(ids).then(formatForPopcorn).finally(stopPerformance);
     };
 
