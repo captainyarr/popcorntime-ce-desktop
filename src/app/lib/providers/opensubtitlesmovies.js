@@ -113,13 +113,14 @@
                     //win.debug(res.userinfo);
                     this.authenticated = true;
                     win.debug("OpenSubtitles API Login Successful");
-
-                    ga('send', {
-                        hitType: 'event',
-                        eventCategory: 'OpenSubtitles',
-                        eventAction: 'OpenSubtitles Login Successful',
-                        eventLabel: 'OpenSubtitles Login Successful'
-                    });
+                    if (App.settings.analytics) {
+                        ga('send', {
+                            hitType: 'event',
+                            eventCategory: 'OpenSubtitles',
+                            eventAction: 'OpenSubtitles Login Successful',
+                            eventLabel: 'OpenSubtitles Login Successful'
+                        });
+                    }
 
                     deferred.resolve(this.authenticated);
                 })
@@ -130,12 +131,14 @@
                     });
                     this.authenticated = false;
                     win.debug("OpenSubtitles API Login Unsuccessful");
-                    ga('send', {
-                        hitType: 'event',
-                        eventCategory: 'OpenSubtitles',
-                        eventAction: 'OpenSubtitles Login Unsuccessful',
-                        eventLabel: 'OpenSubtitles: ' + err
-                    });
+                    if (App.settings.analytics) {
+                        ga('send', {
+                            hitType: 'event',
+                            eventCategory: 'OpenSubtitles',
+                            eventAction: 'OpenSubtitles Login Unsuccessful',
+                            eventLabel: 'OpenSubtitles: ' + err
+                        });
+                    }
                     deferred.resolve(this.authenticated);
                 });
 
@@ -145,12 +148,14 @@
             });
             this.authenticated = false;
             win.debug("OpenSubtitles API Login Unsuccessful");
-            ga('send', {
-                hitType: 'event',
-                eventCategory: 'OpenSubtitles',
-                eventAction: 'OpenSubtitles Login Anonymous',
-                eventLabel: 'OpenSubtitles Login Anonymous'
-            });
+            if (App.settings.analytics) {
+                ga('send', {
+                    hitType: 'event',
+                    eventCategory: 'OpenSubtitles',
+                    eventAction: 'OpenSubtitles Login Anonymous',
+                    eventLabel: 'OpenSubtitles Login Anonymous'
+                });
+            }
             deferred.resolve(this.authenticated);
         }
         return deferred.promise;
@@ -163,12 +168,14 @@
         });
         this.authenticated = false;
         win.debug("Opensubtitles API Logout");
-        ga('send', {
-            hitType: 'event',
-            eventCategory: 'OpenSubtitles',
-            eventAction: 'OpenSubtitles Disconnect',
-            eventLabel: 'OpenSubtitles Disconnect'
-        });
+        if (App.settings.analytics) {
+            ga('send', {
+                hitType: 'event',
+                eventCategory: 'OpenSubtitles',
+                eventAction: 'OpenSubtitles Disconnect',
+                eventLabel: 'OpenSubtitles Disconnect'
+            });
+        }
         callback();
     };
 
@@ -305,14 +312,16 @@
         obs = new PerformanceObserver((list, observer) => {
             const entries = list.getEntries();
             entries.forEach((entry) => {
-                win.debug('Performance Test: ' + entry.name + ' Duration: ' + entry.duration + 'ms');
-                ga('send', {
-                    hitType: 'timing',
-                    timingCategory: 'OpenSubtitles',
-                    timingVar: entry.name,
-                    timingValue: entry.duration,
-                    timingLabel: 'OpenSubtitles_'+entry.name,
-                  });
+                win.debug('Performance Test: ' + entry.name + ' Duration: ' + entry.duration.toFixed(2) + 'ms');
+                if (App.settings.analytics) {
+                    ga('send', {
+                        hitType: 'timing',
+                        timingCategory: 'OpenSubtitles',
+                        timingVar: entry.name,
+                        timingValue: entry.duration.toFixed(0),
+                        timingLabel: 'OpenSubtitles_'+App.settings.version+'_'+entry.name,
+                    });
+                }
             });
             obs.disconnect();
         });
@@ -320,13 +329,13 @@
 
         let amount = _.size(ids);
 
-        if(amount < 40)
+        if (amount < 40)
             limiter.updateSettings({
-                minTime:50
+                minTime: 50
             })
         else
             limiter.updateSettings(limiterOptions);
-        
+
         return querySubtitles(ids).then(formatForPopcorn).finally(stopPerformance);
     };
 

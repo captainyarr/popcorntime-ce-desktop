@@ -234,7 +234,7 @@
                         url: value,
                         strictSSL: value.substr(0, 8) === 'https://'
                     });
-                    
+
                     value = App.settings['tvAPI'];
                     break;
 
@@ -264,7 +264,7 @@
                     if ($('option:selected', field).val() === 'Last Open') {
                         AdvSettings.set('lastTab', App.currentview);
                     }
-                    /* falls through */
+                /* falls through */
                 case 'watchedCovers':
                 case 'theme':
                     value = $('option:selected', field).val();
@@ -558,12 +558,14 @@
                 if (value == false) {
                     that.alertMessageFailed(i18n.__("Incorrect Username or Password"));
                 }
-                ga('send', {
-                    hitType: 'event',
-                    eventCategory: 'Settings',
-                    eventAction: 'OpenSubtitles Login Incorrect',
-                    eventLabel: 'OpenSubtitles Login Incorrect'
-                });
+                if (App.settings.analytics) {
+                    ga('send', {
+                        hitType: 'event',
+                        eventCategory: 'Settings',
+                        eventAction: 'OpenSubtitles Login Incorrect',
+                        eventLabel: 'OpenSubtitles Login Incorrect'
+                    });
+                }
                 return value;
             }).then(function(value) {
                 if (value == true) {
@@ -715,18 +717,18 @@
                 }
                 return location;
             } catch (err) {
-                if (err.code !== 'EEXIST'){
+                if (err.code !== 'EEXIST') {
                     $('.notification_alert').show().text(i18n.__('Unable to create new Download directory')).delay(5000).fadeOut(400);
                     return this.resetTmpLocation();
                 }
             }
         },
 
-        resetTmpLocation: function(){
+        resetTmpLocation: function() {
             var value = path.join(os.tmpDir(), 'Popcorn-Time');
             $('#tmpLocation').val(value);
             this.render();
-            return value; 
+            return value;
         },
 
         openDatabaseFolder: function() {
