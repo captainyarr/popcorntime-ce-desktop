@@ -1,15 +1,23 @@
 ## 0.4.1-18 Beta - WIP Builds
 
 New Features:
-- Sort By, Genres, Type are now saved when going between Movies and TV Shows.
-
+- Sort: Sort By, Genres, Type are now saved when going between Movies and TV Shows.
+- RARBG: Updated categories for RARBG to support 4K, Movies, TV Shows, XXX
+- Tracker: Added Tracker Updater
 
 BugFixes: 
-
+- Trakt: Authorize Fixed
+- RARBG: Fixed RARBG search support in Torrent Collection
+- Trailer: Validate trailer information is correct
+- Favorites: Fixed Favorites to handle bad movie entries
 
 Updated:
-
-
+- OpenSubtitles: Updated handling of subtitle search
+- OpenSubtitles: Added performance tests
+- Trakt: Updated Watchlist refresh and trakt clean up
+- Trakt: Added Trak scrobble to ext players
+- Code: Intergrated torrent health into repo
+- Chromecast: Enabled auto discovery of new chromecast device on a set period of time
 
 ## 0.4.1-17.1 Beta - Popcorn Treats  - 24 October 2019
 
