@@ -1,11 +1,11 @@
-(function (App) {
+(function(App) {
     'use strict';
 
     var Q = require('q');
 
     var PopCollection = Backbone.Collection.extend({
         popid: 'imdb_id',
-        initialize: function (models, options) {
+        initialize: function(models, options) {
             this.providers = this.getProviders();
 
             options = options || {};
@@ -19,7 +19,7 @@
             Backbone.Collection.prototype.initialize.apply(this, arguments);
         },
 
-        fetch: function () {
+        fetch: function() {
             var self = this;
 
             if (this.state === 'loading' && !this.hasMore) {
@@ -32,6 +32,20 @@
             var subtitle = this.providers.subtitle;
             var torrents = this.providers.torrents;
 
+            var updateSubtitles = function(subtitles) {
+                //win.debug("updateSubtitles");
+                _.each(subtitles, function(subtitle,id) {
+                    //win.debug("Update subtitle id: " + id);
+                    var model = self.get(id);
+                    if (model) {
+                        var ts = model.get('subtitle');
+                        _.extend(ts, subtitle);
+                        model.set('subtitle', ts);
+                    }
+                });
+                self.trigger('sync', self);
+            }
+
             /* XXX(xaiki): provider hack
              *
              * we actually do this to 'save' the provider number,
@@ -40,7 +54,7 @@
              * provider declare a unique id, and then lookthem up in
              * a hash.
              */
-            var torrentPromises = _.map(torrents, function (torrentProvider, pid) { //XXX(xaiki): provider hack
+            var torrentPromises = _.map(torrents, function(torrentProvider, pid) { //XXX(xaiki): provider hack
                 var deferred = Q.defer();
 
                 var promises = [torrentProvider.fetch(self.filter)];
@@ -48,13 +62,14 @@
                 var idsPromise = promises[0].then(_.bind(torrentProvider.extractIds, torrentProvider));
 
                 if (subtitle) {
-                    promises.push(idsPromise.then(_.bind(subtitle.fetch, subtitle)));
+                    //promises.push(idsPromise.then(_.bind(subtitle.fetch, subtitle)));
+                    idsPromise.then(_.bind(subtitle.fetch, subtitle)).then(updateSubtitles);
                 }
 
                 Q.all(promises)
-                    .spread(function (torrents, subtitles) {
+                    .spread(function(torrents, subtitles) {
                         // If a new request was started...
-                        _.each(torrents.results, function (movie) {
+                        _.each(torrents.results, function(movie) {
                             var id = movie[self.popid];
                             /* XXX(xaiki): check if we already have this
                              * torrent if we do merge our torrents with the
@@ -72,12 +87,13 @@
 
                             if (subtitles) {
                                 movie.subtitle = subtitles[id];
-                            }
+                            } else
+                                movie.subtitle = {};
                         });
 
                         return deferred.resolve(torrents);
                     })
-                    .catch(function (err) {
+                    .catch(function(err) {
                         self.state = 'error';
                         self.trigger('loaded', self, self.state);
                         win.error('PopCollection.fetch() : torrentPromises mapping', err);
@@ -86,8 +102,8 @@
                 return deferred.promise;
             });
 
-            Q.all(torrentPromises).done(function (torrents) {
-                _.forEach(torrents, function (t) {
+            Q.all(torrentPromises).done(function(torrents) {
+                _.forEach(torrents, function(t) {
                     self.add(t.results);
                 });
                 self.hasMore = _.pluck(torrents, 'hasMore')[0];
@@ -97,7 +113,7 @@
             });
         },
 
-        fetchMore: function () {
+        fetchMore: function() {
             this.filter.page += 1;
             this.fetch();
         }
