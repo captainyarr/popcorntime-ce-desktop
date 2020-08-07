@@ -25,7 +25,7 @@
         //reservoirRefreshInterval: 10 * 1000, // must be divisible by 250
 
         // also use maxConcurrent and/or minTime for safety
-        maxConcurrent: 10,
+        maxConcurrent: 5,
         minTime: 250 // pick a value that makes sense for your use case
     };
 
@@ -219,6 +219,8 @@
 
         if (_.isEmpty(imdbIds)) {
             //subtitles is blank
+            performance.mark('querySubtitles_end');
+            performance.measure('querySubtitles', 'querySubtitles_start', 'querySubtitles_end');
             deferred.resolve({});
             return deferred.promise;
         }
@@ -309,22 +311,25 @@
         }
     }
     OpenSubtitlesMovies.prototype.query = function(ids) {
-        obs = new PerformanceObserver((list, observer) => {
-            const entries = list.getEntries();
-            entries.forEach((entry) => {
-                win.debug('Performance Test: ' + entry.name + ' Duration: ' + entry.duration.toFixed(2) + 'ms');
-                if (App.settings.analytics) {
-                    ga('send', {
-                        hitType: 'timing',
-                        timingCategory: 'OpenSubtitles',
-                        timingVar: entry.name,
-                        timingValue: entry.duration.toFixed(0),
-                        timingLabel: 'OpenSubtitles_'+App.settings.version+'_'+entry.name,
-                    });
-                }
+        if (typeof (obs) == 'undefined') {
+            obs = new PerformanceObserver((list, observer) => {
+                const entries = list.getEntries();
+                entries.forEach((entry) => {
+                    win.debug('Performance Test: ' + entry.name + ' Duration: ' + entry.duration.toFixed(2) + 'ms');
+                    if (App.settings.analytics) {
+                        ga('send', {
+                            hitType: 'timing',
+                            timingCategory: 'OpenSubtitles',
+                            timingVar: entry.name,
+                            timingValue: entry.duration.toFixed(0),
+                            timingLabel: 'OpenSubtitles_' + App.settings.version + '_' + entry.name,
+                        });
+                    }
+                });
+                performance.clearMarks();
             });
-            obs.disconnect();
-        });
+        }
+
         obs.observe({ entryTypes: ['measure'], buffered: true });
 
         let amount = _.size(ids);
