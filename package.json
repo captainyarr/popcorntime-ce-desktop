@@ -16,7 +16,8 @@
     "releaseName": "Popcorn Treats",
     "scripts": {
         "start": "npx gulp run",
-        "update": "npm prune && npm install"
+        "update": "npm prune && npm install",
+        "debug": "NODE_ENV=development npx gulp run"
     },
     "single-instance": false,
     "window": {

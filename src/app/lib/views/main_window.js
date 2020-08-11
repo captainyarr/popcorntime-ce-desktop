@@ -209,7 +209,9 @@
                     //Set App Details
                     ga('set', 'appName', App.Config.title);
                     ga('set', 'appVersion', AdvSettings.get('version'));
-                    ga('send', 'screenview', {
+                    
+                    ga('send', {
+                        hitType: 'screenview',
                         screenName: App.Config.title
                     });
 
