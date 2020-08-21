@@ -96,4 +96,4 @@ You should have received a copy of the GNU General Public License along with thi
 
 ***
  
-Copyright (c) 2019 Popcorn Time Community - Released under the [GPL v3 license](LICENSE.txt).
+Copyright (c) 2020 Popcorn Time Community - Released under the [GPL v3 license](LICENSE.txt).
