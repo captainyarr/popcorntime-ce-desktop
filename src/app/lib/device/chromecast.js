@@ -172,5 +172,19 @@
         }));
     });
 
+    setInterval(updateChromecast, 180 * 1000); //seconds * 1000ms
+
+    function updateChromecast() {
+        win.debug('Scanning: Local Network for updated Chromecast devices');
+
+        var browser = new chromecast.Browser();
+
+        browser.on('deviceOn', function(device) {
+            collection.add(new Chromecast({
+                device: device
+            }));
+        });
+    }
+
     App.Device.Chromecast = Chromecast;
 })(window.App);

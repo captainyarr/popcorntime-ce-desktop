@@ -9,7 +9,7 @@
             </div>
             <div class="dropdown online-categories">
                     <%
-                        var arr_categories = ["Movies","TV Series","Anime"];
+                        var arr_categories = ["4K","Movies","TV Series","XXX"];
 
                         var select_category = "";
                         for(var key in arr_categories) {

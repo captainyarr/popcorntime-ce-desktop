@@ -1,7 +1,32 @@
+## 0.4.2-0 Beta - Extra Time, Extra Popcorn - 23 August 2020
+
+New Features:
+- Sort: Sort By, Genres, Type are now saved when going between Movies 
+  and TV Shows.
+- RARBG: Updated categories for RARBG to support 4K, Movies, TV Shows, XXX
+- Tracker: Added Tracker Updater
+
+BugFixes: 
+- Trakt: Authorize Fixed
+- RARBG: Fixed RARBG search support in Torrent Collection
+- Trailer: Validate trailer information is correct
+- Favorites: Fixed Favorites to handle bad movie entries
+
+Updated:
+- OpenSubtitles: Updated handling of subtitle search
+- OpenSubtitles: Added performance tests
+- OpenSubtitles: Subtitle information is now loaded in the background
+- Trakt: Updated Watchlist refresh and trakt clean up
+- Trakt: Added Trak scrobble to ext players
+- Code: Intergrated torrent health into repo
+- Chromecast: Enabled auto discovery of new chromecast device on a set period 
+  of time
+
 ## 0.4.1-17.1 Beta - Popcorn Treats  - 24 October 2019
 
 New Features:
-- Added more information to status screen: Active Users, and Total User, Time remaining
+- Added more information to status screen: Active Users, and Total User, 
+  Time remaining
 
 BugFixes: 
 - Fixed Next TV episode playing Automatically
@@ -17,7 +42,8 @@ Updated:
 
 New Features:
 - OpenSubtitles: Add link to create account
-- OpenSubtitles: Added Username and Password for OpenSubtitles API into the settings screen.
+- OpenSubtitles: Added Username and Password for OpenSubtitles API into the 
+  settings screen.
 - ExtPlayer: Added Windows Media Player
 - Player: Added a "Download Only" option to the player selection
 - gulp: Add ffmpeg update to cache sdk
@@ -71,7 +97,9 @@ New Features:
 
 BugFixes: 
 
-- Fixed build archive so that all files are included when a new build is generated.  All builds should now have all the proper files as expected and run properly.
+- Fixed build archive so that all files are included when a new build is 
+  generated. All builds should now have all the proper files as expected and 
+  run properly.
 - Updated dependencies
 ## 0.4.1-11 Beta - Now with some butter - 6 December 2017
 
@@ -84,7 +112,8 @@ BugFixes:
 - Updated nw.js with ffmpeg fix from Butter Project (butterproject.org)
 
 OpenSubtitles:
-- Added error handling to OpenSubtitles search call, movie list will appear after a short time.
+- Added error handling to OpenSubtitles search call, movie list will appear 
+  after a short time.
 
 ## 0.4.1-9 Beta - I have a need for speed - 10 October 2017
 

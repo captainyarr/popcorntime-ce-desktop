@@ -39,17 +39,17 @@ win.debug = function() {
 };
 win.info = function() {
     var params = Array.prototype.slice.call(arguments, 1);
-    params.unshift('[%cINFO%c] ' + arguments[0], 'color: blue;', 'color: black;');
+    params.unshift('%c[%cINFO%c] %c' + arguments[0], 'color: black;','color: blue;', 'color: black;','color: grey;');
     console.info.apply(console, params);
 };
 win.warn = function() {
     var params = Array.prototype.slice.call(arguments, 1);
-    params.unshift('[%cWARNING%c] ' + arguments[0], 'color: orange;', 'color: black;');
+    params.unshift('[%cWARNING%c] %c' + arguments[0], 'color: orange;', 'color: black;','color: grey;');
     console.warn.apply(console, params);
 };
 win.error = function() {
     var params = Array.prototype.slice.call(arguments, 1);
-    params.unshift('%c[%cERROR%c] ' + arguments[0], 'color: black;', 'color: red;', 'color: black;');
+    params.unshift('%c[%cERROR%c] %c' + arguments[0], 'color: black;', 'color: red;', 'color: black;','color: grey;');
     console.error.apply(console, params);
     fs.appendFileSync(path.join(require('nw.gui').App.dataPath, 'logs.txt'), '\n\n' + (arguments[0].stack || arguments[0])); // log errors;
 };
@@ -211,6 +211,7 @@ var initApp = function() {
 };
 
 App.addInitializer(function(options) {
+    AdvSettings.updateTrackers();
     initTemplates()
         .then(initApp);
 });

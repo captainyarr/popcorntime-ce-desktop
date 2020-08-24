@@ -1,8 +1,6 @@
-[Warning! Popcorntime.sh threatens your computer privacy.](http://popcorn-time.is/official-statement.html#Malware2)
-
 # [Popcorn Time Community](https://github.com/PopcornTime-CE/desktop)
 
-[![Join the chat at https://gitter.im/PopcornTime-CE/desktop](https://badges.gitter.im/PopcornTime-CE/desktop.svg)](https://gitter.im/PopcornTime-CE/desktop?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Join the chat at https://gitter.im/PopcornTime-CE/desktop](https://badges.gitter.im/PopcornTime-CE/desktop.svg)](https://gitter.im/PopcornTime-CE/desktop?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) [![CircleCI](https://circleci.com/gh/captainyarr/popcorntime-ce-desktop.svg?style=shield)](https://app.circleci.com/pipelines/github/captainyarr/popcorntime-ce-desktop)
 
 Allow anyone to easily watch their favorite movies, shows, and anime.
 
@@ -98,4 +96,4 @@ You should have received a copy of the GNU General Public License along with thi
 
 ***
  
-Copyright (c) 2019 Popcorn Time Community - Released under the [GPL v3 license](LICENSE.txt).
+Copyright (c) 2020 Popcorn Time Community - Released under the [GPL v3 license](LICENSE.txt).

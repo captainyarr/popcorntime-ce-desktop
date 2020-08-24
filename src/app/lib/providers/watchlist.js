@@ -3,8 +3,10 @@
     'use strict';
     var Q = require('q');
     var TVApi = App.Providers.get('TVApi');
+    const WATCHLIST_REFRESH = 2; //Refresh minutes
+    const TRAKT_SHOWDAYS = 30; //Number of days to retrieve shows Trakt.tv
+    var Watchlist = function() { };
 
-    var Watchlist = function() {};
     Watchlist.prototype.constructor = Watchlist;
 
     var queryTorrents = function(filters) {
@@ -13,19 +15,19 @@
 
         //Checked when last fetched
         App.db.getSetting({
-                key: 'watchlist-fetched'
-            })
+            key: 'watchlist-fetched'
+        })
             .then(function(doc) {
                 if (doc) {
                     var d = moment.unix(doc.value);
 
-                    if (Math.abs(now.diff(d, 'hours')) >= 12) {
-                        win.info('Watchlist - last update was %s hour(s) ago', Math.abs(now.diff(d, 'hours')));
+                    if (Math.abs(now.diff(d, 'minutes')) >= WATCHLIST_REFRESH) {
+                        win.info('Watchlist - last update was %s minute(s) ago', Math.abs(now.diff(d, 'hours')));
                         fetchWatchlist(true);
 
                     } else {
-                        // Last fetch is fresh (< 12h)
-                        win.info('Watchlist - next update in %s hour(s)', 12 - Math.abs(now.diff(d, 'hours')));
+                        // Last fetch is fresh time (< WATCHLIST_REFRESH)
+                        win.info('Watchlist - next update in %s minutes(s)', WATCHLIST_REFRESH - Math.abs(now.diff(d, 'minutes')));
                         fetchWatchlist(false);
                     }
                 } else {
@@ -37,29 +39,29 @@
 
         function fetchWatchlist(update) {
             App.db.getSetting({
-                    key: 'watchlist'
-                })
+                key: 'watchlist'
+            })
                 .then(function(doc) {
                     if (doc && !update) {
                         // Returning cached watchlist
                         deferred.resolve(doc.value || []);
                     } else {
                         win.info('Watchlist - Fetching new watchlist');
-                        App.Trakt.calendars.myShows(moment().subtract(30, 'days').format('YYYY-MM-DD'), 30)
+                        App.Trakt.calendars.myShows(moment().subtract(TRAKT_SHOWDAYS, 'days').format('YYYY-MM-DD'), TRAKT_SHOWDAYS)
                             .then(function(data) {
-                                win.debug("trakt watchlist data: " + data);
+                                win.debug("Trakt watchlist data retrieved");
                                 App.db.writeSetting({
-                                        key: 'watchlist',
-                                        value: data
-                                    })
-                                    .then(function() {
-                                        win.debug("trakt watchlist-fetched data: " + data);
+                                    key: 'watchlist',
+                                    value: data
+                                })
+                                .then(function() {
+                                        win.debug("Trakt watchlist-fetched data retrieved");
                                         App.db.writeSetting({
                                             key: 'watchlist-fetched',
                                             value: now.unix()
                                         });
                                     })
-                                    .then(function() {
+                                .then(function() {
                                         deferred.resolve(data || []);
                                     });
                             })
@@ -81,10 +83,10 @@
 
             if (show.show_id && show.season !== 0) {
                 promisifyDb(db.watched.find({
-                        imdb_id: show.show_id.toString(),
-                        season: show.season.toString(),
-                        episode: show.episode.toString()
-                    }))
+                    imdb_id: show.show_id.toString(),
+                    season: show.season.toString(),
+                    episode: show.episode.toString()
+                }))
                     .then(function(data) {
                         if (data != null && data.length > 0) {
                             deferred.resolve(null);
@@ -120,7 +122,7 @@
                         data.imdb = data.imdb_id;
                         data.next_episode = show.next_episode;
                         // Fallback for old bookmarks without provider in database or marked as Eztv
-                        if (typeof(data.provider) === 'undefined' || data.provider === 'Eztv') {
+                        if (typeof (data.provider) === 'undefined' || data.provider === 'Eztv') {
                             data.provider = 'TVApi';
                         }
                         deferred.resolve(data);
@@ -180,12 +182,12 @@
         var deferred = Q.defer();
 
         win.info('Watchlist - Fetching new watchlist');
-        App.Trakt.calendars.myShows(moment().subtract(30, 'days').format('YYYY-MM-DD'), 30)
+        App.Trakt.calendars.myShows(moment().subtract(TRAKT_SHOWDAYS, 'days').format('YYYY-MM-DD'), TRAKT_SHOWDAYS)
             .then(function(data) {
                 App.db.writeSetting({
-                        key: 'watchlist',
-                        value: data
-                    })
+                    key: 'watchlist',
+                    value: data
+                })
                     .then(function() {
                         App.db.writeSetting({
                             key: 'watchlist-fetched',

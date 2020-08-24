@@ -1,5 +1,7 @@
-(function (App) {
+(function(App) {
     'use strict';
+
+    var torrentHealth = require('./lib/util/torrent-tracker-health');
 
     var clipboard = gui.Clipboard.get(),
         collection = path.join(require('nw.gui').App.dataPath + '/TorrentCollection/'),
@@ -26,7 +28,7 @@
             'contextmenu #online-input': 'rightclick_search'
         },
 
-        initialize: function () {
+        initialize: function() {
             if (!fs.existsSync(collection)) {
                 fs.mkdirSync(collection);
                 win.debug('TorrentCollection: data directory created');
@@ -35,8 +37,8 @@
             this.searchEngine = Settings.onlineSearchEngine;
         },
 
-        onShow: function () {
-            Mousetrap.bind(['esc', 'backspace'], function (e) {
+        onShow: function() {
+            Mousetrap.bind(['esc', 'backspace'], function(e) {
                 $('#filterbar-torrent-collection').click();
             });
 
@@ -45,15 +47,15 @@
 
             this.render();
 
-			if(AdvSettings.get('pluginKATsearch')===false && AdvSettings.get('pluginRARBGsearch')===false)
-            	$('.onlinesearch').hide();
-			if(AdvSettings.get('pluginKATsearch')===false)
-            	$('#kat-icon').hide();
-			if(AdvSettings.get('pluginRARBGsearch')===false)
-            	$('#rarbg-icon').hide();
+            if (AdvSettings.get('pluginKATsearch') === false && AdvSettings.get('pluginRARBGsearch') === false)
+                $('.onlinesearch').hide();
+            if (AdvSettings.get('pluginKATsearch') === false)
+                $('#kat-icon').hide();
+            if (AdvSettings.get('pluginRARBGsearch') === false)
+                $('#rarbg-icon').hide();
         },
 
-        onRender: function () {
+        onRender: function() {
             $('.engine-icon').removeClass('active');
             $('#' + this.searchEngine.toLowerCase() + '-icon').addClass('active');
             $('#online-input').focus();
@@ -71,7 +73,7 @@
             });
         },
 
-        changeEngine: function (e) {
+        changeEngine: function(e) {
             e.preventDefault();
 
             Settings.onlineSearchEngine = this.searchEngine = e.currentTarget.dataset.id;
@@ -86,7 +88,7 @@
             }
         },
 
-        createMagnetURI: function (torrentHash) {
+        createMagnetURI: function(torrentHash) {
             var magnet_uri = 'magnet:?xt=urn:btih:';
             var tracker_list = '&tr=udp:\/\/tracker.coppersurfer.tk:6969'
                 + '&tr=udp:\/\/p4p.arenabg.com:1337'
@@ -100,15 +102,25 @@
                 + '&tr=udp:\/\/tracker.coppersurfer.tk:6969'
                 + '&tr=udp:\/\/tracker.leechers-paradise.org:6969'
                 + '&tr=udp:\/\/exodus.desync.com:696931622A';
-            
-            Settings.trackers.forEach(function(item){
-                tracker_list += '&tr='+item;
+
+            Settings.trackers.forEach(function(item) {
+                tracker_list += '&tr=' + item;
             });
-            
+
             return magnet_uri + torrentHash + tracker_list;
         },
 
-        onlineSearch: function (e) {
+        updateMagnetURI: function(magnet_uri) {
+            let tracker_list = "";
+
+            Settings.trackers.forEach(function(item) {
+                tracker_list += '&tr=' + item;
+            });
+
+            return magnet_uri + tracker_list;
+        },
+
+        onlineSearch: function(e) {
             if (e) {
                 e.preventDefault();
             }
@@ -116,13 +128,22 @@
             var input = $('#online-input').val();
             var category = $('.online-categories > select').val();
             AdvSettings.set('OnlineSearchCategory', category);
-            if (category === 'TV Series') {
-                category = 'tv';
-            } else if (category === 'Movies') {
-                category = 'movies';
-            } else if (category === 'Anime') {
-                category = 'anime';
+
+            switch (category) {
+                case 'TV Series':
+                    category = 'tv';
+                    break;
+                case 'Movies':
+                    category = "movies";
+                    break;
+                case 'XXX':
+                    category = 'xxx';
+                    break;
+                case '4K':
+                    category = '4k';
+                    break;
             }
+
             var current = $('.onlinesearch-info > ul.file-list').html();
 
             if (input === '' && current === '') {
@@ -140,17 +161,26 @@
 
             if (this.searchEngine === 'KAT') {
 
+                ga('set', {
+                    page: '/popcorntimece/kat/search?s=' + encodeURI(input) + '&cat=' + encodeURI(category),
+                    title: 'KAT Search Results: ' + input
+                });
+
+                ga('send', {
+                    hitType: 'pageview'
+                });
+
                 var kat = require('kat-api-ce');
                 kat.search({
                     query: input,
                     min_seeds: 5,
                     category: category
-                }).then(function (data) {
+                }).then(function(data) {
                     win.debug('KAT search: %s results', data.results.length);
-                    data.results.forEach(function (item) {
+                    data.results.forEach(function(item) {
                         var itemModel = {
                             title: item.title,
-                            magnet: item.magnet,
+                            magnet: that.updateMagnetURI(item.magnet),
                             seeds: item.seeds,
                             peers: item.peers,
                             size: Common.fileSize(parseInt(item.size)),
@@ -171,7 +201,7 @@
                     $('.notorrents-info,.torrents-info').hide();
                     $('.online-search').removeClass('fa-spin fa-spinner').addClass('fa-search');
                     $('.onlinesearch-info').show();
-                }).catch(function (err) {
+                }).catch(function(err) {
                     win.debug('KAT search failed:', err.message);
                     var error;
                     if (err.message === 'No results') {
@@ -187,16 +217,59 @@
                 });
 
             } else {
-				//CREDIT to Mohammed Talas - github.com/talas9
+
+                //GA Track RARBG Search Value
+                ga('set', {
+                    page: '/popcorntimece/rarbg/search?s=' + encodeURI(input) + '&cat=' + encodeURI(category),
+                    title: 'RARBG Search Results: ' + input
+                });
+
+                ga('send', {
+                    hitType: 'pageview'
+                });
+
+                //RarBg Search
                 var rarbg = require('rarbg-api');
-                rarbg.search(input, category).then(function (result) {
-                    console.debug('rarbg search: %s results', result.results.length);
-                    result.results.forEach(function (item) {
+
+                const defaultParams = {
+                    category: rarbg.CATEGORY.MOVIES,
+                    limit: 100,
+                    sort: 'last',
+                    min_seeders: null,
+                    min_leechers: null,
+                    format: 'json_extended',
+                    ranked: null
+                }
+
+                switch (category) {
+                    case 'xxx':
+                        defaultParams.category = rarbg.CATEGORY.XXX;
+                        break;
+                    case 'movies':
+                        defaultParams.category = rarbg.CATEGORY.MOVIES;
+                        break;
+                    case 'tv':
+                        defaultParams.category = rarbg.CATEGORY.TV;
+                        break;
+                    case '4k':
+                        defaultParams.category = rarbg.CATEGORY['4K'];
+                        break;
+                }
+
+                win.debug('rargb search started: %s', input);
+                rarbg.search(input, defaultParams).then(function(result) {
+                    win.debug('rarbg search: %s results', result.length);
+
+                    //TODO: Update tracker list for each magnet
+                    let tracker_list = that.updateMagnetURI("");
+
+                    result.forEach(function(item) {
+
                         var itemModel = {
                             title: item.title,
-                            magnet: item.torrentLink,
-                            seeds: item.seeds,
-                            peers: item.leechs,
+                            magnet: item.download,//FIXME tracker_list,
+                            seeds: item.seeders,
+                            peers: item.leechers,
                             size: Common.fileSize(parseInt(item.size)),
                             index: index
                         };
@@ -221,7 +294,7 @@
                     if (index === 0) {
                         $('.onlinesearch-info>ul.file-list').html('<br><br><div style="text-align:center;font-size:30px">' + i18n.__('No results found') + '</div>');
                     }
-                }).catch(function (err) {
+                }).catch(function(err) {
                     console.debug('rarbg search failed:', err.message || err);
                     var error;
                     if (err === 'No torrents found') {
@@ -242,16 +315,19 @@
             }
         },
 
-        onlineAddItem: function (item) {
+        onlineAddItem: function(item) {
             var ratio = item.peers > 0 ? item.seeds / item.peers : +item.seeds;
             $('.onlinesearch-info>ul.file-list').append(
                 '<li class="result-item" data-index="' + item.index + '" data-file="' + item.magnet + '"><a>' + item.title + '</a><div class="item-icon magnet-icon tooltipped" data-toogle="tooltip" data-placement="right" title="' + i18n.__('Magnet link') + '"></div><i class="online-size tooltipped" data-toggle="tooltip" data-placement="left" title="' + i18n.__('Ratio:') + ' ' + ratio.toFixed(2) + '<br>' + i18n.__('Seeds:') + ' ' + item.seeds + ' - ' + i18n.__('Peers:') + ' ' + item.peers + '">' + item.size + '</i></li>'
-                );
+            );
             if (item.seeds === 0) { // recalc the peers/seeds
+                //TODO: Update tracker list to full
                 var torrent = item.magnet.split('&tr')[0] + '&tr=udp://tracker.openbittorrent.com:80/announce' + '&tr=udp://open.demonii.com:1337/announce' + '&tr=udp://tracker.coppersurfer.tk:6969';
-                require('torrent-tracker-health')(torrent, {
+
+                //require('torrent-tracker-health')(torrent, {
+                torrentHealth(torrent, {
                     timeout: 1000
-                }).then(function (res) {
+                }).then(function(res) {
                     //console.log('torrent index %s: %s -> %s (seeds)', item.index, item.seeds, res.seeds)
                     ratio = res.peers > 0 ? res.seeds / res.peers : +res.seeds;
                     $('.result-item[data-index=' + item.index + '] i').attr('data-original-title', i18n.__('Ratio:') + ' ' + ratio.toFixed(2) + '<br>' + i18n.__('Seeds:') + ' ' + res.seeds + ' - ' + i18n.__('Peers:') + ' ' + res.peers);
@@ -259,45 +335,46 @@
             }
         },
 
-        onlineOpen: function (e) {
-            var file = $(e.currentTarget).dataset.file;
+        onlineOpen: function(e) {
+            //var file = $(e.currentTarget).dataset.file;
+            var file = e.currentTarget.dataset.file;
             Settings.droppedMagnet = file;
             window.handleTorrent(file);
         },
 
-        onlineClose: function () {
+        onlineClose: function() {
             $('.onlinesearch-info>ul.file-list').html('');
             $('.onlinesearch-info').hide();
             this.render();
         },
 
-        rightclick_search: function (e) {
+        rightclick_search: function(e) {
             e.stopPropagation();
             var search_menu = new this.context_Menu(i18n.__('Cut'), i18n.__('Copy'), i18n.__('Paste'));
             search_menu.popup(e.originalEvent.x, e.originalEvent.y);
         },
 
-        context_Menu: function (cutLabel, copyLabel, pasteLabel) {
+        context_Menu: function(cutLabel, copyLabel, pasteLabel) {
             var gui = require('nw.gui'),
                 menu = new gui.Menu(),
 
                 cut = new gui.MenuItem({
                     label: cutLabel || 'Cut',
-                    click: function () {
+                    click: function() {
                         document.execCommand('cut');
                     }
                 }),
 
                 copy = new gui.MenuItem({
                     label: copyLabel || 'Copy',
-                    click: function () {
+                    click: function() {
                         document.execCommand('copy');
                     }
                 }),
 
                 paste = new gui.MenuItem({
                     label: pasteLabel || 'Paste',
-                    click: function () {
+                    click: function() {
                         var text = clipboard.get('text');
                         $('#online-input').val(text);
                     }
@@ -310,11 +387,11 @@
             return menu;
         },
 
-        openFileSelector: function (e) {
+        openFileSelector: function(e) {
             var _file = e.currentTarget.innerText;
             var file;
 
-            if(_file !== undefined)           
+            if (_file !== undefined)
                 file = _file.substring(0, _file.length - 2); // avoid ENOENT
             else
                 file = "";
@@ -330,7 +407,7 @@
             }
         },
 
-        openMagnet: function (e) {
+        openMagnet: function(e) {
             this.$('.tooltip').css('display', 'none');
             e.preventDefault();
             e.stopPropagation();
@@ -357,7 +434,7 @@
             }
         },
 
-        deleteItem: function (e) {
+        deleteItem: function(e) {
             this.$('.tooltip').css('display', 'none');
             e.preventDefault();
             e.stopPropagation();
@@ -373,7 +450,7 @@
             this.render();
         },
 
-        renameItem: function (e) {
+        renameItem: function(e) {
             this.$('.tooltip').css('display', 'none');
             e.preventDefault();
             e.stopPropagation();
@@ -413,7 +490,7 @@
             this.render();
         },
 
-        renameInput: function (oldName) {
+        renameInput: function(oldName) {
             var userInput = prompt(i18n.__('Enter new name'), oldName);
             if (!userInput || userInput === oldName) {
                 return false;
@@ -422,43 +499,43 @@
             }
         },
 
-        clearCollection: function () {
+        clearCollection: function() {
             deleteFolder(collection);
             win.debug('Torrent Collection: delete all', collection);
             App.vent.trigger('torrentCollection:show');
         },
 
-        openCollection: function () {
+        openCollection: function() {
             win.debug('Opening: ' + collection);
             gui.Shell.openItem(collection);
         },
 
-        importItem: function () {
+        importItem: function() {
             this.$('.tooltip').css('display', 'none');
 
             var that = this;
             var input = document.querySelector('.collection-import-hidden');
-            input.addEventListener('change', function (evt) {
+            input.addEventListener('change', function(evt) {
                 var file = $('.collection-import-hidden')[0].files[0];
                 that.render();
                 window.ondrop({
                     dataTransfer: {
                         files: [file]
                     },
-                    preventDefault: function () { }
+                    preventDefault: function() { }
                 });
             }, false);
 
             input.click();
         },
 
-        onDestroy: function () {
+        onDestroy: function() {
             Mousetrap.unbind(['esc', 'backspace']);
             $('#movie-detail').show();
             $('#nav-filters').show();
         },
 
-        closeTorrentCollection: function () {
+        closeTorrentCollection: function() {
             App.vent.trigger('torrentCollection:close');
         }
 

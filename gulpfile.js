@@ -28,7 +28,7 @@ var argv = require('yargs')
     .argv;
 
 //Set Default nw.js version
-var nwVersion = '0.41.3';
+var nwVersion = '0.44.1';
 var buildDownloadUrl = 'https://dl.nwjs.io/';
 
 nwVersion = argv.nwv ? argv.nwv : nwVersion;
@@ -72,7 +72,12 @@ var buildTask = function () {
 };
 
 var cleanTask = function () {
-    return del('build/');
+    var item = 0;
+
+    buildplatforms.forEach(item => {
+        del('build/Popcorn-Time-CE/'+item+'/');
+    });
+    return del('build/Popcorn-Time-CE/'+item+'/');
 }
 
 var ffmpegcacheTask = function () {
@@ -185,29 +190,45 @@ var zipTask = function () {
                 zipArray.add(gulp.src('./build/Popcorn-Time-CE/linux64/**')
                     .pipe(tar('popcorn-time-ce_linux64_' + package.version + '.tar'))
                     .pipe(gzip())
-                    .pipe(gulp.dest('./dist')));
+                    .pipe(gulp.dest('./dist'))
+                    .on('end', function() { 
+                        console.log('Build Zip Complete: ' + item);
+                      })
+                    );
                 break;
             case "linux32":
                 zipArray.add(gulp.src('./build/Popcorn-Time-CE/linux32/**')
                     .pipe(tar('popcorn-time-ce_linux32_' + package.version + '.tar'))
                     .pipe(gzip())
-                    .pipe(gulp.dest('./dist')));
+                    .pipe(gulp.dest('./dist'))
+                    .on('end', function() { 
+                        console.log('Build Zip Complete: ' + item);
+                    }));
                 break;
             case "win32":
                 zipArray.add(gulp.src('./build/Popcorn-Time-CE/win32/**')
                     .pipe(zip('popcorn-time-ce_win32_' + package.version + '.zip'))
-                    .pipe(gulp.dest('./dist')));
+                    .pipe(gulp.dest('./dist'))
+                    .on('end', function() { 
+                        console.log('Build Zip Complete: ' + item);
+                    }));
                 break;
             case "win64":
                 zipArray.add(gulp.src('./build/Popcorn-Time-CE/win64/**')
                     .pipe(zip('popcorn-time-ce_win64_' + package.version + '.zip'))
-                    .pipe(gulp.dest('./dist')));
+                    .pipe(gulp.dest('./dist'))
+                    .on('end', function() { 
+                        console.log('Build Zip Complete: ' + item);
+                    }));
                 break;
             case "osx64":
                 zipArray.add(gulp.src('./build/Popcorn-Time-CE/osx64/**')
                     .pipe(zip('popcorn-time-ce_osx64_' + package.version + '.zip'))
                     //.pipe(gzip())
-                    .pipe(gulp.dest('./dist')));
+                    .pipe(gulp.dest('./dist'))
+                    .on('end', function() { 
+                        console.log('Build Zip Complete: ' + item);
+                    }));
                 break;
         }
     });

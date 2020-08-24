@@ -469,14 +469,14 @@
             <span>
                 <p><%= i18n.__("Movie API Endpoint") %></p>
                     <input id="ytsAPI" type="text" size="50" name="ytsAPI" value="<%=Settings.ytsAPI[0].url%>">
-                    <% if (Settings.ytsAPI.length <= 1) { %>
+                    <% if (Settings.ytsAPI.length > Settings.defaultMovieAPI.length) { %>
                     &nbsp;&nbsp;<i class="reset-ytsAPI fa fa-undo tooltipped" data-toggle="tooltip" data-placement="auto" title="<%= i18n.__('Reset to Default Settings') %>"></i>
                     <% } %>
             </span>
             <span>
                 <p><%= i18n.__("TV Show API Endpoint") %></p>
                     <input id="tvAPI" type="text" size="50" name="tvAPI" value="<%=Settings.tvAPI[0].url%>">
-                    <% if (Settings.tvAPI.length <= 1) { %>
+                    <% if (Settings.tvAPI.length > Settings.defaultTvAPI.length) { %>
                     &nbsp;&nbsp;<i class="reset-tvAPI fa fa-undo tooltipped" data-toggle="tooltip" data-placement="auto" title="<%= i18n.__('Reset to Default Settings') %>"></i>
                     <% } %>
             </span>

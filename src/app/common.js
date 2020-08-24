@@ -9,7 +9,12 @@ Common.healthMap = {
     3: 'excellent'
 };
 
-Common.calcHealth = function (torrent) {
+/**
+ * @description Calculate Torrent Health
+ * @param {NewType} torrent 
+ * @return {number} Scaled value 1-3
+ */
+Common.calcHealth = function(torrent) {
     var seeds = torrent.seed;
     var peers = torrent.peer;
 
@@ -34,11 +39,16 @@ Common.calcHealth = function (torrent) {
     return scaledTotal;
 };
 
-Common.md5 = function (arg) {
+/**
+ * @description Generate an MD5 hash based on parameter
+ * @param {data} arg Value to be hashed
+ * @return {Hash} MD5 Hash
+ */
+Common.md5 = function(arg) {
     return crypt.createHash('md5').update(arg).digest('hex');
 };
 
-Common.copyFile = function (source, target, cb) {
+Common.copyFile = function(source, target, cb) {
     var cbCalled = false;
 
     var rd = fs.createReadStream(source);
@@ -57,14 +67,14 @@ Common.copyFile = function (source, target, cb) {
 
     var wr = fs.createWriteStream(target);
     wr.on('error', done);
-    wr.on('close', function (ex) {
+    wr.on('close', function(ex) {
         done();
     });
 
     rd.pipe(wr);
 };
 
-Common.fileSize = function (num) {
+Common.fileSize = function(num) {
     if (isNaN(num)) {
         return;
     }
@@ -75,19 +85,19 @@ Common.fileSize = function (num) {
     var neg = num < 0;
 
     switch (os.platform()) {
-    case 'linux':
-        base = 1024;
-        units = ['B', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB'];
-        break;
-    case 'win32':
-        base = 1024;
-        units = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
-        break;
-    case 'darwin':
+        case 'linux':
+            base = 1024;
+            units = ['B', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB'];
+            break;
+        case 'win32':
+            base = 1024;
+            units = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+            break;
+        case 'darwin':
         /* falls through */
-    default:
-        base = 1000;
-        units = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+        default:
+            base = 1000;
+            units = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
     }
 
     if (neg) {
@@ -116,16 +126,16 @@ Common.fileSize = function (num) {
     return (neg ? '-' : '') + num + ' ' + unit;
 };
 
-Common.matchTorrent = function (file, torrent) {
+Common.matchTorrent = function(file, torrent) {
     var defer = Q.defer();
     var data = {};
 
-    var checkTraktSearch = function (trakt, filename) {
-        return Q.Promise(function (resolve, reject) {
+    var checkTraktSearch = function(trakt, filename) {
+        return Q.Promise(function(resolve, reject) {
             var traktObj = trakt
                 .match(/[\w+\s+]+/ig)[0]
                 .split(' ');
-            traktObj.forEach(function (word) {
+            traktObj.forEach(function(word) {
                 if (word.length >= 4) {
                     var regxp = new RegExp(word.slice(0, 3), 'ig');
                     if (filename.replace(/\W/ig, '').match(regxp) === null) {
@@ -137,18 +147,18 @@ Common.matchTorrent = function (file, torrent) {
         });
     };
 
-    var searchMovie = function (title) {
-        return Q.Promise(function (resolve, reject) {
+    var searchMovie = function(title) {
+        return Q.Promise(function(resolve, reject) {
 
             // find a matching movie
             App.Trakt.search(title, 'movie')
-                .then(function (summary) {
+                .then(function(summary) {
 
                     if (!summary || summary.length === 0) {
                         reject(new Error('Unable to fetch data from Trakt.tv'));
                     } else {
                         checkTraktSearch(summary[0].movie.title, data.filename)
-                            .then(function () {
+                            .then(function() {
                                 data.movie = {};
                                 data.type = 'movie';
                                 data.movie.image = summary[0].movie.images.fanart.medium;
@@ -156,28 +166,28 @@ Common.matchTorrent = function (file, torrent) {
                                 data.movie.title = summary[0].movie.title;
                                 resolve(data);
                             })
-                            .catch(function (err) {
+                            .catch(function(err) {
                                 data.error = err.message;
                                 resolve(data);
                             });
                     }
 
                 })
-                .catch(function (err) {
+                .catch(function(err) {
                     reject(new Error('An error occured while trying to get subtitles'));
                 });
         });
     };
 
-    var searchEpisode = function (title, season, episode) {
-        return Q.Promise(function (resolve, reject) {
+    var searchEpisode = function(title, season, episode) {
+        return Q.Promise(function(resolve, reject) {
             if (!title || !season || !episode) {
                 return reject(new Error('Title, season and episode need to be passed'));
             }
 
             // find a matching show
             App.Trakt.shows.summary(title)
-                .then(function (summary) {
+                .then(function(summary) {
 
                     if (!summary || summary.length === 0) {
                         return reject(new Error('Unable to fetch data from Trakt.tv'));
@@ -185,7 +195,7 @@ Common.matchTorrent = function (file, torrent) {
 
                         // find the corresponding episode
                         App.Trakt.episodes.summary(title, season, episode)
-                            .then(function (episodeSummary) {
+                            .then(function(episodeSummary) {
 
                                 if (!episodeSummary) {
                                     return reject(new Error('Unable to fetch data from Trakt.tv'));
@@ -205,20 +215,20 @@ Common.matchTorrent = function (file, torrent) {
                                     resolve(data);
                                 }
 
-                            }).catch(function (err) {
+                            }).catch(function(err) {
                                 reject(new Error('Error while looking for metadata to get subtitles'));
                             });
                     }
 
                 })
-                .catch(function (err) {
+                .catch(function(err) {
                     reject(new Error('Error while looking for metadata to get subtitles'));
                 });
         });
     };
 
-    var injectTorrent = function (file, torrent) {
-        return Q.Promise(function (resolve, reject) {
+    var injectTorrent = function(file, torrent) {
+        return Q.Promise(function(resolve, reject) {
             if (!torrent) {
                 resolve(file);
             }
@@ -242,8 +252,8 @@ Common.matchTorrent = function (file, torrent) {
         });
     };
 
-    var formatTitle = function (title) {
-        return Q.Promise(function (resolve, reject) {
+    var formatTitle = function(title) {
+        return Q.Promise(function(resolve, reject) {
             var formatted = {};
 
             // regex match
@@ -299,7 +309,7 @@ Common.matchTorrent = function (file, torrent) {
         });
     };
 
-    var injectQuality = function (title) {
+    var injectQuality = function(title) {
         // 480p
         if (title.match(/480[pix]/i)) {
             return '480p';
@@ -333,7 +343,7 @@ Common.matchTorrent = function (file, torrent) {
 
         // inject torrent title if not in filename
         injectTorrent(file, torrent)
-            .then(function (parsed) {
+            .then(function(parsed) {
                 var title = $.trim(parsed.replace(/\[rartv\]/i, '').replace(/\[PublicHD\]/i, '').replace(/\[ettv\]/i, '').replace(/\[eztv\]/i, '')).replace(/[\s]/g, '.');
                 data.filename = file;
 
@@ -343,30 +353,30 @@ Common.matchTorrent = function (file, torrent) {
                 }
 
                 formatTitle(parsed)
-                    .then(function (obj) {
+                    .then(function(obj) {
                         searchEpisode(obj.title, obj.season, obj.episode)
-                            .then(function (result) {
+                            .then(function(result) {
                                 result.filename = data.filename;
                                 defer.resolve(result);
                             })
-                            .catch(function (error) {
+                            .catch(function(error) {
                                 searchMovie(obj.title)
-                                    .then(function (result) {
+                                    .then(function(result) {
                                         result.filename = data.filename;
                                         defer.resolve(result);
                                     })
-                                    .catch(function (error) {
+                                    .catch(function(error) {
                                         data.error = error.message;
                                         defer.resolve(data);
                                     });
                             });
                     })
-                    .catch(function (error) {
+                    .catch(function(error) {
                         data.error = error.message;
                         defer.resolve(data);
                     });
             })
-            .catch(function (error) {
+            .catch(function(error) {
                 data.error = error.message;
                 defer.resolve(data);
             });
@@ -375,7 +385,7 @@ Common.matchTorrent = function (file, torrent) {
     return defer.promise;
 };
 
-Common.sanitize = function (input) {
+Common.sanitize = function(input) {
     function sanitizeString(string) {
         return require('sanitizer').sanitize(string);
     }

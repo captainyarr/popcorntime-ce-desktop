@@ -4983,6 +4983,7 @@ body,
     .episode-info {
         width: 46%;
     }
+
     .tabs-episodes {
         width: 38%;
     }
@@ -4992,12 +4993,15 @@ body,
     .episode-info {
         width: 36%;
     }
+
     .tabs-episodes {
         width: 47%;
     }
+
     .episode-info-title {
         font-size: 18px;
     }
+
     .episode-info-number {
         top: 36px;
     }
@@ -6876,6 +6880,20 @@ body,
     padding-right: 8px;
 }
 
+.settings-container-contain .settings-container #connection .reset-ytsAPI {
+    font-size: 13px;
+    color: #939597;
+    -webkit-transition: all 0.5s;
+    transition: all 0.5s;
+}
+
+.settings-container-contain .settings-container #connection .reset-ytsAPI:hover {
+    cursor: pointer;
+    color: #d9394b;
+    -webkit-transition: all 0.5s;
+    transition: all 0.5s;
+}
+
 .settings-container-contain .settings-container #connection .reset-tvAPI {
     font-size: 13px;
     color: rgba(228, 233, 242, 0.7);
@@ -7220,6 +7238,7 @@ body,
         -webkit-transform: rotate(0deg);
         transform: rotate(0deg);
     }
+
     100% {
         -webkit-transform: rotate(360deg);
         transform: rotate(360deg);
@@ -7231,6 +7250,7 @@ body,
         -webkit-transform: rotate(0deg);
         transform: rotate(0deg);
     }
+
     100% {
         -webkit-transform: rotate(360deg);
         transform: rotate(360deg);
@@ -7242,6 +7262,7 @@ body,
         -webkit-transform: rotate(0deg);
         transform: rotate(0deg);
     }
+
     100% {
         -webkit-transform: rotate(360deg);
         transform: rotate(360deg);
@@ -7253,6 +7274,7 @@ body,
         -webkit-transform: rotate(0deg);
         transform: rotate(0deg);
     }
+
     100% {
         -webkit-transform: rotate(360deg);
         transform: rotate(360deg);

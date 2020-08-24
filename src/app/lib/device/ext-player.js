@@ -8,17 +8,23 @@
     var collection = App.Device.Collection;
     var child = require('child_process');
 
+    var model; //Store current streamModel 
+
     var ExtPlayer = App.Device.Generic.extend({
         defaults: {
             type: 'ext-app',
             name: i18n.__('External Player'),
         },
 
+        model,
+
         play: function(streamModel) {
             var options = {};
             var args = [];
-            var url = streamModel.attributes.src;
+            var url = streamModel.get('src');//streamModel.attributes.src;
             var cmd;
+
+            this.model = streamModel;
 
             if (process.platform == 'win32') {
                 // "" So it behaves when spaces in path
@@ -80,6 +86,8 @@
 
             var player = child.spawn(cmd, args, options);
 
+            this.sendToTrakt('start');
+
             player.stdout.on('data', (data) => {
                 win.info(`stdout: ${data}`);
             });
@@ -90,6 +98,7 @@
 
             player.on('error', (data) => {
                 win.error("External Player Error" + data);
+                this.sendToTrakt('stop');
                 App.vent.trigger('player:close');
                 App.vent.trigger('stream:stop');
                 App.vent.trigger('preload:stop');
@@ -101,6 +110,8 @@
                     // don't stop on exit, because Bomi could be already running in background and the command ends while the stream should continue
                     return;
                 }
+                this.sendToTrakt('stop');
+
                 App.vent.trigger('player:close');
                 App.vent.trigger('stream:stop');
                 App.vent.trigger('preload:stop');
@@ -111,7 +122,29 @@
 
         stop: function() { },
 
-        unpause: function() { }
+        unpause: function() { },
+
+        sendToTrakt: function(method) {
+            var type = this.isMovie();
+            var id = type === 'movie' ? this.model.get('imdb_id') : this.model.get('episode_id');
+            var progress = 0; //this.video.currentTime() / this.video.duration() * 100 | 0;
+            
+            if(method == 'stop')
+                progress = 100;
+
+            App.Trakt.scrobble(method, type, id, progress);
+        },
+        isMovie: function() {
+            if (this.model.get('tvdb_id') === undefined) {
+                if (this.model.get('type') === 'video/youtube' || this.model.get('imdb_id') === undefined) {
+                    return undefined;
+                } else {
+                    return 'movie';
+                }
+            } else {
+                return 'episode';
+            }
+        },
     });
 
     function getPlayerName(loc) {
@@ -174,7 +207,7 @@
         },
         'mpv': {
             type: 'mpv',
-            switches: '-quiet',
+            switches: '--quiet',
             subswitch: '--sub-file=',
             fs: '--fs'
         },
@@ -277,7 +310,7 @@
     addPath(process.env.LOCALAPPDATA);
     addPath(process.env.LOCALAPPDATA + '\\Programs');
     addPath(process.env.LOCALAPPDATA + '\\Apps\\2.0\\');
-    
+
     /*
     win.debug("SystemDrive:"+process.env.SystemDrive);
     win.debug("LOCALAPPDATA:"+process.env.LOCALAPPDATA);
