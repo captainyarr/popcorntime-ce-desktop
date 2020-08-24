@@ -1,4 +1,4 @@
-## 0.4.2-0 Beta - WIP Builds
+## 0.4.2-0 Beta - Extra Time, Extra Popcorn - 23 August 2020
 
 New Features:
 - Sort: Sort By, Genres, Type are now saved when going between Movies 
