@@ -140,6 +140,15 @@ Settings.defaultMovieAPI = [{
     strictSSL: true
 }];
 
+Settings.defaultAnimeAPI = [{
+    url: 'http://yts.am/',
+    strictSSL: true
+}, {
+    url: 'http://yts.ag/',
+    strictSSL: true
+}];
+
+
 Settings.ytsAPI = Settings.defaultMovieAPI.slice(0);
 
 Settings.updateEndpoint = {
