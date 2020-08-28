@@ -206,7 +206,8 @@
             var episode, tryName;
             let episodeMatch = "Season " + item.season + " - Episode " + item.episode;
             win.debug(episodeMatch);
-            var match = episodeMatch.match(/[\s_]([0-9]+(-[0-9]+)?|CM|OVA)[\s_]/);
+            //var match = episodeMatch.match(/[\s_]([0-9]+(-[0-9]+)?|CM|OVA)[\s_]/);
+            let match = [item.season,item.episode];
             if (!match) {
                 tryName = item.title.split(/:?(\(|\[)/);
                 if (tryName.length === 1) {
@@ -227,7 +228,7 @@
                     ordered: match ? true : false
                 };
             }
-            torrents[item.episode] = item.torrents;
+            torrents[item.episode] = _.extend(torrents[item.episode],item.torrents);
             /*
             torrents[episode][quality] = {
                 seeds: 0,
@@ -290,11 +291,11 @@
                 cover: img,
                 rating: item.rating.percentage,
                 subtitle: undefined,
-                torrents: movieTorrents(item.__id, item.episodes),
+                torrents: movieTorrents(item._id, item.episodes),
             });
         } else {
             ret = _.extend(ret, {
-                episodes: showTorrents(item.id, item.episodes)
+                episodes: showTorrents(item._id, item.episodes)
             });
         }
 
