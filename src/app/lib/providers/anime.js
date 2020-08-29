@@ -39,11 +39,11 @@
 
         var genres = filters.genre;
         if (genres && (genres !== 'All')) {
-            //params.genres = genres;
+            params.genre = genres;
         }
 
         if (filters.sorter && filters.sorter !== 'popularity') {
-            //params.sort = filters.sorter;
+            params.sort = filters.sorter;
         }
         if (filters.sort === 'name') {
             params.order * -1;
