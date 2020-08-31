@@ -5,13 +5,15 @@
     var Q = require('q');
     var inherits = require('util').inherits;
 
-
     var statusMap = {
         0: 'Not Airing Yet',
         1: 'Currently Airing',
         2: 'Ended'
     };
 
+    /*PopcornTime API Reference
+    link: https://popcornofficial.docs.apiary.io/
+    */
     var URL = 'https://anime.api-fetch.sh/';
 
     var Anime = function() {
@@ -31,7 +33,6 @@
         params.genre = 'all';
 
         let page = (filters.page ? filters.page : 1);
-        //params.page = (filters.page ? filters.page - 1 : 0);
 
         if (filters.keywords) {
             params.keywords = filters.keywords.replace(/\s/g, '% ');
@@ -60,17 +61,6 @@
                 break;
         }
 
-        /*
-        if (filters.type && filters.type !== 'All') {
-            if (filters.type === 'Movies') {
-                params.type = 'movie';
-            } else {
-                params.type = filters.type.toLowerCase();
-            }
-        }
-        */
-
-        // XXX(xaiki): haruchichan currently doesn't support filters
         var url = URL + 'animes/' + page + '?' + querystring.stringify(params).replace(/%25%20/g, '%20');
         win.info('Request to Anime API', url);
         request({
@@ -103,8 +93,6 @@
         var results = _.map(items, function(item) {
             var img = item.images.banner;
             var type = (item.type === 'Movie') ? 'movie' : 'show';
-            //var aired = (item.aired.indexOf(', ') !== -1) ? item.aired.split(', ')[1] : item.aired;
-
             var ret = {
                 images: {
                     poster: 'https://media.kitsu.io/anime/poster_images/' + item._id + '/large.jpg',
@@ -207,7 +195,7 @@
             let episodeMatch = "Season " + item.season + " - Episode " + item.episode;
             win.debug(episodeMatch);
             //var match = episodeMatch.match(/[\s_]([0-9]+(-[0-9]+)?|CM|OVA)[\s_]/);
-            let match = [item.season,item.episode];
+            let match = [item.season, item.episode];
             if (!match) {
                 tryName = item.title.split(/:?(\(|\[)/);
                 if (tryName.length === 1) {
@@ -228,7 +216,7 @@
                     ordered: match ? true : false
                 };
             }
-            torrents[item.episode] = _.extend(torrents[item.episode],item.torrents);
+            torrents[item.episode] = _.extend(torrents[item.episode], item.torrents);
             /*
             torrents[episode][quality] = {
                 seeds: 0,
