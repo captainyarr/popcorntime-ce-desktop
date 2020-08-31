@@ -149,7 +149,7 @@
         providers: {
             movie: ['Yts'],
             tvshow: ['TVApi'],
-            anime: ['Haruhichan'],
+            anime: ['Anime'],
             subtitle: 'OpenSubtitlesMovies',
             metadata: 'Trakttv',
             tvst: 'TVShowTime',
