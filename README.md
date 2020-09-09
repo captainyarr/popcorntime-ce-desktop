@@ -18,6 +18,8 @@ Want to report a bug, request a feature, contribute or translate Popcorn Time? W
 
 Please don't post pull requests that reformats the code. Please don't remove whitespaces. Don't do any dirty job.
 
+Donate via BTC: 1PSfipNWyDjBFjecgLAaTC1wvocHAVrwhu
+
 ## Getting Started
 
 If you're comfortable getting up and running from a `git clone`, this method is for you.

@@ -1,11 +1,13 @@
 (function(App) {
     'use strict';
     var Q = require('q');
+    let currentFilter = {};
 
     var Favorites = function() { };
     Favorites.prototype.constructor = Favorites;
 
     var queryTorrents = function(filters) {
+        currentFilter = filters;
         return App.db.getBookmarks(filters)
             .then(function(data) {
                 return data;
