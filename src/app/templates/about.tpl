@@ -26,7 +26,8 @@
                 <%= i18n.__("Popcorn Time! is the result of many developers and designers putting a bunch of APIs together to make the experience of watching torrent movies as simple as possible.") %><br/>
                 <%= i18n.__("We are an open source project. We are from all over the world. We love our movies. And boy, do we love popcorn.") %><br/>
                 <%= i18n.__("Subtitles are provided by")%> <a class="links" href="http://opensubtitles.org">opensubtitles.org</a>.<br><br>
-                <%= i18n.__("This version of Popcorn Time CE is a fork based on Popcorntime Community.") %><br/>
+                <%= i18n.__("This version of Popcorn Time CE is a fork based on Popcorntime Community.") %><br/><br/>
+                <%= i18n.__("Donate via BTC:") %> <a class="links" href="https://www.blockchain.com/btc/address/1PSfipNWyDjBFjecgLAaTC1wvocHAVrwhu">1PSfipNWyDjBFjecgLAaTC1wvocHAVrwhu</a></p><br/>
             </div>
         </div>
 
@@ -45,7 +46,6 @@
         <div class="last-line">
             <%= i18n.__("Made with") %> <span style="color:#e74c3c;">&#10084;</span> <%= i18n.__("by a bunch of geeks from All Around The World") %>
         </div>
-
     </div>
     <div class="changelog-overlay">
         <div class="title"><%=i18n.__("Changelog")%></div>
