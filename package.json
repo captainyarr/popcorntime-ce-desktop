@@ -68,7 +68,7 @@
         "request": "^2.88.2",
         "rimraf": "^3.0.2",
         "sanitizer": "^0.1.2",
-        "semver": "^7.3.2",
+        "semver": "^7.3.4",
         "send": "^0.17.1",
         "strike-api": "0.2.0",
         "tar": "^5.0.5",
