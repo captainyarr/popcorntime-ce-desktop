@@ -10,8 +10,6 @@
         },
 
         initialize: function() {
-            win.debug(this.get('sorters'));
-
             switch (App.currentview) {
                 case 'movies':
                     this.set('sorter', this.get('sorter') || AdvSettings.get('lastSortMovie') || this.get('sorters')[0]);
