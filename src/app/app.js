@@ -39,17 +39,17 @@ win.debug = function() {
 };
 win.info = function() {
     var params = Array.prototype.slice.call(arguments, 1);
-    params.unshift('%c[%cINFO%c] %c' + arguments[0], 'color: black;','color: blue;', 'color: black;','color: grey;');
+    params.unshift('%c[%cINFO%c] %c' + arguments[0], 'color: black;', 'color: blue;', 'color: black;', 'color: grey;');
     console.info.apply(console, params);
 };
 win.warn = function() {
     var params = Array.prototype.slice.call(arguments, 1);
-    params.unshift('[%cWARNING%c] %c' + arguments[0], 'color: orange;', 'color: black;','color: grey;');
+    params.unshift('[%cWARNING%c] %c' + arguments[0], 'color: orange;', 'color: black;', 'color: grey;');
     console.warn.apply(console, params);
 };
 win.error = function() {
     var params = Array.prototype.slice.call(arguments, 1);
-    params.unshift('%c[%cERROR%c] %c' + arguments[0], 'color: black;', 'color: red;', 'color: black;','color: grey;');
+    params.unshift('%c[%cERROR%c] %c' + arguments[0], 'color: black;', 'color: red;', 'color: black;', 'color: grey;');
     console.error.apply(console, params);
     fs.appendFileSync(path.join(require('nw.gui').App.dataPath, 'logs.txt'), '\n\n' + (arguments[0].stack || arguments[0])); // log errors;
 };
@@ -144,10 +144,10 @@ App.addInitializer(function(options) {
         zoom = 2;
     }
     /*
-	if (ScreenResolution.UltraHD) {
-		zoom = 4;
-	}
-	*/
+    if (ScreenResolution.UltraHD) {
+        zoom = 4;
+    }
+    */
 
     var width = parseInt(localStorage.width ? localStorage.width : Settings.defaultWidth);
     var height = parseInt(localStorage.height ? localStorage.height : Settings.defaultHeight);
@@ -503,7 +503,7 @@ var handleTorrent = function(torrent) {
         var torrentUrl = new URL(torrent);
         torrent = unescape(torrentUrl.protocol + torrentUrl.search);
     } else
-        torrent = unescape(torrent);       
+        torrent = unescape(torrent);
     try {
         App.PlayerView.closePlayer();
     } catch (err) {
@@ -631,6 +631,6 @@ process.on('uncaughtException', function(err) {
             App.vent.trigger('movies:list');
             $('.notification_alert').show().html('An error occured with the localization in ' + currentLocale).delay(4000).fadeOut(400);
         }
-    } catch (e) {}
+    } catch (e) { }
     win.error(err, err.stack);
 });
