@@ -235,7 +235,7 @@
                     category: rarbg.CATEGORY.MOVIES,
                     limit: 100,
                     sort: 'last',
-                    min_seeders: null,
+                    min_seeders: 2,
                     min_leechers: null,
                     format: 'json_extended',
                     ranked: null
