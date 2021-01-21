@@ -156,15 +156,26 @@
             var maxSize = 0;
             var file_index = 0;
 
+            //Deselect all files on initial download
+            this.files.forEach(file => file.deselect());
+            this.deselect(0, this.pieces.length - 1, false);
+
             if (streamInfo.get('file_index')) {
                 size = this.files[streamInfo.get('file_index')].length; // torrent with multi-files
             } else {
                 this.files.forEach(function(file, index) { // pct torrent
+                    win.debug("file.name: " + file.name);
                     win.debug("file.length: " + file.length);
+
                     size += file.length || 0;
                     if (file.length >= maxSize) {
                         file_index = index;
                         maxSize = file.length;
+                    }
+
+                    //Filter file type not wanted
+                    if(!file.name.endsWith('.exe')){
+                        file.select(); //Select file to download
                     }
                 });
             }
@@ -568,7 +579,7 @@
             // HACK(xaiki): we need to go through parse torrent
             // if we have a torrent and not an http source, this
             // is fragile as shit.
-            if (typeof(torrentUrl) === 'string' && torrentUrl.substring(0, 7) === 'http://' && !torrentUrl.match('\\.torrent') && !torrentUrl.match('\\.php?')) {
+            if (typeof (torrentUrl) === 'string' && torrentUrl.substring(0, 7) === 'http://' && !torrentUrl.match('\\.torrent') && !torrentUrl.match('\\.php?')) {
                 return Streamer.startStream(model, torrentUrl, stateModel);
             } else if (!torrent_read) {
                 //readTorrent(torrentUrl, doTorrent); //preload torrent
