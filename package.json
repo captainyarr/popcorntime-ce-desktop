@@ -33,7 +33,7 @@
     },
     "dependencies": {
         "URIjs": "^1.16.1",
-        "adm-zip": "0.4.16",
+        "adm-zip": "0.5.2",
         "airplay-js": "^0.3.0",
         "ajv": "6.12.6",
         "async": "^3.2.0",
