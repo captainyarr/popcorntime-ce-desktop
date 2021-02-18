@@ -54,6 +54,16 @@
         onShow: function() {
 
             win.info('Show movie detail (' + this.model.get('imdb_id') + ')');
+
+            //GA: Player Launched
+            ga('send', {
+                hitType: 'event',
+                eventCategory: 'Movie',
+                eventAction: 'MovieClick',
+                eventLabel: this.model.get('imdb_id') + "\\" + this.model.get('title')
+            });
+
+
             this.handleAnime();
 
             var torrents = this.model.get('torrents');
@@ -235,7 +245,7 @@
             win.info('Subtitles: ' + this.subtitle_selected);
         },
 
-        startStreaming: function () {
+        startStreaming: function() {
             var playerType = App.Device.Collection.selected.get('type');
             var playerName = App.Device.Collection.selected.get('name');
 
@@ -312,7 +322,7 @@
             }
         },
 
-        playTrailer: function () {
+        playTrailer: function() {
 
             var trailer = new Backbone.Model({
                 src: this.model.get('trailer'),
@@ -324,7 +334,7 @@
 
             var tmpPlayer = 'local';
 
-            if(App.Device.Collection.selected != null)
+            if (App.Device.Collection.selected != null)
                 tmpPlayer = App.Device.Collection.selected.attributes.id;
             App.Device.Collection.setDevice('local');
             App.vent.trigger('stream:ready', trailer);
@@ -382,8 +392,8 @@
                 .tooltip('fixTitle');
 
             $('.health-icon').tooltip({
-                    html: true
-                })
+                html: true
+            })
                 .removeClass('Bad Medium Good Excellent')
                 .addClass(health)
                 .attr('data-original-title', i18n.__('Health ' + health) + ' - ' + i18n.__('Ratio:') + ' ' + ratio.toFixed(2) + ' <br> ' + i18n.__('Seeds') + ': ' + torrent.seed + ' - ' + i18n.__('Peers') + ': ' + torrent.peer)
@@ -474,10 +484,10 @@
             $('li[data-imdb-id="' + this.model.get('imdb_id') + '"] .actions-watched').click();
         },
 
-        openIMDb: function () {
+        openIMDb: function() {
             gui.Shell.openExternal('http://www.imdb.com/title/' + this.model.get('imdb_id'));
         },
-        
+
         openMagnet: function(e) {
             var provider = this.model.get('provider'),
                 torrent = this.model.get('torrents')[this.model.get('quality')],
@@ -511,7 +521,7 @@
             }
         },
 
-        selectPlayer: function (e) { //onclick li player
+        selectPlayer: function(e) { //onclick li player
             var player = $(e.currentTarget).parent('li').attr('id').replace('player-', '');
             win.info('Initial Device set to: ' + player);
             //this.model.set('device', player);
