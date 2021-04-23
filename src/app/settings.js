@@ -119,13 +119,7 @@ Settings.opensubtitlesUsername = "";
 Settings.opensubtitlesPassword = "";
 
 Settings.defaultTvAPI = [{
-    url: 'https://tv-v2.api-fetch.sh/',
-    strictSSL: true
-}, {
-    url: 'https://tv-v2.api-fetch.am/',
-    strictSSL: true
-}, {
-    url: 'https://tv-v2.api-fetch.website/',
+    url: 'https://popcorn-ru.tk/',
     strictSSL: true
 }];
 
