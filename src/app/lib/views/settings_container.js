@@ -725,7 +725,7 @@
         },
 
         resetTmpLocation: function() {
-            var value = path.join(os.tmpDir(), 'Popcorn-Time');
+            var value = path.join(os.tmpdir(), 'Popcorn-Time');
             $('#tmpLocation').val(value);
             this.render();
             return value;

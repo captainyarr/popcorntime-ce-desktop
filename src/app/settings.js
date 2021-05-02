@@ -71,7 +71,7 @@ Settings.tvstAccessToken = '';
 Settings.connectionLimit = 100;
 Settings.dhtLimit = 50;
 Settings.streamPort = 0; // 0 = Random
-Settings.tmpLocation = path.join(os.tmpDir(), 'Popcorn-Time');
+Settings.tmpLocation = path.join(os.tmpdir(), 'Popcorn-Time');
 Settings.databaseLocation = path.join(data_path, 'data');
 Settings.deleteTmpOnClose = false;
 Settings.automaticUpdating = false;
