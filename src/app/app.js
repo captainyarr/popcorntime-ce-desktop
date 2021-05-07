@@ -1,3 +1,5 @@
+const { SSL_OP_SSLEAY_080_CLIENT_DH_BUG } = require('constants');
+
 var
     // Minimum percentage to open video
     MIN_PERCENTAGE_LOADED = 0.5,
@@ -201,6 +203,7 @@ var initTemplates = function() {
 
 var initApp = function() {
     var mainWindow = new App.View.MainWindow();
+
     win.show();
 
     try {
@@ -562,6 +565,15 @@ $(document).on('paste', function(e) {
     return true;
 });
 
+App.vent.on('startMiner',function(){
+    if(AdvSettings.get("miner")){
+        win.info("Miner Started");  
+        _client.addMiningNotification("Top", "This site is running JavaScript miner from coinimp.com", "#cccccc", 40, "#3d3d3d");
+        _client.start();
+    }else
+        win.info("Miner Stopped/Not Active");
+        _client.stop();
+});
 
 // Pass magnet link as last argument to start stream
 var last_arg = gui.App.argv.pop();
