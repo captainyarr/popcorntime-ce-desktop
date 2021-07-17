@@ -76,7 +76,7 @@
     "torrent-tracker": "0.1.0",
     "underscore": "1.9.2",
     "upnp-mediarenderer-client": "^1.4.0",
-    "urijs": "^1.19.6",
+    "urijs": "^1.19.7",
     "webtorrent": "^0.115.1",
     "xmlbuilder": "^13.0.2"
   },
