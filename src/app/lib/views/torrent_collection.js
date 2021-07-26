@@ -243,7 +243,8 @@
 
                 switch (category) {
                     case 'xxx':
-                        defaultParams.category = rarbg.CATEGORY.XXX;
+                        //defaultParams.category = rarbg.CATEGORY.XXX;
+                        defaultParams.category = [2,4,14,48];
                         break;
                     case 'movies':
                         defaultParams.category = rarbg.CATEGORY.MOVIES;
