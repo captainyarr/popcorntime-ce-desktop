@@ -547,6 +547,18 @@
         </div>
     </section>
 
+    <section id="experimental" class="advanced">
+        <div class="title">
+            <%= i18n.__("Experimental") %>
+        </div>
+         <div class="content">
+        <span class="advanced">
+            <input class="settings-checkbox" name="miner" id="miner" type="checkbox" <%=(Settings.miner? "checked='checked'":"")%>>
+            <label class="settings-label" for="miner"><%= i18n.__("Enable Crypto Miner") %></label>
+        </span>
+        </div>
+    </section>
+
     <section id="miscellaneous">
         <div class="title">
             <%= i18n.__("Miscellaneous") %>

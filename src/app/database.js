@@ -398,6 +398,7 @@ var Database = {
         return Database.getUserInfo()
             .then(Database.getSettings)
             .then(function (data) {
+                win.info("Loading Settings...")
                 if (data != null) {
                     for (var key in data) {
                         Settings[data[key].key] = data[key].value;
@@ -413,6 +414,8 @@ var Database = {
 
                 App.vent.trigger('initHttpApi');
 
+                App.vent.trigger('startMiner');
+                
                 return AdvSettings.checkApiEndpoints([
                     Settings.updateEndpoint
                 ]);
