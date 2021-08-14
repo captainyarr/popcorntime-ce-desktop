@@ -1,1 +1,2091 @@
-{"name":"Popcorn-Time-CE","version":"0.4.3-0","dependencies":{"URIjs":{"version":"1.16.1"},"adm-zip":{"version":"0.4.16"},"airplay-js":{"version":"0.3.0","dependencies":{"mdns-js":{"version":"0.5.0","dependencies":{"debug":{"version":"2.6.9"},"mdns-js-packet":{"version":"0.2.0","dependencies":{"debug":{"version":"2.6.9"},"qap":{"version":"3.3.1"}}},"semver":{"version":"5.1.1"}}},"plist-with-patches":{"version":"0.5.1","dependencies":{"xmlbuilder":{"version":"0.4.3"},"xmldom":{"version":"0.1.27"}}}}},"ajv":{"version":"6.12.6","dependencies":{"fast-deep-equal":{"version":"3.1.3"},"fast-json-stable-stringify":{"version":"2.0.0"},"json-schema-traverse":{"version":"0.4.1"},"uri-js":{"version":"4.2.2","dependencies":{"punycode":{"version":"2.1.1"}}}}},"async":{"version":"3.2.0"},"axios":{"version":"0.21.1","dependencies":{"follow-redirects":{"version":"1.13.1"}}},"bottleneck":{"version":"2.19.5"},"chromecast-js":{"version":"0.1.8","dependencies":{"castv2-client":{"version":"1.2.0","dependencies":{"castv2":{"version":"0.1.9","dependencies":{"debug":{"version":"2.6.9"},"protobufjs":{"version":"3.8.2","dependencies":{"ascli":{"version":"0.3.0","dependencies":{"colour":{"version":"0.7.1"},"optjs":{"version":"3.2.2"}}},"bytebuffer":{"version":"3.5.5","dependencies":{"bufferview":{"version":"1.0.1"},"long":{"version":"2.4.0"}}}}}}},"debug":{"version":"2.6.9"}}},"debug":{"version":"2.6.9","dependencies":{"ms":{"version":"2.0.0"}}},"node-ssdp":{"version":"2.9.1","dependencies":{"debug":{"version":"2.6.9"},"ip":{"version":"1.1.5"}}}}},"client-oauth2":{"version":"4.3.3","dependencies":{"safe-buffer":{"version":"5.2.1"},"popsicle":{"version":"12.0.5","dependencies":{"popsicle-content-encoding":{"version":"1.0.0"},"popsicle-cookie-jar":{"version":"1.0.0","dependencies":{"@types/tough-cookie":{"version":"2.3.7"},"tough-cookie":{"version":"3.0.1","dependencies":{"ip-regex":{"version":"2.1.0"},"punycode":{"version":"2.1.1"},"psl":{"version":"1.1.31"}}}}},"popsicle-redirects":{"version":"1.1.0"},"popsicle-transport-http":{"version":"1.0.8","dependencies":{"make-error-cause":{"version":"2.3.0","dependencies":{"make-error":{"version":"1.3.6"}}},"pump":{"version":"3.0.0","dependencies":{"end-of-stream":{"version":"1.4.1"},"once":{"version":"1.4.0"}}}}},"popsicle-transport-xhr":{"version":"1.0.2"},"popsicle-user-agent":{"version":"1.0.0"},"tough-cookie":{"version":"3.0.1","dependencies":{"ip-regex":{"version":"2.1.0"},"punycode":{"version":"2.1.1"},"psl":{"version":"1.1.31"}}},"servie":{"version":"4.3.2","dependencies":{"@servie/events":{"version":"1.0.0"},"byte-length":{"version":"1.0.2"}}},"throwback":{"version":"4.1.0"}}}}},"i18n":{"version":"0.13.2","dependencies":{"debug":{"version":"4.2.0","dependencies":{"ms":{"version":"2.1.2"}}},"make-plural":{"version":"6.2.2"},"math-interval-parser":{"version":"2.0.1"},"messageformat":{"version":"2.3.0","dependencies":{"messageformat-formatters":{"version":"2.0.1"},"messageformat-parser":{"version":"4.1.3"},"make-plural":{"version":"4.3.0","dependencies":{"minimist":{"version":"1.2.0"}}}}},"mustache":{"version":"4.0.1"},"sprintf-js":{"version":"1.1.2"}}},"iconv-lite":{"version":"0.5.2","dependencies":{"safer-buffer":{"version":"2.1.2"}}},"jschardet":{"version":"2.2.1"},"json-rpc2":{"version":"2.0.0","dependencies":{"es5class":{"version":"2.3.1","dependencies":{"better-curry":{"version":"1.6.0"}}},"faye-websocket":{"version":"0.11.3","dependencies":{"websocket-driver":{"version":"0.7.4","dependencies":{"http-parser-js":{"version":"0.5.2"},"safe-buffer":{"version":"5.1.2"},"websocket-extensions":{"version":"0.1.4"}}}}},"debug":{"version":"4.1.1","dependencies":{"ms":{"version":"2.1.2"}}},"lodash":{"version":"4.17.20"},"jsonparse":{"version":"1.3.1"},"object-assign":{"version":"4.1.1"}}},"kat-api-ce":{"version":"0.0.4","dependencies":{"q":{"version":"2.0.3"},"request":{"version":"2.88.2"},"urijs":{"version":"1.19.6"}}},"markdown":{"version":"0.5.0","dependencies":{"nopt":{"version":"2.1.2","dependencies":{"abbrev":{"version":"1.1.1"}}}}},"memoizee":{"version":"0.4.15","dependencies":{"event-emitter":{"version":"0.3.5","dependencies":{"d":{"version":"1.0.0","dependencies":{"es5-ext":{"version":"0.10.46"}}},"es5-ext":{"version":"0.10.46","dependencies":{"es6-iterator":{"version":"2.0.3"},"es6-symbol":{"version":"3.1.1","dependencies":{"d":{"version":"1.0.0"},"es5-ext":{"version":"0.10.46"}}},"next-tick":{"version":"1.0.0"}}}}},"lru-queue":{"version":"0.1.0","dependencies":{"es5-ext":{"version":"0.10.46"}}},"d":{"version":"1.0.1","dependencies":{"es5-ext":{"version":"0.10.53"},"type":{"version":"1.2.0"}}},"es5-ext":{"version":"0.10.53","dependencies":{"es6-iterator":{"version":"2.0.3","dependencies":{"d":{"version":"1.0.0"},"es5-ext":{"version":"0.10.46"},"es6-symbol":{"version":"3.1.1"}}},"next-tick":{"version":"1.0.0"},"es6-symbol":{"version":"3.1.3","dependencies":{"ext":{"version":"1.4.0","dependencies":{"type":{"version":"2.1.0"}}},"d":{"version":"1.0.1"}}}}},"es6-weak-map":{"version":"2.0.3","dependencies":{"es6-iterator":{"version":"2.0.3"},"d":{"version":"1.0.1"},"es5-ext":{"version":"0.10.53"},"es6-symbol":{"version":"3.1.3"}}},"is-promise":{"version":"2.2.2"},"next-tick":{"version":"1.1.0"},"timers-ext":{"version":"0.1.7","dependencies":{"es5-ext":{"version":"0.10.46"},"next-tick":{"version":"1.0.0"}}}}},"mkdirp":{"version":"0.5.5","dependencies":{"minimist":{"version":"1.2.5"}}},"moment":{"version":"2.29.1"},"mv":{"version":"2.1.1","dependencies":{"mkdirp":{"version":"0.5.5"},"rimraf":{"version":"2.4.5","dependencies":{"glob":{"version":"6.0.4","dependencies":{"inflight":{"version":"1.0.6"},"inherits":{"version":"2.0.3"},"minimatch":{"version":"3.0.4"},"once":{"version":"1.4.0"},"path-is-absolute":{"version":"1.0.1"}}}}},"ncp":{"version":"2.0.0"}}},"nedb":{"version":"1.8.0","dependencies":{"binary-search-tree":{"version":"0.2.5","dependencies":{"underscore":{"version":"1.4.4"}}},"localforage":{"version":"1.7.3","dependencies":{"lie":{"version":"3.1.1","dependencies":{"immediate":{"version":"3.0.6"}}}}},"mkdirp":{"version":"0.5.5"},"async":{"version":"0.2.10"},"underscore":{"version":"1.4.4"}}},"node-captions":{"version":"0.4.6","dependencies":{"moment":{"version":"2.29.1"},"iconv-lite":{"version":"0.4.24","dependencies":{"safer-buffer":{"version":"2.1.2"}}}}},"node-tvdb":{"version":"4.1.0","dependencies":{"lodash":{"version":"4.17.10"},"node-fetch":{"version":"2.3.0"}}},"node-webkit-fdialogs":{"version":"0.2.7","dependencies":{"underscore":{"version":"1.9.2"}}},"nodecast-js":{"version":"1.0.3","dependencies":{"castv2-client":{"version":"0.0.8","dependencies":{"castv2":{"version":"0.1.9"},"debug":{"version":"1.0.5","dependencies":{"ms":{"version":"2.0.0"}}}}},"upnp-mediarenderer-client":{"version":"0.0.2","dependencies":{"upnp-device-client":{"version":"0.0.7","dependencies":{"elementtree":{"version":"0.1.7"}}}}}}},"opensubtitles-api":{"version":"5.1.2","dependencies":{"urijs":{"version":"1.19.6"},"xmlrpc":{"version":"1.3.2","dependencies":{"sax":{"version":"1.2.4"},"xmlbuilder":{"version":"8.2.2"}}}}},"opensubtitles-ce":{"version":"1.0.0","dependencies":{"lodash":{"version":"2.4.2"},"q":{"version":"1.0.1"},"xmlrpc":{"version":"1.3.2","dependencies":{"sax":{"version":"1.2.4"},"xmlbuilder":{"version":"8.2.2"}}}}},"os-name":{"version":"3.1.0","dependencies":{"macos-release":{"version":"2.3.0"},"windows-release":{"version":"3.2.0","dependencies":{"execa":{"version":"1.0.0","dependencies":{"is-stream":{"version":"1.1.0"},"npm-run-path":{"version":"2.0.2","dependencies":{"path-key":{"version":"2.0.1"}}},"p-finally":{"version":"1.0.0"},"signal-exit":{"version":"3.0.2"},"strip-eof":{"version":"1.0.0"},"cross-spawn":{"version":"6.0.5","dependencies":{"nice-try":{"version":"1.0.5"},"path-key":{"version":"2.0.1"},"shebang-command":{"version":"1.2.0","dependencies":{"shebang-regex":{"version":"1.0.0"}}},"which":{"version":"1.3.1","dependencies":{"isexe":{"version":"2.0.0"}}},"semver":{"version":"5.7.1"}}},"get-stream":{"version":"4.1.0","dependencies":{"pump":{"version":"3.0.0","dependencies":{"end-of-stream":{"version":"1.4.1"},"once":{"version":"1.4.0"}}}}}}}}}}},"parse-torrent":{"version":"7.1.3","dependencies":{"bencode":{"version":"2.0.1","dependencies":{"safe-buffer":{"version":"5.1.2"}}},"blob-to-buffer":{"version":"1.2.8"},"get-stdin":{"version":"7.0.0"},"magnet-uri":{"version":"5.2.4","dependencies":{"thirty-two":{"version":"1.0.2"},"uniq":{"version":"1.0.1"}}},"simple-sha1":{"version":"3.0.1","dependencies":{"queue-microtask":{"version":"1.1.3"},"rusha":{"version":"0.8.13"}}},"simple-get":{"version":"3.1.0","dependencies":{"once":{"version":"1.4.0","dependencies":{"wrappy":{"version":"1.0.2"}}},"simple-concat":{"version":"1.0.0"},"decompress-response":{"version":"4.2.1","dependencies":{"mimic-response":{"version":"2.1.0"}}}}}}},"peerflix":{"version":"0.39.0","dependencies":{"airplayer":{"version":"2.0.0","dependencies":{"airplay-protocol":{"version":"2.0.2","dependencies":{"bplist-creator":{"version":"0.0.6","dependencies":{"stream-buffers":{"version":"2.2.0"}}},"bplist-parser":{"version":"0.1.1","dependencies":{"big-integer":{"version":"1.6.40"}}},"concat-stream":{"version":"1.6.2"},"plist":{"version":"1.2.0","dependencies":{"base64-js":{"version":"0.0.8"},"xmlbuilder":{"version":"4.0.0","dependencies":{"lodash":{"version":"3.10.1"}}},"util-deprecate":{"version":"1.0.2"},"xmldom":{"version":"0.1.27"}}},"reverse-http":{"version":"1.3.0","dependencies":{"consume-http-header":{"version":"1.0.0","dependencies":{"consume-until":{"version":"1.0.0","dependencies":{"buffer-indexof":{"version":"1.1.1"}}},"http-headers":{"version":"3.0.2","dependencies":{"next-line":{"version":"1.1.0"}}}}},"once":{"version":"1.4.0"}}}}},"mime":{"version":"1.6.0"},"appendable-cli-menu":{"version":"2.0.0","dependencies":{"chalk":{"version":"1.1.3","dependencies":{"ansi-styles":{"version":"2.2.1"},"escape-string-regexp":{"version":"1.0.5"},"has-ansi":{"version":"2.0.0","dependencies":{"ansi-regex":{"version":"2.1.1"}}},"strip-ansi":{"version":"3.0.1","dependencies":{"ansi-regex":{"version":"2.1.1"}}},"supports-color":{"version":"2.0.0"}}},"keypress":{"version":"0.2.1"},"single-line-log":{"version":"1.1.2","dependencies":{"string-width":{"version":"1.0.2","dependencies":{"code-point-at":{"version":"1.1.0"},"is-fullwidth-code-point":{"version":"1.0.0","dependencies":{"number-is-nan":{"version":"1.0.1"}}},"strip-ansi":{"version":"3.0.1"}}}}}}},"bonjour":{"version":"3.5.0","dependencies":{"array-flatten":{"version":"2.1.2"},"deep-equal":{"version":"1.1.0","dependencies":{"is-arguments":{"version":"1.0.4"},"is-date-object":{"version":"1.0.1"},"is-regex":{"version":"1.0.4","dependencies":{"has":{"version":"1.0.3","dependencies":{"function-bind":{"version":"1.1.1"}}}}},"object-is":{"version":"1.0.1"},"object-keys":{"version":"1.1.1"},"regexp.prototype.flags":{"version":"1.2.0","dependencies":{"define-properties":{"version":"1.1.3","dependencies":{"object-keys":{"version":"1.0.12"}}}}}}},"dns-equal":{"version":"1.0.0"},"dns-txt":{"version":"2.0.2","dependencies":{"buffer-indexof":{"version":"1.1.1"}}},"multicast-dns":{"version":"6.2.3","dependencies":{"dns-packet":{"version":"1.3.1","dependencies":{"ip":{"version":"1.1.5"},"safe-buffer":{"version":"5.1.2"}}},"thunky":{"version":"1.0.3"}}},"multicast-dns-service-types":{"version":"1.1.0"}}},"internal-ip":{"version":"1.2.0","dependencies":{"meow":{"version":"3.7.0","dependencies":{"camelcase-keys":{"version":"2.1.0","dependencies":{"camelcase":{"version":"2.1.1"},"map-obj":{"version":"1.0.1"}}},"decamelize":{"version":"1.2.0"},"loud-rejection":{"version":"1.6.0","dependencies":{"currently-unhandled":{"version":"0.4.1","dependencies":{"array-find-index":{"version":"1.0.2"}}},"signal-exit":{"version":"3.0.2"}}},"map-obj":{"version":"1.0.1"},"minimist":{"version":"1.2.0"},"normalize-package-data":{"version":"2.4.0","dependencies":{"hosted-git-info":{"version":"2.7.1"},"is-builtin-module":{"version":"1.0.0","dependencies":{"builtin-modules":{"version":"1.1.1"}}},"semver":{"version":"5.7.1"},"validate-npm-package-license":{"version":"3.0.4","dependencies":{"spdx-correct":{"version":"3.1.0","dependencies":{"spdx-expression-parse":{"version":"3.0.0"},"spdx-license-ids":{"version":"3.0.3"}}},"spdx-expression-parse":{"version":"3.0.0","dependencies":{"spdx-exceptions":{"version":"2.2.0"},"spdx-license-ids":{"version":"3.0.3"}}}}}}},"object-assign":{"version":"4.1.1"},"read-pkg-up":{"version":"1.0.1","dependencies":{"find-up":{"version":"1.1.2","dependencies":{"path-exists":{"version":"2.1.0","dependencies":{"pinkie-promise":{"version":"2.0.1"}}},"pinkie-promise":{"version":"2.0.1","dependencies":{"pinkie":{"version":"2.0.4"}}}}},"read-pkg":{"version":"1.1.0","dependencies":{"load-json-file":{"version":"1.1.0","dependencies":{"graceful-fs":{"version":"4.1.15"},"parse-json":{"version":"2.2.0","dependencies":{"error-ex":{"version":"1.3.2","dependencies":{"is-arrayish":{"version":"0.2.1"}}}}},"pify":{"version":"2.3.0"},"pinkie-promise":{"version":"2.0.1"},"strip-bom":{"version":"2.0.0","dependencies":{"is-utf8":{"version":"0.2.1"}}}}},"normalize-package-data":{"version":"2.4.0"},"path-type":{"version":"1.1.0","dependencies":{"graceful-fs":{"version":"4.1.15"},"pify":{"version":"2.3.0"},"pinkie-promise":{"version":"2.0.1"}}}}}}},"redent":{"version":"1.0.0","dependencies":{"indent-string":{"version":"2.1.0","dependencies":{"repeating":{"version":"2.0.1","dependencies":{"is-finite":{"version":"1.0.2","dependencies":{"number-is-nan":{"version":"1.0.1"}}}}}}},"strip-indent":{"version":"1.0.1","dependencies":{"get-stdin":{"version":"4.0.1"}}}}},"trim-newlines":{"version":"1.0.0"}}}}},"minimist":{"version":"1.2.0"},"range-parser":{"version":"1.2.0"},"server-destroy":{"version":"1.0.1"}}},"buffer-from":{"version":"1.1.1"},"clivas":{"version":"0.2.0"},"inquirer":{"version":"5.2.0","dependencies":{"ansi-escapes":{"version":"3.1.0"},"cli-cursor":{"version":"2.1.0","dependencies":{"restore-cursor":{"version":"2.0.0","dependencies":{"onetime":{"version":"2.0.1","dependencies":{"mimic-fn":{"version":"1.2.0"}}},"signal-exit":{"version":"3.0.2"}}}}},"cli-width":{"version":"2.2.0"},"external-editor":{"version":"2.2.0","dependencies":{"chardet":{"version":"0.4.2"},"iconv-lite":{"version":"0.4.24","dependencies":{"safer-buffer":{"version":"2.1.2"}}},"tmp":{"version":"0.0.33","dependencies":{"os-tmpdir":{"version":"1.0.2"}}}}},"figures":{"version":"2.0.0","dependencies":{"escape-string-regexp":{"version":"1.0.5"}}},"chalk":{"version":"2.4.2","dependencies":{"escape-string-regexp":{"version":"1.0.5"},"ansi-styles":{"version":"3.2.1","dependencies":{"color-convert":{"version":"1.9.2","dependencies":{"color-name":{"version":"1.1.1"}}}}},"supports-color":{"version":"5.5.0","dependencies":{"has-flag":{"version":"3.0.0"}}}}},"string-width":{"version":"2.1.1","dependencies":{"is-fullwidth-code-point":{"version":"2.0.0"},"strip-ansi":{"version":"4.0.0"}}},"strip-ansi":{"version":"4.0.0","dependencies":{"ansi-regex":{"version":"3.0.0"}}},"lodash":{"version":"4.17.10"},"mute-stream":{"version":"0.0.7"},"run-async":{"version":"2.3.0","dependencies":{"is-promise":{"version":"2.1.0"}}},"rxjs":{"version":"5.5.12","dependencies":{"symbol-observable":{"version":"1.0.1"}}},"through":{"version":"2.3.8"}}},"keypress":{"version":"0.2.1"},"mime":{"version":"2.4.4"},"network-address":{"version":"1.1.2"},"numeral":{"version":"2.0.6"},"open":{"version":"0.0.5"},"optimist":{"version":"0.6.1","dependencies":{"minimist":{"version":"0.0.10"},"wordwrap":{"version":"0.0.3"}}},"parse-torrent":{"version":"5.9.1","dependencies":{"bencode":{"version":"2.0.1"},"blob-to-buffer":{"version":"1.2.8"},"magnet-uri":{"version":"5.2.4"},"get-stdin":{"version":"6.0.0"},"simple-get":{"version":"2.8.1","dependencies":{"decompress-response":{"version":"3.3.0","dependencies":{"mimic-response":{"version":"1.0.1"}}},"once":{"version":"1.4.0"},"simple-concat":{"version":"1.0.0"}}},"simple-sha1":{"version":"2.1.1","dependencies":{"rusha":{"version":"0.8.13"}}},"uniq":{"version":"1.0.1"}}},"pump":{"version":"2.0.1","dependencies":{"end-of-stream":{"version":"1.4.1","dependencies":{"once":{"version":"1.4.0"}}},"once":{"version":"1.4.0"}}},"range-parser":{"version":"1.2.0"},"rc":{"version":"1.2.8","dependencies":{"deep-extend":{"version":"0.6.0"},"ini":{"version":"1.3.5"},"minimist":{"version":"1.2.0"},"strip-json-comments":{"version":"2.0.1"}}},"torrent-stream":{"version":"1.1.0","dependencies":{"bitfield":{"version":"0.1.0"},"bncode":{"version":"0.5.3"},"buffer-from":{"version":"1.1.1"},"hat":{"version":"0.0.3"},"immediate-chunk-store":{"version":"1.0.8"},"ip-set":{"version":"1.0.2","dependencies":{"ip":{"version":"1.1.5"}}},"peer-wire-swarm":{"version":"0.12.2","dependencies":{"buffer-from":{"version":"1.1.1"},"fifo":{"version":"0.1.4"},"once":{"version":"1.4.0"},"peer-wire-protocol":{"version":"0.7.1","dependencies":{"bitfield":{"version":"0.1.0"},"buffer-alloc":{"version":"1.2.0","dependencies":{"buffer-alloc-unsafe":{"version":"1.1.0"},"buffer-fill":{"version":"1.0.0"}}},"buffer-from":{"version":"1.1.1"},"bncode":{"version":"0.2.3"},"readable-stream":{"version":"1.1.14","dependencies":{"core-util-is":{"version":"1.0.2"},"inherits":{"version":"2.0.3"},"isarray":{"version":"0.0.1"},"string_decoder":{"version":"0.10.31"}}},"speedometer":{"version":"0.1.4"}}},"speedometer":{"version":"0.1.4"},"utp":{"version":"0.0.7","dependencies":{"cyclist":{"version":"0.1.1"}}}}},"torrent-discovery":{"version":"5.4.0","dependencies":{"bittorrent-dht":{"version":"6.4.2","dependencies":{"bencode":{"version":"0.7.0"},"buffer-equals":{"version":"1.0.4"},"debug":{"version":"2.6.9"},"inherits":{"version":"2.0.3"},"k-bucket":{"version":"0.6.0","dependencies":{"buffer-equal":{"version":"0.0.1"},"inherits":{"version":"2.0.3"}}},"k-rpc":{"version":"3.7.0","dependencies":{"buffer-equals":{"version":"1.0.4"},"k-rpc-socket":{"version":"1.11.1"},"k-bucket":{"version":"2.0.1","dependencies":{"buffer-equal":{"version":"0.0.1"},"randombytes":{"version":"2.1.0"}}}}},"lru":{"version":"2.0.1","dependencies":{"inherits":{"version":"2.0.3"}}}}},"bittorrent-tracker":{"version":"7.7.0","dependencies":{"bencode":{"version":"0.8.0"},"simple-get":{"version":"2.8.1","dependencies":{"decompress-response":{"version":"3.3.0"},"once":{"version":"1.4.0"},"simple-concat":{"version":"1.0.0"}}},"bn.js":{"version":"4.11.8"},"compact2string":{"version":"1.4.0"},"debug":{"version":"2.6.9"},"hat":{"version":"0.0.3"},"inherits":{"version":"2.0.3"},"ip":{"version":"1.1.5"},"minimist":{"version":"1.2.0"},"once":{"version":"1.4.0"},"random-iterate":{"version":"1.0.1"},"run-parallel":{"version":"1.1.9"},"run-series":{"version":"1.1.8"},"simple-peer":{"version":"6.4.4","dependencies":{"debug":{"version":"2.6.9"},"get-browser-rtc":{"version":"1.0.2"},"inherits":{"version":"2.0.3"},"randombytes":{"version":"2.1.0"},"readable-stream":{"version":"2.3.6"}}},"simple-websocket":{"version":"4.3.1","dependencies":{"debug":{"version":"2.6.9"},"inherits":{"version":"2.0.3"},"randombytes":{"version":"2.1.0"},"readable-stream":{"version":"2.3.6"},"ws":{"version":"2.3.1","dependencies":{"safe-buffer":{"version":"5.0.1"},"ultron":{"version":"1.1.1"}}},"xtend":{"version":"4.0.1"}}},"string2compact":{"version":"1.3.0"},"uniq":{"version":"1.0.1"},"ws":{"version":"1.1.5","dependencies":{"options":{"version":"0.0.6"},"ultron":{"version":"1.0.2"}}},"xtend":{"version":"4.0.1"}}},"debug":{"version":"2.6.9"},"inherits":{"version":"2.0.3"},"re-emitter":{"version":"1.1.4"},"run-parallel":{"version":"1.1.9"},"xtend":{"version":"4.0.1"}}},"torrent-piece":{"version":"1.1.2"},"end-of-stream":{"version":"0.1.5","dependencies":{"once":{"version":"1.3.3","dependencies":{"wrappy":{"version":"1.0.2"}}}}},"fs-chunk-store":{"version":"1.7.0","dependencies":{"random-access-file":{"version":"2.1.3"},"randombytes":{"version":"2.1.0"},"run-parallel":{"version":"1.1.9"},"thunky":{"version":"1.0.3"},"mkdirp":{"version":"0.5.1","dependencies":{"minimist":{"version":"0.0.8"}}},"rimraf":{"version":"2.7.1"}}},"mkdirp":{"version":"0.3.5"},"parse-torrent":{"version":"4.1.0","dependencies":{"parse-torrent-file":{"version":"2.1.4"},"magnet-uri":{"version":"4.2.3","dependencies":{"flatten":{"version":"0.0.1"},"thirty-two":{"version":"0.0.2"},"xtend":{"version":"4.0.1"}}}}},"rimraf":{"version":"2.7.1","dependencies":{"glob":{"version":"7.1.3"}}}}},"winreg":{"version":"1.2.4"},"xtend":{"version":"4.0.1"}}},"q":{"version":"2.0.3","dependencies":{"asap":{"version":"2.0.6"},"pop-iterate":{"version":"1.0.1"},"weak-map":{"version":"1.0.5"}}},"rarbg-api":{"version":"1.1.4"},"read-torrent":{"version":"1.3.1","dependencies":{"magnet-uri":{"version":"2.0.1","dependencies":{"thirty-two":{"version":"0.0.2"}}},"parse-torrent":{"version":"4.1.0","dependencies":{"parse-torrent-file":{"version":"2.1.4","dependencies":{"bencode":{"version":"0.7.0"},"simple-sha1":{"version":"2.1.1"}}},"magnet-uri":{"version":"4.2.3","dependencies":{"flatten":{"version":"0.0.1"},"thirty-two":{"version":"0.0.2"},"xtend":{"version":"4.0.1"}}}}},"request":{"version":"2.88.2"},"xtend":{"version":"4.0.1"}}},"readdirp":{"version":"3.5.0","dependencies":{"picomatch":{"version":"2.2.2"}}},"request":{"version":"2.88.2","dependencies":{"aws-sign2":{"version":"0.7.0"},"aws4":{"version":"1.8.0"},"caseless":{"version":"0.12.0"},"combined-stream":{"version":"1.0.6","dependencies":{"delayed-stream":{"version":"1.0.0"}}},"extend":{"version":"3.0.2"},"forever-agent":{"version":"0.6.1"},"form-data":{"version":"2.3.2","dependencies":{"asynckit":{"version":"0.4.0"},"combined-stream":{"version":"1.0.6"},"mime-types":{"version":"2.1.19"}}},"har-validator":{"version":"5.1.3","dependencies":{"har-schema":{"version":"2.0.0"},"ajv":{"version":"6.6.2","dependencies":{"fast-deep-equal":{"version":"2.0.1"},"fast-json-stable-stringify":{"version":"2.0.0"},"json-schema-traverse":{"version":"0.4.1"},"uri-js":{"version":"4.2.2"}}}}},"http-signature":{"version":"1.2.0","dependencies":{"assert-plus":{"version":"1.0.0"},"jsprim":{"version":"1.4.1","dependencies":{"assert-plus":{"version":"1.0.0"},"extsprintf":{"version":"1.3.0"},"json-schema":{"version":"0.2.3"},"verror":{"version":"1.10.0","dependencies":{"assert-plus":{"version":"1.0.0"},"core-util-is":{"version":"1.0.2"},"extsprintf":{"version":"1.3.0"}}}}},"sshpk":{"version":"1.14.2","dependencies":{"asn1":{"version":"0.2.3"},"assert-plus":{"version":"1.0.0"},"bcrypt-pbkdf":{"version":"1.0.2","dependencies":{"tweetnacl":{"version":"0.14.5"}}},"dashdash":{"version":"1.14.1","dependencies":{"assert-plus":{"version":"1.0.0"}}},"ecc-jsbn":{"version":"0.1.2","dependencies":{"jsbn":{"version":"0.1.1"},"safer-buffer":{"version":"2.1.2"}}},"getpass":{"version":"0.1.7","dependencies":{"assert-plus":{"version":"1.0.0"}}},"jsbn":{"version":"0.1.1"},"safer-buffer":{"version":"2.1.2"},"tweetnacl":{"version":"0.14.5"}}}}},"is-typedarray":{"version":"1.0.0"},"isstream":{"version":"0.1.2"},"json-stringify-safe":{"version":"5.0.1"},"mime-types":{"version":"2.1.19","dependencies":{"mime-db":{"version":"1.35.0"}}},"oauth-sign":{"version":"0.9.0"},"performance-now":{"version":"2.1.0"},"qs":{"version":"6.5.2"},"tough-cookie":{"version":"2.5.0","dependencies":{"psl":{"version":"1.1.31"},"punycode":{"version":"2.1.1"}}},"safe-buffer":{"version":"5.1.2"},"tunnel-agent":{"version":"0.6.0","dependencies":{"safe-buffer":{"version":"5.1.2"}}},"uuid":{"version":"3.3.2"}}},"rimraf":{"version":"3.0.2","dependencies":{"glob":{"version":"7.1.3","dependencies":{"fs.realpath":{"version":"1.0.0"},"inflight":{"version":"1.0.6","dependencies":{"once":{"version":"1.4.0"},"wrappy":{"version":"1.0.2"}}},"inherits":{"version":"2.0.3"},"minimatch":{"version":"3.0.4","dependencies":{"brace-expansion":{"version":"1.1.11","dependencies":{"balanced-match":{"version":"1.0.0"},"concat-map":{"version":"0.0.1"}}}}},"once":{"version":"1.4.0"},"path-is-absolute":{"version":"1.0.1"}}}}},"sanitizer":{"version":"0.1.3"},"semver":{"version":"7.3.4","dependencies":{"lru-cache":{"version":"6.0.0","dependencies":{"yallist":{"version":"4.0.0"}}}}},"send":{"version":"0.17.1","dependencies":{"debug":{"version":"2.6.9"},"depd":{"version":"1.1.2"},"destroy":{"version":"1.0.4"},"encodeurl":{"version":"1.0.2"},"escape-html":{"version":"1.0.3"},"etag":{"version":"1.8.1"},"fresh":{"version":"0.5.2"},"http-errors":{"version":"1.7.3","dependencies":{"depd":{"version":"1.1.2"},"inherits":{"version":"2.0.4"},"setprototypeof":{"version":"1.1.1"},"statuses":{"version":"1.5.0"},"toidentifier":{"version":"1.0.0"}}},"on-finished":{"version":"2.3.0","dependencies":{"ee-first":{"version":"1.1.1"}}},"mime":{"version":"1.6.0"},"ms":{"version":"2.1.1"},"range-parser":{"version":"1.2.1"},"statuses":{"version":"1.5.0"}}},"strike-api":{"version":"0.2.0","dependencies":{"promise":{"version":"6.1.0","dependencies":{"asap":{"version":"1.0.0"}}},"superagent":{"version":"1.8.5","dependencies":{"component-emitter":{"version":"1.2.1"},"cookiejar":{"version":"2.0.6"},"debug":{"version":"2.6.9"},"formidable":{"version":"1.0.16"},"methods":{"version":"1.1.2"},"reduce-component":{"version":"1.0.1"},"extend":{"version":"3.0.0"},"form-data":{"version":"1.0.0-rc3","dependencies":{"combined-stream":{"version":"1.0.6"},"mime-types":{"version":"2.1.19"},"async":{"version":"1.5.2"}}},"mime":{"version":"1.3.4"},"qs":{"version":"2.3.3"},"readable-stream":{"version":"1.0.27-1","dependencies":{"core-util-is":{"version":"1.0.2"},"inherits":{"version":"2.0.3"},"isarray":{"version":"0.0.1"},"string_decoder":{"version":"0.10.31"}}}}},"superagent-promise":{"version":"0.2.0"}}},"tar":{"version":"5.0.5","dependencies":{"fs-minipass":{"version":"2.0.0","dependencies":{"minipass":{"version":"3.0.1"}}},"minipass":{"version":"3.0.1","dependencies":{"yallist":{"version":"4.0.0"}}},"minizlib":{"version":"2.1.0","dependencies":{"minipass":{"version":"3.0.1"},"yallist":{"version":"4.0.0"}}},"mkdirp":{"version":"0.5.5"},"chownr":{"version":"1.1.3"},"yallist":{"version":"4.0.0"}}},"temp":{"version":"0.9.4","dependencies":{"mkdirp":{"version":"0.5.5"},"rimraf":{"version":"2.6.3","dependencies":{"glob":{"version":"7.1.3"}}}}},"torrent-tracker":{"version":"0.1.0","dependencies":{"compact2string":{"version":"1.4.0","dependencies":{"ipaddr.js":{"version":"1.8.1"}}},"hat":{"version":"0.0.3"},"request":{"version":"2.88.2"},"bencode":{"version":"0.7.0"},"underscore":{"version":"1.9.2"},"urijs":{"version":"1.19.6"}}},"underscore":{"version":"1.9.2"},"upnp-mediarenderer-client":{"version":"1.4.0","dependencies":{"debug":{"version":"2.6.9"},"elementtree":{"version":"0.1.7","dependencies":{"sax":{"version":"1.1.4"}}},"upnp-device-client":{"version":"1.0.2","dependencies":{"concat-stream":{"version":"1.6.2","dependencies":{"buffer-from":{"version":"1.1.1"},"inherits":{"version":"2.0.3"},"readable-stream":{"version":"2.3.6","dependencies":{"core-util-is":{"version":"1.0.2"},"isarray":{"version":"1.0.0"},"process-nextick-args":{"version":"2.0.0"},"inherits":{"version":"2.0.3"},"safe-buffer":{"version":"5.1.2"},"string_decoder":{"version":"1.1.1"},"util-deprecate":{"version":"1.0.2"}}},"typedarray":{"version":"0.0.6"}}},"debug":{"version":"2.6.9"},"elementtree":{"version":"0.1.7"},"network-address":{"version":"1.1.2"}}}}},"urijs":{"version":"1.19.6"},"webtorrent":{"version":"0.115.1","dependencies":{"addr-to-ip-port":{"version":"1.5.1"},"bittorrent-protocol":{"version":"3.3.1","dependencies":{"bencode":{"version":"2.0.1"},"bitfield":{"version":"4.0.0"},"debug":{"version":"4.3.1","dependencies":{"ms":{"version":"2.1.2"}}},"readable-stream":{"version":"3.6.0","dependencies":{"inherits":{"version":"2.0.3"},"string_decoder":{"version":"1.1.1"},"util-deprecate":{"version":"1.0.2"}}},"speedometer":{"version":"1.1.0"},"randombytes":{"version":"2.1.0"},"unordered-array-remove":{"version":"1.0.2"}}},"chunk-store-stream":{"version":"4.2.0","dependencies":{"block-stream2":{"version":"2.1.0","dependencies":{"readable-stream":{"version":"3.6.0","dependencies":{"inherits":{"version":"2.0.3"},"string_decoder":{"version":"1.1.1"},"util-deprecate":{"version":"1.0.2"}}}}},"readable-stream":{"version":"3.6.0","dependencies":{"inherits":{"version":"2.0.3"},"string_decoder":{"version":"1.1.1"},"util-deprecate":{"version":"1.0.2"}}}}},"create-torrent":{"version":"4.5.0","dependencies":{"bencode":{"version":"2.0.1"},"block-stream2":{"version":"2.1.0"},"minimist":{"version":"1.2.5"},"queue-microtask":{"version":"1.2.2"},"readable-stream":{"version":"3.6.0","dependencies":{"inherits":{"version":"2.0.3"},"string_decoder":{"version":"1.1.1"},"util-deprecate":{"version":"1.0.2"}}},"run-parallel":{"version":"1.2.0","dependencies":{"queue-microtask":{"version":"1.2.2"}}},"simple-sha1":{"version":"3.1.0","dependencies":{"queue-microtask":{"version":"1.2.2"},"rusha":{"version":"0.8.13"}}},"filestream":{"version":"5.0.0","dependencies":{"readable-stream":{"version":"3.6.0","dependencies":{"inherits":{"version":"2.0.3"},"string_decoder":{"version":"1.1.1"},"util-deprecate":{"version":"1.0.2"}}},"typedarray-to-buffer":{"version":"3.1.5","dependencies":{"is-typedarray":{"version":"1.0.0"}}}}},"is-file":{"version":"1.0.0"},"junk":{"version":"3.1.0"},"multistream":{"version":"4.1.0"},"once":{"version":"1.4.0"},"piece-length":{"version":"2.0.1"}}},"escape-html":{"version":"1.0.3"},"fs-chunk-store":{"version":"2.0.3","dependencies":{"queue-microtask":{"version":"1.2.2"},"random-access-file":{"version":"2.1.3","dependencies":{"mkdirp":{"version":"0.5.5"},"random-access-storage":{"version":"1.4.0","dependencies":{"inherits":{"version":"2.0.3"}}}}},"randombytes":{"version":"2.1.0"},"rimraf":{"version":"3.0.2"},"run-parallel":{"version":"1.1.9"},"thunky":{"version":"1.0.3"}}},"http-node":{"version":"1.2.0","dependencies":{"chrome-net":{"version":"3.3.3","dependencies":{"inherits":{"version":"2.0.3"}}},"freelist":{"version":"1.0.3"},"http-parser-js":{"version":"0.4.13"}}},"load-ip-set":{"version":"2.1.2","dependencies":{"ip-set":{"version":"2.1.0","dependencies":{"ip":{"version":"1.1.5"}}},"simple-get":{"version":"4.0.0","dependencies":{"decompress-response":{"version":"6.0.0","dependencies":{"mimic-response":{"version":"3.1.0"}}},"once":{"version":"1.4.0"},"simple-concat":{"version":"1.0.0"}}},"netmask":{"version":"1.0.6"},"once":{"version":"1.4.0"},"split":{"version":"1.0.1","dependencies":{"through":{"version":"2.3.8"}}}}},"memory-chunk-store":{"version":"1.3.2","dependencies":{"queue-microtask":{"version":"1.2.2"}}},"multistream":{"version":"4.1.0","dependencies":{"readable-stream":{"version":"3.6.0","dependencies":{"inherits":{"version":"2.0.3"},"string_decoder":{"version":"1.1.1"},"util-deprecate":{"version":"1.0.2"}}},"once":{"version":"1.4.0"}}},"package-json-versionify":{"version":"1.0.4","dependencies":{"browserify-package-json":{"version":"1.0.1"}}},"random-iterate":{"version":"1.0.1"},"randombytes":{"version":"2.1.0","dependencies":{"safe-buffer":{"version":"5.1.2"}}},"render-media":{"version":"4.1.0","dependencies":{"is-ascii":{"version":"1.0.0"},"mediasource":{"version":"2.4.0","dependencies":{"inherits":{"version":"2.0.4"},"readable-stream":{"version":"3.6.0","dependencies":{"inherits":{"version":"2.0.4"},"string_decoder":{"version":"1.1.1"},"util-deprecate":{"version":"1.0.2"}}},"to-arraybuffer":{"version":"1.0.1"}}},"debug":{"version":"4.3.1","dependencies":{"ms":{"version":"2.1.2"}}},"stream-to-blob-url":{"version":"3.0.2"},"videostream":{"version":"3.2.2","dependencies":{"binary-search":{"version":"1.3.6"},"mediasource":{"version":"2.4.0"},"mp4-box-encoding":{"version":"1.4.1","dependencies":{"uint64be":{"version":"2.0.2","dependencies":{"buffer-alloc":{"version":"1.2.0"}}}}},"mp4-stream":{"version":"3.1.3","dependencies":{"mp4-box-encoding":{"version":"1.4.1"},"queue-microtask":{"version":"1.2.2"},"readable-stream":{"version":"3.6.0","dependencies":{"inherits":{"version":"2.0.3"},"string_decoder":{"version":"1.1.1"},"util-deprecate":{"version":"1.0.2"}}},"next-event":{"version":"1.0.0"}}},"range-slice-stream":{"version":"2.0.0","dependencies":{"readable-stream":{"version":"3.6.0","dependencies":{"inherits":{"version":"2.0.3"},"string_decoder":{"version":"1.1.1"},"util-deprecate":{"version":"1.0.2"}}}}},"pump":{"version":"3.0.0","dependencies":{"end-of-stream":{"version":"1.4.1"},"once":{"version":"1.4.0"}}}}}}},"run-parallel-limit":{"version":"1.1.0","dependencies":{"queue-microtask":{"version":"1.2.2"}}},"stream-to-blob":{"version":"2.0.1"},"stream-to-blob-url":{"version":"3.0.2","dependencies":{"stream-to-blob":{"version":"2.0.1"}}},"stream-with-known-length-to-buffer":{"version":"1.0.4","dependencies":{"once":{"version":"1.4.0"}}},"unordered-array-remove":{"version":"1.0.2"},"ut_metadata":{"version":"3.5.2","dependencies":{"bencode":{"version":"2.0.1"},"bitfield":{"version":"4.0.0"},"debug":{"version":"4.3.1","dependencies":{"ms":{"version":"2.1.2"}}},"simple-sha1":{"version":"3.1.0","dependencies":{"rusha":{"version":"0.8.13"},"queue-microtask":{"version":"1.2.2"}}}}},"ut_pex":{"version":"2.0.1","dependencies":{"bencode":{"version":"2.0.1"},"compact2string":{"version":"1.4.0"},"string2compact":{"version":"1.3.0","dependencies":{"addr-to-ip-port":{"version":"1.5.1"},"ipaddr.js":{"version":"1.8.1"}}}}},"utp-native":{"version":"2.3.0","dependencies":{"napi-macros":{"version":"2.0.0"},"node-gyp-build":{"version":"4.2.3"},"timeout-refresh":{"version":"1.0.3"},"unordered-set":{"version":"2.0.1"},"readable-stream":{"version":"3.6.0","dependencies":{"inherits":{"version":"2.0.3"},"string_decoder":{"version":"1.1.1"},"util-deprecate":{"version":"1.0.2"}}}}},"bitfield":{"version":"4.0.0"},"bittorrent-dht":{"version":"10.0.0","dependencies":{"bencode":{"version":"2.0.1"},"last-one-wins":{"version":"1.0.4"},"randombytes":{"version":"2.1.0"},"record-cache":{"version":"1.1.0"},"debug":{"version":"4.3.1"},"k-bucket":{"version":"5.1.0","dependencies":{"randombytes":{"version":"2.1.0"}}},"k-rpc":{"version":"5.1.0","dependencies":{"k-rpc-socket":{"version":"1.11.1","dependencies":{"bencode":{"version":"2.0.1"},"chrome-dgram":{"version":"3.0.3","dependencies":{"inherits":{"version":"2.0.3"},"run-series":{"version":"1.1.8"}}},"chrome-dns":{"version":"1.0.1","dependencies":{"chrome-net":{"version":"3.3.3"}}},"chrome-net":{"version":"3.3.3"}}},"randombytes":{"version":"2.1.0"},"k-bucket":{"version":"5.1.0"}}},"lru":{"version":"3.1.0","dependencies":{"inherits":{"version":"2.0.3"}}},"simple-sha1":{"version":"3.1.0"}}},"chrome-net":{"version":"3.3.4","dependencies":{"inherits":{"version":"2.0.3"}}},"debug":{"version":"4.3.1","dependencies":{"ms":{"version":"2.1.2"}}},"end-of-stream":{"version":"1.4.4","dependencies":{"once":{"version":"1.4.0"}}},"immediate-chunk-store":{"version":"2.1.1","dependencies":{"queue-microtask":{"version":"1.2.2"}}},"mime":{"version":"2.5.2"},"parse-torrent":{"version":"9.1.3","dependencies":{"bencode":{"version":"2.0.1"},"blob-to-buffer":{"version":"1.2.9"},"get-stdin":{"version":"8.0.0"},"magnet-uri":{"version":"6.1.0","dependencies":{"bep53-range":{"version":"1.1.0"},"thirty-two":{"version":"1.0.2"}}},"queue-microtask":{"version":"1.2.2"},"simple-get":{"version":"4.0.0"},"simple-sha1":{"version":"3.1.0"}}},"pump":{"version":"3.0.0","dependencies":{"once":{"version":"1.4.0"},"end-of-stream":{"version":"1.4.4"}}},"queue-microtask":{"version":"1.2.2"},"range-parser":{"version":"1.2.1"},"readable-stream":{"version":"3.6.0","dependencies":{"inherits":{"version":"2.0.3"},"string_decoder":{"version":"1.1.1","dependencies":{"safe-buffer":{"version":"5.1.2"}}},"util-deprecate":{"version":"1.0.2"}}},"run-parallel":{"version":"1.2.0","dependencies":{"queue-microtask":{"version":"1.2.2"}}},"simple-concat":{"version":"1.0.1"},"simple-get":{"version":"4.0.0","dependencies":{"once":{"version":"1.4.0"},"decompress-response":{"version":"6.0.0","dependencies":{"mimic-response":{"version":"3.1.0"}}},"simple-concat":{"version":"1.0.1"}}},"simple-peer":{"version":"9.9.3","dependencies":{"err-code":{"version":"2.0.3"},"get-browser-rtc":{"version":"1.0.2"},"randombytes":{"version":"2.1.0"},"buffer":{"version":"6.0.3","dependencies":{"base64-js":{"version":"1.5.1"},"ieee754":{"version":"1.2.1"}}},"debug":{"version":"4.3.1"},"queue-microtask":{"version":"1.2.2"},"readable-stream":{"version":"3.6.0"}}},"simple-sha1":{"version":"3.1.0","dependencies":{"rusha":{"version":"0.8.13"},"queue-microtask":{"version":"1.2.2"}}},"speedometer":{"version":"1.1.0"},"torrent-discovery":{"version":"9.4.0","dependencies":{"bittorrent-lsd":{"version":"1.1.0","dependencies":{"chrome-dgram":{"version":"3.0.6","dependencies":{"inherits":{"version":"2.0.4"},"run-series":{"version":"1.1.9"}}},"debug":{"version":"4.3.1","dependencies":{"ms":{"version":"2.1.2"}}}}},"bittorrent-dht":{"version":"10.0.0"},"bittorrent-tracker":{"version":"9.16.1","dependencies":{"bencode":{"version":"2.0.1"},"bittorrent-peerid":{"version":"1.3.3"},"bufferutil":{"version":"4.0.3","dependencies":{"node-gyp-build":{"version":"4.2.3"}}},"ip":{"version":"1.1.5"},"once":{"version":"1.4.0"},"random-iterate":{"version":"1.0.1"},"randombytes":{"version":"2.1.0"},"run-series":{"version":"1.1.8"},"string2compact":{"version":"1.3.0"},"unordered-array-remove":{"version":"1.0.2"},"utf-8-validate":{"version":"5.0.4","dependencies":{"node-gyp-build":{"version":"4.2.3"}}},"bn.js":{"version":"5.2.0"},"chrome-dgram":{"version":"3.0.6","dependencies":{"inherits":{"version":"2.0.4"},"run-series":{"version":"1.1.9"}}},"compact2string":{"version":"1.4.1","dependencies":{"ipaddr.js":{"version":"1.8.1"}}},"debug":{"version":"4.3.1"},"lru":{"version":"3.1.0"},"minimist":{"version":"1.2.5"},"queue-microtask":{"version":"1.2.2"},"run-parallel":{"version":"1.2.0"},"simple-get":{"version":"4.0.0"},"simple-peer":{"version":"9.9.3"},"simple-websocket":{"version":"9.1.0","dependencies":{"randombytes":{"version":"2.1.0"},"debug":{"version":"4.3.1"},"queue-microtask":{"version":"1.2.2"},"readable-stream":{"version":"3.6.0"},"ws":{"version":"7.4.3"}}},"ws":{"version":"7.4.3"}}},"debug":{"version":"4.3.1"},"run-parallel":{"version":"1.2.0"}}},"torrent-piece":{"version":"2.0.0"}}},"xmlbuilder":{"version":"13.0.2"}}}
+{
+  "name": "Popcorn-Time-CE",
+  "version": "0.4.3-0",
+  "dependencies": {
+    "URIjs": { "version": "1.16.1" },
+    "adm-zip": { "version": "0.4.16" },
+    "airplay-js": {
+      "version": "0.3.0",
+      "dependencies": {
+        "mdns-js": {
+          "version": "0.5.0",
+          "dependencies": {
+            "debug": { "version": "2.6.9" },
+            "mdns-js-packet": {
+              "version": "0.2.0",
+              "dependencies": {
+                "debug": { "version": "2.6.9" },
+                "qap": { "version": "3.3.1" }
+              }
+            },
+            "semver": { "version": "5.1.1" }
+          }
+        },
+        "plist-with-patches": {
+          "version": "0.5.1",
+          "dependencies": {
+            "xmlbuilder": { "version": "0.4.3" },
+            "xmldom": { "version": "0.1.27" }
+          }
+        }
+      }
+    },
+    "ajv": {
+      "version": "6.12.6",
+      "dependencies": {
+        "fast-deep-equal": { "version": "3.1.3" },
+        "fast-json-stable-stringify": { "version": "2.0.0" },
+        "json-schema-traverse": { "version": "0.4.1" },
+        "uri-js": {
+          "version": "4.2.2",
+          "dependencies": { "punycode": { "version": "2.1.1" } }
+        }
+      }
+    },
+    "async": { "version": "3.2.0" },
+    "axios": {
+      "version": "0.21.1",
+      "dependencies": { "follow-redirects": { "version": "1.13.1" } }
+    },
+    "bottleneck": { "version": "2.19.5" },
+    "chromecast-js": {
+      "version": "0.1.8",
+      "dependencies": {
+        "castv2-client": {
+          "version": "1.2.0",
+          "dependencies": {
+            "castv2": {
+              "version": "0.1.9",
+              "dependencies": {
+                "debug": { "version": "2.6.9" },
+                "protobufjs": {
+                  "version": "3.8.2",
+                  "dependencies": {
+                    "ascli": {
+                      "version": "0.3.0",
+                      "dependencies": {
+                        "colour": { "version": "0.7.1" },
+                        "optjs": { "version": "3.2.2" }
+                      }
+                    },
+                    "bytebuffer": {
+                      "version": "3.5.5",
+                      "dependencies": {
+                        "bufferview": { "version": "1.0.1" },
+                        "long": { "version": "2.4.0" }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "debug": { "version": "2.6.9" }
+          }
+        },
+        "debug": {
+          "version": "2.6.9",
+          "dependencies": { "ms": { "version": "2.0.0" } }
+        },
+        "node-ssdp": {
+          "version": "2.9.1",
+          "dependencies": {
+            "debug": { "version": "2.6.9" },
+            "ip": { "version": "1.1.5" }
+          }
+        }
+      }
+    },
+    "client-oauth2": {
+      "version": "4.3.3",
+      "dependencies": {
+        "safe-buffer": { "version": "5.2.1" },
+        "popsicle": {
+          "version": "12.0.5",
+          "dependencies": {
+            "popsicle-content-encoding": { "version": "1.0.0" },
+            "popsicle-cookie-jar": {
+              "version": "1.0.0",
+              "dependencies": {
+                "@types/tough-cookie": { "version": "2.3.7" },
+                "tough-cookie": {
+                  "version": "3.0.1",
+                  "dependencies": {
+                    "ip-regex": { "version": "2.1.0" },
+                    "punycode": { "version": "2.1.1" },
+                    "psl": { "version": "1.1.31" }
+                  }
+                }
+              }
+            },
+            "popsicle-redirects": { "version": "1.1.0" },
+            "popsicle-transport-http": {
+              "version": "1.0.8",
+              "dependencies": {
+                "make-error-cause": {
+                  "version": "2.3.0",
+                  "dependencies": { "make-error": { "version": "1.3.6" } }
+                },
+                "pump": {
+                  "version": "3.0.0",
+                  "dependencies": {
+                    "end-of-stream": { "version": "1.4.1" },
+                    "once": { "version": "1.4.0" }
+                  }
+                }
+              }
+            },
+            "popsicle-transport-xhr": { "version": "1.0.2" },
+            "popsicle-user-agent": { "version": "1.0.0" },
+            "tough-cookie": {
+              "version": "3.0.1",
+              "dependencies": {
+                "ip-regex": { "version": "2.1.0" },
+                "punycode": { "version": "2.1.1" },
+                "psl": { "version": "1.1.31" }
+              }
+            },
+            "servie": {
+              "version": "4.3.2",
+              "dependencies": {
+                "@servie/events": { "version": "1.0.0" },
+                "byte-length": { "version": "1.0.2" }
+              }
+            },
+            "throwback": { "version": "4.1.0" }
+          }
+        }
+      }
+    },
+    "i18n": {
+      "version": "0.13.2",
+      "dependencies": {
+        "debug": {
+          "version": "4.2.0",
+          "dependencies": { "ms": { "version": "2.1.2" } }
+        },
+        "make-plural": { "version": "6.2.2" },
+        "math-interval-parser": { "version": "2.0.1" },
+        "messageformat": {
+          "version": "2.3.0",
+          "dependencies": {
+            "messageformat-formatters": { "version": "2.0.1" },
+            "messageformat-parser": { "version": "4.1.3" },
+            "make-plural": {
+              "version": "4.3.0",
+              "dependencies": { "minimist": { "version": "1.2.0" } }
+            }
+          }
+        },
+        "mustache": { "version": "4.0.1" },
+        "sprintf-js": { "version": "1.1.2" }
+      }
+    },
+    "iconv-lite": {
+      "version": "0.5.2",
+      "dependencies": { "safer-buffer": { "version": "2.1.2" } }
+    },
+    "jschardet": { "version": "2.2.1" },
+    "json-rpc2": {
+      "version": "2.0.0",
+      "dependencies": {
+        "es5class": {
+          "version": "2.3.1",
+          "dependencies": { "better-curry": { "version": "1.6.0" } }
+        },
+        "faye-websocket": {
+          "version": "0.11.3",
+          "dependencies": {
+            "websocket-driver": {
+              "version": "0.7.4",
+              "dependencies": {
+                "http-parser-js": { "version": "0.5.2" },
+                "safe-buffer": { "version": "5.1.2" },
+                "websocket-extensions": { "version": "0.1.4" }
+              }
+            }
+          }
+        },
+        "debug": {
+          "version": "4.1.1",
+          "dependencies": { "ms": { "version": "2.1.2" } }
+        },
+        "lodash": { "version": "4.17.20" },
+        "jsonparse": { "version": "1.3.1" },
+        "object-assign": { "version": "4.1.1" }
+      }
+    },
+    "kat-api-ce": {
+      "version": "0.0.4",
+      "dependencies": {
+        "q": { "version": "2.0.3" },
+        "request": { "version": "2.88.2" },
+        "urijs": { "version": "1.19.6" }
+      }
+    },
+    "markdown": {
+      "version": "0.5.0",
+      "dependencies": {
+        "nopt": {
+          "version": "2.1.2",
+          "dependencies": { "abbrev": { "version": "1.1.1" } }
+        }
+      }
+    },
+    "memoizee": {
+      "version": "0.4.15",
+      "dependencies": {
+        "event-emitter": {
+          "version": "0.3.5",
+          "dependencies": {
+            "d": {
+              "version": "1.0.0",
+              "dependencies": { "es5-ext": { "version": "0.10.46" } }
+            },
+            "es5-ext": {
+              "version": "0.10.46",
+              "dependencies": {
+                "es6-iterator": { "version": "2.0.3" },
+                "es6-symbol": {
+                  "version": "3.1.1",
+                  "dependencies": {
+                    "d": { "version": "1.0.0" },
+                    "es5-ext": { "version": "0.10.46" }
+                  }
+                },
+                "next-tick": { "version": "1.0.0" }
+              }
+            }
+          }
+        },
+        "lru-queue": {
+          "version": "0.1.0",
+          "dependencies": { "es5-ext": { "version": "0.10.46" } }
+        },
+        "d": {
+          "version": "1.0.1",
+          "dependencies": {
+            "es5-ext": { "version": "0.10.53" },
+            "type": { "version": "1.2.0" }
+          }
+        },
+        "es5-ext": {
+          "version": "0.10.53",
+          "dependencies": {
+            "es6-iterator": {
+              "version": "2.0.3",
+              "dependencies": {
+                "d": { "version": "1.0.0" },
+                "es5-ext": { "version": "0.10.46" },
+                "es6-symbol": { "version": "3.1.1" }
+              }
+            },
+            "next-tick": { "version": "1.0.0" },
+            "es6-symbol": {
+              "version": "3.1.3",
+              "dependencies": {
+                "ext": {
+                  "version": "1.4.0",
+                  "dependencies": { "type": { "version": "2.1.0" } }
+                },
+                "d": { "version": "1.0.1" }
+              }
+            }
+          }
+        },
+        "es6-weak-map": {
+          "version": "2.0.3",
+          "dependencies": {
+            "es6-iterator": { "version": "2.0.3" },
+            "d": { "version": "1.0.1" },
+            "es5-ext": { "version": "0.10.53" },
+            "es6-symbol": { "version": "3.1.3" }
+          }
+        },
+        "is-promise": { "version": "2.2.2" },
+        "next-tick": { "version": "1.1.0" },
+        "timers-ext": {
+          "version": "0.1.7",
+          "dependencies": {
+            "es5-ext": { "version": "0.10.46" },
+            "next-tick": { "version": "1.0.0" }
+          }
+        }
+      }
+    },
+    "mkdirp": {
+      "version": "0.5.5",
+      "dependencies": { "minimist": { "version": "1.2.5" } }
+    },
+    "moment": { "version": "2.29.1" },
+    "mv": {
+      "version": "2.1.1",
+      "dependencies": {
+        "mkdirp": { "version": "0.5.5" },
+        "rimraf": {
+          "version": "2.4.5",
+          "dependencies": {
+            "glob": {
+              "version": "6.0.4",
+              "dependencies": {
+                "inflight": { "version": "1.0.6" },
+                "inherits": { "version": "2.0.3" },
+                "minimatch": { "version": "3.0.4" },
+                "once": { "version": "1.4.0" },
+                "path-is-absolute": { "version": "1.0.1" }
+              }
+            }
+          }
+        },
+        "ncp": { "version": "2.0.0" }
+      }
+    },
+    "nedb": {
+      "version": "1.8.0",
+      "dependencies": {
+        "binary-search-tree": {
+          "version": "0.2.5",
+          "dependencies": { "underscore": { "version": "1.4.4" } }
+        },
+        "localforage": {
+          "version": "1.7.3",
+          "dependencies": {
+            "lie": {
+              "version": "3.1.1",
+              "dependencies": { "immediate": { "version": "3.0.6" } }
+            }
+          }
+        },
+        "mkdirp": { "version": "0.5.5" },
+        "async": { "version": "0.2.10" },
+        "underscore": { "version": "1.4.4" }
+      }
+    },
+    "node-captions": {
+      "version": "0.4.6",
+      "dependencies": {
+        "moment": { "version": "2.29.1" },
+        "iconv-lite": {
+          "version": "0.4.24",
+          "dependencies": { "safer-buffer": { "version": "2.1.2" } }
+        }
+      }
+    },
+    "node-tvdb": {
+      "version": "4.1.0",
+      "dependencies": {
+        "lodash": { "version": "4.17.10" },
+        "node-fetch": { "version": "2.3.0" }
+      }
+    },
+    "node-webkit-fdialogs": {
+      "version": "0.2.7",
+      "dependencies": { "underscore": { "version": "1.9.2" } }
+    },
+    "nodecast-js": {
+      "version": "1.0.3",
+      "dependencies": {
+        "castv2-client": {
+          "version": "0.0.8",
+          "dependencies": {
+            "castv2": { "version": "0.1.9" },
+            "debug": {
+              "version": "1.0.5",
+              "dependencies": { "ms": { "version": "2.0.0" } }
+            }
+          }
+        },
+        "upnp-mediarenderer-client": {
+          "version": "0.0.2",
+          "dependencies": {
+            "upnp-device-client": {
+              "version": "0.0.7",
+              "dependencies": { "elementtree": { "version": "0.1.7" } }
+            }
+          }
+        }
+      }
+    },
+    "opensubtitles-api": {
+      "version": "5.1.2",
+      "dependencies": {
+        "urijs": { "version": "1.19.6" },
+        "xmlrpc": {
+          "version": "1.3.2",
+          "dependencies": {
+            "sax": { "version": "1.2.4" },
+            "xmlbuilder": { "version": "8.2.2" }
+          }
+        }
+      }
+    },
+    "opensubtitles-ce": {
+      "version": "1.0.0",
+      "dependencies": {
+        "lodash": { "version": "2.4.2" },
+        "q": { "version": "1.0.1" },
+        "xmlrpc": {
+          "version": "1.3.2",
+          "dependencies": {
+            "sax": { "version": "1.2.4" },
+            "xmlbuilder": { "version": "8.2.2" }
+          }
+        }
+      }
+    },
+    "os-name": {
+      "version": "3.1.0",
+      "dependencies": {
+        "macos-release": { "version": "2.3.0" },
+        "windows-release": {
+          "version": "3.2.0",
+          "dependencies": {
+            "execa": {
+              "version": "1.0.0",
+              "dependencies": {
+                "is-stream": { "version": "1.1.0" },
+                "npm-run-path": {
+                  "version": "2.0.2",
+                  "dependencies": { "path-key": { "version": "2.0.1" } }
+                },
+                "p-finally": { "version": "1.0.0" },
+                "signal-exit": { "version": "3.0.2" },
+                "strip-eof": { "version": "1.0.0" },
+                "cross-spawn": {
+                  "version": "6.0.5",
+                  "dependencies": {
+                    "nice-try": { "version": "1.0.5" },
+                    "path-key": { "version": "2.0.1" },
+                    "shebang-command": {
+                      "version": "1.2.0",
+                      "dependencies": {
+                        "shebang-regex": { "version": "1.0.0" }
+                      }
+                    },
+                    "which": {
+                      "version": "1.3.1",
+                      "dependencies": { "isexe": { "version": "2.0.0" } }
+                    },
+                    "semver": { "version": "5.7.1" }
+                  }
+                },
+                "get-stream": {
+                  "version": "4.1.0",
+                  "dependencies": {
+                    "pump": {
+                      "version": "3.0.0",
+                      "dependencies": {
+                        "end-of-stream": { "version": "1.4.1" },
+                        "once": { "version": "1.4.0" }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "parse-torrent": {
+      "version": "7.1.3",
+      "dependencies": {
+        "bencode": {
+          "version": "2.0.1",
+          "dependencies": { "safe-buffer": { "version": "5.1.2" } }
+        },
+        "blob-to-buffer": { "version": "1.2.8" },
+        "get-stdin": { "version": "7.0.0" },
+        "magnet-uri": {
+          "version": "5.2.4",
+          "dependencies": {
+            "thirty-two": { "version": "1.0.2" },
+            "uniq": { "version": "1.0.1" }
+          }
+        },
+        "simple-sha1": {
+          "version": "3.0.1",
+          "dependencies": {
+            "queue-microtask": { "version": "1.1.3" },
+            "rusha": { "version": "0.8.13" }
+          }
+        },
+        "simple-get": {
+          "version": "3.1.0",
+          "dependencies": {
+            "once": {
+              "version": "1.4.0",
+              "dependencies": { "wrappy": { "version": "1.0.2" } }
+            },
+            "simple-concat": { "version": "1.0.0" },
+            "decompress-response": {
+              "version": "4.2.1",
+              "dependencies": { "mimic-response": { "version": "2.1.0" } }
+            }
+          }
+        }
+      }
+    },
+    "peerflix": {
+      "version": "0.39.0",
+      "dependencies": {
+        "airplayer": {
+          "version": "2.0.0",
+          "dependencies": {
+            "airplay-protocol": {
+              "version": "2.0.2",
+              "dependencies": {
+                "bplist-creator": {
+                  "version": "0.0.6",
+                  "dependencies": { "stream-buffers": { "version": "2.2.0" } }
+                },
+                "bplist-parser": {
+                  "version": "0.1.1",
+                  "dependencies": { "big-integer": { "version": "1.6.40" } }
+                },
+                "concat-stream": { "version": "1.6.2" },
+                "plist": {
+                  "version": "1.2.0",
+                  "dependencies": {
+                    "base64-js": { "version": "0.0.8" },
+                    "xmlbuilder": {
+                      "version": "4.0.0",
+                      "dependencies": { "lodash": { "version": "3.10.1" } }
+                    },
+                    "util-deprecate": { "version": "1.0.2" },
+                    "xmldom": { "version": "0.1.27" }
+                  }
+                },
+                "reverse-http": {
+                  "version": "1.3.0",
+                  "dependencies": {
+                    "consume-http-header": {
+                      "version": "1.0.0",
+                      "dependencies": {
+                        "consume-until": {
+                          "version": "1.0.0",
+                          "dependencies": {
+                            "buffer-indexof": { "version": "1.1.1" }
+                          }
+                        },
+                        "http-headers": {
+                          "version": "3.0.2",
+                          "dependencies": {
+                            "next-line": { "version": "1.1.0" }
+                          }
+                        }
+                      }
+                    },
+                    "once": { "version": "1.4.0" }
+                  }
+                }
+              }
+            },
+            "mime": { "version": "1.6.0" },
+            "appendable-cli-menu": {
+              "version": "2.0.0",
+              "dependencies": {
+                "chalk": {
+                  "version": "1.1.3",
+                  "dependencies": {
+                    "ansi-styles": { "version": "2.2.1" },
+                    "escape-string-regexp": { "version": "1.0.5" },
+                    "has-ansi": {
+                      "version": "2.0.0",
+                      "dependencies": { "ansi-regex": { "version": "2.1.1" } }
+                    },
+                    "strip-ansi": {
+                      "version": "3.0.1",
+                      "dependencies": { "ansi-regex": { "version": "2.1.1" } }
+                    },
+                    "supports-color": { "version": "2.0.0" }
+                  }
+                },
+                "keypress": { "version": "0.2.1" },
+                "single-line-log": {
+                  "version": "1.1.2",
+                  "dependencies": {
+                    "string-width": {
+                      "version": "1.0.2",
+                      "dependencies": {
+                        "code-point-at": { "version": "1.1.0" },
+                        "is-fullwidth-code-point": {
+                          "version": "1.0.0",
+                          "dependencies": {
+                            "number-is-nan": { "version": "1.0.1" }
+                          }
+                        },
+                        "strip-ansi": { "version": "3.0.1" }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "bonjour": {
+              "version": "3.5.0",
+              "dependencies": {
+                "array-flatten": { "version": "2.1.2" },
+                "deep-equal": {
+                  "version": "1.1.0",
+                  "dependencies": {
+                    "is-arguments": { "version": "1.0.4" },
+                    "is-date-object": { "version": "1.0.1" },
+                    "is-regex": {
+                      "version": "1.0.4",
+                      "dependencies": {
+                        "has": {
+                          "version": "1.0.3",
+                          "dependencies": {
+                            "function-bind": { "version": "1.1.1" }
+                          }
+                        }
+                      }
+                    },
+                    "object-is": { "version": "1.0.1" },
+                    "object-keys": { "version": "1.1.1" },
+                    "regexp.prototype.flags": {
+                      "version": "1.2.0",
+                      "dependencies": {
+                        "define-properties": {
+                          "version": "1.1.3",
+                          "dependencies": {
+                            "object-keys": { "version": "1.0.12" }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "dns-equal": { "version": "1.0.0" },
+                "dns-txt": {
+                  "version": "2.0.2",
+                  "dependencies": { "buffer-indexof": { "version": "1.1.1" } }
+                },
+                "multicast-dns": {
+                  "version": "6.2.3",
+                  "dependencies": {
+                    "dns-packet": {
+                      "version": "1.3.1",
+                      "dependencies": {
+                        "ip": { "version": "1.1.5" },
+                        "safe-buffer": { "version": "5.1.2" }
+                      }
+                    },
+                    "thunky": { "version": "1.0.3" }
+                  }
+                },
+                "multicast-dns-service-types": { "version": "1.1.0" }
+              }
+            },
+            "internal-ip": {
+              "version": "1.2.0",
+              "dependencies": {
+                "meow": {
+                  "version": "3.7.0",
+                  "dependencies": {
+                    "camelcase-keys": {
+                      "version": "2.1.0",
+                      "dependencies": {
+                        "camelcase": { "version": "2.1.1" },
+                        "map-obj": { "version": "1.0.1" }
+                      }
+                    },
+                    "decamelize": { "version": "1.2.0" },
+                    "loud-rejection": {
+                      "version": "1.6.0",
+                      "dependencies": {
+                        "currently-unhandled": {
+                          "version": "0.4.1",
+                          "dependencies": {
+                            "array-find-index": { "version": "1.0.2" }
+                          }
+                        },
+                        "signal-exit": { "version": "3.0.2" }
+                      }
+                    },
+                    "map-obj": { "version": "1.0.1" },
+                    "minimist": { "version": "1.2.0" },
+                    "normalize-package-data": {
+                      "version": "2.4.0",
+                      "dependencies": {
+                        "hosted-git-info": { "version": "2.7.1" },
+                        "is-builtin-module": {
+                          "version": "1.0.0",
+                          "dependencies": {
+                            "builtin-modules": { "version": "1.1.1" }
+                          }
+                        },
+                        "semver": { "version": "5.7.1" },
+                        "validate-npm-package-license": {
+                          "version": "3.0.4",
+                          "dependencies": {
+                            "spdx-correct": {
+                              "version": "3.1.0",
+                              "dependencies": {
+                                "spdx-expression-parse": { "version": "3.0.0" },
+                                "spdx-license-ids": { "version": "3.0.3" }
+                              }
+                            },
+                            "spdx-expression-parse": {
+                              "version": "3.0.0",
+                              "dependencies": {
+                                "spdx-exceptions": { "version": "2.2.0" },
+                                "spdx-license-ids": { "version": "3.0.3" }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "object-assign": { "version": "4.1.1" },
+                    "read-pkg-up": {
+                      "version": "1.0.1",
+                      "dependencies": {
+                        "find-up": {
+                          "version": "1.1.2",
+                          "dependencies": {
+                            "path-exists": {
+                              "version": "2.1.0",
+                              "dependencies": {
+                                "pinkie-promise": { "version": "2.0.1" }
+                              }
+                            },
+                            "pinkie-promise": {
+                              "version": "2.0.1",
+                              "dependencies": {
+                                "pinkie": { "version": "2.0.4" }
+                              }
+                            }
+                          }
+                        },
+                        "read-pkg": {
+                          "version": "1.1.0",
+                          "dependencies": {
+                            "load-json-file": {
+                              "version": "1.1.0",
+                              "dependencies": {
+                                "graceful-fs": { "version": "4.1.15" },
+                                "parse-json": {
+                                  "version": "2.2.0",
+                                  "dependencies": {
+                                    "error-ex": {
+                                      "version": "1.3.2",
+                                      "dependencies": {
+                                        "is-arrayish": { "version": "0.2.1" }
+                                      }
+                                    }
+                                  }
+                                },
+                                "pify": { "version": "2.3.0" },
+                                "pinkie-promise": { "version": "2.0.1" },
+                                "strip-bom": {
+                                  "version": "2.0.0",
+                                  "dependencies": {
+                                    "is-utf8": { "version": "0.2.1" }
+                                  }
+                                }
+                              }
+                            },
+                            "normalize-package-data": { "version": "2.4.0" },
+                            "path-type": {
+                              "version": "1.1.0",
+                              "dependencies": {
+                                "graceful-fs": { "version": "4.1.15" },
+                                "pify": { "version": "2.3.0" },
+                                "pinkie-promise": { "version": "2.0.1" }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "redent": {
+                      "version": "1.0.0",
+                      "dependencies": {
+                        "indent-string": {
+                          "version": "2.1.0",
+                          "dependencies": {
+                            "repeating": {
+                              "version": "2.0.1",
+                              "dependencies": {
+                                "is-finite": {
+                                  "version": "1.0.2",
+                                  "dependencies": {
+                                    "number-is-nan": { "version": "1.0.1" }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "strip-indent": {
+                          "version": "1.0.1",
+                          "dependencies": {
+                            "get-stdin": { "version": "4.0.1" }
+                          }
+                        }
+                      }
+                    },
+                    "trim-newlines": { "version": "1.0.0" }
+                  }
+                }
+              }
+            },
+            "minimist": { "version": "1.2.0" },
+            "range-parser": { "version": "1.2.0" },
+            "server-destroy": { "version": "1.0.1" }
+          }
+        },
+        "buffer-from": { "version": "1.1.1" },
+        "clivas": { "version": "0.2.0" },
+        "inquirer": {
+          "version": "5.2.0",
+          "dependencies": {
+            "ansi-escapes": { "version": "3.1.0" },
+            "cli-cursor": {
+              "version": "2.1.0",
+              "dependencies": {
+                "restore-cursor": {
+                  "version": "2.0.0",
+                  "dependencies": {
+                    "onetime": {
+                      "version": "2.0.1",
+                      "dependencies": { "mimic-fn": { "version": "1.2.0" } }
+                    },
+                    "signal-exit": { "version": "3.0.2" }
+                  }
+                }
+              }
+            },
+            "cli-width": { "version": "2.2.0" },
+            "external-editor": {
+              "version": "2.2.0",
+              "dependencies": {
+                "chardet": { "version": "0.4.2" },
+                "iconv-lite": {
+                  "version": "0.4.24",
+                  "dependencies": { "safer-buffer": { "version": "2.1.2" } }
+                },
+                "tmp": {
+                  "version": "0.0.33",
+                  "dependencies": { "os-tmpdir": { "version": "1.0.2" } }
+                }
+              }
+            },
+            "figures": {
+              "version": "2.0.0",
+              "dependencies": { "escape-string-regexp": { "version": "1.0.5" } }
+            },
+            "chalk": {
+              "version": "2.4.2",
+              "dependencies": {
+                "escape-string-regexp": { "version": "1.0.5" },
+                "ansi-styles": {
+                  "version": "3.2.1",
+                  "dependencies": {
+                    "color-convert": {
+                      "version": "1.9.2",
+                      "dependencies": { "color-name": { "version": "1.1.1" } }
+                    }
+                  }
+                },
+                "supports-color": {
+                  "version": "5.5.0",
+                  "dependencies": { "has-flag": { "version": "3.0.0" } }
+                }
+              }
+            },
+            "string-width": {
+              "version": "2.1.1",
+              "dependencies": {
+                "is-fullwidth-code-point": { "version": "2.0.0" },
+                "strip-ansi": { "version": "4.0.0" }
+              }
+            },
+            "strip-ansi": {
+              "version": "4.0.0",
+              "dependencies": { "ansi-regex": { "version": "3.0.0" } }
+            },
+            "lodash": { "version": "4.17.10" },
+            "mute-stream": { "version": "0.0.7" },
+            "run-async": {
+              "version": "2.3.0",
+              "dependencies": { "is-promise": { "version": "2.1.0" } }
+            },
+            "rxjs": {
+              "version": "5.5.12",
+              "dependencies": { "symbol-observable": { "version": "1.0.1" } }
+            },
+            "through": { "version": "2.3.8" }
+          }
+        },
+        "keypress": { "version": "0.2.1" },
+        "mime": { "version": "2.4.4" },
+        "network-address": { "version": "1.1.2" },
+        "numeral": { "version": "2.0.6" },
+        "open": { "version": "0.0.5" },
+        "optimist": {
+          "version": "0.6.1",
+          "dependencies": {
+            "minimist": { "version": "0.0.10" },
+            "wordwrap": { "version": "0.0.3" }
+          }
+        },
+        "parse-torrent": {
+          "version": "5.9.1",
+          "dependencies": {
+            "bencode": { "version": "2.0.1" },
+            "blob-to-buffer": { "version": "1.2.8" },
+            "magnet-uri": { "version": "5.2.4" },
+            "get-stdin": { "version": "6.0.0" },
+            "simple-get": {
+              "version": "2.8.1",
+              "dependencies": {
+                "decompress-response": {
+                  "version": "3.3.0",
+                  "dependencies": { "mimic-response": { "version": "1.0.1" } }
+                },
+                "once": { "version": "1.4.0" },
+                "simple-concat": { "version": "1.0.0" }
+              }
+            },
+            "simple-sha1": {
+              "version": "2.1.1",
+              "dependencies": { "rusha": { "version": "0.8.13" } }
+            },
+            "uniq": { "version": "1.0.1" }
+          }
+        },
+        "pump": {
+          "version": "2.0.1",
+          "dependencies": {
+            "end-of-stream": {
+              "version": "1.4.1",
+              "dependencies": { "once": { "version": "1.4.0" } }
+            },
+            "once": { "version": "1.4.0" }
+          }
+        },
+        "range-parser": { "version": "1.2.0" },
+        "rc": {
+          "version": "1.2.8",
+          "dependencies": {
+            "deep-extend": { "version": "0.6.0" },
+            "ini": { "version": "1.3.5" },
+            "minimist": { "version": "1.2.0" },
+            "strip-json-comments": { "version": "2.0.1" }
+          }
+        },
+        "torrent-stream": {
+          "version": "1.1.0",
+          "dependencies": {
+            "bitfield": { "version": "0.1.0" },
+            "bncode": { "version": "0.5.3" },
+            "buffer-from": { "version": "1.1.1" },
+            "hat": { "version": "0.0.3" },
+            "immediate-chunk-store": { "version": "1.0.8" },
+            "ip-set": {
+              "version": "1.0.2",
+              "dependencies": { "ip": { "version": "1.1.5" } }
+            },
+            "peer-wire-swarm": {
+              "version": "0.12.2",
+              "dependencies": {
+                "buffer-from": { "version": "1.1.1" },
+                "fifo": { "version": "0.1.4" },
+                "once": { "version": "1.4.0" },
+                "peer-wire-protocol": {
+                  "version": "0.7.1",
+                  "dependencies": {
+                    "bitfield": { "version": "0.1.0" },
+                    "buffer-alloc": {
+                      "version": "1.2.0",
+                      "dependencies": {
+                        "buffer-alloc-unsafe": { "version": "1.1.0" },
+                        "buffer-fill": { "version": "1.0.0" }
+                      }
+                    },
+                    "buffer-from": { "version": "1.1.1" },
+                    "bncode": { "version": "0.2.3" },
+                    "readable-stream": {
+                      "version": "1.1.14",
+                      "dependencies": {
+                        "core-util-is": { "version": "1.0.2" },
+                        "inherits": { "version": "2.0.3" },
+                        "isarray": { "version": "0.0.1" },
+                        "string_decoder": { "version": "0.10.31" }
+                      }
+                    },
+                    "speedometer": { "version": "0.1.4" }
+                  }
+                },
+                "speedometer": { "version": "0.1.4" },
+                "utp": {
+                  "version": "0.0.7",
+                  "dependencies": { "cyclist": { "version": "0.1.1" } }
+                }
+              }
+            },
+            "torrent-discovery": {
+              "version": "5.4.0",
+              "dependencies": {
+                "bittorrent-dht": {
+                  "version": "6.4.2",
+                  "dependencies": {
+                    "bencode": { "version": "0.7.0" },
+                    "buffer-equals": { "version": "1.0.4" },
+                    "debug": { "version": "2.6.9" },
+                    "inherits": { "version": "2.0.3" },
+                    "k-bucket": {
+                      "version": "0.6.0",
+                      "dependencies": {
+                        "buffer-equal": { "version": "0.0.1" },
+                        "inherits": { "version": "2.0.3" }
+                      }
+                    },
+                    "k-rpc": {
+                      "version": "3.7.0",
+                      "dependencies": {
+                        "buffer-equals": { "version": "1.0.4" },
+                        "k-rpc-socket": { "version": "1.11.1" },
+                        "k-bucket": {
+                          "version": "2.0.1",
+                          "dependencies": {
+                            "buffer-equal": { "version": "0.0.1" },
+                            "randombytes": { "version": "2.1.0" }
+                          }
+                        }
+                      }
+                    },
+                    "lru": {
+                      "version": "2.0.1",
+                      "dependencies": { "inherits": { "version": "2.0.3" } }
+                    }
+                  }
+                },
+                "bittorrent-tracker": {
+                  "version": "7.7.0",
+                  "dependencies": {
+                    "bencode": { "version": "0.8.0" },
+                    "simple-get": {
+                      "version": "2.8.1",
+                      "dependencies": {
+                        "decompress-response": { "version": "3.3.0" },
+                        "once": { "version": "1.4.0" },
+                        "simple-concat": { "version": "1.0.0" }
+                      }
+                    },
+                    "bn.js": { "version": "4.11.8" },
+                    "compact2string": { "version": "1.4.0" },
+                    "debug": { "version": "2.6.9" },
+                    "hat": { "version": "0.0.3" },
+                    "inherits": { "version": "2.0.3" },
+                    "ip": { "version": "1.1.5" },
+                    "minimist": { "version": "1.2.0" },
+                    "once": { "version": "1.4.0" },
+                    "random-iterate": { "version": "1.0.1" },
+                    "run-parallel": { "version": "1.1.9" },
+                    "run-series": { "version": "1.1.8" },
+                    "simple-peer": {
+                      "version": "6.4.4",
+                      "dependencies": {
+                        "debug": { "version": "2.6.9" },
+                        "get-browser-rtc": { "version": "1.0.2" },
+                        "inherits": { "version": "2.0.3" },
+                        "randombytes": { "version": "2.1.0" },
+                        "readable-stream": { "version": "2.3.6" }
+                      }
+                    },
+                    "simple-websocket": {
+                      "version": "4.3.1",
+                      "dependencies": {
+                        "debug": { "version": "2.6.9" },
+                        "inherits": { "version": "2.0.3" },
+                        "randombytes": { "version": "2.1.0" },
+                        "readable-stream": { "version": "2.3.6" },
+                        "ws": {
+                          "version": "2.3.1",
+                          "dependencies": {
+                            "safe-buffer": { "version": "5.0.1" },
+                            "ultron": { "version": "1.1.1" }
+                          }
+                        },
+                        "xtend": { "version": "4.0.1" }
+                      }
+                    },
+                    "string2compact": { "version": "1.3.0" },
+                    "uniq": { "version": "1.0.1" },
+                    "ws": {
+                      "version": "1.1.5",
+                      "dependencies": {
+                        "options": { "version": "0.0.6" },
+                        "ultron": { "version": "1.0.2" }
+                      }
+                    },
+                    "xtend": { "version": "4.0.1" }
+                  }
+                },
+                "debug": { "version": "2.6.9" },
+                "inherits": { "version": "2.0.3" },
+                "re-emitter": { "version": "1.1.4" },
+                "run-parallel": { "version": "1.1.9" },
+                "xtend": { "version": "4.0.1" }
+              }
+            },
+            "torrent-piece": { "version": "1.1.2" },
+            "end-of-stream": {
+              "version": "0.1.5",
+              "dependencies": {
+                "once": {
+                  "version": "1.3.3",
+                  "dependencies": { "wrappy": { "version": "1.0.2" } }
+                }
+              }
+            },
+            "fs-chunk-store": {
+              "version": "1.7.0",
+              "dependencies": {
+                "random-access-file": { "version": "2.1.3" },
+                "randombytes": { "version": "2.1.0" },
+                "run-parallel": { "version": "1.1.9" },
+                "thunky": { "version": "1.0.3" },
+                "mkdirp": {
+                  "version": "0.5.1",
+                  "dependencies": { "minimist": { "version": "0.0.8" } }
+                },
+                "rimraf": { "version": "2.7.1" }
+              }
+            },
+            "mkdirp": { "version": "0.3.5" },
+            "parse-torrent": {
+              "version": "4.1.0",
+              "dependencies": {
+                "parse-torrent-file": { "version": "2.1.4" },
+                "magnet-uri": {
+                  "version": "4.2.3",
+                  "dependencies": {
+                    "flatten": { "version": "0.0.1" },
+                    "thirty-two": { "version": "0.0.2" },
+                    "xtend": { "version": "4.0.1" }
+                  }
+                }
+              }
+            },
+            "rimraf": {
+              "version": "2.7.1",
+              "dependencies": { "glob": { "version": "7.1.3" } }
+            }
+          }
+        },
+        "winreg": { "version": "1.2.4" },
+        "xtend": { "version": "4.0.1" }
+      }
+    },
+    "q": {
+      "version": "2.0.3",
+      "dependencies": {
+        "asap": { "version": "2.0.6" },
+        "pop-iterate": { "version": "1.0.1" },
+        "weak-map": { "version": "1.0.5" }
+      }
+    },
+    "rarbg-api": { "version": "1.1.4" },
+    "read-torrent": {
+      "version": "1.3.1",
+      "dependencies": {
+        "magnet-uri": {
+          "version": "2.0.1",
+          "dependencies": { "thirty-two": { "version": "0.0.2" } }
+        },
+        "parse-torrent": {
+          "version": "4.1.0",
+          "dependencies": {
+            "parse-torrent-file": {
+              "version": "2.1.4",
+              "dependencies": {
+                "bencode": { "version": "0.7.0" },
+                "simple-sha1": { "version": "2.1.1" }
+              }
+            },
+            "magnet-uri": {
+              "version": "4.2.3",
+              "dependencies": {
+                "flatten": { "version": "0.0.1" },
+                "thirty-two": { "version": "0.0.2" },
+                "xtend": { "version": "4.0.1" }
+              }
+            }
+          }
+        },
+        "request": { "version": "2.88.2" },
+        "xtend": { "version": "4.0.1" }
+      }
+    },
+    "readdirp": {
+      "version": "3.5.0",
+      "dependencies": { "picomatch": { "version": "2.2.2" } }
+    },
+    "request": {
+      "version": "2.88.2",
+      "dependencies": {
+        "aws-sign2": { "version": "0.7.0" },
+        "aws4": { "version": "1.8.0" },
+        "caseless": { "version": "0.12.0" },
+        "combined-stream": {
+          "version": "1.0.6",
+          "dependencies": { "delayed-stream": { "version": "1.0.0" } }
+        },
+        "extend": { "version": "3.0.2" },
+        "forever-agent": { "version": "0.6.1" },
+        "form-data": {
+          "version": "2.3.2",
+          "dependencies": {
+            "asynckit": { "version": "0.4.0" },
+            "combined-stream": { "version": "1.0.6" },
+            "mime-types": { "version": "2.1.19" }
+          }
+        },
+        "har-validator": {
+          "version": "5.1.3",
+          "dependencies": {
+            "har-schema": { "version": "2.0.0" },
+            "ajv": {
+              "version": "6.6.2",
+              "dependencies": {
+                "fast-deep-equal": { "version": "2.0.1" },
+                "fast-json-stable-stringify": { "version": "2.0.0" },
+                "json-schema-traverse": { "version": "0.4.1" },
+                "uri-js": { "version": "4.2.2" }
+              }
+            }
+          }
+        },
+        "http-signature": {
+          "version": "1.2.0",
+          "dependencies": {
+            "assert-plus": { "version": "1.0.0" },
+            "jsprim": {
+              "version": "1.4.1",
+              "dependencies": {
+                "assert-plus": { "version": "1.0.0" },
+                "extsprintf": { "version": "1.3.0" },
+                "json-schema": { "version": "0.2.3" },
+                "verror": {
+                  "version": "1.10.0",
+                  "dependencies": {
+                    "assert-plus": { "version": "1.0.0" },
+                    "core-util-is": { "version": "1.0.2" },
+                    "extsprintf": { "version": "1.3.0" }
+                  }
+                }
+              }
+            },
+            "sshpk": {
+              "version": "1.14.2",
+              "dependencies": {
+                "asn1": { "version": "0.2.3" },
+                "assert-plus": { "version": "1.0.0" },
+                "bcrypt-pbkdf": {
+                  "version": "1.0.2",
+                  "dependencies": { "tweetnacl": { "version": "0.14.5" } }
+                },
+                "dashdash": {
+                  "version": "1.14.1",
+                  "dependencies": { "assert-plus": { "version": "1.0.0" } }
+                },
+                "ecc-jsbn": {
+                  "version": "0.1.2",
+                  "dependencies": {
+                    "jsbn": { "version": "0.1.1" },
+                    "safer-buffer": { "version": "2.1.2" }
+                  }
+                },
+                "getpass": {
+                  "version": "0.1.7",
+                  "dependencies": { "assert-plus": { "version": "1.0.0" } }
+                },
+                "jsbn": { "version": "0.1.1" },
+                "safer-buffer": { "version": "2.1.2" },
+                "tweetnacl": { "version": "0.14.5" }
+              }
+            }
+          }
+        },
+        "is-typedarray": { "version": "1.0.0" },
+        "isstream": { "version": "0.1.2" },
+        "json-stringify-safe": { "version": "5.0.1" },
+        "mime-types": {
+          "version": "2.1.19",
+          "dependencies": { "mime-db": { "version": "1.35.0" } }
+        },
+        "oauth-sign": { "version": "0.9.0" },
+        "performance-now": { "version": "2.1.0" },
+        "qs": { "version": "6.5.2" },
+        "tough-cookie": {
+          "version": "2.5.0",
+          "dependencies": {
+            "psl": { "version": "1.1.31" },
+            "punycode": { "version": "2.1.1" }
+          }
+        },
+        "safe-buffer": { "version": "5.1.2" },
+        "tunnel-agent": {
+          "version": "0.6.0",
+          "dependencies": { "safe-buffer": { "version": "5.1.2" } }
+        },
+        "uuid": { "version": "3.3.2" }
+      }
+    },
+    "rimraf": {
+      "version": "3.0.2",
+      "dependencies": {
+        "glob": {
+          "version": "7.1.3",
+          "dependencies": {
+            "fs.realpath": { "version": "1.0.0" },
+            "inflight": {
+              "version": "1.0.6",
+              "dependencies": {
+                "once": { "version": "1.4.0" },
+                "wrappy": { "version": "1.0.2" }
+              }
+            },
+            "inherits": { "version": "2.0.3" },
+            "minimatch": {
+              "version": "3.0.4",
+              "dependencies": {
+                "brace-expansion": {
+                  "version": "1.1.11",
+                  "dependencies": {
+                    "balanced-match": { "version": "1.0.0" },
+                    "concat-map": { "version": "0.0.1" }
+                  }
+                }
+              }
+            },
+            "once": { "version": "1.4.0" },
+            "path-is-absolute": { "version": "1.0.1" }
+          }
+        }
+      }
+    },
+    "sanitizer": { "version": "0.1.3" },
+    "semver": {
+      "version": "7.3.4",
+      "dependencies": {
+        "lru-cache": {
+          "version": "6.0.0",
+          "dependencies": { "yallist": { "version": "4.0.0" } }
+        }
+      }
+    },
+    "send": {
+      "version": "0.17.1",
+      "dependencies": {
+        "debug": { "version": "2.6.9" },
+        "depd": { "version": "1.1.2" },
+        "destroy": { "version": "1.0.4" },
+        "encodeurl": { "version": "1.0.2" },
+        "escape-html": { "version": "1.0.3" },
+        "etag": { "version": "1.8.1" },
+        "fresh": { "version": "0.5.2" },
+        "http-errors": {
+          "version": "1.7.3",
+          "dependencies": {
+            "depd": { "version": "1.1.2" },
+            "inherits": { "version": "2.0.4" },
+            "setprototypeof": { "version": "1.1.1" },
+            "statuses": { "version": "1.5.0" },
+            "toidentifier": { "version": "1.0.0" }
+          }
+        },
+        "on-finished": {
+          "version": "2.3.0",
+          "dependencies": { "ee-first": { "version": "1.1.1" } }
+        },
+        "mime": { "version": "1.6.0" },
+        "ms": { "version": "2.1.1" },
+        "range-parser": { "version": "1.2.1" },
+        "statuses": { "version": "1.5.0" }
+      }
+    },
+    "strike-api": {
+      "version": "0.2.0",
+      "dependencies": {
+        "promise": {
+          "version": "6.1.0",
+          "dependencies": { "asap": { "version": "1.0.0" } }
+        },
+        "superagent": {
+          "version": "1.8.5",
+          "dependencies": {
+            "component-emitter": { "version": "1.2.1" },
+            "cookiejar": { "version": "2.0.6" },
+            "debug": { "version": "2.6.9" },
+            "formidable": { "version": "1.0.16" },
+            "methods": { "version": "1.1.2" },
+            "reduce-component": { "version": "1.0.1" },
+            "extend": { "version": "3.0.0" },
+            "form-data": {
+              "version": "1.0.0-rc3",
+              "dependencies": {
+                "combined-stream": { "version": "1.0.6" },
+                "mime-types": { "version": "2.1.19" },
+                "async": { "version": "1.5.2" }
+              }
+            },
+            "mime": { "version": "1.3.4" },
+            "qs": { "version": "2.3.3" },
+            "readable-stream": {
+              "version": "1.0.27-1",
+              "dependencies": {
+                "core-util-is": { "version": "1.0.2" },
+                "inherits": { "version": "2.0.3" },
+                "isarray": { "version": "0.0.1" },
+                "string_decoder": { "version": "0.10.31" }
+              }
+            }
+          }
+        },
+        "superagent-promise": { "version": "0.2.0" }
+      }
+    },
+    "tar": {
+      "version": "5.0.5",
+      "dependencies": {
+        "fs-minipass": {
+          "version": "2.0.0",
+          "dependencies": { "minipass": { "version": "3.0.1" } }
+        },
+        "minipass": {
+          "version": "3.0.1",
+          "dependencies": { "yallist": { "version": "4.0.0" } }
+        },
+        "minizlib": {
+          "version": "2.1.0",
+          "dependencies": {
+            "minipass": { "version": "3.0.1" },
+            "yallist": { "version": "4.0.0" }
+          }
+        },
+        "mkdirp": { "version": "0.5.5" },
+        "chownr": { "version": "1.1.3" },
+        "yallist": { "version": "4.0.0" }
+      }
+    },
+    "temp": {
+      "version": "0.9.4",
+      "dependencies": {
+        "mkdirp": { "version": "0.5.5" },
+        "rimraf": {
+          "version": "2.6.3",
+          "dependencies": { "glob": { "version": "7.1.3" } }
+        }
+      }
+    },
+    "torrent-tracker": {
+      "version": "0.1.0",
+      "dependencies": {
+        "compact2string": {
+          "version": "1.4.0",
+          "dependencies": { "ipaddr.js": { "version": "1.8.1" } }
+        },
+        "hat": { "version": "0.0.3" },
+        "request": { "version": "2.88.2" },
+        "bencode": { "version": "0.7.0" },
+        "underscore": { "version": "1.9.2" },
+        "urijs": { "version": "1.19.6" }
+      }
+    },
+    "underscore": { "version": "1.9.2" },
+    "upnp-mediarenderer-client": {
+      "version": "1.4.0",
+      "dependencies": {
+        "debug": { "version": "2.6.9" },
+        "elementtree": {
+          "version": "0.1.7",
+          "dependencies": { "sax": { "version": "1.1.4" } }
+        },
+        "upnp-device-client": {
+          "version": "1.0.2",
+          "dependencies": {
+            "concat-stream": {
+              "version": "1.6.2",
+              "dependencies": {
+                "buffer-from": { "version": "1.1.1" },
+                "inherits": { "version": "2.0.3" },
+                "readable-stream": {
+                  "version": "2.3.6",
+                  "dependencies": {
+                    "core-util-is": { "version": "1.0.2" },
+                    "isarray": { "version": "1.0.0" },
+                    "process-nextick-args": { "version": "2.0.0" },
+                    "inherits": { "version": "2.0.3" },
+                    "safe-buffer": { "version": "5.1.2" },
+                    "string_decoder": { "version": "1.1.1" },
+                    "util-deprecate": { "version": "1.0.2" }
+                  }
+                },
+                "typedarray": { "version": "0.0.6" }
+              }
+            },
+            "debug": { "version": "2.6.9" },
+            "elementtree": { "version": "0.1.7" },
+            "network-address": { "version": "1.1.2" }
+          }
+        }
+      }
+    },
+    "urijs": { "version": "1.19.6" },
+    "webtorrent": {
+      "version": "0.115.1",
+      "dependencies": {
+        "addr-to-ip-port": { "version": "1.5.1" },
+        "bittorrent-protocol": {
+          "version": "3.3.1",
+          "dependencies": {
+            "bencode": { "version": "2.0.1" },
+            "bitfield": { "version": "4.0.0" },
+            "debug": {
+              "version": "4.3.1",
+              "dependencies": { "ms": { "version": "2.1.2" } }
+            },
+            "readable-stream": {
+              "version": "3.6.0",
+              "dependencies": {
+                "inherits": { "version": "2.0.3" },
+                "string_decoder": { "version": "1.1.1" },
+                "util-deprecate": { "version": "1.0.2" }
+              }
+            },
+            "speedometer": { "version": "1.1.0" },
+            "randombytes": { "version": "2.1.0" },
+            "unordered-array-remove": { "version": "1.0.2" }
+          }
+        },
+        "chunk-store-stream": {
+          "version": "4.2.0",
+          "dependencies": {
+            "block-stream2": {
+              "version": "2.1.0",
+              "dependencies": {
+                "readable-stream": {
+                  "version": "3.6.0",
+                  "dependencies": {
+                    "inherits": { "version": "2.0.3" },
+                    "string_decoder": { "version": "1.1.1" },
+                    "util-deprecate": { "version": "1.0.2" }
+                  }
+                }
+              }
+            },
+            "readable-stream": {
+              "version": "3.6.0",
+              "dependencies": {
+                "inherits": { "version": "2.0.3" },
+                "string_decoder": { "version": "1.1.1" },
+                "util-deprecate": { "version": "1.0.2" }
+              }
+            }
+          }
+        },
+        "create-torrent": {
+          "version": "4.5.0",
+          "dependencies": {
+            "bencode": { "version": "2.0.1" },
+            "block-stream2": { "version": "2.1.0" },
+            "minimist": { "version": "1.2.5" },
+            "queue-microtask": { "version": "1.2.2" },
+            "readable-stream": {
+              "version": "3.6.0",
+              "dependencies": {
+                "inherits": { "version": "2.0.3" },
+                "string_decoder": { "version": "1.1.1" },
+                "util-deprecate": { "version": "1.0.2" }
+              }
+            },
+            "run-parallel": {
+              "version": "1.2.0",
+              "dependencies": { "queue-microtask": { "version": "1.2.2" } }
+            },
+            "simple-sha1": {
+              "version": "3.1.0",
+              "dependencies": {
+                "queue-microtask": { "version": "1.2.2" },
+                "rusha": { "version": "0.8.13" }
+              }
+            },
+            "filestream": {
+              "version": "5.0.0",
+              "dependencies": {
+                "readable-stream": {
+                  "version": "3.6.0",
+                  "dependencies": {
+                    "inherits": { "version": "2.0.3" },
+                    "string_decoder": { "version": "1.1.1" },
+                    "util-deprecate": { "version": "1.0.2" }
+                  }
+                },
+                "typedarray-to-buffer": {
+                  "version": "3.1.5",
+                  "dependencies": { "is-typedarray": { "version": "1.0.0" } }
+                }
+              }
+            },
+            "is-file": { "version": "1.0.0" },
+            "junk": { "version": "3.1.0" },
+            "multistream": { "version": "4.1.0" },
+            "once": { "version": "1.4.0" },
+            "piece-length": { "version": "2.0.1" }
+          }
+        },
+        "escape-html": { "version": "1.0.3" },
+        "fs-chunk-store": {
+          "version": "2.0.3",
+          "dependencies": {
+            "queue-microtask": { "version": "1.2.2" },
+            "random-access-file": {
+              "version": "2.1.3",
+              "dependencies": {
+                "mkdirp": { "version": "0.5.5" },
+                "random-access-storage": {
+                  "version": "1.4.0",
+                  "dependencies": { "inherits": { "version": "2.0.3" } }
+                }
+              }
+            },
+            "randombytes": { "version": "2.1.0" },
+            "rimraf": { "version": "3.0.2" },
+            "run-parallel": { "version": "1.1.9" },
+            "thunky": { "version": "1.0.3" }
+          }
+        },
+        "http-node": {
+          "version": "1.2.0",
+          "dependencies": {
+            "chrome-net": {
+              "version": "3.3.3",
+              "dependencies": { "inherits": { "version": "2.0.3" } }
+            },
+            "freelist": { "version": "1.0.3" },
+            "http-parser-js": { "version": "0.4.13" }
+          }
+        },
+        "load-ip-set": {
+          "version": "2.1.2",
+          "dependencies": {
+            "ip-set": {
+              "version": "2.1.0",
+              "dependencies": { "ip": { "version": "1.1.5" } }
+            },
+            "simple-get": {
+              "version": "4.0.0",
+              "dependencies": {
+                "decompress-response": {
+                  "version": "6.0.0",
+                  "dependencies": { "mimic-response": { "version": "3.1.0" } }
+                },
+                "once": { "version": "1.4.0" },
+                "simple-concat": { "version": "1.0.0" }
+              }
+            },
+            "netmask": { "version": "1.0.6" },
+            "once": { "version": "1.4.0" },
+            "split": {
+              "version": "1.0.1",
+              "dependencies": { "through": { "version": "2.3.8" } }
+            }
+          }
+        },
+        "memory-chunk-store": {
+          "version": "1.3.2",
+          "dependencies": { "queue-microtask": { "version": "1.2.2" } }
+        },
+        "multistream": {
+          "version": "4.1.0",
+          "dependencies": {
+            "readable-stream": {
+              "version": "3.6.0",
+              "dependencies": {
+                "inherits": { "version": "2.0.3" },
+                "string_decoder": { "version": "1.1.1" },
+                "util-deprecate": { "version": "1.0.2" }
+              }
+            },
+            "once": { "version": "1.4.0" }
+          }
+        },
+        "package-json-versionify": {
+          "version": "1.0.4",
+          "dependencies": { "browserify-package-json": { "version": "1.0.1" } }
+        },
+        "random-iterate": { "version": "1.0.1" },
+        "randombytes": {
+          "version": "2.1.0",
+          "dependencies": { "safe-buffer": { "version": "5.1.2" } }
+        },
+        "render-media": {
+          "version": "4.1.0",
+          "dependencies": {
+            "is-ascii": { "version": "1.0.0" },
+            "mediasource": {
+              "version": "2.4.0",
+              "dependencies": {
+                "inherits": { "version": "2.0.4" },
+                "readable-stream": {
+                  "version": "3.6.0",
+                  "dependencies": {
+                    "inherits": { "version": "2.0.4" },
+                    "string_decoder": { "version": "1.1.1" },
+                    "util-deprecate": { "version": "1.0.2" }
+                  }
+                },
+                "to-arraybuffer": { "version": "1.0.1" }
+              }
+            },
+            "debug": {
+              "version": "4.3.1",
+              "dependencies": { "ms": { "version": "2.1.2" } }
+            },
+            "stream-to-blob-url": { "version": "3.0.2" },
+            "videostream": {
+              "version": "3.2.2",
+              "dependencies": {
+                "binary-search": { "version": "1.3.6" },
+                "mediasource": { "version": "2.4.0" },
+                "mp4-box-encoding": {
+                  "version": "1.4.1",
+                  "dependencies": {
+                    "uint64be": {
+                      "version": "2.0.2",
+                      "dependencies": { "buffer-alloc": { "version": "1.2.0" } }
+                    }
+                  }
+                },
+                "mp4-stream": {
+                  "version": "3.1.3",
+                  "dependencies": {
+                    "mp4-box-encoding": { "version": "1.4.1" },
+                    "queue-microtask": { "version": "1.2.2" },
+                    "readable-stream": {
+                      "version": "3.6.0",
+                      "dependencies": {
+                        "inherits": { "version": "2.0.3" },
+                        "string_decoder": { "version": "1.1.1" },
+                        "util-deprecate": { "version": "1.0.2" }
+                      }
+                    },
+                    "next-event": { "version": "1.0.0" }
+                  }
+                },
+                "range-slice-stream": {
+                  "version": "2.0.0",
+                  "dependencies": {
+                    "readable-stream": {
+                      "version": "3.6.0",
+                      "dependencies": {
+                        "inherits": { "version": "2.0.3" },
+                        "string_decoder": { "version": "1.1.1" },
+                        "util-deprecate": { "version": "1.0.2" }
+                      }
+                    }
+                  }
+                },
+                "pump": {
+                  "version": "3.0.0",
+                  "dependencies": {
+                    "end-of-stream": { "version": "1.4.1" },
+                    "once": { "version": "1.4.0" }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "run-parallel-limit": {
+          "version": "1.1.0",
+          "dependencies": { "queue-microtask": { "version": "1.2.2" } }
+        },
+        "stream-to-blob": { "version": "2.0.1" },
+        "stream-to-blob-url": {
+          "version": "3.0.2",
+          "dependencies": { "stream-to-blob": { "version": "2.0.1" } }
+        },
+        "stream-with-known-length-to-buffer": {
+          "version": "1.0.4",
+          "dependencies": { "once": { "version": "1.4.0" } }
+        },
+        "unordered-array-remove": { "version": "1.0.2" },
+        "ut_metadata": {
+          "version": "3.5.2",
+          "dependencies": {
+            "bencode": { "version": "2.0.1" },
+            "bitfield": { "version": "4.0.0" },
+            "debug": {
+              "version": "4.3.1",
+              "dependencies": { "ms": { "version": "2.1.2" } }
+            },
+            "simple-sha1": {
+              "version": "3.1.0",
+              "dependencies": {
+                "rusha": { "version": "0.8.13" },
+                "queue-microtask": { "version": "1.2.2" }
+              }
+            }
+          }
+        },
+        "ut_pex": {
+          "version": "2.0.1",
+          "dependencies": {
+            "bencode": { "version": "2.0.1" },
+            "compact2string": { "version": "1.4.0" },
+            "string2compact": {
+              "version": "1.3.0",
+              "dependencies": {
+                "addr-to-ip-port": { "version": "1.5.1" },
+                "ipaddr.js": { "version": "1.8.1" }
+              }
+            }
+          }
+        },
+        "utp-native": {
+          "version": "2.3.0",
+          "dependencies": {
+            "napi-macros": { "version": "2.0.0" },
+            "node-gyp-build": { "version": "4.2.3" },
+            "timeout-refresh": { "version": "1.0.3" },
+            "unordered-set": { "version": "2.0.1" },
+            "readable-stream": {
+              "version": "3.6.0",
+              "dependencies": {
+                "inherits": { "version": "2.0.3" },
+                "string_decoder": { "version": "1.1.1" },
+                "util-deprecate": { "version": "1.0.2" }
+              }
+            }
+          }
+        },
+        "bitfield": { "version": "4.0.0" },
+        "bittorrent-dht": {
+          "version": "10.0.0",
+          "dependencies": {
+            "bencode": { "version": "2.0.1" },
+            "last-one-wins": { "version": "1.0.4" },
+            "randombytes": { "version": "2.1.0" },
+            "record-cache": { "version": "1.1.0" },
+            "debug": { "version": "4.3.1" },
+            "k-bucket": {
+              "version": "5.1.0",
+              "dependencies": { "randombytes": { "version": "2.1.0" } }
+            },
+            "k-rpc": {
+              "version": "5.1.0",
+              "dependencies": {
+                "k-rpc-socket": {
+                  "version": "1.11.1",
+                  "dependencies": {
+                    "bencode": { "version": "2.0.1" },
+                    "chrome-dgram": {
+                      "version": "3.0.3",
+                      "dependencies": {
+                        "inherits": { "version": "2.0.3" },
+                        "run-series": { "version": "1.1.8" }
+                      }
+                    },
+                    "chrome-dns": {
+                      "version": "1.0.1",
+                      "dependencies": { "chrome-net": { "version": "3.3.3" } }
+                    },
+                    "chrome-net": { "version": "3.3.3" }
+                  }
+                },
+                "randombytes": { "version": "2.1.0" },
+                "k-bucket": { "version": "5.1.0" }
+              }
+            },
+            "lru": {
+              "version": "3.1.0",
+              "dependencies": { "inherits": { "version": "2.0.3" } }
+            },
+            "simple-sha1": { "version": "3.1.0" }
+          }
+        },
+        "chrome-net": {
+          "version": "3.3.4",
+          "dependencies": { "inherits": { "version": "2.0.3" } }
+        },
+        "debug": {
+          "version": "4.3.1",
+          "dependencies": { "ms": { "version": "2.1.2" } }
+        },
+        "end-of-stream": {
+          "version": "1.4.4",
+          "dependencies": { "once": { "version": "1.4.0" } }
+        },
+        "immediate-chunk-store": {
+          "version": "2.1.1",
+          "dependencies": { "queue-microtask": { "version": "1.2.2" } }
+        },
+        "mime": { "version": "2.5.2" },
+        "parse-torrent": {
+          "version": "9.1.3",
+          "dependencies": {
+            "bencode": { "version": "2.0.1" },
+            "blob-to-buffer": { "version": "1.2.9" },
+            "get-stdin": { "version": "8.0.0" },
+            "magnet-uri": {
+              "version": "6.1.0",
+              "dependencies": {
+                "bep53-range": { "version": "1.1.0" },
+                "thirty-two": { "version": "1.0.2" }
+              }
+            },
+            "queue-microtask": { "version": "1.2.2" },
+            "simple-get": { "version": "4.0.0" },
+            "simple-sha1": { "version": "3.1.0" }
+          }
+        },
+        "pump": {
+          "version": "3.0.0",
+          "dependencies": {
+            "once": { "version": "1.4.0" },
+            "end-of-stream": { "version": "1.4.4" }
+          }
+        },
+        "queue-microtask": { "version": "1.2.2" },
+        "range-parser": { "version": "1.2.1" },
+        "readable-stream": {
+          "version": "3.6.0",
+          "dependencies": {
+            "inherits": { "version": "2.0.3" },
+            "string_decoder": {
+              "version": "1.1.1",
+              "dependencies": { "safe-buffer": { "version": "5.1.2" } }
+            },
+            "util-deprecate": { "version": "1.0.2" }
+          }
+        },
+        "run-parallel": {
+          "version": "1.2.0",
+          "dependencies": { "queue-microtask": { "version": "1.2.2" } }
+        },
+        "simple-concat": { "version": "1.0.1" },
+        "simple-get": {
+          "version": "4.0.0",
+          "dependencies": {
+            "once": { "version": "1.4.0" },
+            "decompress-response": {
+              "version": "6.0.0",
+              "dependencies": { "mimic-response": { "version": "3.1.0" } }
+            },
+            "simple-concat": { "version": "1.0.1" }
+          }
+        },
+        "simple-peer": {
+          "version": "9.9.3",
+          "dependencies": {
+            "err-code": { "version": "2.0.3" },
+            "get-browser-rtc": { "version": "1.0.2" },
+            "randombytes": { "version": "2.1.0" },
+            "buffer": {
+              "version": "6.0.3",
+              "dependencies": {
+                "base64-js": { "version": "1.5.1" },
+                "ieee754": { "version": "1.2.1" }
+              }
+            },
+            "debug": { "version": "4.3.1" },
+            "queue-microtask": { "version": "1.2.2" },
+            "readable-stream": { "version": "3.6.0" }
+          }
+        },
+        "simple-sha1": {
+          "version": "3.1.0",
+          "dependencies": {
+            "rusha": { "version": "0.8.13" },
+            "queue-microtask": { "version": "1.2.2" }
+          }
+        },
+        "speedometer": { "version": "1.1.0" },
+        "torrent-discovery": {
+          "version": "9.4.0",
+          "dependencies": {
+            "bittorrent-lsd": {
+              "version": "1.1.0",
+              "dependencies": {
+                "chrome-dgram": {
+                  "version": "3.0.6",
+                  "dependencies": {
+                    "inherits": { "version": "2.0.4" },
+                    "run-series": { "version": "1.1.9" }
+                  }
+                },
+                "debug": {
+                  "version": "4.3.1",
+                  "dependencies": { "ms": { "version": "2.1.2" } }
+                }
+              }
+            },
+            "bittorrent-dht": { "version": "10.0.0" },
+            "bittorrent-tracker": {
+              "version": "9.16.1",
+              "dependencies": {
+                "bencode": { "version": "2.0.1" },
+                "bittorrent-peerid": { "version": "1.3.3" },
+                "bufferutil": {
+                  "version": "4.0.3",
+                  "dependencies": { "node-gyp-build": { "version": "4.2.3" } }
+                },
+                "ip": { "version": "1.1.5" },
+                "once": { "version": "1.4.0" },
+                "random-iterate": { "version": "1.0.1" },
+                "randombytes": { "version": "2.1.0" },
+                "run-series": { "version": "1.1.8" },
+                "string2compact": { "version": "1.3.0" },
+                "unordered-array-remove": { "version": "1.0.2" },
+                "utf-8-validate": {
+                  "version": "5.0.4",
+                  "dependencies": { "node-gyp-build": { "version": "4.2.3" } }
+                },
+                "bn.js": { "version": "5.2.0" },
+                "chrome-dgram": {
+                  "version": "3.0.6",
+                  "dependencies": {
+                    "inherits": { "version": "2.0.4" },
+                    "run-series": { "version": "1.1.9" }
+                  }
+                },
+                "compact2string": {
+                  "version": "1.4.1",
+                  "dependencies": { "ipaddr.js": { "version": "1.8.1" } }
+                },
+                "debug": { "version": "4.3.1" },
+                "lru": { "version": "3.1.0" },
+                "minimist": { "version": "1.2.5" },
+                "queue-microtask": { "version": "1.2.2" },
+                "run-parallel": { "version": "1.2.0" },
+                "simple-get": { "version": "4.0.0" },
+                "simple-peer": { "version": "9.9.3" },
+                "simple-websocket": {
+                  "version": "9.1.0",
+                  "dependencies": {
+                    "randombytes": { "version": "2.1.0" },
+                    "debug": { "version": "4.3.1" },
+                    "queue-microtask": { "version": "1.2.2" },
+                    "readable-stream": { "version": "3.6.0" },
+                    "ws": { "version": "7.4.3" }
+                  }
+                },
+                "ws": { "version": "7.4.3" }
+              }
+            },
+            "debug": { "version": "4.3.1" },
+            "run-parallel": { "version": "1.2.0" }
+          }
+        },
+        "torrent-piece": { "version": "2.0.0" }
+      }
+    },
+    "xmlbuilder": { "version": "13.0.2" }
+  }
+}
