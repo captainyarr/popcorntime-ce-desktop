@@ -13,7 +13,7 @@
   "version": "0.4.3-0",
   "node-remote": "*://*",
   "chromium-args": "--password-store=basic --remote-debugging-port=9222 --inspect-brk",
-  "releaseName": "Extra Time, Extra Popcorn",
+  "releaseName": "Let's All Go To The Movies!",
   "scripts": {
     "start": "npx gulp run",
     "update": "npm prune && npm install",
