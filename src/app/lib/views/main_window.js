@@ -177,7 +177,7 @@
                             if (!err || err.errno === '-4075') {
                                 //success
                             } else {
-                                Settings.tmpLocation = path.join(os.tmpDir(), 'Popcorn-Time');
+                                Settings.tmpLocation = path.join(os.tmpdir(), 'Popcorn-Time');
                                 fs.mkdir(Settings.tmpLocation);
                             }
                         });

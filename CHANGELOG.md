@@ -1,3 +1,10 @@
+## 0.4.3-0 Beta - Let's All Go To The Movies! - 1 September 2020
+New Features:
+- Added Experimental section
+BugFixes:
+- Fix category search
+- Various small fixes.
+
 ## 0.4.2-0 Beta - Extra Time, Extra Popcorn - 23 August 2020
 
 New Features:

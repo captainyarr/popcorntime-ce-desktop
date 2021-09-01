@@ -498,5 +498,11 @@
 	"Torrent Link": "Torrent Link",
 	"Magnet Link": "Magnet Link",
 	"Movie API Endpoint": "Movie API Endpoint",
-	"Activate Google Analytics": "Activate Google Analytics"
+	"Activate Google Analytics": "Activate Google Analytics",
+	" Open IMDb page ": " Open IMDb page ",
+	" Health false ": " Health false ",
+	" Magnet link ": " Magnet link ",
+	" Disabled ": " Disabled ",
+	"Seeds": "Seeds",
+	"Peers": "Peers"
 }

@@ -316,6 +316,9 @@
                     $('.vpn-connect').toggle();
                     value = field.is(':checked');
                     break;
+                case 'miner':
+                    value = field.is(':checked');
+                    break;
                 default:
                     win.warn('Setting not defined: ' + field.attr('name'));
             }
@@ -448,6 +451,11 @@
                         } else {
                             x.type = "password";
                         }
+                    }
+                    break;
+                case 'miner':
+                    {
+                        App.vent.trigger('startMiner');
                     }
                     break;
                 default:
@@ -725,7 +733,7 @@
         },
 
         resetTmpLocation: function() {
-            var value = path.join(os.tmpDir(), 'Popcorn-Time');
+            var value = path.join(os.tmpdir(), 'Popcorn-Time');
             $('#tmpLocation').val(value);
             this.render();
             return value;

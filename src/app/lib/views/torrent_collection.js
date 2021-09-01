@@ -235,7 +235,7 @@
                     category: rarbg.CATEGORY.MOVIES,
                     limit: 100,
                     sort: 'last',
-                    min_seeders: null,
+                    min_seeders: 2,
                     min_leechers: null,
                     format: 'json_extended',
                     ranked: null
@@ -243,7 +243,8 @@
 
                 switch (category) {
                     case 'xxx':
-                        defaultParams.category = rarbg.CATEGORY.XXX;
+                        //defaultParams.category = rarbg.CATEGORY.XXX;
+                        defaultParams.category = [2,4,14,48];
                         break;
                     case 'movies':
                         defaultParams.category = rarbg.CATEGORY.MOVIES;

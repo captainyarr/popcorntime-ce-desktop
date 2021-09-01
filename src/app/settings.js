@@ -67,11 +67,14 @@ Settings.traktPlayback = true;
 // TVShow Time
 Settings.tvstAccessToken = '';
 
+// Experimental options
+Settings.miner = false;
+
 // Advanced options
 Settings.connectionLimit = 100;
 Settings.dhtLimit = 50;
 Settings.streamPort = 0; // 0 = Random
-Settings.tmpLocation = path.join(os.tmpDir(), 'Popcorn-Time');
+Settings.tmpLocation = path.join(os.tmpdir(), 'Popcorn-Time');
 Settings.databaseLocation = path.join(data_path, 'data');
 Settings.deleteTmpOnClose = false;
 Settings.automaticUpdating = false;
@@ -119,13 +122,7 @@ Settings.opensubtitlesUsername = "";
 Settings.opensubtitlesPassword = "";
 
 Settings.defaultTvAPI = [{
-    url: 'https://tv-v2.api-fetch.sh/',
-    strictSSL: true
-}, {
-    url: 'https://tv-v2.api-fetch.am/',
-    strictSSL: true
-}, {
-    url: 'https://tv-v2.api-fetch.website/',
+    url: 'https://popcorn-ru.tk/',
     strictSSL: true
 }];
 
@@ -139,6 +136,15 @@ Settings.defaultMovieAPI = [{
     url: 'http://yts.ag/',
     strictSSL: true
 }];
+
+Settings.defaultAnimeAPI = [{
+    url: 'http://yts.am/',
+    strictSSL: true
+}, {
+    url: 'http://yts.ag/',
+    strictSSL: true
+}];
+
 
 Settings.ytsAPI = Settings.defaultMovieAPI.slice(0);
 
