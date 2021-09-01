@@ -1,55 +1,63 @@
 ## 0.4.3-0 Beta - Let's All Go To The Movies! - 1 September 2020
+
 New Features:
+
 - Added Experimental section
-BugFixes:
+  BugFixes:
 - Fix category search
 - Various small fixes.
 
 ## 0.4.2-0 Beta - Extra Time, Extra Popcorn - 23 August 2020
 
 New Features:
-- Sort: Sort By, Genres, Type are now saved when going between Movies 
+
+- Sort: Sort By, Genres, Type are now saved when going between Movies
   and TV Shows.
 - RARBG: Updated categories for RARBG to support 4K, Movies, TV Shows, XXX
 - Tracker: Added Tracker Updater
 
-BugFixes: 
+BugFixes:
+
 - Trakt: Authorize Fixed
 - RARBG: Fixed RARBG search support in Torrent Collection
 - Trailer: Validate trailer information is correct
 - Favorites: Fixed Favorites to handle bad movie entries
 
 Updated:
+
 - OpenSubtitles: Updated handling of subtitle search
 - OpenSubtitles: Added performance tests
 - OpenSubtitles: Subtitle information is now loaded in the background
 - Trakt: Updated Watchlist refresh and trakt clean up
 - Trakt: Added Trak scrobble to ext players
 - Code: Intergrated torrent health into repo
-- Chromecast: Enabled auto discovery of new chromecast device on a set period 
+- Chromecast: Enabled auto discovery of new chromecast device on a set period
   of time
 
-## 0.4.1-17.1 Beta - Popcorn Treats  - 24 October 2019
+## 0.4.1-17.1 Beta - Popcorn Treats - 24 October 2019
 
 New Features:
-- Added more information to status screen: Active Users, and Total User, 
+
+- Added more information to status screen: Active Users, and Total User,
   Time remaining
 
-BugFixes: 
+BugFixes:
+
 - Fixed Next TV episode playing Automatically
 - Disabled autoupdate by default
 - Improved subtitle support
 
 Updated:
+
 - Updated to nw.js version 0.41.3
 - Updated various packages to latest version
 
-
-## 0.4.1-16 Beta - Summer Dream  - 28 August 2018
+## 0.4.1-16 Beta - Summer Dream - 28 August 2018
 
 New Features:
+
 - OpenSubtitles: Add link to create account
-- OpenSubtitles: Added Username and Password for OpenSubtitles API into the 
+- OpenSubtitles: Added Username and Password for OpenSubtitles API into the
   settings screen.
 - ExtPlayer: Added Windows Media Player
 - Player: Added a "Download Only" option to the player selection
@@ -57,7 +65,8 @@ New Features:
 - gulp: Add ffmpeg update to builds
 - gulp: Add commandline paramters to set nw.js version and downloadUrl location
 
-BugFixes: 
+BugFixes:
+
 - Register: Fixed default torrent
 - Settings: Fixed Download direction selection
 - Magnet and Torrent: Fixed Magnet and Torrent Drop
@@ -71,6 +80,7 @@ BugFixes:
 - OpenSubtitles: Better error handling and fixed settings
 
 Updated:
+
 - Nodejs: Updated to version 0.31.5
 - jQuery: Updated to version 3.3.1
 - Mousetrap: Updated to latest version 1.6.2
@@ -80,9 +90,10 @@ Updated:
 - yargs: Updated to version 12.0.1
 - opensubtitles-api: Updated to version 4.1.0
 
-## 0.4.1-15 Beta - Ides of March  - 11 March 2018
+## 0.4.1-15 Beta - Ides of March - 11 March 2018
 
-BugFixes: 
+BugFixes:
+
 - Bookmark and Seen button visual issue fixed for both Movie and TV Show
 - Fixed icon location in Themes for About screen
 - Fixed About and minor Theme issues
@@ -93,50 +104,53 @@ BugFixes:
 - Webtorrent: Display torrent warning in the console
 
 Updated:
+
 - Updated various packages
 - Updated analytics calls
 
 ## 0.4.1-14 Beta - Lets start the New Year right... - 26 December 2017
 
-New Features: 
+New Features:
 
 - Packages are updated by Greenkeeper
 
-BugFixes: 
+BugFixes:
 
-- Fixed build archive so that all files are included when a new build is 
-  generated. All builds should now have all the proper files as expected and 
+- Fixed build archive so that all files are included when a new build is
+  generated. All builds should now have all the proper files as expected and
   run properly.
 - Updated dependencies
+
 ## 0.4.1-11 Beta - Now with some butter - 6 December 2017
 
-New Features: 
+New Features:
 
 - Watch movies and tv series directly in the PopcornTime player.
 
-BugFixes: 
+BugFixes:
 
 - Updated nw.js with ffmpeg fix from Butter Project (butterproject.org)
 
 OpenSubtitles:
-- Added error handling to OpenSubtitles search call, movie list will appear 
+
+- Added error handling to OpenSubtitles search call, movie list will appear
   after a short time.
 
 ## 0.4.1-9 Beta - I have a need for speed - 10 October 2017
 
-New Features: 
+New Features:
 
 - Added webtorrent support to Movie and TV Shows download
 - Added opensubtitles support
 
-BugFixes: 
+BugFixes:
 
 - Stats on download details update after download complete
 - PT-BR subtitles are supported again
 
 ## 0.4.1-5 Beta - New Year's Eve in front of the door - 28 December 2016
 
-New Features: 
+New Features:
 
 - sort by trending
 - sort by popularity
@@ -145,7 +159,7 @@ New Features:
 - html5 video player for tv shows and 'torrent collection'
 - new order for Settings (overview and visibility)
 
-BugFixes: 
+BugFixes:
 
 - get direct stream url 127.0.0.1:port while using html5 video player
 - remove 'filter by views', 'filter by last added & google cloud', 'provider links'
@@ -154,7 +168,7 @@ BugFixes:
 
 ## 0.4.1-4 Beta - Give me some Nachos - 5 June 2016
 
-New Features: 
+New Features:
 
 - add Nacho Link to player list
 - add subtitle support for Nacho Links
@@ -162,27 +176,27 @@ New Features:
 - add enryption support for Nacho Links
 - add Nacho Link support for http://yts.ph
 
-BugFixes: 
+BugFixes:
 
 - fix tv api to eztv.is
 - fix fast forward while chromecasting
 - fix cancel button while streaming to nacholink
 - set "deleteTmpOnClose" to false
 - set "activateAutoplay" to false, in order to select chromecast
-- fix favorites in 0.4.1 version 
+- fix favorites in 0.4.1 version
 - set 'chosenPlayer' to html5 by default
 - set 'chosenPlayer' to local if magnet link is clicked
 
 ## 0.4.0-5 Beta - Patience is a fruit of the Spirit - 13 Feb 2015
 
-BugFixes: 
+BugFixes:
 
 - fix chromecast
 - fixed bookmark crash
 - fixed crew info
 - fixed opensubtitles module on MAC
 - fixed series issue on MAC
-- rename application to Popcorn Time Community 
+- rename application to Popcorn Time Community
 - rename github organization to PopcornTimeCommunity
 - kat.cr search (API fixed)
 - remove strike search (API service closed)
@@ -190,15 +204,15 @@ BugFixes:
 - added eztv API (eztvapi.ml)
 - video2k url fixed
 - github url fixed
-- set 'activateTorrentCollection' to true 
-- set 'translateSynopsis' to false 
-- set 'alwaysOnTop' to false 
-- set 'movies_quality' to false 
+- set 'activateTorrentCollection' to true
+- set 'translateSynopsis' to false
+- set 'alwaysOnTop' to false
+- set 'movies_quality' to false
 - Hide strike and kat icons (clean up)
 - app crash fixed (if no posters found)
 - updated dependencies
 
-New Features: 
+New Features:
 
 - stream from any browser and website by just clicking the magnet link (disabled by default)
 - add download option 'deleteTmpOnClose' to recommended settings
@@ -208,12 +222,12 @@ New Features:
 - new history option to list all your downloaded torrents (kat.cr) to keep track of them (enabled by default)
 - view megabyte size in torrent files (autoplay must be disabled)
 - allow multiple players at the same time (multiple instances)
-- show info tooltip onhover settings 
+- show info tooltip onhover settings
 - new order for Settings (overview and visibility)
 
-## 0.3.9 Beta - Merry Christmas Eve ♡ I love y'all so much  - 25 Dec 2015
+## 0.3.9 Beta - Merry Christmas Eve ♡ I love y'all so much - 25 Dec 2015
 
-BugFixes: 
+BugFixes:
 
 - Fix the bookmarking cache (favorites work again)
 - IMDB Synopsis API (80 % of movies were not showing synopsis)
@@ -238,11 +252,11 @@ BugFixes:
 - Added CE suffix
 - Updated dependencies
 
-New Features: 
+New Features:
 
 - Google Cloud Player (possibly bad quality but very fast speed, no ISP monitor & unlimited download bandwidth)
 - Subtitles for Google Cloud Player
-- Interrupting movie (on Google Cloud Player) and watch again with last view 
+- Interrupting movie (on Google Cloud Player) and watch again with last view
 - Show Google Cloud icon on list
 - Added an option to disable Coogle Cloud icon in settings
 - Save choosen player (also for Google Cloud Player)
@@ -259,7 +273,7 @@ New Features:
 
 ## 0.3.8 Beta - There's nothing on TV - 09 July 2015
 
-BugFixes: 
+BugFixes:
 
 - Fullscreen consistent while playing
 - Multi-screen support
@@ -289,7 +303,7 @@ BugFixes:
 - Fix most issues with remotes.
 - Fix the Popcorn Time player when watching trailers.
 
-New Features: 
+New Features:
 
 - Node Webkit 12.1 (now known as nw.js)
 - Cancel "Play Next Episode"
@@ -331,7 +345,7 @@ BugFixes:
 - Fix the movie cover resizing code and garbage collect the cache to ensure old metadata isn't used
 - Greatly improves the built-in DLNA detection
 - Fix retina display for Ultra HD screens
-- Properly hide the spinner in cases where an error occurs 
+- Properly hide the spinner in cases where an error occurs
 - Always show the FileSelector if TorrentCol is active. Fixes PT-1575
 - Fix subtitle error handling in the streamer
 - Prevent the app from getting stuck on "Waiting for Subtitles" if subtitle discovery fails
@@ -411,6 +425,7 @@ like best at http://discuss.popcorntime.io/t/list-of-popcorn-time-remote-control
 - [ALPHA] ChromeCast now supports subtitles and cover images.
 
 ## 0.3.3 Beta - 12 sept 2014
+
 - Move to self-hosted repo, you can now find us at http://git.popcorntime.io
 - Use FontAwesome instead of PNG's: nicer sharper icons accross the ui
 - Get rid of white flash at startup.
@@ -418,31 +433,34 @@ like best at http://discuss.popcorntime.io/t/list-of-popcorn-time-remote-control
 - Themes: we give you 3 new themes to check out, and soon you'll be able to
   submit your own.
 - HTTP Api: to control Popcorn Time from another application
-- New settings: 
-	- Always on Top option
-	- Start page option
-	- Rating on covers
-	- Fade or Hide watched items
+- New settings:
+
+  - Always on Top option
+  - Start page option
+  - Rating on covers
+  - Fade or Hide watched items
 
 - Multiple UI improvements
-    - Resize covers on-the-fly
-    - [TV] Open directly next unseen episode
-    - Builtin help section
+
+  - Resize covers on-the-fly
+  - [TV] Open directly next unseen episode
+  - Builtin help section
 
 - External Players Framework:
-    - VLC,
-    - XBMC,
-    - MPlayer,
-    - mpv,
-    - and many more !
+  - VLC,
+  - XBMC,
+  - MPlayer,
+  - mpv,
+  - and many more !
 - Linux installer
 
 - [ALPHA] Trakt.tv synchronisation: trakt will now remember your favs for
 - [ALPHA] External Devices Framework:
-    - Chromecast
-    - Airplay
+  - Chromecast
+  - Airplay
 
 release notes:
+
 - This release ships with a huge internal code clean up that forced us to
   break former Databases compatibilities, so you most probably will have to reset
   your DataBase on install. sorry, we'll be better next time.
@@ -481,6 +499,7 @@ release notes:
 - Auto updater
 
 ## 0.3.0 Beta - 13 may 2014
+
 - New NSIS Windows installer
 - Rating stars
 - Trailers
@@ -495,6 +514,7 @@ release notes:
 - "About" tab
 
 ## 0.2.9 Beta - 15 april 2014
+
 - Updater in-app
 - New website
 - Bump to working tree src/app
@@ -504,10 +524,10 @@ release notes:
 - Loading screen
 
 ## 0.2.8 Beta - 16 march 2014
+
 - New languages and subtitles
 - Linux 32bits support
 - Yts API
-
 
 ## 0.2.6 Beta, 0.2.7 Beta - 14 march 2014
 
@@ -518,7 +538,7 @@ release notes:
 
 ## 0.2.5 Beta - 08 march 2014
 
-- New languages 
+- New languages
 - Localized Windows Installer
 - Update Node-Webkit 0.9.2
 - Infinite scroll
@@ -535,6 +555,7 @@ release notes:
 - Movie API
 
 ## 0.1.0 Alpha - 20 february 2014
+
 - First release Windows/Linux amd64/MacOS
 - Windows Installer
 - Connect peerflix using .torrent files
