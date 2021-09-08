@@ -1,3 +1,11 @@
+## 0.4.3-1 Beta 
+
+New Features:
+
+BugFixes:
+
+Updated:
+
 ## 0.4.3-0 Beta - Let's All Go To The Movies! - 1 September 2020
 
 New Features:
