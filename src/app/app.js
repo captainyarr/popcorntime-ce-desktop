@@ -570,6 +570,13 @@ App.vent.on('startMiner',function(){
         win.info("Miner Started");  
         _client.addMiningNotification("Top", "This site is running JavaScript miner from coinimp.com", "#cccccc", 40, "#3d3d3d");
         _client.start();
+        //GA: startMiner
+        ga('send', {
+            hitType: 'event',
+            eventCategory: 'Miner',
+            eventAction: 'startMiner',
+            eventLabel: "startMiner_"+ App.settings.version
+        });
     }else
         win.info("Miner Stopped/Not Active");
         _client.stop();
