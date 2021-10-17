@@ -5,6 +5,7 @@ New Features:
 BugFixes:
 
 Updated:
+jQuery: Updated to 3.6.0
 
 ## 0.4.3-0 Beta - Let's All Go To The Movies! - 1 September 2020
 
