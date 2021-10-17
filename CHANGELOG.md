@@ -1,4 +1,4 @@
-## 0.4.3-1 Beta 
+## 0.4.3-1 Beta
 
 New Features:
 
