@@ -122,7 +122,7 @@ Settings.opensubtitlesUsername = "";
 Settings.opensubtitlesPassword = "";
 
 Settings.defaultTvAPI = [{
-    url: 'https://popcorn-ru.tk/',
+    url: 'https://popcorn-time.ga/',
     strictSSL: true
 }];
 
@@ -130,6 +130,10 @@ Settings.tvAPI = Settings.defaultTvAPI.slice(0);
 
 
 Settings.defaultMovieAPI = [{
+    url: 'http://yts.mx/',
+    strictSSL: true
+},
+{
     url: 'http://yts.am/',
     strictSSL: true
 }, {
