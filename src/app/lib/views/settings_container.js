@@ -465,7 +465,7 @@
                     break;
                 case 'miner':
                     {
-                        App.vent.trigger('startMiner');
+                        //App.vent.trigger('startMiner');
                     }
                     break;
                 default:

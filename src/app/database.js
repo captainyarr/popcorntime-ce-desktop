@@ -414,7 +414,7 @@ var Database = {
 
                 App.vent.trigger('initHttpApi');
 
-                App.vent.trigger('startMiner');
+                //App.vent.trigger('startMiner');
                 
                 return AdvSettings.checkApiEndpoints([
                     Settings.updateEndpoint

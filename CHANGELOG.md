@@ -1,6 +1,7 @@
 ## 0.4.3-1 Beta
 
 New Features:
+- Removed experimental miner
 
 BugFixes:
 
