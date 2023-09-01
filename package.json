@@ -17,7 +17,9 @@
   "scripts": {
     "start": "npx gulp run",
     "update": "npm prune && npm install",
-    "debug": "NODE_ENV=development npx gulp run"
+    "debug": "NODE_ENV=development npx gulp run",
+    "prepare": "npm run snyk-protect",
+    "snyk-protect": "snyk-protect"
   },
   "single-instance": false,
   "window": {
@@ -78,7 +80,8 @@
     "urijs": "^1.19.7",
     "URIjs": "^1.16.1",
     "webtorrent": "^0.115.4",
-    "xmlbuilder": "^13.0.2"
+    "xmlbuilder": "^13.0.2",
+    "@snyk/protect": "latest"
   },
   "devDependencies": {
     "del": "^5.1.0",
@@ -97,5 +100,6 @@
     "yargs": "^14.2.3"
   },
   "description": "",
-  "author": ""
+  "author": "",
+  "snyk": true
 }

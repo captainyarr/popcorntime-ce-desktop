@@ -1,0 +1,10 @@
+# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
+version: v1.25.1
+ignore: {}
+# patches apply the minimum changes required to fix a vulnerability
+patch:
+  'npm:lodash:20180130':
+    - peerflix > airplayer > airplay-protocol > plist > xmlbuilder > lodash:
+        patched: '2023-09-01T13:08:29.992Z'
+        id: 'npm:lodash:20180130'
+        path: peerflix > airplayer > airplay-protocol > plist > xmlbuilder > lodash
