@@ -36,7 +36,7 @@
     "airplay-js": "^0.3.0",
     "ajv": "6.12.6",
     "async": "^3.2.1",
-    "axios": "^0.21.3",
+    "axios": "^1.6.0",
     "bottleneck": "^2.19.5",
     "chromecast-js": "git+https://github.com/captainyarr/chromecast-js.git",
     "client-oauth2": "^4.3.3",
