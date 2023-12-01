@@ -1,6 +1,6 @@
 # Plugins
 
-Plugins extend the functionality of Mousetrap.  To use a plugin just include the plugin after mousetrap.
+Plugins extend the functionality of Mousetrap. To use a plugin just include the plugin after mousetrap.
 
 ```html
 <script src="mousetrap.js"></script>
@@ -9,7 +9,7 @@ Plugins extend the functionality of Mousetrap.  To use a plugin just include the
 
 ## Bind dictionary
 
-Allows you to make multiple bindings in a single ``Mousetrap.bind`` call.
+Allows you to make multiple bindings in a single `Mousetrap.bind` call.
 
 ## Global bind
 

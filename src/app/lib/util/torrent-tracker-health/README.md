@@ -1,5 +1,4 @@
-torrent-tracker-health
-==============
+# torrent-tracker-health
 
 Get health info for torrents. This library is based on torrent-tracker and returns the number of seeds and peers.
 

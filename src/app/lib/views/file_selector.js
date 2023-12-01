@@ -1,253 +1,263 @@
-(function(App) {
-    'use strict';
+(function (App) {
+  "use strict";
 
-    var _this,
-        formatMagnet;
+  var _this, formatMagnet;
 
-    var FileSelector = Backbone.Marionette.ItemView.extend({
-        template: '#file-selector-tpl',
-        className: 'file-selector',
+  var FileSelector = Backbone.Marionette.ItemView.extend({
+    template: "#file-selector-tpl",
+    className: "file-selector",
 
-        events: {
-            'click .close-icon': 'closeSelector',
-            'click .file-item': 'startStreaming',
-            'click .store-torrent': 'storeTorrent',
-            'click .playerchoicemenu li a': 'selectPlayer'
-        },
+    events: {
+      "click .close-icon": "closeSelector",
+      "click .file-item": "startStreaming",
+      "click .store-torrent": "storeTorrent",
+      "click .playerchoicemenu li a": "selectPlayer",
+    },
 
-        initialize: function() {
-            _this = this;
+    initialize: function () {
+      _this = this;
 
-            formatMagnet = function(link) {
-                // format magnet with Display Name
-                var index = link.indexOf('\&dn=') + 4, // keep display name
-                    _link = link.substring(index); // remove everything before dn
-                _link = _link.split('\&'); // array of strings starting with &
-                _link = _link[0]; // keep only the first (i.e: display name)
-                _link = _link.replace(/\+/g, '.'); // replace + by .
-                _link = _link.replace(/%5B/g, '[').replace(/%5D/g, ']');
-                _link = _link.replace(/%28/g, '(').replace(/%29/g, ')');
-                link = _link.replace(/\W$/, ''); // remove trailing non-word char
-                return link;
-            };
-        },
+      formatMagnet = function (link) {
+        // format magnet with Display Name
+        var index = link.indexOf("&dn=") + 4, // keep display name
+          _link = link.substring(index); // remove everything before dn
+        _link = _link.split("&"); // array of strings starting with &
+        _link = _link[0]; // keep only the first (i.e: display name)
+        _link = _link.replace(/\+/g, "."); // replace + by .
+        _link = _link.replace(/%5B/g, "[").replace(/%5D/g, "]");
+        _link = _link.replace(/%28/g, "(").replace(/%29/g, ")");
+        link = _link.replace(/\W$/, ""); // remove trailing non-word char
+        return link;
+      };
+    },
 
-        onBeforeRender: function() {
-            //Bitsnoop is no longer functional
-            /*
+    onBeforeRender: function () {
+      //Bitsnoop is no longer functional
+      /*
             if (AdvSettings.get('pluginFakeSkan') === true) {
                 this.bitsnoopRequest(this.model.get('torrent').infoHash);
             }
             */
+    },
+
+    onShow: function () {
+      this.isTorrentStored();
+
+      Mousetrap.bind(["esc", "backspace"], function (e) {
+        _this.closeSelector(e);
+      });
+
+      App.Device.Collection.setDevice(Settings.chosenPlayer);
+      App.Device.ChooserView("#player-chooser2").render();
+
+      $("#player-googlecloud").hide();
+      if (AdvSettings.get("pluginHTML5") === false) {
+        $("#player-html5").hide();
+      }
+      if (AdvSettings.get("pluginVLC") === false) {
+        $("#player-VLC").hide();
+      }
+
+      this.$("#watch-now").text("");
+
+      // get all a in file-selector and click the one with highest size
+      var li = document.getElementsByTagName("li");
+      var length = li.length;
+      // variable for the highest one
+      var highest = 0;
+      // loop over to find the highest ID by looking at the property parsed as an int
+      for (var i = 0; i < length; i++) {
+        var id = parseInt(li[i].id.substring(1, li[i].id.length), 10);
+        if (id > highest) {
+          highest = id;
+        }
+      }
+
+      if (!this.isTorrentStored()) {
+        this.storeTorrent();
+      }
+
+      if (AdvSettings.get("activateAutoplay") === true) {
+        $("#s" + highest).click();
+      }
+    },
+
+    bitsnoopRequest: function (hash) {
+      var endpoint = "http://bitsnoop.com/api/fakeskan.php?hash=";
+
+      request(
+        {
+          method: "GET",
+          url: endpoint + hash,
+          headers: {
+            "User-Agent": "request",
+          },
         },
-
-        onShow: function() {
-            this.isTorrentStored();
-
-            Mousetrap.bind(['esc', 'backspace'], function(e) {
-                _this.closeSelector(e);
-            });
-
-            App.Device.Collection.setDevice(Settings.chosenPlayer);
-            App.Device.ChooserView('#player-chooser2').render();
-
-            $('#player-googlecloud').hide();
-            if (AdvSettings.get('pluginHTML5') === false) {
-                $('#player-html5').hide();
+        function (error, response, body) {
+          if (!error && response.statusCode <= 400) {
+            if (body === "FAKE") {
+              $(".fakeskan")
+                .text(i18n.__("%s reported this torrent as fake", "FakeSkan"))
+                .show();
             }
-            if (AdvSettings.get('pluginVLC') === false) {
-                $('#player-VLC').hide();
-            }
-
-            this.$('#watch-now').text('');
-
-            // get all a in file-selector and click the one with highest size
-            var li = document.getElementsByTagName("li");
-            var length = li.length;
-            // variable for the highest one
-            var highest = 0;
-            // loop over to find the highest ID by looking at the property parsed as an int
-            for (var i = 0; i < length; i++) {
-                var id = parseInt(li[i].id.substring(1, li[i].id.length), 10);
-                if (id > highest) {
-                    highest = id;
-                }
-            }
-
-            if (!this.isTorrentStored()) {
-                this.storeTorrent();
-            }
-
-            if (AdvSettings.get('activateAutoplay') === true) {
-                $('#s' + highest).click();
-            }
+          }
         },
+      );
+    },
 
-        bitsnoopRequest: function(hash) {
-            var endpoint = 'http://bitsnoop.com/api/fakeskan.php?hash=';
+    startStreaming: function (e) {
+      var torrent = _this.model.get("torrent");
+      var file = parseInt($(e.currentTarget).attr("data-file"));
+      var actualIndex = parseInt($(e.currentTarget).attr("data-index"));
+      torrent.name = torrent.files[file].name;
 
-            request({
-                method: 'GET',
-                url: endpoint + hash,
-                headers: {
-                    'User-Agent': 'request'
-                }
-            }, function(error, response, body) {
-                if (!error && response.statusCode <= 400) {
-                    if (body === 'FAKE') {
-                        $('.fakeskan').text(i18n.__('%s reported this torrent as fake', 'FakeSkan')).show();
-                    }
-                }
-            });
-        },
+      var torrentStart = new Backbone.Model({
+        torrent: torrent,
+        torrent_read: true,
+        file_index: actualIndex,
+        device: App.Device.Collection.selected,
+      });
+      try {
+        App.MovieDetailView.closeDetails();
+      } catch (e) {}
+      App.vent.trigger("stream:start", torrentStart);
+      App.vent.trigger("system:closeFileSelector");
+    },
 
-        startStreaming: function(e) {
-            var torrent = _this.model.get('torrent');
-            var file = parseInt($(e.currentTarget).attr('data-file'));
-            var actualIndex = parseInt($(e.currentTarget).attr('data-index'));
-            torrent.name = torrent.files[file].name;
+    isTorrentStored: function () {
+      var target = require("nw.gui").App.dataPath + "/TorrentCollection/";
 
-            var torrentStart = new Backbone.Model({
-                torrent: torrent,
-                torrent_read: true,
-                file_index: actualIndex,
-                device: App.Device.Collection.selected
-            });
-            try { App.MovieDetailView.closeDetails(); } catch (e) { }
-            App.vent.trigger('stream:start', torrentStart);
-            App.vent.trigger('system:closeFileSelector');
-        },
+      // bypass errors
+      if (!Settings.droppedTorrent && !Settings.droppedMagnet) {
+        $(".store-torrent").hide();
+        return false;
+      } else if (
+        Settings.droppedMagnet &&
+        Settings.droppedMagnet.indexOf("&dn=") === -1
+      ) {
+        $(".store-torrent").text(i18n.__("Cannot be stored"));
+        $(".store-torrent").addClass("disabled").prop("disabled", true);
+        //alert('Magnet lacks Display Name, unable to store it');
+        win.warn("Magnet lacks Display Name, unable to store it");
+        return false;
+      }
+      var file, _file;
+      if (Settings.droppedTorrent) {
+        file = Settings.droppedTorrent;
+        //alert("droppedTorrent: "+file);
+      } else if (!Settings.droppedStoredMagnet) {
+        //else if (Settings.droppedMagnet && !Settings.droppedStoredMagnet) {
+        (_file = Settings.droppedMagnet), (file = formatMagnet(_file));
+        //alert("droppedMagnet, droppedStoredMagnet=false: "+file);
+      } else if (Settings.droppedStoredMagnet) {
+        //else if (Settings.droppedMagnet && Settings.droppedStoredMagnet) {
+        file = Settings.droppedStoredMagnet;
+        //alert("droppedMagnet, droppedStoredMagnet=true: "+file);
+      }
 
-        isTorrentStored: function() {
-            var target = require('nw.gui').App.dataPath + '/TorrentCollection/';
+      // check if torrent stored
+      if (!fs.existsSync(target + file)) {
+        $(".store-torrent").text(i18n.__("Store this torrent"));
+        return false;
+      } else {
+        $(".store-torrent").text(i18n.__("Remove this torrent"));
+        return true;
+      }
+    },
 
-            // bypass errors
-            if (!Settings.droppedTorrent && !Settings.droppedMagnet) {
-                $('.store-torrent').hide();
-                return false;
-            } else if (Settings.droppedMagnet && Settings.droppedMagnet.indexOf('\&dn=') === -1) {
-                $('.store-torrent').text(i18n.__('Cannot be stored'));
-                $('.store-torrent').addClass('disabled').prop('disabled', true);
-                //alert('Magnet lacks Display Name, unable to store it');
-                win.warn('Magnet lacks Display Name, unable to store it');
-                return false;
+    storeTorrent: function () {
+      var source = App.settings.tmpLocation + "/",
+        target = require("nw.gui").App.dataPath + "/TorrentCollection/",
+        file,
+        _file;
+
+      if (Settings.droppedTorrent) {
+        let file = Settings.droppedTorrent;
+        let targetFile = target + file;
+        let sourceFile;
+
+        try {
+          sourceFile = fs.readFileSync(source + file);
+          if (this.isTorrentStored()) {
+            fs.unlinkSync(targetFile); // remove the torrent
+            win.debug("Torrent Collection: deleted", file);
+          } else {
+            if (!fs.existsSync(target)) {
+              fs.mkdir(target); // create directory if needed
             }
-            var file, _file;
-            if (Settings.droppedTorrent) {
-                file = Settings.droppedTorrent;
-                //alert("droppedTorrent: "+file);
-            } else if (!Settings.droppedStoredMagnet) {
-                //else if (Settings.droppedMagnet && !Settings.droppedStoredMagnet) {
-                _file = Settings.droppedMagnet,
-                    file = formatMagnet(_file);
-                //alert("droppedMagnet, droppedStoredMagnet=false: "+file);
-            } else if (Settings.droppedStoredMagnet) {
-                //else if (Settings.droppedMagnet && Settings.droppedStoredMagnet) {
-                file = Settings.droppedStoredMagnet;
-                //alert("droppedMagnet, droppedStoredMagnet=true: "+file);
+
+            fs.writeFileSync(targetFile, sourceFile); // save torrent
+            win.debug("Torrent Collection: added", file);
+          }
+        } catch (err) {
+          win.error(err);
+          fs.unlinkSync(targetFile);
+          win.debug("Torrent Collection: deleted", file);
+        }
+      } else if (Settings.droppedMagnet) {
+        _file = Settings.droppedMagnet;
+        file = formatMagnet(_file);
+
+        let targetFile = target + file;
+
+        try {
+          if (this.isTorrentStored()) {
+            if (Settings.droppedStoredMagnet) {
+              file = Settings.droppedStoredMagnet;
             }
-
-            // check if torrent stored
-            if (!fs.existsSync(target + file)) {
-                $('.store-torrent').text(i18n.__('Store this torrent'));
-                return false;
-            } else {
-                $('.store-torrent').text(i18n.__('Remove this torrent'));
-                return true;
+            fs.unlinkSync(targetFile); // remove the magnet
+            win.debug("Torrent Collection: deleted", file);
+          } else {
+            if (!fs.existsSync(target)) {
+              fs.mkdir(target); // create directory if needed
             }
-        },
+            fs.writeFileSync(targetFile, _file); // save magnet link inside readable file
+            win.debug("Torrent Collection: added", file);
+          }
+        } catch (err) {
+          win.error(err);
+          fs.unlinkSync(targetFile);
+        }
+      }
+      this.isTorrentStored(); // trigger button change
 
-        storeTorrent: function() {
-            var source = App.settings.tmpLocation + '/',
-                target = require('nw.gui').App.dataPath + '/TorrentCollection/',
-                file,
-                _file;
+      if (App.currentview === "Torrent-collection") {
+        App.vent.trigger("torrentCollection:show"); // refresh collection
+      }
+    },
 
-            if (Settings.droppedTorrent) {
-                let file = Settings.droppedTorrent;
-                let targetFile = target + file;
-                let sourceFile;
+    selectPlayer: function (e) {
+      var player = $(e.currentTarget)
+        .parent("li")
+        .attr("id")
+        .replace("player-", "");
+      _this.model.set("device", player);
+      if (!player.match(/[0-9]+.[0-9]+.[0-9]+.[0-9]/gi)) {
+        AdvSettings.set("chosenPlayer", player);
+      }
+    },
 
-                try {
-                    sourceFile = fs.readFileSync(source + file);
-                    if (this.isTorrentStored()) {
-                        fs.unlinkSync(targetFile); // remove the torrent
-                        win.debug('Torrent Collection: deleted', file);
-                    } else {
-                        if (!fs.existsSync(target)) {
-                            fs.mkdir(target); // create directory if needed
-                        }
+    closeSelector: function (e) {
+      Mousetrap.bind("backspace", function (e) {
+        App.vent.trigger("show:closeDetail");
+        App.vent.trigger("movie:closeDetail");
+      });
+      $(".filter-bar").show();
+      $("#header").removeClass("header-shadow");
+      $("#movie-detail").show();
+      App.vent.trigger("system:closeFileSelector");
+    },
 
-                        fs.writeFileSync(targetFile, sourceFile); // save torrent
-                        win.debug('Torrent Collection: added', file);
-                    }
-                } catch (err) {
-                    win.error(err);
-                    fs.unlinkSync(targetFile);
-                    win.debug('Torrent Collection: deleted', file);
-                }
-            } else if (Settings.droppedMagnet) {
-                _file = Settings.droppedMagnet;
-                file = formatMagnet(_file);
+    onDestroy: function () {
+      Settings.droppedTorrent = false;
+      Settings.droppedMagnet = false;
+      Settings.droppedStoredMagnet = false;
 
-                let targetFile = target + file;
-                
-                try {
-                    if (this.isTorrentStored()) {
-                        if (Settings.droppedStoredMagnet) {
-                            file = Settings.droppedStoredMagnet;
-                        }
-                        fs.unlinkSync(targetFile); // remove the magnet
-                        win.debug('Torrent Collection: deleted', file);
-                    } else {
-                        if (!fs.existsSync(target)) {
-                            fs.mkdir(target); // create directory if needed
-                        }
-                        fs.writeFileSync(targetFile, _file); // save magnet link inside readable file
-                        win.debug('Torrent Collection: added', file);
-                    }
-                } catch (err) {
-                    win.error(err);
-                    fs.unlinkSync(targetFile);
-                }
-            }
-            this.isTorrentStored(); // trigger button change
+      //Clean TorrentCache
+      App.Providers.TorrentCache().clearTmpDir();
+      App.Providers.TorrentCache()._checkTmpDir();
+    },
+  });
 
-            if (App.currentview === 'Torrent-collection') {
-                App.vent.trigger('torrentCollection:show'); // refresh collection
-            }
-        },
-
-        selectPlayer: function(e) {
-            var player = $(e.currentTarget).parent('li').attr('id').replace('player-', '');
-            _this.model.set('device', player);
-            if (!player.match(/[0-9]+.[0-9]+.[0-9]+.[0-9]/ig)) {
-                AdvSettings.set('chosenPlayer', player);
-            }
-        },
-
-        closeSelector: function(e) {
-            Mousetrap.bind('backspace', function(e) {
-                App.vent.trigger('show:closeDetail');
-                App.vent.trigger('movie:closeDetail');
-            });
-            $('.filter-bar').show();
-            $('#header').removeClass('header-shadow');
-            $('#movie-detail').show();
-            App.vent.trigger('system:closeFileSelector');
-        },
-
-        onDestroy: function() {
-            Settings.droppedTorrent = false;
-            Settings.droppedMagnet = false;
-            Settings.droppedStoredMagnet = false;
-
-            //Clean TorrentCache
-            App.Providers.TorrentCache().clearTmpDir();
-            App.Providers.TorrentCache()._checkTmpDir();
-        },
-
-    });
-
-    App.View.FileSelector = FileSelector;
+  App.View.FileSelector = FileSelector;
 })(window.App);

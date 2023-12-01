@@ -3,51 +3,52 @@
  *
  * @author Dan Tao <daniel.tao@gmail.com>
  */
-var Jelly = (function() {
-    var recordButton = $("button.test-record"),
-        recordResult = $("div.test-record-result");
+var Jelly = (function () {
+  var recordButton = $("button.test-record"),
+    recordResult = $("div.test-record-result");
 
-    function _formatSequenceAsHtml(sequence) {
-        var combos = [],
-            i;
+  function _formatSequenceAsHtml(sequence) {
+    var combos = [],
+      i;
 
-        for (i = 0; i < sequence.length; ++i) {
-            combos.push('<span>' + _formatKeysAsHtml(sequence[i].split('+')) + '</span>');
-        }
-
-        return combos.join(' ');
+    for (i = 0; i < sequence.length; ++i) {
+      combos.push(
+        "<span>" + _formatKeysAsHtml(sequence[i].split("+")) + "</span>",
+      );
     }
 
-    function _formatKeysAsHtml(keys) {
-        var htmlKeys = [],
-            i;
+    return combos.join(" ");
+  }
 
-        for (i = 0; i < keys.length; ++i) {
-            htmlKeys.push('<kbd>' + keys[i] + '</kbd>');
-        }
+  function _formatKeysAsHtml(keys) {
+    var htmlKeys = [],
+      i;
 
-        return htmlKeys.join('+');
+    for (i = 0; i < keys.length; ++i) {
+      htmlKeys.push("<kbd>" + keys[i] + "</kbd>");
     }
 
-    function _prepareRecordTest() {
-        recordButton.prop('disabled', true);
-        recordButton.text('Recording');
+    return htmlKeys.join("+");
+  }
 
-        Mousetrap.record(function(sequence) {
-            recordResult.html(_formatSequenceAsHtml(sequence));
-            recordButton.prop('disabled', false);
-            recordButton.text('Record');
-        });
+  function _prepareRecordTest() {
+    recordButton.prop("disabled", true);
+    recordButton.text("Recording");
 
-        // take focus away from the button so that Mousetrap will actually
-        // capture keystrokes
-        recordButton.blur();
-    }
+    Mousetrap.record(function (sequence) {
+      recordResult.html(_formatSequenceAsHtml(sequence));
+      recordButton.prop("disabled", false);
+      recordButton.text("Record");
+    });
 
-    return {
-        spread: function() {
-            recordButton.click(_prepareRecordTest);
-        }
-    };
+    // take focus away from the button so that Mousetrap will actually
+    // capture keystrokes
+    recordButton.blur();
+  }
 
+  return {
+    spread: function () {
+      recordButton.click(_prepareRecordTest);
+    },
+  };
 })();
