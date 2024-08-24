@@ -10,7 +10,7 @@ jobs:
 
       docker:
       # specify the version you desire here
-      - image: cimg/base:2021.04
+      - image: cimg/node:lts
       
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
@@ -42,6 +42,21 @@ jobs:
          - run: 
             name: update-npm
             command: 'sudo npm install'
+
+         # install gulp as global
+         - run: 
+            name: install-gulp
+            command: 'sudo npm install -g gulp'
+
+         # install updated version npm as global
+         - run: 
+            name: install-npm
+            command: 'sudo npm install -g npm@10.8.2'
+
+         # install nw-builder as global
+         - run: 
+            name: install-nw-builder
+            command: 'sudo npm install -g nw-builder@3.5.4'
       
          #store cache dependencies
          - save_cache:
@@ -58,7 +73,7 @@ jobs:
    build_original:
       docker:
       # specify the version you desire here
-      - image: circleci/node:lts
+      - image: cimg/node:lts
       
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
@@ -96,7 +111,7 @@ jobs:
    build_linux64:
       docker:
       # specify the version you desire here
-      - image: circleci/node:lts
+      - image: cimg/node:lts
       
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
@@ -154,8 +169,8 @@ jobs:
    build_linux32:
       docker:
       # specify the version you desire here
-      - image: circleci/node:lts
-      
+      - image: cimg/node:lts
+
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
       # documented at https://circleci.com/docs/2.0/circleci-images/
@@ -211,7 +226,7 @@ jobs:
    build_win64:
       docker:
       # specify the version you desire here
-      - image: circleci/node:lts
+      - image: cimg/node:15.0.1
       
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
@@ -268,7 +283,7 @@ jobs:
    build_win32:
       docker:
       # specify the version you desire here
-      - image: circleci/node:lts
+      - image: cimg/node:lts
       
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
