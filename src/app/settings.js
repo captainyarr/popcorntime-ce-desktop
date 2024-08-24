@@ -200,7 +200,7 @@ Settings.tv_detail_jump_to = 'next';
 Settings.rememberRegister = true;
 
 //GA Code
-Settings.gaCode = 'UA-174404912-1'; //PROD - 1, TEST - 3
+Settings.gaCode = 'G-1LTTH1FCRP'; //PROD - 1, TEST - 3
 Settings.analytics = true;
 
 var ScreenResolution = {
