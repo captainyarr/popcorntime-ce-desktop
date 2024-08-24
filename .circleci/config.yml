@@ -19,6 +19,7 @@ jobs:
 
       steps:
          - checkout
+         
          - save_cache:
             name: Save Repo
             key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
@@ -114,7 +115,7 @@ jobs:
    build_linux64:
       docker:
       # specify the version you desire here
-      - image: cimg/node:lts
+      - image: cimg/node:16.20.2
       
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
@@ -172,7 +173,7 @@ jobs:
    build_linux32:
       docker:
       # specify the version you desire here
-      - image: cimg/node:lts
+      - image: cimg/node:16.20.2
 
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
@@ -229,7 +230,7 @@ jobs:
    build_win64:
       docker:
       # specify the version you desire here
-      - image: cimg/node:15.0.1
+      - image: cimg/node:16.20.2
       
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
@@ -286,7 +287,7 @@ jobs:
    build_win32:
       docker:
       # specify the version you desire here
-      - image: cimg/node:lts
+      - image: cimg/node:16.20.2
       
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
