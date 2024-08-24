@@ -122,9 +122,11 @@ Settings.opensubtitlesUsername = "";
 Settings.opensubtitlesPassword = "";
 
 Settings.defaultTvAPI = [{
-    url: 'https://popcorn-time.ga/',
+    url: 'https://fusme.link/',
     strictSSL: true
-}];
+}, {
+    url: 'http://jfpr.link/',
+    strictSSL: true}];
 
 Settings.tvAPI = Settings.defaultTvAPI.slice(0);
 
