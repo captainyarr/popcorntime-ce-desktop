@@ -2,7 +2,6 @@ var gulp = require('gulp');
 var NwBuilder = require('nw-builder');
 var os = require('os');
 var del = require('del');
-var detectCurrentPlatform = require('nw-builder/lib/detectCurrentPlatform.js');
 var zip = require('gulp-zip');
 var unzip = require('gulp-unzip');
 var gzip = require('gulp-gzip');
@@ -10,6 +9,17 @@ var tar = require('gulp-tar');
 var download = require('gulp-download');
 var package = require('./package.json');
 var merge2 = require('merge2');
+
+//Write function to detect current platform
+function detectCurrentPlatform() {
+    if (os.platform() === 'win32') {
+        return 'win32';
+    } else if (os.platform() === 'linux') {
+        return 'linux64';
+    } else if (os.platform() === 'darwin') {
+        return 'mac64';
+    }
+}
 
 //Commandline 
 var argv = require('yargs')
@@ -29,7 +39,7 @@ var argv = require('yargs')
 
 //Set Default nw.js version
 var nwVersion = '0.44.1';
-var buildDownloadUrl = 'https://dl.nwjs.io/';
+var buildDownloadUrl = "https://dl.nwjs.io";
 
 nwVersion = argv.nwv ? argv.nwv : nwVersion;
 buildDownloadUrl = argv.nwurl ? argv.nwurl : buildDownloadUrl;
@@ -56,7 +66,8 @@ var nw = new NwBuilder({
     zip: false,
     downloadUrl: buildDownloadUrl,
     platforms: buildplatforms,
-}).on('log', console.log);
+})
+
 
 gulp.task('run', function run() {
     nw.options.files = './**';

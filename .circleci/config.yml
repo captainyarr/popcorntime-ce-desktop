@@ -10,7 +10,7 @@ jobs:
 
       docker:
       # specify the version you desire here
-      - image: cimg/node:lts
+      - image: cimg/node:16.20.2
       
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
@@ -20,12 +20,14 @@ jobs:
       steps:
          - checkout
          - save_cache:
+            name: Save Repo
             key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
             paths:
                - ~/repo
 
          # Download and cache dependencies
          - restore_cache:
+            name: Restore Dependencies
             keys:
                - v1-dependencies-{{ checksum "package.json" }}
                # fallback to using the latest cache if no exact match is found
@@ -33,25 +35,32 @@ jobs:
 
          # Download and cache node-cache
          - restore_cache:
+            name: Restore Node Cache
             keys:
                - v1-nodecache-{{ checksum "gulpfile.js" }}
                # fallback to using the latest cache if no exact match is found
                - v1-nodecache-
 
-         #- run: sudo npm prune    
+         # install updated version npm as global
+         - run: 
+            name: install-npm
+            command: 'sudo npm install -g npm@8.19.4'
+    
          - run: 
             name: update-npm
             command: 'sudo npm install'
+
+         # install dev dependencies
+         - run: 
+            name: install-dev
+            command: 'npm install --only=dev'
 
          # install gulp as global
          - run: 
             name: install-gulp
             command: 'sudo npm install -g gulp'
 
-         # install updated version npm as global
-         - run: 
-            name: install-npm
-            command: 'sudo npm install -g npm@10.8.2'
+
 
          # install nw-builder as global
          - run: 
@@ -60,12 +69,14 @@ jobs:
       
          #store cache dependencies
          - save_cache:
+            name: Save Cache Node Modules
             key: v1-dependencies-{{ checksum "package.json" }}
             paths:
                - node_modules
 
          #store node cache
          - save_cache:
+            name: Save Node Cache
             key: v1-nodecache-{{ checksum "gulpfile.js" }}
             paths:
                - cache
@@ -73,7 +84,7 @@ jobs:
    build_original:
       docker:
       # specify the version you desire here
-      - image: cimg/node:lts
+      - image: cimg/node:16.20.2
       
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
@@ -98,12 +109,11 @@ jobs:
           - v1-nodecache-
 
       #- run: sudo npm prune    
-      - run: sudo npm install
-      #- run: sudo npm install -g gulp 
+      - run: sudo npm install 
         
       # run tests!
       #- run: gulp build linux32,linux64,win32,win64,osx64
-      - run: npx gulp build -p linux32,linux64,win32,win64
+      - run: npx gulp build -p linux64,win32,win64
       
       - deploy:
          command: npx gulp zip -p linux32,linux64,win32,win64
