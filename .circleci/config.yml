@@ -59,11 +59,6 @@ jobs:
          - run: 
             name: install-gulp
             command: 'sudo npm install -g gulp'
-
-         # install nw-builder as global
-         #- run: 
-         #   name: install-nw-builder
-            #command: 'sudo -H npm install -g nw-builder@3.5.7'
       
          #store cache dependencies
          - save_cache:
