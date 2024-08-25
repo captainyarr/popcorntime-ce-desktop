@@ -40,7 +40,7 @@
     "bottleneck": "^2.19.5",
     "chromecast-js": "git+https://github.com/captainyarr/chromecast-js.git",
     "client-oauth2": "^4.3.3",
-    "i18n": "0.13.2",
+    "i18n": "0.15.1",
     "iconv-lite": "^0.5.2",
     "jschardet": "2.2.1",
     "json-rpc2": "^2.0.0",
