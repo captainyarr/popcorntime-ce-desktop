@@ -2,7 +2,19 @@
 <html lang="en">
 
 <head>
-    <!-- Google Tag Manager -->
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SL46FGF5YD"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-SL46FGF5YD');
+    </script>
+
+
+    <!-- Google Tag Manager
     <script>
         (function(w, d, s, l, i) {
             w[l] = w[l] || [];
@@ -19,7 +31,8 @@
             f.parentNode.insertBefore(j, f);
         })(window, document, 'script', 'dataLayer', 'GTM-WNT4KWR');
     </script>
-    <!-- End Google Tag Manager -->
+    End Google Tag Manager -->
+
 
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="vendor/bootstrap/dist/css/bootstrap.css">
@@ -31,9 +44,6 @@
 
 <body>
 
-    <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WNT4KWR" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <!-- End Google Tag Manager (noscript) -->
 
     <div class="main-window-region"></div>
 
@@ -191,7 +201,7 @@
 
         let analytic_script = 'https://www.google-analytics.com/analytics.js';
 
-        if(process.env.NODE_ENV && process.env.NODE_ENV === "development"){
+        if (process.env.NODE_ENV && process.env.NODE_ENV === "development") {
             analytic_script = 'https://www.google-analytics.com/analytics_debug.js'
         }
 
@@ -257,7 +267,7 @@
             try {
                 tvApiServer = "";
                 document.getElementById('TVApi').setAttribute('data-original-title', tvApiServer);
-            } catch (e) {}
+            } catch (e) { }
         }, 100);
     </script>
 </body>

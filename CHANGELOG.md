@@ -3,10 +3,13 @@
 New Features:
 - Removed experimental miner
 
-BugFixes:
-
 Updated:
-jQuery: Updated to 3.6.0
+- Updated various packages
+
+BugFixes:
+- Fixed Build Issues with CircleCi
+- Fixed default tv show api
+- Fixed gulpfile isses
 
 ## 0.4.3-0 Beta - Let's All Go To The Movies! - 1 September 2020
 
