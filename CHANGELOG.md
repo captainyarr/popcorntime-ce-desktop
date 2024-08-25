@@ -1,12 +1,15 @@
 ## 0.4.3-1 Beta
 
 New Features:
+
 - Removed experimental miner
 
 Updated:
+
 - Updated various packages
 
 BugFixes:
+
 - Fixed Build Issues with CircleCi
 - Fixed default tv show api
 - Fixed gulpfile isses
