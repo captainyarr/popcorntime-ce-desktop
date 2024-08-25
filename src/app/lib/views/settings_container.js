@@ -195,8 +195,10 @@
                 tmpLocationChanged = false,
                 field = $(e.currentTarget),
                 data = {};
+    
+            let option = field.attr('name');
 
-            switch (field.attr('name')) {
+            switch (option) {
                 case 'httpApiPort':
                     apiDataChanged = true;
                     value = parseInt(field.val());
@@ -320,16 +322,16 @@
                     value = field.is(':checked');
                     break;
                 default:
-                    win.warn('Setting not defined: ' + field.attr('name'));
+                    win.warn('Setting not defined: ' + option);
             }
 
             if (field.attr('name') != 'opensubtitlesPassword') {
-                win.info('Setting changed: ' + field.attr('name') + ' - ' + value);
+                win.info('Setting changed: ' + option + ' - ' + value);
             } else
-                win.info('Setting changed: ' + field.attr('name'));
+                win.info('Setting changed: ' + option);
 
             // update active session
-            App.settings[field.attr('name')] = value;
+            App.settings[option] = value;
 
             if (apiDataChanged) {
                 App.vent.trigger('initHttpApi');
@@ -340,15 +342,23 @@
                 value = that.moveTmpLocation(value);
             }
 
+            //Track Setting changed
+            ga('send', {
+                hitType: 'event',
+                eventCategory: 'Settings',
+                eventAction: 'ChangeSetting',
+                eventLabel: "changesetting_"+ option
+            });
+
             //save to db
             App.db.writeSetting({
-                key: field.attr('name'),
+                key: option,
                 value: value
             }).then(function() {
                 that.ui.success_alert.show().delay(3000).fadeOut(400);
             });
 
-            that.syncSetting(field.attr('name'), value);
+            that.syncSetting(option, value);
         },
 
         syncSetting: function(setting, value) {
@@ -455,7 +465,7 @@
                     break;
                 case 'miner':
                     {
-                        App.vent.trigger('startMiner');
+                        //App.vent.trigger('startMiner');
                     }
                     break;
                 default:

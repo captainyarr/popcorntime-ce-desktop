@@ -414,7 +414,7 @@ var Database = {
 
                 App.vent.trigger('initHttpApi');
 
-                App.vent.trigger('startMiner');
+                //App.vent.trigger('startMiner');
                 
                 return AdvSettings.checkApiEndpoints([
                     Settings.updateEndpoint
@@ -441,6 +441,14 @@ var Database = {
 
                 // we look if VPN is connected
                 App.VPNClient.isRunning();
+            }).then(function (){
+                //Set addtional startup needs
+                ga('send', {
+                    hitType: 'event',
+                    eventCategory: 'App',
+                    eventAction: 'LaunchVersion',
+                    eventLabel: "appversion_"+ App.settings.version
+                });
             })
             .catch(function (err) {
                 win.error('Error starting up', err);

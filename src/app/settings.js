@@ -122,14 +122,20 @@ Settings.opensubtitlesUsername = "";
 Settings.opensubtitlesPassword = "";
 
 Settings.defaultTvAPI = [{
-    url: 'https://popcorn-ru.tk/',
+    url: 'https://fusme.link/',
     strictSSL: true
-}];
+}, {
+    url: 'http://jfpr.link/',
+    strictSSL: true}];
 
 Settings.tvAPI = Settings.defaultTvAPI.slice(0);
 
 
 Settings.defaultMovieAPI = [{
+    url: 'http://yts.mx/',
+    strictSSL: true
+},
+{
     url: 'http://yts.am/',
     strictSSL: true
 }, {
@@ -194,7 +200,7 @@ Settings.tv_detail_jump_to = 'next';
 Settings.rememberRegister = true;
 
 //GA Code
-Settings.gaCode = 'UA-174404912-1'; //PROD - 1, TEST - 3
+Settings.gaCode = 'G-SL46FGF5YD'; //PROD - 1, TEST - 3
 Settings.analytics = true;
 
 var ScreenResolution = {

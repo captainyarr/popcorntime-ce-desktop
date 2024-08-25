@@ -468,7 +468,7 @@
             var playerType = App.Device.Collection.selected.get('type');
             var playerName = App.Device.Collection.selected.get('name');
 
-            if (playerType = 'chromecast') {
+            if (playerType == 'chromecast') {
                 playerName = "chromecast";
             }
 

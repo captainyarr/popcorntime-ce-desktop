@@ -23,7 +23,7 @@ fi
 func_error
 
 #Variables
-version="0.4.3-0"
+version="0.4.3-1"
 tos="https://popcorntime.sh/tos"
 $path="$HOME/.Popcorn-Time-CE"
 
