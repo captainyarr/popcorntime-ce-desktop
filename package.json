@@ -32,7 +32,7 @@
     "position": "center"
   },
   "dependencies": {
-    "adm-zip": "0.5.5",
+    "adm-zip": "0.5.15",
     "airplay-js": "^0.3.0",
     "ajv": "6.12.6",
     "async": "^3.2.1",
