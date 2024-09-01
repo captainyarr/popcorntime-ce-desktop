@@ -318,9 +318,6 @@
                     $('.vpn-connect').toggle();
                     value = field.is(':checked');
                     break;
-                case 'miner':
-                    value = field.is(':checked');
-                    break;
                 default:
                     win.warn('Setting not defined: ' + option);
             }
@@ -461,11 +458,6 @@
                         } else {
                             x.type = "password";
                         }
-                    }
-                    break;
-                case 'miner':
-                    {
-                        //App.vent.trigger('startMiner');
                     }
                     break;
                 default:

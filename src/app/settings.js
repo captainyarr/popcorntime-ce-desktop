@@ -68,7 +68,7 @@ Settings.traktPlayback = true;
 Settings.tvstAccessToken = '';
 
 // Experimental options
-Settings.miner = false;
+
 
 // Advanced options
 Settings.connectionLimit = 100;

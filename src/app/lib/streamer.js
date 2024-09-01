@@ -22,6 +22,10 @@
     var subtitleDownloading = false;
     var serverStarting = false;
 
+    /**
+     * Watches the state of a torrent, and updates the state of a model
+     * @param {Backbone.Model} stateModel - The model to update
+     */
     var watchState = function(stateModel) {
 
         if (engine !== null) {
@@ -140,11 +144,19 @@
         });
 
         engineTorrent.on('ready', function() {
+            if (!engineTorrent) {
+                win.error("engineTorrent is null");
+                return;
+            }
             win.debug("torrent:ready");
             App.vent.trigger('stream:server', stateModel);
         });
 
         engineTorrent.on('metadata', function() {
+            if (!engineTorrent) {
+                win.error("engineTorrent is null");
+                return;
+            }
             win.debug("torrent:metadata");
 
             var streamInfo = stateModel.get('streamInfo');

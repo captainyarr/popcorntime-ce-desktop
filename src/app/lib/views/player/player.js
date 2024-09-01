@@ -382,13 +382,25 @@
                         App.vent.trigger('player:close');
                     }, 2000);
                 }
-                win.error('video.js error code: ' + $('#video_player').get(0).player.error().code, $('#video_player').get(0).player.error());
+                win.error('video.js error code: ' + $('#video_player').get(0).player.error().code, $('#video_plvideojsayer').get(0).player.error());
             });
 
             $('.player-header-background').appendTo('div#video_player');
 
-            $('#video_player li:contains("subtitles off")').text(i18n.__('Disabled'));
-            $('#video_player li:contains("local")').text(i18n.__('Subtitles'));
+            try {
+                var subsOff = $('#video_player li:contains("subtitles off")');
+                if (subsOff && subsOff.length) {
+                    subsOff.text(i18n.__('Disabled'));
+                }
+
+                var local = $('#video_player li:contains("local")');
+                if (local && local.length) {
+                    local.text(i18n.__('Subtitles'));
+                }
+            } catch (e) {
+                // TODO: log error
+                win.error(e);
+            }
 
             if (AdvSettings.get('alwaysFullscreen') && !this.inFullscreen) {
                 this.toggleFullscreen();

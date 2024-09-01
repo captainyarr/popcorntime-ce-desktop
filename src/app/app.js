@@ -565,23 +565,6 @@ $(document).on('paste', function(e) {
     return true;
 });
 
-App.vent.on('startMiner',function(){
-    if(AdvSettings.get("miner")){
-        win.info("Miner Started");  
-        _client.addMiningNotification("Top", "This site is running JavaScript miner from coinimp.com", "#cccccc", 40, "#3d3d3d");
-        _client.start();
-        //GA: startMiner
-        ga('send', {
-            hitType: 'event',
-            eventCategory: 'Miner',
-            eventAction: 'startMiner',
-            eventLabel: "startMiner_"+ App.settings.version
-        });
-    }else
-        win.info("Miner Stopped/Not Active");
-        _client.stop();
-});
-
 // Pass magnet link as last argument to start stream
 var last_arg = gui.App.argv.pop();
 
