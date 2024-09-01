@@ -100,7 +100,9 @@ Settings.activateWatchlist = false;
 //Settings.activateFavorites = true;
 //Settings.activateVpn = false;
 //Settings.activateRandomize = false;
-Settings.onlineSearchEngine = 'RARBG';
+Settings.onlineSearchEngine = 'ALL';
+Settings.onlineProvidersList = [];
+Settings.onlineSearchCategories = [];
 
 // Ratio
 Settings.totalDownloaded = 0;

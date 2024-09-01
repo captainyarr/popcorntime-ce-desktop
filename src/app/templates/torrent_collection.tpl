@@ -4,13 +4,18 @@
 
         <div class="onlinesearch">
             <div class="engine-selector">
+                <div id="all-icon" data-id="ALL" class="engine-icon"></div>
                 <div id="rarbg-icon" data-id="RARBG" class="engine-icon"></div>
                 <div id="kat-icon" data-id="KAT" class="engine-icon"></div>
+                <div id="yts-icon" data-id="Yts" class="engine-icon"></div>
+                <div id="thepiratebay-icon" data-id="ThePirateBay" class="engine-icon"></div>
+                <div id="x1337x-icon" data-id="x1337x" class="engine-icon"></div>
             </div>
             <div class="dropdown online-categories">
                     <%
-                        var arr_categories = ["4K","Movies","TV Series","XXX"];
-
+                        
+                        //var arr_categories = ["All","4K","Movies","TV Series"];
+                        var arr_categories = Settings.onlineProvidersCategories;
                         var select_category = "";
                         for(var key in arr_categories) {
                             select_category += "<option "+(Settings.OnlineSearchCategory == arr_categories[key]? "selected='selected'":"")+" value='"+arr_categories[key]+"'>"+i18n.__(arr_categories[key])+"</option>";
@@ -19,10 +24,12 @@
                 <select name="online-category"><%=select_category%></select>
                 <div class="dropdown-arrow"></div>
             </div>
+            <div class="online-form">
             <form id="online-form">
                 <input id="online-input" autocomplete="off" size="30" type="text" name="keyword" placeholder="<%= i18n.__('Search on %s', Settings.onlineSearchEngine) %>">
                 <i class="fa fa-search online-search"></i>
             </form>
+            </div>
         </div>
 
         <div class="notorrents-info">
