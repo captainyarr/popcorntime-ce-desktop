@@ -1,18 +1,20 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
-<head>
-
+  <head>
     <!-- tudoi tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SL46FGF5YD"></script>
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-SL46FGF5YD"
+    ></script>
     <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
 
-        gtag('config', 'G-SL46FGF5YD');
+      gtag("config", "G-SL46FGF5YD");
     </script>
-
 
     <!-- Google Tag Manager
     <script>
@@ -33,46 +35,160 @@
     </script>
     End Google Tag Manager -->
 
+    <meta charset="UTF-8" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="vendor/bootstrap/dist/css/bootstrap.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="vendor/bootstrap/dist/css/bootstrap-theme.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="vendor/font-awesome/css/font-awesome.min.css"
+    />
+    <link rel="stylesheet" type="text/css" href="css/animation.css" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      id="theme"
+      href="themes/Official_-_Dark_theme.css"
+    />
+  </head>
 
-    <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="vendor/bootstrap/dist/css/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="vendor/bootstrap/dist/css/bootstrap-theme.css">
-    <link rel="stylesheet" type="text/css" href="vendor/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="css/animation.css">
-    <link rel="stylesheet" type="text/css" id="theme" href="themes/Official_-_Dark_theme.css">
-</head>
-
-<body>
-
-
+  <body>
     <div class="main-window-region"></div>
 
-    <script id="browser-tpl" src="templates/browser/browser.tpl" type="text/x-template"></script>
-    <script id="item-tpl" src="templates/browser/item.tpl" type="text/x-template"></script>
-    <script id="list-tpl" src="templates/browser/list.tpl" type="text/x-template"></script>
-    <script id="filter-bar-tpl" src="templates/browser/filter-bar.tpl" type="text/x-template"></script>
+    <script
+      id="browser-tpl"
+      src="templates/browser/browser.tpl"
+      type="text/x-template"
+    ></script>
+    <script
+      id="item-tpl"
+      src="templates/browser/item.tpl"
+      type="text/x-template"
+    ></script>
+    <script
+      id="list-tpl"
+      src="templates/browser/list.tpl"
+      type="text/x-template"
+    ></script>
+    <script
+      id="filter-bar-tpl"
+      src="templates/browser/filter-bar.tpl"
+      type="text/x-template"
+    ></script>
 
-    <script id="movie-error-tpl" src="templates/movie-error.tpl" type="text/x-template"></script>
-    <script id="main-window-tpl" src="templates/main-window.tpl" type="text/x-template"></script>
-    <script id="changelog-tpl" src="templates/changelog.tpl" type="text/x-template"></script>
-    <script id="disclaimer-tpl" src="templates/disclaimer.tpl" type="text/x-template"></script>
-    <script id="register-tpl" src="templates/register.tpl" type="text/x-template"></script>
-    <script id="settings-container-tpl" src="templates/settings-container.tpl" type="text/x-template"></script>
-    <script id="header-tpl" src="templates/header.tpl" type="text/x-template"></script>
-    <script id="movie-detail-tpl" src="templates/movie-detail.tpl" type="text/x-template"></script>
-    <script id="show-detail-tpl" src="templates/show-detail.tpl" type="text/x-template"></script>
-    <script id="player-tpl" src="templates/player.tpl" type="text/x-template"></script>
-    <script id="player-chooser-tpl" src="templates/player-chooser.tpl" type="text/x-template"></script>
-    <script id="loading-tpl" src="templates/loading.tpl" type="text/x-template"></script>
-    <script id="initializing-tpl" src="templates/initializing.tpl" type="text/x-template"></script>
-    <script id="about-tpl" src="templates/about.tpl" type="text/x-template"></script>
-    <script id="file-selector-tpl" src="templates/file-selector.tpl" type="text/x-template"></script>
-    <script id="help-tpl" src="templates/help.tpl" type="text/x-template"></script>
-    <script id="issue-tpl" src="templates/issue.tpl" type="text/x-template"></script>
-    <script id="torrent-collection-tpl" src="templates/torrent_collection.tpl" type="text/x-template"></script>
-    <script id="plugins-tpl" src="templates/plugins.tpl" type="text/x-template"></script>
-    <script id="keyboard-tpl" src="templates/keyboard.tpl" type="text/x-template"></script>
-    <script id="notification-tpl" src="templates/notification.tpl" type="text/x-template"></script>
+    <script
+      id="movie-error-tpl"
+      src="templates/movie-error.tpl"
+      type="text/x-template"
+    ></script>
+    <script
+      id="main-window-tpl"
+      src="templates/main-window.tpl"
+      type="text/x-template"
+    ></script>
+    <script
+      id="changelog-tpl"
+      src="templates/changelog.tpl"
+      type="text/x-template"
+    ></script>
+    <script
+      id="disclaimer-tpl"
+      src="templates/disclaimer.tpl"
+      type="text/x-template"
+    ></script>
+    <script
+      id="register-tpl"
+      src="templates/register.tpl"
+      type="text/x-template"
+    ></script>
+    <script
+      id="settings-container-tpl"
+      src="templates/settings-container.tpl"
+      type="text/x-template"
+    ></script>
+    <script
+      id="header-tpl"
+      src="templates/header.tpl"
+      type="text/x-template"
+    ></script>
+    <script
+      id="movie-detail-tpl"
+      src="templates/movie-detail.tpl"
+      type="text/x-template"
+    ></script>
+    <script
+      id="show-detail-tpl"
+      src="templates/show-detail.tpl"
+      type="text/x-template"
+    ></script>
+    <script
+      id="player-tpl"
+      src="templates/player.tpl"
+      type="text/x-template"
+    ></script>
+    <script
+      id="player-chooser-tpl"
+      src="templates/player-chooser.tpl"
+      type="text/x-template"
+    ></script>
+    <script
+      id="loading-tpl"
+      src="templates/loading.tpl"
+      type="text/x-template"
+    ></script>
+    <script
+      id="initializing-tpl"
+      src="templates/initializing.tpl"
+      type="text/x-template"
+    ></script>
+    <script
+      id="about-tpl"
+      src="templates/about.tpl"
+      type="text/x-template"
+    ></script>
+    <script
+      id="file-selector-tpl"
+      src="templates/file-selector.tpl"
+      type="text/x-template"
+    ></script>
+    <script
+      id="help-tpl"
+      src="templates/help.tpl"
+      type="text/x-template"
+    ></script>
+    <script
+      id="issue-tpl"
+      src="templates/issue.tpl"
+      type="text/x-template"
+    ></script>
+    <script
+      id="torrent-collection-tpl"
+      src="templates/torrent_collection.tpl"
+      type="text/x-template"
+    ></script>
+    <script
+      id="plugins-tpl"
+      src="templates/plugins.tpl"
+      type="text/x-template"
+    ></script>
+    <script
+      id="keyboard-tpl"
+      src="templates/keyboard.tpl"
+      type="text/x-template"
+    ></script>
+    <script
+      id="notification-tpl"
+      src="templates/notification.tpl"
+      type="text/x-template"
+    ></script>
 
     <!-- 3rd party Dependencies -->
     <script src="vendor/jquery/dist/jquery-3.7.1.js"></script>
@@ -113,8 +229,6 @@
     <script src="lib/device/dlna.js"></script>
     <script src="lib/device/chromecast.js"></script>
     <script src="lib/device/ext-player.js"></script>
-
-
 
     <script src="lib/subtitle/generic.js"></script>
     <script src="lib/subtitle/server.js"></script>
@@ -191,82 +305,86 @@
     <script src="bootstrap.js"></script>
 
     <script>
-        var tvApiServer = "";
+      var tvApiServer = "";
     </script>
 
     <script>
+      let analytic_script = "https://www.google-analytics.com/analytics.js";
 
-        let analytic_script = 'https://www.google-analytics.com/analytics.js';
+      if (process.env.NODE_ENV && process.env.NODE_ENV === "development") {
+        analytic_script = "https://www.google-analytics.com/analytics_debug.js";
+      }
 
-        if (process.env.NODE_ENV && process.env.NODE_ENV === "development") {
-            analytic_script = 'https://www.google-analytics.com/analytics_debug.js'
-        }
+      //Initialize Google Analytics
+      (function (i, s, o, g, r, a, m) {
+        i["GoogleAnalyticsObject"] = r;
+        (i[r] =
+          i[r] ||
+          function () {
+            (i[r].q = i[r].q || []).push(arguments);
+          }),
+          (i[r].l = 1 * new Date());
+        (a = s.createElement(o)), (m = s.getElementsByTagName(o)[0]);
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m);
+      })(window, document, "script", analytic_script, "ga");
+      window.ga_debug = {
+        trace: true,
+      };
 
-        //Initialize Google Analytics
-        (function(i, s, o, g, r, a, m) {
-            i['GoogleAnalyticsObject'] = r;
-            i[r] = i[r] || function() {
-                (i[r].q = i[r].q || []).push(arguments)
-            }, i[r].l = 1 * new Date();
-            a = s.createElement(o),
-                m = s.getElementsByTagName(o)[0];
-            a.async = 1;
-            a.src = g;
-            m.parentNode.insertBefore(a, m)
-        })(window, document, 'script', analytic_script, 'ga');
-        window.ga_debug = {
-            trace: true
-        }
+      ga("create", Settings.gaCode);
 
-        ga('create', Settings.gaCode);
+      // Sets the page value on the tracker.
+      ga("set", {
+        page: "/popcorntimece/",
+      });
 
-        // Sets the page value on the tracker.
-        ga('set', {
-            page: '/popcorntimece/'
-        });
+      // This gives the official version (the package.json one)
+      var gui = require("nw.gui");
 
-        // This gives the official version (the package.json one)
-        var gui = require('nw.gui');
+      //Set AppVersion
+      ga("set", "appName", App.Config.title);
+      ga("set", "appVersion", gui.App.manifest.version);
+      //ga('set', 'appVersion', AdvSettings.get('version'));
 
-        //Set AppVersion
-        ga('set', 'appName', App.Config.title);
-        ga('set', 'appVersion', gui.App.manifest.version);
-        //ga('set', 'appVersion', AdvSettings.get('version'));
+      ga("set", "checkProtocolTask", function () {
+        /* nothing */
+      });
+      // Sets the page value on the tracker.
+      ga("set", {
+        page: "/popcorntimece/",
+        title: "Popcorn Time CE Startup",
+      });
+      ga("send", {
+        hitType: "pageview",
+      });
 
-        ga('set', 'checkProtocolTask', function() { /* nothing */ });
-        // Sets the page value on the tracker.
-        ga('set', {
-            page: '/popcorntimece/',
-            title: 'Popcorn Time CE Startup'
-        });
-        ga('send', {
-            hitType: 'pageview'
-        });
-
-        // Replace the following lines with the plugins you want to use.
-        ga('require', 'eventTracker', {
-            attributePrefix: 'data-'
-        });
-        ga('require', 'outboundLinkTracker');
-        ga('require', 'cleanUrlTracker');
-        ga('require', 'impressionTracker', {
-            attributePrefix: 'data-'
-        });
-        ga('require', 'maxScrollTracker', {
-            maxScrollMetricIndex: 1,
-        });
-        ga('require', 'mediaQueryTracker');
-        ga('require', 'urlChangeTracker');
+      // Replace the following lines with the plugins you want to use.
+      ga("require", "eventTracker", {
+        attributePrefix: "data-",
+      });
+      ga("require", "outboundLinkTracker");
+      ga("require", "cleanUrlTracker");
+      ga("require", "impressionTracker", {
+        attributePrefix: "data-",
+      });
+      ga("require", "maxScrollTracker", {
+        maxScrollMetricIndex: 1,
+      });
+      ga("require", "mediaQueryTracker");
+      ga("require", "urlChangeTracker");
     </script>
     <script async src="vendor/autotrack/autotrack.js"></script>
     <script>
-        window.setInterval(function() {
-            try {
-                tvApiServer = "";
-                document.getElementById('TVApi').setAttribute('data-original-title', tvApiServer);
-            } catch (e) { }
-        }, 100);
+      window.setInterval(function () {
+        try {
+          tvApiServer = "";
+          document
+            .getElementById("TVApi")
+            .setAttribute("data-original-title", tvApiServer);
+        } catch (e) {}
+      }, 100);
     </script>
-</body>
-
+  </body>
 </html>
