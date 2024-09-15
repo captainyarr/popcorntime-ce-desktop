@@ -6456,7 +6456,6 @@ body,
 
 .torrent-collection-container .content .onlinesearch .engine-selector {
   position: absolute;
-  margin-left: -160px;
 }
 
 .torrent-collection-container .content .onlinesearch .engine-selector div {
@@ -6468,6 +6467,11 @@ body,
   transition: opacity 0.1s ease-in;
   transition: opacity 0.1s ease-in;
 }
+
+.torrent-collection-container .content .onlinesearch .online-form {
+  position: relative;
+}
+
 
 .torrent-collection-container
   .content
@@ -6497,6 +6501,17 @@ body,
   div#rarbg-icon {
   filter: brightness(1);
   background: url("../images/icons/rarbg.png");
+  -webkit-background-size: contain;
+  background-size: contain;
+}
+
+.torrent-collection-container
+  .content
+  .onlinesearch
+  .engine-selector
+  div#torrent9-icon {
+  filter: brightness(1);
+  background: url("../images/icons/icon-torrent9.png");
   -webkit-background-size: contain;
   background-size: contain;
 }
