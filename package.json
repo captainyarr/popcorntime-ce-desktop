@@ -70,7 +70,7 @@
     "semver": "^7.3.5",
     "send": "^0.17.1",
     "strike-api": "^0.2.0",
-    "tar": "^6.2.1",
+    "tar": "^7.5.4",
     "temp": "^0.9.4",
     "torrent-browse": "^1.0.2",
     "torrent-search-api": "^2.1.4",
